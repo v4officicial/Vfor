@@ -102,7 +102,7 @@ fetch('/JSON/Jobs/company_detailes.json')
           <dd>${job.work_mode}</dd>
 
           <dt>Work Type:</dt>
-          <dd itemprop="employmentType">${job.work_type || "Full time"}</dd>
+          <dd itemprop="employmentType">${job.job_type || "Full time"}</dd>
 
           <dt>Eligibility:</dt>
           <dd>${job.Eligible}</dd>

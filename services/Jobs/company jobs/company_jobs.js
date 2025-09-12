@@ -107,6 +107,7 @@ fetch('/JSON/Jobs/company_detailes.json')
         <div class="title">${item.job_role} (${item.job_id})</div>
         <div class="description">
           <div>Experience : ${item.Experience}</div>
+          <div>Job Type :<b> ${item.job_type}</b></div>
           <div>CTC : ${item.CTC}</div>
           <div>Eligible : ${item.Eligible}</div>
           <div>Mandatory : ${item.skills}</div>
