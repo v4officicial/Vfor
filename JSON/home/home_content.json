@@ -1,0 +1,33 @@
+[
+{
+  "header":"Jobs",
+  "icon":"fa fa-briefcase",
+  "href_link":"/services/Jobs/jobs.html"
+},
+{
+  "header":"Resume",
+  "icon":"fa fa-file-text",
+  "href_link":"#"
+},
+{
+  "header": "Portfolio",
+  "icon": "fa fa-address-card-o",
+  "href_link": "#"
+},
+{
+  "header": "V-card",
+  "icon": "fa fa-id-card",
+  "href_link": "#"
+},
+{
+  "header": "Career Insights",
+  "icon": "fa fa-bullhorn",
+  "href_link": "#"
+},
+{
+  "header": "Blogs",
+  "icon": "fa fa-newspaper-o",
+  "href_link": "#"
+}
+]
+
