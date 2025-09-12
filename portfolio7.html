@@ -1,0 +1,2044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lisa Manoban | BLACKPINK | Portfolio</title>
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Turret+Road:wght@200;300;400;500;700;800&display=swap');
+
+:root {
+    --hue-color: 258;  /* Changed from 242 to 258 for a more vibrant purple */
+
+    --skin-color: hsl(325, 82%, 56%);  /* Changed from red to pink */
+    --mirage-color: hsl(215, 30%, 30%);  /* More vibrant secondary color */
+    --title-color: hsl(var(--hue-color), 8%, 95%);
+    --text-color: hsl(var(--hue-color), 8%, 85%);
+    --body-color: hsl(var(--hue-color), 19%, 5%);
+    --box-color: hsl(var(--hue-color), 14%, 12%);  /* Slightly lighter */
+    --scroll-box-color: hsl(var(--hue-color), 12%, 38%);
+    --scroll-thumb-color: hsl(var(--hue-color), 60%, 60%);  /* Matching accent color */
+
+    --body-font: 'Poppins', sans-serif;
+    --signature-font: 'Turret Road', sans-serif;
+
+    --biggest-font-size: 3rem;
+    --h1-font-size: 2.25rem;
+    --h2-font-size: 1.5rem;
+    --h3-font-size: 1.25rem;
+    --normal-font-size: 1rem;
+    --small-font-size: .875rem;
+    --smaller-font-size: .813rem;
+
+    --font-medium: 500;
+    --font-bold: 600;
+
+    --mb025: .25rem;
+    --mb05: .5rem;
+    --mb075: .75rem;
+    --mb1: 1rem;
+    --mb15: 1.5rem;
+    --mb2: 2rem;
+    --mb25: 2.5rem;
+    --mb3: 3rem;
+
+    --z-fixed: 10;
+    --z-modal: 100;
+
+}
+
+@media screen and (max-width: 1024px) {
+    :root {
+        --biggest-font-size: 2rem;
+        --h1-font-size: 1.5rem;
+        --h2-font-size: 1.25rem;
+        --h3-font-size: 1.125rem;
+        --normal-font-size: .938rem;
+        --small-font-size: .813rem;
+        --smaller-font-size: .75rem;
+    }
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body, button, input { font-family: var(--body-font); font-size: var(--normal-font-size); }
+    body { 
+        background-color: var(--body-color); 
+        color: var(--text-color);
+        background-image: linear-gradient(135deg, var(--body-color) 0%, hsl(var(--hue-color), 19%, 8%) 100%);
+        background-size: 400% 400%;
+        animation: gradientBG 15s ease infinite;
+    }
+    
+    @keyframes gradientBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+/* Animation keyframes */
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInLeft {
+    0% { opacity: 0; transform: translateX(-30px); }
+    100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+    0% { opacity: 0; transform: translateX(30px); }
+    100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+h1, h2, h3 { color: var(--title-color); font-weight: var(--font-bold); }
+ul { list-style: none; }
+a { text-decoration: none; }
+img { max-width: 100%; height: auto; }
+button { cursor: pointer; }
+    button, input { border: none; outline: none; }
+.container { max-width: 1250px; margin-left: auto; margin-right: auto; }
+.grid { display: grid; }
+.button { 
+    display: inline-flex; 
+    align-items: center; 
+    column-gap: .5rem; 
+    background-color: var(--skin-color); 
+    color: var(--title-color); 
+    padding: 0.75rem 1.4rem; 
+    border-radius: .25rem; 
+    font-weight: var(--font-medium);
+    position: relative;
+    z-index: 1;
+    transition: .4s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+    .button::after { 
+        position: absolute; 
+        content: ''; 
+        left: 0; 
+        top: 0; 
+        width: 100%; 
+        height: 100%; 
+        background-color: var(--mirage-color); 
+        z-index: -1;
+        transform-origin: center; 
+        transform: scale(0); 
+        border-radius: .25rem;
+        transition: .3s ease-out; 
+    }
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        }
+        .button:hover::after { 
+            transform: scale(1); 
+        }
+        .button:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .button .button-icon {
+            transition: transform 0.3s ease;
+        }
+        .button:hover .button-icon {
+            transform: translateX(4px);
+        }
+.section { 
+    padding: 6.5rem 0 2rem;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease-out;
+}
+.section.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+.section-title { 
+    text-align: center; 
+    font-size: var(--h1-font-size); 
+    margin-bottom: var(--mb3);
+    position: relative;
+    overflow: hidden;
+}
+    .section-title::before { 
+        content: attr(data-heading); 
+        display: block; 
+        font-size: var(--normal-font-size); 
+        font-weight: var(--font-medium); 
+        color: var(--skin-color);
+        margin-bottom: 0.5rem;
+        transform: translateY(20px);
+        opacity: 0;
+        transition: all 0.5s ease 0.3s;
+    }
+    .section.active .section-title::before {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    .section-title::after {
+        content: '';
+        position: absolute;
+        width: 70px;
+        height: 3px;
+        background-color: var(--skin-color);
+        left: 50%;
+        bottom: -10px;
+        transform: translateX(-50%) scaleX(0);
+        transition: transform 0.5s ease 0.5s;
+    }
+    .section.active .section-title::after {
+        transform: translateX(-50%) scaleX(1);
+    }
+::-webkit-scrollbar { width: 0.6rem; background-color: var(--scroll-box-color); border-radius: .5rem; }
+::-webkit-scrollbar-thumb { background-color: var(--scroll-thumb-color); border-radius: .5rem; }
+
+/* Sidebar */
+
+.sidebar { 
+    position: fixed; 
+    width: 100px; 
+    height: 100vh; 
+    background-color: var(--body-color); 
+    border-right: 1px solid var(--box-color);
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    animation: slideInLeft 0.7s ease-out forwards;
+    transition: width 0.3s ease; 
+    z-index: 100;
+}
+.nav-logo { 
+    position: absolute; 
+    left: 0; 
+    right: 0; 
+    top: 1.8rem; 
+    width: 40px; 
+    height: 40px; 
+    border-radius: 50%; 
+    background-color: var(--skin-color); 
+    text-align: center; 
+    margin: auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    animation: pulse 2s infinite;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.nav-logo:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+}
+.nav-logo-text { 
+    font-size: 1.125rem; 
+    color: var(--title-color); 
+    font-weight: var(--font-bold); 
+    line-height: 40px; 
+}
+.nav-menu { 
+    position: fixed; 
+    transform: rotate(-90deg) translateX(-100%); 
+    transform-origin: left top; 
+    width: 100vh; 
+}
+.menu { display: flex; }
+.nav-list { 
+    display: flex; 
+    flex-direction: row-reverse; 
+    margin: -2px auto 0 auto; 
+}
+.nav-link { 
+    float: right; 
+    height: 100%; 
+    line-height: 100px; 
+    padding: 0 1rem; 
+    color: var(--title-color); 
+    font-weight: var(--font-medium); 
+    position: relative; 
+    transition: all 0.4s ease;
+    overflow: hidden;
+}
+.nav-toggle {
+    height: 32px;
+    width: 36px;
+    cursor: pointer;
+    position: fixed;
+    right: 1.5rem;
+    top: 2rem;
+    font-size: 1.2rem;
+    border-radius: .25rem;
+    background-color: var(--skin-color);
+    color: var(--title-color);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+.nav-close { font-size: 1.5rem; position: absolute; top: 1rem; right: 1.25rem; cursor: pointer; display: none; }
+    .nav-link.active-link, .nav-link:hover { 
+        color: var(--skin-color);
+        text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+    }
+        .nav-link::before {
+            position: absolute;
+            content: '';
+            width: 0;
+            height: 2px;
+            background-color: var(--skin-color);
+            bottom: 2.5rem;
+            left: 0;
+            right: 0;
+            margin: auto;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::before {
+            width: 50%;
+        }
+        .nav-link.active-link::after, .nav-link:hover::after {
+            position: absolute;
+            content: '';
+            width: 8px;
+            height: 8px;
+            background-color: var(--skin-color);
+            border-radius: 50%;
+            bottom: 1.8rem;
+            left: 0;
+            right: 0;
+            margin: auto;
+            box-shadow: 0 0 8px var(--skin-color);
+            animation: pulse 2s infinite;
+        }
+.btn-share { position: absolute; bottom: 1.8rem; left: 0; right: 0; text-align: center; cursor: pointer; }
+.social-share { font-size: 1.5rem; }
+
+/* Main - Home */
+
+.main { 
+    margin-left: 100px;
+    transition: margin-left 0.3s ease;
+    min-height: 100vh;
+    width: calc(100% - 100px);
+}
+/*
+.home { background: url('https://ik.imagekit.io/gopichakradhar/Lisa.jpeg'); background-size: cover; background-position: center center; height: 100vh; }
+*/.home { background: url('https://ik.imagekit.io/gopichakradhar/LISA%20-LALISA-%20PHOTOBOOK%20-SPECIAL%20EDITION%20__%202022_01.20?updatedAt=1754312714961'); background-size: cover; background-position: center center; height: 100vh; }
+.home-container { 
+    position: relative; 
+    height: 100%; 
+    align-items: center; 
+}
+.home-social { 
+    position: absolute; 
+    top: 1.8rem; 
+    left: 0; 
+    display: flex; 
+    align-items: center; 
+    column-gap: 3.5rem;
+    animation: slideInLeft 0.8s ease-out forwards;
+}
+.home-social-follow { 
+    font-weight: var(--font-medium); 
+    position: relative; 
+}
+    .home-social-follow::after { 
+        content: ''; 
+        position: absolute; 
+        width: 1rem; 
+        height: 2px; 
+        background-color: var(--skin-color); 
+        right: -45%; 
+        top: 50%;
+        animation: slideInLeft 1s ease-out forwards;
+    }
+.home-social-links { 
+    display: inline-flex; 
+    column-gap: 1rem; 
+}
+.home-social-link { 
+    font-size: 1.08rem; 
+    color: var(--text-color); 
+    transition: all 0.4s ease; 
+}
+    .home-social-link:hover { 
+        transform: translateY(.25rem); 
+        color: var(--skin-color);
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+.home-img { 
+    display: none;
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    transition: all 0.5s ease;
+    animation: fadeIn 1s ease forwards;
+}
+.home-img:hover {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+.home-title { 
+    font-size: var(--biggest-font-size);
+    animation: fadeIn 0.8s ease-out forwards;
+    background: linear-gradient(90deg, var(--skin-color) 0%, var(--title-color) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+}
+.home-subtitle { 
+    font-size: var(--h3-font-size); 
+    font-weight: var(--font-medium); 
+    margin-bottom: var(--mb075);
+    animation: fadeIn 1s ease-out 0.2s forwards;
+    opacity: 0;
+}
+.home-description { 
+    max-width: 450px; 
+    margin-bottom: var(--mb2);
+    animation: fadeIn 1s ease-out 0.4s forwards;
+    opacity: 0;
+}
+.my-info { 
+    display: flex; 
+    column-gap: 1.8rem; 
+    position: absolute; 
+    left: 0; 
+    bottom: 1.8rem;
+    animation: slideInLeft 1s ease-out 0.6s forwards;
+    opacity: 0;
+}
+.info-item { 
+    display: flex; 
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+.info-item:hover {
+    transform: translateX(5px);
+}
+.info-title, .info-subtitle { 
+    font-size: var(--small-font-size); 
+}
+    .info-title { 
+        font-weight: var(--font-medium); 
+    }
+.info-icon { 
+    font-size: 1.8rem; 
+    color: var(--skin-color); 
+    margin-right: var(--mb075);
+    transition: transform 0.3s ease;
+}
+.info-item:hover .info-icon {
+    transform: scale(1.2);
+}
+
+/* Main - About */
+
+.about-container { 
+    grid-template-columns: repeat(2, 1fr); 
+    column-gap: 4rem; 
+    align-items: center; 
+}
+.about-img { 
+    width: 480px; 
+    border-radius: .75rem; 
+    justify-self: center;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    transition: all 0.5s ease;
+    transform: translateX(-50px);
+    opacity: 0;
+}
+.section.active .about-img {
+    transform: translateX(0);
+    opacity: 1;
+    transition-delay: 0.3s;
+}
+.about-img:hover {
+    transform: scale(1.03) rotate(1deg);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+.about-heading { 
+    font-size: var(--h3-font-size); 
+    margin-bottom: var(--mb075);
+    transform: translateY(30px);
+    opacity: 0;
+    transition: all 0.5s ease;
+    color: var(--title-color);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+.section.active .about-heading {
+    transform: translateY(0);
+    opacity: 1;
+    transition-delay: 0.4s;
+}
+.about-description { 
+    text-align: justify; 
+    padding-right: 6rem; 
+    margin-bottom: var(--mb2);
+    transform: translateY(30px);
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+.section.active .about-description {
+    transform: translateY(0);
+    opacity: 1;
+    transition-delay: 0.6s;
+}
+.about-info { 
+    display: grid; 
+    grid-template-columns: repeat(3, 140px); 
+    column-gap: .5rem; 
+    margin-bottom: var(--mb3);
+    transform: translateY(30px);
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+.section.active .about-info {
+    transform: translateY(0);
+    opacity: 1;
+    transition-delay: 0.8s;
+}
+.about-box { 
+    text-align: center; 
+    border-radius: .5rem; 
+    padding: 1rem 1.25rem; 
+    background-color: var(--box-color);
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+.about-box:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    background-color: var(--mirage-color);
+}
+.about-icon { 
+    font-size: 1.5rem; 
+    color: var(--skin-color); 
+    margin-bottom: var(--mb075);
+    transition: all 0.3s ease;
+}
+.about-box:hover .about-icon {
+    transform: scale(1.2);
+    color: var(--skin-color);
+}
+.about-title { 
+    font-size: var(--small-font-size);
+    transition: all 0.3s ease;
+}
+.about-subtitle { 
+    font-size: var(--small-font-size);
+    transition: all 0.3s ease;
+    opacity: 0.8;
+}
+.about-box:hover .about-subtitle {
+    color: var(--skin-color);
+    opacity: 1;
+}
+
+/* Main - Qualification */
+
+.qualification-container { grid-template-columns: repeat(2 ,340px); column-gap: 3rem; justify-content: center; }
+.qualification-title { font-size: var(--h3-font-size); font-weight: var(--font-medium); margin-bottom: var(--mb2); }
+.timeline-item { position: relative; margin-bottom: var(--mb25); padding-left: 3rem; }
+    .timeline-item:last-child { margin-bottom: 0; }
+    .timeline-item::before { content: ''; width: 1px; position: absolute; left: 0.48rem; top: 0; height: 100%; background-color: var(--skin-color); }
+.circle-dot { position: absolute; left: 0; top: 0; height: 1rem; width: 1rem; border: 2px solid var(--skin-color); border-radius: 50%; background-color: var(--skin-color); transition: .4s; }
+    .timeline-item:hover .circle-dot { background-color: var(--body-color); }
+.timeline-title { font-size: var(--normal-font-size); font-weight: var(--font-medium); margin-bottom: var(--mb025); }
+.timeline-text { font-size: var(--smaller-font-size); margin-bottom: var(--mb1); }
+.timeline-date { display: flex; align-items: center; column-gap: .4rem; font-size: var(--normal-font-size); color: var(--skin-color); }
+
+/* Main - Skills */ 
+
+.skills-container { grid-template-columns: 360px 320px; column-gap: 3rem; justify-content: center; }
+.skills-header { display: flex; align-items: center; cursor: pointer; }
+    .skills-header:not(:last-child) { margin-bottom: var(--mb25); }
+.skills-icon, .skills-arrow { font-size: 2rem; color: var(--skin-color); }
+    .skills-icon { margin-right: var(--mb075); }
+    .skills-arrow { margin-left: auto; }
+        .skills-active .skills-arrow { transform: rotate(-90deg); transition: .4s; }
+.skills-title { font-size: var(--h3-font-size); font-weight: var(--font-medium); }
+.skills-subtitle { font-size: var(--small-font-size); }
+.skills-list { row-gap: 1.8rem; }
+.skills-titles { 
+    display: flex; 
+    justify-content: space-between; 
+    margin-bottom: var(--mb05);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+}
+.section.active .skills-titles {
+    opacity: 1;
+    transform: translateY(0);
+}
+.skills-name { 
+    font-size: var(--normal-font-size); 
+    font-weight: var(--font-medium);
+    transition: all 0.3s ease;
+}
+.skills-titles:hover .skills-name {
+    color: var(--skin-color);
+}
+.skills-bar, .skills-percentage { 
+    height: 7px; 
+    border-radius: .5rem;
+}
+.skills-bar { 
+    background-color: var(--box-color);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: scaleX(0.7);
+    transition: all 0.5s ease 0.2s;
+}
+.section.active .skills-bar {
+    opacity: 1;
+    transform: scaleX(1);
+}
+.skills-percentage { 
+    display: block; 
+    background: linear-gradient(90deg, var(--skin-color) 0%, var(--mirage-color) 100%);
+    width: 0;
+    transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.5s;
+    box-shadow: 0 1px 5px rgba(255, 255, 255, 0.1);
+}
+.section.active .skills-percentage {
+    width: attr(data-width);
+}
+.skills-percentage::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: -3px;
+    width: 12px;
+    height: 12px;
+    background-color: var(--skin-color);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--skin-color);
+    opacity: 0;
+    transition: opacity 0.5s ease 1.5s;
+}
+.section.active .skills-percentage::after {
+    opacity: 1;
+}
+.skills [data-content] { display: none; }
+    .skills-active[data-content] { display: block; }
+
+/* Main - Work */ 
+
+.work-container { grid-template-columns: repeat(3, 330px); gap: 1.8rem; justify-content: center; padding-top: 1rem; }
+.work-filters { display: flex; justify-content: center; align-items: center; column-gap: .75rem; margin-bottom: 2rem; }
+.work-item { cursor: pointer; color: var(--title-color); padding: 0.25rem .75rem; font-weight: var(--font-medium); border-radius: .5rem; }
+.work-card { background-color: var(--box-color); padding: 1.25rem; border-radius: .5rem; display: flex; flex-direction: column; }
+.portfolio-item-details { display: none; }
+.work-img { 
+    border-radius: .5rem; 
+    margin-bottom: var(--mb1); 
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+}
+.work-title { font-size: var(--normal-font-size); font-weight: var(--font-medium); margin-bottom: var(--mb05); }
+.work-button { color: var(--skin-color); font-size: var(--small-font-size); display: flex; align-items: center; column-gap: .25rem; cursor: pointer; }
+.work-button-icon { font-size: 1rem; transition: .4s; }
+    .work-button:hover .work-button-icon { transform: translateX(.25rem); }
+.active-work { background-color: var(--skin-color); color: var(--title-color); }
+
+.portfolio-popup { 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    bottom: 0; 
+    background-color: rgba(0, 0, 0, .5); 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    padding: 0 1rem;
+    opacity: 0;
+    visibility: hidden; 
+    z-index: var(--z-modal); 
+    transition: .4s; 
+}
+.portfolio-popup.open { opacity: 1; visibility: visible; }
+.portfolio-popup-inner { background-color: var(--box-color); width: 900px; border-radius: .5rem; padding: 2.5rem; position: relative; }
+.portfolio-popup-content { grid-template-columns: repeat(2, 1fr); align-items: center; column-gap: 3rem; }
+.portfolio-popup-close { position: absolute; top: 1.5rem; right: 1.5rem; font-size: 1.5rem; color: var(--skin-color); cursor: pointer; }
+.portfolio-popup-img { border-radius: .5rem; }
+.portfolio-popup-subtitle { font-size: var(--smaller-font-size); margin-bottom: var(--mb025); }
+.details-title { font-size: var(--h3-font-size); font-weight: var(--font-medium); margin-bottom: var(--mb1); }
+.details-description { font-size: var(--small-font-size); margin-bottom: var(--mb2); }
+.details-info li { margin-bottom: var(--mb075); text-transform: capitalize; font-size: var(--small-font-size); }
+    .details-info li:last-child { margin-bottom: 0; }
+    .details-info li span { font-weight: normal; }
+    .details-info li a { text-transform: lowercase; color: var(--skin-color); }
+
+/* Main - Services */ 
+
+.services-container { grid-template-columns: repeat(3, 250px); justify-content: center; column-gap: 1.8rem; }
+.services-content { position: relative; background-color: var(--box-color); padding: 6rem 0 2rem 2.5rem; border-radius: .25rem; }
+.services-icon { display: block; font-size: 1.8rem; color: var(--skin-color); margin-bottom: var(--mb1); }
+.services-title { font-size: var(--h3-font-size); margin-bottom: var(--mb1); font-weight: var(--font-medium); }
+.services-button { color: var(--skin-color); font-size: var(--small-font-size); display: flex; align-items: center; column-gap: .25rem; cursor: pointer; }
+.services-button-icon { font-size: 1rem; transition: .4s; }
+    .services-button:hover .services-button-icon { transform: translateX(.25rem); }
+.services-modal {
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    bottom: 0; 
+    background-color: rgba(0, 0, 0, .5); 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    padding: 0 1rem;
+    z-index: var(--z-modal);
+    opacity: 0;
+    visibility: hidden; 
+    transition: .4s;
+}
+.active-modal { opacity: 1; visibility: visible; }
+.services-modal-content { width: 500px; position: relative; background-color: var(--box-color); padding: 4.5rem 2.5rem 2.5rem; border-radius: .5rem; }
+.services-modal-close { position: absolute; top: 1.5rem; right: 1.5rem; font-size: 1.5rem; color: var(--skin-color); cursor: pointer; }
+.services-modal-title, .services-modal-description { text-align: center; }
+    .services-modal-title { font-size: var(--h3-font-size); font-weight: var(--font-medium); margin-bottom: var(--mb1); }
+    .services-modal-description { font-size: var(--small-font-size); padding: 0 3.5rem; margin-bottom: var(--mb2); }
+.services-modal-services { row-gap: var(--mb075); }
+.services-modal-service { display: flex; align-items: center; column-gap: .5rem; }
+.services-modal-icon { color: var(--skin-color); font-size: 1.1rem; }
+.services-modal-info { font-size: var(--small-font-size); }
+
+/* Main - Testimonials */
+
+@media screen and (min-width: 992px) {
+    .testimonials-container { width: 750px; margin-left: auto !important; margin-right: auto !important; }
+}
+
+.testimonial-card { background-color: var(--box-color); padding: 1.8rem 2rem; border-radius: .5rem; margin-bottom: 3rem; }
+.testimonial-quote { display: inline-flex; font-size: 1.5rem; color: var(--skin-color); margin-bottom: var(--mb1); }
+.testimonial-description { margin-bottom: var(--mb1); font-size: var(--small-font-size); text-align: justify; }
+.testimonial-date { font-size: var(--normal-font-size); margin-bottom: var(--mb2); }
+.testimonial-profile { display: flex; align-items: center; column-gap: 1rem; }
+.testimonial-profile-img { width: 60px; height: 60px; border-radius: 3rem; }
+.testimonial-profile-name { font-size: var(--h3-font-size); font-weight: var(--font-medium); color: var(--title-color); }
+.testimonial-profile-detail { font-size: var(--small-font-size); display: block; }
+.testimonial-profile-data { display: flex; flex-direction: column; row-gap: .4rem; }
+
+/* Swiper */
+
+.swiper-pagination-bullet { background-color: var(--box-color); }
+.swiper-pagination-bullet-active { background-color: var(--skin-color); }
+
+/* Main - Contact */
+
+.contact-container { grid-template-columns: 300px 340px; column-gap: 3rem; justify-content: center; align-items: center; }
+.contact-info { display: grid; row-gap: 1rem; }
+.contact-card { background-color: var(--box-color); padding: 1rem; border-radius: .5rem; text-align: center; }
+.contact-card-icon { font-size: 1.8rem; color: var(--title-color); margin-bottom: var(--mb025); }
+.contact-card-title, .contact-card-data { font-size: var(--small-font-size); }
+    .contact-card-title { font-weight: var(--font-medium); }
+    .contact-card-data { display: block; margin-bottom: var(--mb075); }
+.contact-button { color: var(--skin-color); font-size: var(--small-font-size); display: flex; align-items: center; justify-content: center; column-gap: .25rem; cursor: pointer; }
+.contact-button-icon { font-size: 1rem; transition: .4s; }
+    .contact-button:hover .contact-button-icon { transform: translateX(.25rem); }
+.input-container { position: relative; margin-top: 1rem; margin-bottom: 1.9rem; }
+.input { 
+    width: 100%; 
+    border: 2px solid var(--text-color); 
+    background-color: transparent; 
+    padding: 0.6rem 1.2rem; 
+    color: var(--title-color); 
+    font-weight: var(--font-medium); 
+    font-size: var(--normal-font-size); 
+    letter-spacing: .5px; 
+    border-radius: .5rem;
+    outline: none; 
+    transition: .4s; 
+}
+textarea.input { padding: 0.8rem 1.2rem; min-height: 140px; border-radius: .5rem; resize: none; font-family: var(--body-font); }
+    .input-container label {
+        position: absolute;
+        top: 50%;
+        left: 1rem;
+        transform: translateY(-50%);
+        padding: 0 .4rem;
+        color: var(--text-color);
+        font-size: 1rem;
+        font-weight: var(--font-medium);
+        pointer-events: none;
+        z-index: 15;
+        transition: .5s;
+    }
+        
+        .input-container.textarea label { top: 1rem; transform: translateY(0); }
+    .input-container span { 
+        position: absolute; 
+        top: 0; 
+        left: 25px; 
+        transform: translateY(-50%); 
+        font-size: var(--small-font-size); 
+        padding: 0 .4rem; 
+        pointer-events: none; 
+        z-index: var(--z-fixed); 
+        color: transparent; 
+    }
+        .input-container span::before, .input-container span::after { 
+            content: '';
+            position: absolute;
+            width: 10%;
+            opacity: 0;
+            height: 5px;
+            background-color: var(--body-color);
+            top: 50%;
+            transform: translateY(-50%);
+            transition: .4s;
+        }
+            .input-container span::before { left: 50%; }
+            .input-container span::after { right: 50%; }
+            .input-container.focus label { top: 0; transform: translateY(-50%); left: 25px; font-size: var(--smaller-font-size); }
+                .input-container.focus span::before, .input-container.focus span::after  { width: 50%; opacity: 1; }
+
+/* Footer */
+
+.footer { padding-top: 2rem; }
+.footer-container { grid-template-columns: repeat(3, 1fr); column-gap: 1.6rem; }
+.footer-bg { background-color: var(--box-color); padding: 3rem 0 3.5rem; }
+.footer-title { font-size: var(--h1-font-size); margin-bottom: var(--mb025); }    
+.footer-subtitle { font-size: var(--small-font-size); }
+.footer-links { display: flex; justify-self: center; column-gap: 2rem; }
+    .footer-links:hover { color: var(--skin-color); }
+.footer-socials { justify-self: flex-end; }
+.footer-social { font-size: 1.25rem; margin-right: var(--mb15); }
+    .footer-social:hover { color: var(--skin-color); }
+.footer-copy { font-size: var(--smaller-font-size); text-align: center; margin-top: 4.5rem; }
+    .footer-copy a { font-family: var(--signature-font); } 
+        .footer-copy a:hover { color: var(--skin-color); }
+    .footer-title, .footer-subtitle, .footer-links, .footer-social, .footer-copy a { color: var(--title-color); }
+
+/* Media Queries */
+
+@media screen and (max-width: 1408px) {
+    .container { margin-left: var(--mb25); margin-right: var(--mb25); }
+}
+
+@media screen and (max-width: 1216px) {
+    .about-container { column-gap: 2.5rem; }
+    .about-description { padding-right: 0; }
+    .work-container { grid-template-columns: repeat(2, 330px); gap: 3rem; }
+}
+
+@media screen and (max-width: 1024px) {
+    .container { margin-left: var(--mb15); margin-right: var(--mb15); }
+    .sidebar { width: 100px; z-index: 999; }
+    .show-sidebar { transform: translateX(0); }
+    .nav-menu { height: 100%; width: 100%; transform: rotate(0deg) translateX(0); display: flex; justify-content: center; }
+    .nav-list { flex-direction: column; height: 100%; justify-content: center; align-items: center; }
+    .nav-link { padding: 1rem 0; line-height: 1.5; }
+        .nav-link.active-link::after, .nav-link:hover::after { bottom: 0; }
+    .nav-toggle { display: flex; }
+
+    .main { 
+        margin-left: 100px;
+        width: calc(100% - 100px);
+    }
+
+    .about-container { grid-template-columns: 1fr; row-gap: 2.5rem; }
+    .about-img { width: 350px; }
+    .about-data { text-align: center; }
+    .about-info { justify-content: center; }
+    .about-box { padding: 0.75rem .5rem; }
+    .about-description { padding: 0 4rem; text-align: center; }
+
+    .qualification-container { grid-template-columns: repeat(2, 290px); }
+    .skills-container { grid-template-columns: 340px 300px; }
+    .skills-list { row-gap: 1.7rem; }
+
+    .work-card { padding: 1rem; }
+    .work-img { 
+        margin-bottom: var(--mb075); 
+        aspect-ratio: 1/1;
+        object-fit: cover;
+    }
+    .work-title { margin-bottom: var(--mb025); }
+
+    .services-container { grid-template-columns: repeat(3, 220px); }
+
+    .testimonial-card { padding: 1.25rem 1.5rem; }
+
+    .portfolio-item-details { margin-bottom: var(--mb15); }
+    .details-info li { margin-bottom: var(--mb05); }
+    .details-title { margin-bottom: var(--mb075); }
+}
+
+@media screen and (max-width: 768px) {
+    .about-img { width: 250px; }
+    .qualification-container { grid-template-columns: 290px; row-gap: 3rem; }
+    .skills-container { grid-template-columns: 300px; row-gap: 3rem; }
+    .work-container { grid-template-columns: 330px; }
+
+    .services-container { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .services-content { padding: 3.5rem .5rem 1.25rem 1.5rem; }
+    .services-icon { font-size: 1.5rem; }
+
+    .contact-container { grid-template-columns: 360px; row-gap: 3rem; }
+    .footer-container { grid-template-columns: repeat(2, 1fr); row-gap: 3rem; }
+    .footer-socials { justify-self: start; }
+    .footer-links { flex-direction: column; row-gap: 1.5rem; }
+    .footer-bg { padding: 2rem 0 3rem; }
+    .footer-copy { margin-top: var(--mb3); }
+
+    .portfolio-popup-inner { width: 420px; padding: 2.8rem 1.5rem 2.5rem; }
+    .portfolio-popup-content { grid-template-columns: 1fr; row-gap: 1.6rem; }
+    .details-title { font-size: var(--normal-font-size); }
+    .portfolio-popup-close { top: .5rem;  }
+}
+
+@media screen and (max-width: 576px) {
+    .sidebar { width: 70px; }
+    .main { 
+        margin-left: 70px;
+        width: calc(100% - 70px);
+    }
+    .nav-toggle { right: initial; left: 1.5rem; }
+    .home { background-image: none; height: initial; align-items: initial; padding: 7rem 0 2rem; }
+    .home-container { row-gap: 2rem; }
+    .home-img { display: block; width: 250px; justify-self: center; }
+    .home-social { left: initial; right: -1rem; flex-direction: column; row-gap: 3.5rem; }
+    .home-social-follow { font-size: var(--smaller-font-size); transform: rotate(90deg); }
+    .home-social-links { flex-direction: column; row-gap: .25rem; }
+    .home-social-link { font-size: var(--normal-font-size); }
+
+    .about-info { grid-template-columns: repeat(3, 1fr); }
+    .about-description { padding: 0; }
+
+    .services-modal-content { padding: 4.5rem 1.5rem 2.5rem; }
+    .services-modal-description { padding: 0; }
+
+    .work-container, .contact-container { grid-template-columns: 300px; }
+
+    .footer-container { grid-template-columns: 1fr;  }
+    .footer-links { justify-self: flex-start; }
+
+}
+
+@media screen and (max-width: 350px) {
+    .sidebar { width: 60px; }
+    .main { 
+        margin-left: 60px; 
+        width: calc(100% - 60px);
+    }
+    .container { margin-left: var(--mb1); margin-right: var(--mb1); }
+    .home-img { width: 200px; }
+    .home-title { font-size: var(--h1-font-size); }
+    .home-subtitle { font-size: var(--normal-font-size); }
+    
+    .about-info { grid-template-columns: repeat(2, 1fr); row-gap: .5rem; }
+    .work-container, .skills-container, .qualification-container, .contact-container { grid-template-columns: 1fr; }
+    .skills-title { font-size: var(--normal-font-size); }
+    .work-item { font-size: var(--normal-font-size); }
+    .work-filters { column-gap: .25rem; }
+    .services-container { grid-template-columns: max-content; }
+    .services-content { padding-right: 3.5rem; }
+}
+
+</style>
+<body>
+    <div class="nav-toggle" id="nav-toggle">
+        <i class="uil uil-bars"></i>
+    </div>
+
+    <aside class="sidebar" id="sidebar">
+        <nav class="nav">
+            <div class="nav-logo">
+                <a href="#" class="nav-logo-text">L</a>
+            </div>
+
+            <div class="nav-menu">
+                <div class="menu">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="#home" class="nav-link active-link">Home</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#about" class="nav-link">About</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#skills" class="nav-link">Skills</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#work" class="nav-link">Work</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#services" class="nav-link">Services</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#contact" class="nav-link">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="btn-share">
+                <i class="uil uil-share-alt social-share"></i>
+            </div>
+
+            <div class="nav-close" id="nav-close">
+                <i class="uil uil-times"></i>
+            </div>
+        </nav>
+    </aside>
+
+    <main class="main">
+        <section class="home" id="home">
+            <div class="home-container container grid">
+                <div class="home-social">
+                    <span class="home-social-follow">Follow Me</span>
+                    <div class="home-social-links">
+                        <a href="https://www.linkedin.com/company/yg-entertainment/people/" target="_blank" class="home-social-link">
+                            <i class="uil uil-linkedin"></i>
+                        </a>
+
+                        <a href="https://www.instagram.com/lalalalisa_m/" target="_blank" class="home-social-link">
+                            <i class="uil uil-instagram"></i>
+                        </a>
+
+                        <a href="https://www.youtube.com/@lalalalisa_m" target="_blank" class="home-social-link">
+                            <i class="uil uil-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <img src="https://ik.imagekit.io/gopichakradhar/180708%20Yeouido%20Fansign%20_LISA.jpeg?updatedAt=1752415416655" alt="" class="home-img">
+
+            <div class="home-data">
+                <h1 class="home-title">Hi, I'm Lisa Manoban</h1>
+                <h3 class="home-subtitle">K-Pop Artist & Performer</h3>
+                <p class="home-description">I am a talented performer, rapper, and dancer with expertise in music production, choreography, and entertainment industry leadership</p>
+                <a href="#about" class="button">
+                    <i class="uil uil-user button-icon"></i>
+                    More About me!
+                </a>
+            </div>
+
+            <div class="my-info">
+                <div class="info-item">
+                    <i class="uil uil-youtube info-icon"></i>
+
+                    <div>
+                        <h3 class="info-title">YouTube</h3>
+                        <span class="info-subtitle">@lalalalisa_m</span>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <i class="uil uil-instagram info-icon"></i>
+
+                    <div>
+                        <h3 class="info-title">Instagram</h3>
+                        <span class="info-subtitle">@lalalalisa_m</span>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <i class="uil uil-envelope-edit info-icon"></i>
+
+                    <div>
+                        <h3 class="info-title">Email</h3>
+                        <span class="info-subtitle">support@blackpinkupdate.com</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            
+        </section>
+
+        <section class="about section" id="about">
+            <h2 class="section-title" data-heading="My Intro">About me</h2>
+
+            <div class="about-container container grid">
+                <img src="https://ik.imagekit.io/gopichakradhar/180708%20Yeouido%20Fansign%20_LISA.jpeg?updatedAt=1752415416655" alt="" class="about-img">
+
+                <div class="about-data">
+                    <h3 class="about-heading">Hi, I'm Lisa Manoban, based in South Korea</h3>
+                    <p class="about-description">I'm a K-Pop artist and performer specializing in rap, dance, and music production, with a proven track record of delivering outstanding performances in the global entertainment industry and inspiring millions of fans worldwide</p>
+
+                    <div class="about-info">
+                        <div class="about-box">
+                            <i class="uil uil-award about-icon"></i>
+                            <h3 class="about-title">Experience</h3>
+                            <span class="about-subtitle">8+ Years</span>
+                        </div>
+
+                        <div class="about-box">
+                            <i class="uil uil-suitcase-alt about-icon"></i>
+                            <h3 class="about-title">Albums</h3>
+                            <span class="about-subtitle">5+ Releases</span>
+                        </div>
+
+                        <div class="about-box">
+                            <i class="uil uil-headphones-alt about-icon"></i>
+                            <h3 class="about-title">Fans</h3>
+                            <span class="about-subtitle">Millions Worldwide</span>
+                        </div>
+                    </div>
+
+                    <a href="#contact" class="button"><i class="uil uil-navigator button-icon"></i>Contact me</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="qualification section">
+            <h2 class="section-title" data-heading="My Journey">Career Highlights</h2>
+
+            <div class="qualification-container container grid">
+                <div class="education">
+                    <h3 class="qualification-title"><i class="uil uil-music"></i>Music & Dance</h3>
+
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="circle-dot"></div>
+                            <h3 class="timeline-title">Solo Debut with "LALISA"</h3>
+                            <p class="timeline-text">Record-breaking solo album release</p>
+                            <span class="timeline-date"><i class="uil uil-calendar-alt"></i>September 2021</span>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="circle-dot"></div>
+                            <h3 class="timeline-title">BLACKPINK World Tour: BORN PINK</h3>
+                            <p class="timeline-text">Global concert tour across 4 continents</p>
+                            <span class="timeline-date"><i class="uil uil-calendar-alt"></i>2022 - 2023</span>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="circle-dot"></div>
+                            <h3 class="timeline-title">LILI's FILM Dance Performance Series</h3>
+                            <p class="timeline-text">Choreography and dance showcase</p>
+                            <span class="timeline-date"><i class="uil uil-calendar-alt"></i>2019 - Present</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="experience">
+                    <h3 class="qualification-title"><i class="uil uil-suitcase"></i>Brand Endorsements</h3>
+
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="circle-dot"></div>
+                            <h3 class="timeline-title">CELINE</h3>
+                            <p class="timeline-text">Global Brand Ambassador</p>
+                            <span class="timeline-date"><i class="uil uil-calendar-alt"></i>2020 - Present</span>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="circle-dot"></div>
+                            <h3 class="timeline-title">Bulgari</h3>
+                            <p class="timeline-text">Global Brand Ambassador</p>
+                            <span class="timeline-date"><i class="uil uil-calendar-alt"></i>2020 - Present</span>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="circle-dot"></div>
+                            <h3 class="timeline-title">MAC Cosmetics</h3>
+                            <p class="timeline-text">Global Brand Ambassador</p>
+                            <span class="timeline-date"><i class="uil uil-calendar-alt"></i>2020 - Present</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="skills section" id="skills">
+            <h2 class="section-title" data-heading="My Abilities">My Talents</h2>
+
+            <div class="skills-container container grid">
+                <div class="skills-tabs">
+                    <div class="skills-header skills-active" data-target="#frontend">
+                        <i class="uil uil-music skills-icon"></i>
+
+                        <div>
+                            <h1 class="skills-title">Performance Arts</h1>
+                            <span class="skills-subtitle">10+ years experience</span>
+                            
+                        </div>
+
+                        <i class="uil uil-angle-down skills-arrow"></i>
+                    </div>
+
+                    <div class="skills-header" data-target="#design">
+                        <i class="uil uil-camera skills-icon"></i>
+
+                        <div>
+                            <h1 class="skills-title">Fashion & Modeling</h1>
+                            <span class="skills-subtitle">6+ years experience</span>
+                            
+                        </div>
+
+                        <i class="uil uil-angle-down skills-arrow"></i>
+                    </div>
+
+                    <div class="skills-header" data-target="#backend">
+                        <i class="uil uil-microphone skills-icon"></i>
+
+                        <div>
+                            <h1 class="skills-title">Languages & Communication</h1>
+                            <span class="skills-subtitle">Multilingual Talent</span>
+
+                        </div>
+
+                        <i class="uil uil-angle-down skills-arrow"></i>
+                    </div>
+                </div>
+
+                <div class="skills-content">
+                    <div class="skills-group skills-active" data-content id="frontend">
+                        <div class="skills-list grid">
+                            <div class="skills-data">
+                                <div class="skills-titles">
+                                    <h3 class="skills-name">Dance Performance</h3>
+                                    <span class="skills-number">98%</span>
+                                </div>
+
+                                <div class="skills-bar">
+                                    <span class="skills-percentage" style="width: 98%;"></span>
+                                </div>
+                            </div>
+
+                            <div class="skills-data">
+                                <div class="skills-titles">
+                                    <h3 class="skills-name">Rap & Vocal Performance</h3>
+                                    <span class="skills-number">95%</span>
+                                </div>
+
+                                <div class="skills-bar">
+                                    <span class="skills-percentage" style="width: 95%;"></span>
+                                </div>
+                            </div>
+
+                            <div class="skills-data">
+                                <div class="skills-titles">
+                                    <h3 class="skills-name">Choreography</h3>
+                                    <span class="skills-number">90%</span>
+                                </div>
+
+                                <div class="skills-bar">
+                                    <span class="skills-percentage" style="width: 90%;"></span>
+                                </div>
+                            </div>
+
+                            <div class="skills-data">
+                                <div class="skills-titles">
+                                    <h3 class="skills-name">Stage Presence</h3>
+                                    <span class="skills-number">98%</span>
+                                </div>
+
+                                <div class="skills-bar">
+                                    <span class="skills-percentage" style="width: 98%;"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skills-group" data-content id="design">
+                        <div class="skills-list grid">
+                            <div class="skills-data">
+                                <div class="skills-titles">
+                                    <h3 class="skills-name">Fashion Modeling</h3>
+                                    <span class="skills-number">95%</span>
+                                </div>
+
+                                <div class="skills-bar">
+                                    <span class="skills-percentage" style="width: 95%;"></span>
+                                </div>
+                            </div>
+
+                            <div class="skills-data">
+                                <div class="skills-titles">
+                                    <h3 class="skills-name">Brand Representation</h3>
+                                    <span class="skills-number">96%</span>
+                                </div>
+
+                                <div class="skills-bar">
+                                    <span class="skills-percentage" style="width: 96%;"></span>
+                                </div>
+                            </div>
+
+                            <div class="skills-data">
+                                <div class="skills-titles">
+                                    <h3 class="skills-name">Visual Aesthetics</h3>
+                                    <span class="skills-number">92%</span>
+                                </div>
+
+                                <div class="skills-bar">
+                                    <span class="skills-percentage" style="width: 92%;"></span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="skills-group" data-content id="backend">
+                        <div class="skills-list grid">
+                            <div class="skills-data">
+                                <div class="skills-titles">
+                                    <h3 class="skills-name">Thai (Native)</h3>
+                                    <span class="skills-number">100%</span>
+                                </div>
+
+                                <div class="skills-bar">
+                                    <span class="skills-percentage" style="width: 100%;"></span>
+                                </div>
+                            </div>
+
+                            <div class="skills-data">
+                                <div class="skills-titles">
+                                    <h3 class="skills-name">English</h3>
+                                    <span class="skills-number">95%</span>
+                                </div>
+
+                                <div class="skills-bar">
+                                    <span class="skills-percentage" style="width: 95%;"></span>
+                                </div>
+                            </div>
+
+                            <div class="skills-data">
+                                <div class="skills-titles">
+                                    <h3 class="skills-name">Korean</h3>
+                                    <span class="skills-number">90%</span>
+                                </div>
+
+                                <div class="skills-bar">
+                                    <span class="skills-percentage" style="width: 90%;"></span>
+                                </div>
+                            </div>
+
+                            <div class="skills-data">
+                                <div class="skills-titles">
+                                    <h3 class="skills-name">Japanese (Basic)</h3>
+                                    <span class="skills-number">70%</span>
+                                </div>
+
+                                <div class="skills-bar">
+                                    <span class="skills-percentage" style="width: 70%;"></span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="work section" id="work">
+            <h2 class="section-title" data-heading="My Portfolio">Recent Works</h2>
+
+            <div class="work-filters">
+                <span class="work-item active-work" data-filter="all">All</span>
+                <span class="work-item" data-filter=".web">Music</span>
+                <span class="work-item" data-filter=".app">Fashion</span>
+                <span class="work-item" data-filter=".design">Performance</span>
+            </div>
+
+            <div class="work-container container grid">
+                <div class="work-card mix web">
+                    <img src="https://ik.imagekit.io/gopichakradhar/download%20(5).jpeg?updatedAt=1752415416660" alt="" class="work-img">
+                    <h3 class="work-title">LALISA Solo Album</h3>
+                    <span class="work-button">Demo<i class="uil uil-arrow-right work-button-icon"></i></span>
+
+                    <div class="portfolio-item-details">
+                        <h3 class="details-title">LALISA Solo Album</h3>
+                        <p class="details-description">Debut solo album featuring hit singles 'LALISA' and 'MONEY', breaking YouTube records for most-viewed music video in 24 hours by a solo artist</p>
+                        <ul class="details-info">
+                            <li>Released - <span>2021</span></li>
+                            <li>Label - <span>YG Entertainment</span></li>
+                            <li>Role - <span>Solo Artist</span></li>
+                            <li>View - <span><a href="https://www.youtube.com/watch?v=awkkyBH2zEo">YouTube</a></span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="work-card mix app">
+                    <img src="https://ik.imagekit.io/gopichakradhar/download%20(7).jpeg?updatedAt=1752415416413" alt="" class="work-img">
+                    <h3 class="work-title">BLACKPINK WORLD TOUR [BORN PINK]</h3>
+                    <span class="work-button">Demo<i class="uil uil-arrow-right work-button-icon"></i></span>
+
+                    <div class="portfolio-item-details">
+                        <h3 class="details-title">BLACKPINK WORLD TOUR [BORN PINK]</h3>
+                        <p class="details-description">Global stadium tour across North America, Europe, Asia, and Australia with over 1.8 million attendees</p>
+                        <ul class="details-info">
+                            <li>Duration - <span>2022-2023</span></li>
+                            <li>Venues - <span>34 cities worldwide</span></li>
+                            <li>Role - <span>Lead Performer</span></li>
+                            <li>View - <span><a href="https://www.youtube.com/watch?v=DSaR4ye0Qv0">YouTube</a></span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="work-card mix design">
+                    <img src="https://ik.imagekit.io/gopichakradhar/download%20(4).jpeg?updatedAt=1752415416439" alt="" class="work-img">
+                    <h3 class="work-title">Bulgari Global Brand Ambassador</h3>
+                    <span class="work-button">Demo<i class="uil uil-arrow-right work-button-icon"></i></span>
+
+                    <div class="portfolio-item-details">
+                        <h3 class="details-title">Bulgari Global Brand Ambassador</h3>
+                        <p class="details-description">Global ambassador for the luxury brand Bulgari, representing their jewelry collections in international campaigns</p>
+                        <ul class="details-info">
+                            <li>Since - <span>2020</span></li>
+                            <li>Campaign - <span>Bulgari Magnificence</span></li>
+                            <li>Role - <span>Global Ambassador</span></li>
+                            <li>View - <span><a href="https://www.bulgari.com/en-us/">Bulgari</a></span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="work-card mix app">
+                    <img src="https://ik.imagekit.io/gopichakradhar/download%20(6).jpeg?updatedAt=1752415416517" alt="" class="work-img">
+                    <h3 class="work-title">CELINE Creative Director</h3>
+                    <span class="work-button">Demo<i class="uil uil-arrow-right work-button-icon"></i></span>
+
+                    <div class="portfolio-item-details">
+                        <h3 class="details-title">CELINE Global Ambassador</h3>
+                        <p class="details-description">First Global Ambassador for the French luxury fashion house CELINE, representing their collections worldwide</p>
+                        <ul class="details-info">
+                            <li>Since - <span>2020</span></li>
+                            <li>Collections - <span>Fashion, Accessories</span></li>
+                            <li>Role - <span>Brand Ambassador</span></li>
+                            <li>View - <span><a href="https://www.celine.com">CELINE</a></span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="work-card mix web">
+                    <img src="https://ik.imagekit.io/gopichakradhar/180708%20Yeouido%20Fansign%20_LISA.jpeg?updatedAt=1752415416655" alt="" class="work-img">
+                    <h3 class="work-title">MAC Cosmetics Ambassador</h3>
+                    <span class="work-button">Demo<i class="uil uil-arrow-right work-button-icon"></i></span>
+
+                    <div class="portfolio-item-details">
+                        <h3 class="details-title">MAC Cosmetics Global Ambassador</h3>
+                        <p class="details-description">Brand ambassador for MAC Cosmetics' global campaigns, featuring in worldwide beauty advertisements</p>
+                        <ul class="details-info">
+                            <li>Since - <span>2020</span></li>
+                            <li>Collections - <span>Makeup, Cosmetics</span></li>
+                            <li>Role - <span>Brand Ambassador</span></li>
+                            <li>View - <span><a href="https://www.maccosmetics.com">MAC</a></span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="work-card mix design">
+                    <img src="https://ik.imagekit.io/gopichakradhar/_Lisa.jpeg?updatedAt=1752415416482" alt="" class="work-img">
+                    <h3 class="work-title">LILI's FILM Dance Performance</h3>
+                    <span class="work-button">Demo<i class="uil uil-arrow-right work-button-icon"></i></span>
+
+                    <div class="portfolio-item-details">
+                        <h3 class="details-title">LILI's FILM Dance Performance</h3>
+                        <p class="details-description">Series of dance performances showcasing exceptional choreography skills, garnering millions of views worldwide</p>
+                        <ul class="details-info">
+                            <li>Since - <span>2019</span></li>
+                            <li>Format - <span>YouTube Performance Series</span></li>
+                            <li>Role - <span>Dancer & Choreographer</span></li>
+                            <li>View - <span><a href="https://www.youtube.com/watch?v=je_R3gEtDbw">YouTube</a></span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="portfolio-popup">
+            <div class="portfolio-popup-inner">
+                <div class="portfolio-popup-content grid">
+                    <span class="portfolio-popup-close"><i class="uil uil-times"></i></span>
+                    <div class="pp-thumbnail">
+                        <img src="https://ik.imagekit.io/gopichakradhar/180708%20Yeouido%20Fansign%20_LISA.jpeg?updatedAt=1752415416655" alt="" class="portfolio-popup-img">
+                    </div>
+
+                    <div class="portfolio-popup-info">
+                        <div class="portfolio-popup-subtitle">Featured - <span>Design</span></div>
+                        <div class="portfolio-popup-body">
+                            <h3 class="details-title">App for Technology & Services</h3>
+                            <p class="details-description">A stylish burger restaurant mobile app interface displayed on two smartphones</p>
+
+                            <ul class="details-info">
+                                <li>Created - <span>15 Apr 2025</span></li>
+                                <li>Technologies - <span>html css</span></li>
+                                <li>Role - <span>frontend</span></li>
+                                <li>View - <span><a href="#">www.domain.com</a></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="services section" id="services">
+            <h2 class="section-title" data-heading="Services">What I Offer</h2>
+
+            <div class="services-container container grid">
+                <div class="services-content">
+                    <div>
+                        <i class="uil uil-music services-icon"></i>
+                        <h3 class="services-title">Performance <br> & Entertainment</h3>
+                    </div>
+
+                    <span class="services-button">
+                        View More <i class="uil uil-arrow-right services-button-icon"></i>
+                    </span>
+
+                    <div class="services-modal">
+                        <div class="services-modal-content">
+                            <i class="uil uil-times services-modal-close"></i>
+
+                            <h3 class="services-modal-title">Performance & Entertainment</h3>
+                            <p class="services-modal-description">I offer world-class entertainment services with over 10 years of experience in performance arts</p>
+
+                            <ul class="services-modal-services grid">
+                                <li class="services-modal-service">
+                                    <i class="uil uil-check-circle services-modal-icon"></i>
+                                    <p class="services-modal-info">Live Concerts & Tours</p>
+                                </li>
+
+                                <li class="services-modal-service">
+                                    <i class="uil uil-check-circle services-modal-icon"></i>
+                                    <p class="services-modal-info">Music Video Performance</p>
+                                </li>
+
+                                <li class="services-modal-service">
+                                    <i class="uil uil-check-circle services-modal-icon"></i>
+                                    <p class="services-modal-info">Dance Choreography & Direction</p>
+                                </li>
+
+                                <li class="services-modal-service">
+                                    <i class="uil uil-check-circle services-modal-icon"></i>
+                                    <p class="services-modal-info">Television & Award Show Appearances</p>
+                                </li>
+
+                                <li class="services-modal-service">
+                                    <i class="uil uil-check-circle services-modal-icon"></i>
+                                    <p class="services-modal-info">Virtual & Live Streaming Events</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="services-content">
+                    <div>
+                        <i class="uil uil-camera services-icon"></i>
+                        <h3 class="services-title">Brand <br> Partnerships</h3>
+                    </div>
+
+                    <span class="services-button">
+                        View More <i class="uil uil-arrow-right services-button-icon"></i>
+                    </span>
+
+                    <div class="services-modal">
+                        <div class="services-modal-content">
+                            <i class="uil uil-times services-modal-close"></i>
+
+                            <h3 class="services-modal-title">Brand Partnerships</h3>
+                            <p class="services-modal-description">I collaborate with global luxury and lifestyle brands as an ambassador with worldwide influence</p>
+
+                            <ul class="services-modal-services grid">
+                                <li class="services-modal-service">
+                                    <i class="uil uil-check-circle services-modal-icon"></i>
+                                    <p class="services-modal-info">Global Brand Campaigns</p>
+                                </li>
+
+                                <li class="services-modal-service">
+                                    <i class="uil uil-check-circle services-modal-icon"></i>
+                                    <p class="services-modal-info">Fashion & Luxury Endorsements</p>
+                                </li>
+
+                                <li class="services-modal-service">
+                                    <i class="uil uil-check-circle services-modal-icon"></i>
+                                    <p class="services-modal-info">Product Launch Events</p>
+                                </li>
+
+                                <li class="services-modal-service">
+                                    <i class="uil uil-check-circle services-modal-icon"></i>
+                                    <p class="services-modal-info">Social Media Campaigns</p>
+                                </li>
+
+                                <li class="services-modal-service">
+                                    <i class="uil uil-check-circle services-modal-icon"></i>
+                                    <p class="services-modal-info">Brand Ambassador Appearances</p>
+                                </li>
+
+                                <li class="services-modal-service">
+                                    <i class="uil uil-check-circle services-modal-icon"></i>
+                                    <p class="services-modal-info">Print & Digital Advertising</p>
+                                </li>
+
+                                <li class="services-modal-service">
+                                    <i class="uil uil-check-circle services-modal-icon"></i>
+                                    <p class="services-modal-info">Fashion Week & Red Carpet Events</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="services-content">
+                    <div>
+                        <i class="uil uil-microphone services-icon"></i>
+                        <h3 class="services-title">Media <br> Production</h3>
+                    </div>
+
+                    <span class="services-button">
+                        View More <i class="uil uil-arrow-right services-button-icon"></i>
+                    </span>
+
+                    <div class="services-modal">
+                        <div class="services-modal-content">
+                            <i class="uil uil-times services-modal-close"></i>
+
+                            <h3 class="services-modal-title">Media Production</h3>
+                            <p class="services-modal-description">I create and participate in high-quality media productions across various platforms</p>
+
+                            <ul class="services-modal-services grid">
+                                <li class="services-modal-service">
+                                    <i class="uil uil-check-circle services-modal-icon"></i>
+                                    <p class="services-modal-info">Music Video Production</p>
+                                </li>
+
+                                <li class="services-modal-service">
+                                    <i class="uil uil-check-circle services-modal-icon"></i>
+                                    <p class="services-modal-info">Dance Performance Series</p>
+                                </li>
+
+                                <li class="services-modal-service">
+                                    <i class="uil uil-check-circle services-modal-icon"></i>
+                                    <p class="services-modal-info">Reality & Variety Show Appearances</p>
+                                </li>
+
+                                <li class="services-modal-service">
+                                    <i class="uil uil-check-circle services-modal-icon"></i>
+                                    <p class="services-modal-info">Documentary Participation</p>
+                                </li>
+
+                                <li class="services-modal-service">
+                                    <i class="uil uil-check-circle services-modal-icon"></i>
+                                    <p class="services-modal-info">YouTube Content Creation</p>
+                                </li>
+
+                                <li class="services-modal-service">
+                                    <i class="uil uil-check-circle services-modal-icon"></i>
+                                    <p class="services-modal-info">Social Media Content</p>
+                                </li>
+
+                                <li class="services-modal-service">
+                                    <i class="uil uil-check-circle services-modal-icon"></i>
+                                    <p class="services-modal-info">Quality assurance</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials section">
+            <h2 class="section-title" data-heading="Industry Recognition">Testimonials</h2>
+
+            <div class="testimonials-container container swiper">
+                <div class="swiper-wrapper">
+                    <div class="testimonial-card swiper-slide">
+                        <div class="testimonial-quote">
+                            <i class='bx bxs-quote-alt-left'></i>
+                        </div>
+                        <p class="testimonial-description">Lisa's performance on our global campaign exceeded all expectations. Her unique style and worldwide appeal brought unprecedented attention to our brand. She's the perfect ambassador for CELINE.</p>
+                        <h3 class="testimonial-date">September 2023</h3>
+                        <div class="testimonial-profile">
+                            <img src="https://i.postimg.cc/MK1rJJ4y/celine-logo.jpg" alt="" class="testimonial-profile-img">
+
+                            <div class="testimonial-profile-data">
+                                <span class="testimonial-profile-name">CELINE</span>
+                                <span class="testimonail-profile-detail">Fashion Brand</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card swiper-slide">
+                        <div class="testimonial-quote">
+                            <i class='bx bxs-quote-alt-left'></i>
+                        </div>
+                        <p class="testimonial-description">Working with Lisa on our jewelry campaign was phenomenal. Her elegance and global influence perfectly embody the spirit of Bulgari. Our collaboration has been incredibly successful worldwide.</p>
+                        <h3 class="testimonial-date">May 2023</h3>
+                        <div class="testimonial-profile">
+                            <img src="https://i.postimg.cc/3RQ9vRtw/bulgari-logo.jpg" alt="" class="testimonial-profile-img">
+
+                            <div class="testimonial-profile-data">
+                                <span class="testimonial-profile-name">Bulgari</span>
+                                <span class="testimonail-profile-detail">Luxury Brand</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card swiper-slide">
+                        <div class="testimonial-quote">
+                            <i class='bx bxs-quote-alt-left'></i>
+                        </div>
+                        <p class="testimonial-description">Lisa's performances during our world tour were extraordinary. Her dance precision and stage presence captivate audiences everywhere. She's truly one of the most talented performers of this generation.</p>
+                        <h3 class="testimonial-date">December 2022</h3>
+                        <div class="testimonial-profile">
+                            <img src="https://i.postimg.cc/L4Khb0z4/yg-logo.jpg" alt="" class="testimonial-profile-img">
+
+                            <div class="testimonial-profile-data">
+                                <span class="testimonial-profile-name">YG Entertainment</span>
+                                <span class="testimonail-profile-detail">Music Label</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+            
+        </section>
+
+        <section class="contact section" id="contact">
+            <h2 class="section-title" data-heading="Get in Touch">Contact me</h2>
+
+            <div class="contact-container container grid">
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <div class="contact-card">
+                            <i class="uil uil-envelope-edit contact-card-icon"></i>
+                            <h3 class="contact-card-title">Email</h3>
+                            <span class="contact-card-data">support@blackpinkupdate.com</span>
+                            <span class="contact-button">Write me <i class="uil uil-arrow-right contact-button-icon"></i></span>
+                        </div>
+
+                        <div class="contact-card">
+                            <i class="uil uil-whatsapp contact-card-icon"></i>
+                            <h3 class="contact-card-title">WhatsApp</h3>
+                            <span class="contact-card-data">016 5738 200</span>
+                            <span class="contact-button">Write me <i class="uil uil-arrow-right contact-button-icon"></i></span>
+                        </div>
+
+                        <div class="contact-card">
+                            <i class="uil uil-youtube contact-card-icon"></i>
+                            <h3 class="contact-card-title">YouTube</h3>
+                            <span class="contact-card-data">@lalalalisa_m</span>
+                            <span class="contact-button">Subscribe <i class="uil uil-arrow-right contact-button-icon"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-content">
+                    <form action="" class="contact-form">
+                        <div class="input-container">
+                            <input type="text" class="input">
+                            <label for="">Username</label>
+                            <span>Username</span>
+                        </div>
+    
+                        <div class="input-container">
+                            <input type="email" class="input">
+                            <label for="">Email</label>
+                            <span>Email</span>
+                        </div>
+    
+                        <div class="input-container">
+                            <input type="tel" class="input">
+                            <label for="">Phone</label>
+                            <span>Phone</span>
+                        </div>
+    
+                        <div class="input-container textarea">
+                            <textarea name="" id="" class="input"></textarea>
+                            <label for="">Message</label>
+                            <span>Message</span>
+                        </div>
+    
+                        <button type="submit" class="button"><i class="uil uil-navigator button-icon"></i>Send Message</button>
+                    </form>
+                </div>
+            </div>
+
+        </section>
+
+        <footer class="footer">
+            <div class="footer-bg">
+                <div class="footer-container container grid">
+                    <div>
+                        <h1 class="footer-title">Lisa</h1>
+                        <span class="footer-subtitle">K-Pop Artist & Performer</span>
+                    </div>
+
+                    <ul class="footer-links">
+                        <li>
+                            <a href="#services" class="footer-links">Services</a>
+                        </li>
+                        <li>
+                            <a href="#work" class="footer-links">Work</a>
+                        </li>
+                        <li>
+                            <a href="#contact" class="footer-links">Contact</a>
+                        </li>
+                    </ul>
+
+                    <div class="footer-socials">
+                        <a href="https://www.linkedin.com/company/yg-entertainment/people/" target="_blank" class="footer-social">
+                            <i class="uil uil-linkedin"></i>
+                        </a>
+
+                        <a href="https://www.instagram.com/lalalalisa_m/" target="_blank" class="footer-social">
+                            <i class="uil uil-instagram"></i>
+                        </a>
+
+                        <a href="https://www.youtube.com/@lalalalisa_m" target="_blank" class="footer-social">
+                            <i class="uil uil-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <p class="footer-copy">&#169; <a href="https://en.wikipedia.org/wiki/Lisa_(rapper)">Lisa Manoban</a>. All rights reserved</p>
+            </div>
+        </footer>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.1/mixitup.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="scripts.js"></script>
+</body>
+<script>
+  // Scroll Animations for Sections
+function checkSectionsAnimation() {
+    const triggerBottom = window.innerHeight * 0.85;
+    const animateSections = document.querySelectorAll('.section');
+    
+    animateSections.forEach(section => {
+        const sectionTop = section.getBoundingClientRect().top;
+        
+        if (sectionTop < triggerBottom) {
+            section.classList.add('active');
+            
+            // Animate skill percentages once section is visible
+            if (section.classList.contains('skills')) {
+                const skillPercentages = section.querySelectorAll('.skills-percentage');
+                skillPercentages.forEach(skillBar => {
+                    const width = skillBar.parentElement.previousElementSibling.querySelector('.skills-number').textContent;
+                    skillBar.style.width = width;
+                });
+            }
+        }
+    });
+}
+
+// Initial check on page load
+window.addEventListener('DOMContentLoaded', checkSectionsAnimation);
+
+// Check sections on scroll
+window.addEventListener('scroll', checkSectionsAnimation);
+
+// Share button functionality
+const shareButton = document.querySelector('.btn-share');
+shareButton.addEventListener('click', async () => {
+    // The image URL to share
+    const imageUrl = 'https://ik.imagekit.io/gopichakradhar/assets/web_lisa.png';
+    
+    // Check if Web Share API is supported
+    if (navigator.share) {
+        try {
+            await navigator.share({
+                title: 'Lisa Manoban | BLACKPINK',
+                text: 'Check out Lisa Manoban\'s portfolio!',
+                url: imageUrl
+            });
+            console.log('Share successful');
+        } catch (error) {
+            console.log('Sharing failed', error);
+            // Fallback: Open image in new tab
+            window.open(imageUrl, '_blank');
+        }
+    } else {
+        // Fallback for browsers without Web Share API
+        window.open(imageUrl, '_blank');
+    }
+});
+
+// Toggling Skill Tabs
+const tabs = document.querySelectorAll('[data-target]');
+const tabContent = document.querySelectorAll('[data-content]');
+
+tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+        const target = document.querySelector(tab.dataset.target);
+
+        tabContent.forEach(tabContents => {
+            tabContents.classList.remove('skills-active');
+        })
+
+        target.classList.add('skills-active');
+
+        tabs.forEach(tab => {
+            tab.classList.remove('skills-active');
+        })
+
+        tab.classList.add('skills-active');
+    })
+})
+
+//Mix it up Sorting
+
+let mixerPortfolio = mixitup('.work-container', {
+    selectors: {
+        target: '.work-card'
+    },
+    animation: {
+        duration: 300
+    }
+});
+
+// Active link changing
+
+const linkWork = document.querySelectorAll('.work-item');
+
+function activeWork() {
+    linkWork.forEach(l => l.classList.remove('active-work'))
+    this.classList.add('active-work')
+}
+linkWork.forEach(l => l.addEventListener('click', activeWork));
+
+//Portfolio Popup
+
+document.addEventListener('click', (e) => {
+    if(e.target.classList.contains('work-button')){
+        togglePortfolioPopup();
+        portfolioItemDetails(e.target.parentElement);
+    }
+})
+
+function togglePortfolioPopup() {
+    document.querySelector('.portfolio-popup').classList.toggle('open');
+}
+
+document.querySelector('.portfolio-popup-close').addEventListener('click', togglePortfolioPopup);
+
+function portfolioItemDetails(portfolioItem) {
+    document.querySelector('.pp-thumbnail img').src = portfolioItem.querySelector('.work-img').src;
+    document.querySelector('.portfolio-popup-subtitle span').innerHTML = portfolioItem.querySelector('.work-title').innerHTML;
+    document.querySelector('.portfolio-popup-body').innerHTML = portfolioItem.querySelector('.portfolio-item-details').innerHTML;
+}
+
+//Services Popup
+const modalViews = document.querySelectorAll('.services-modal');
+const modelBtns = document.querySelectorAll('.services-button');
+const modalCloses = document.querySelectorAll('.services-modal-close');
+
+let modal = function(modalClick) {
+    modalViews[modalClick].classList.add('active-modal');
+}
+
+modelBtns.forEach((modelBtn, i) => {
+    modelBtn.addEventListener('click', () => {
+        modal(i);
+    })
+})
+
+modalCloses.forEach((modalClose) => {
+    modalClose.addEventListener('click', () => {
+        modalViews.forEach((modalView) => {
+            modalView.classList.remove('active-modal');
+        })
+    })
+})
+
+//Swiper Testimonial
+
+let swiper = new Swiper(".testimonials-container", {
+    spaceBetween: 24,
+    loop: true,
+    grabCursor: true,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    breakpoints: {
+        576: {
+            slidesPerView: 2,
+        },
+        768: {
+            slidesPerView: 2,
+            spaceBetween: 48,
+        },
+    },
+});
+
+// Input Animation
+
+const inputs = document.querySelectorAll('.input');
+
+function focusFunc() {
+    let parent = this.parentNode;
+    parent.classList.add('focus');
+}
+
+function blurFunc() {
+    let parent = this.parentNode;
+    if(this.value == "") {
+        parent.classList.remove('focus');
+    }
+}
+
+inputs.forEach((input) => {
+    input.addEventListener('focus', focusFunc);
+    input.addEventListener('blur', blurFunc);
+})
+
+// Scroll Section Active Link
+
+const sections = document.querySelectorAll('section[id]');
+
+window.addEventListener('scroll', navHighlighter);
+
+function navHighlighter() {
+    let scrollY = window.pageYOffset;
+    sections.forEach(current => {
+        const sectionHeight = current.offsetHeight;
+        const sectionTop = current.offsetTop - 50;
+        const sectionId = current.getAttribute('id');
+
+        if(scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+            document.querySelector('.nav-menu a[href*=' + sectionId + ']').classList.add('active-link');
+        }else {
+            document.querySelector('.nav-menu a[href*=' + sectionId + ']').classList.remove('active-link');
+        }
+    })
+}
+
+// Activating Sidebar
+
+const navMenu = document.getElementById('sidebar');
+const navToggle = document.getElementById('nav-toggle');
+const navClose = document.getElementById('nav-close');
+
+if(navToggle) {
+    navToggle.addEventListener('click', () => {
+        navMenu.classList.add('show-sidebar');
+    })
+}
+
+if(navClose) {
+    navClose.addEventListener('click', () => {
+        navMenu.classList.remove('show-sidebar');
+    })
+}
+</script>
+</html>

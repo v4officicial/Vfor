@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dan Future — vCard Interattiva · Creative Technologist</title>
+  <meta name="description" content="vCard interattiva e futuristica: salva contatto ottimizzato iOS/Android, portfolio dinamico con fallback immagini, clienti forniti migliorati, prezzi/pacchetti, FAQ, SEO e social tags." />
+  <link rel="canonical" href="https://example.com/vcard" />
+  <meta name="theme-color" content="#0f172a" />
+
+  <!-- Open Graph / Twitter (sostituisci image con uno tuo 1200x630) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://example.com/vcard" />
+  <meta property="og:title" content="Dan Future — vCard Interattiva" />
+  <meta property="og:description" content="Contatti rapidi, portfolio, prezzi e FAQ. Salva il contatto in un tap." />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Dan Future — vCard Interattiva" />
+  <meta name="twitter:description" content="Contatti rapidi, portfolio, prezzi e FAQ. Salva il contatto in un tap." />
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Dan Future",
+    "jobTitle": "Creative Technologist",
+    "url": "https://example.com/vcard",
+    "image": "https://i.pravatar.cc/300?img=68",
+    "email": "mailto:hello@example.com",
+    "telephone": "+39 06 1234 5678",
+    "address": {"@type":"PostalAddress","addressLocality":"Roma","addressCountry":"IT"}
+  }
+  </script>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Outfit','ui-sans-serif','system-ui'] },
+          dropShadow: { neon: '0 0 18px rgba(114,245,255,0.55)' }
+        }
+      }
+    }
+  </script>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;400;600;800&display=swap" rel="stylesheet">
+  <script defer src="https://kit.fontawesome.com/a2e0e6ad20.js" crossorigin="anonymous"></script>
+
+  <!-- Animations & UI libs -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <!-- Sfondo animato -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.net.min.js"></script>
+
+  <style>
+    /* ======= Sistema tema (dark/light) + 4 colori globali ======= */
+    :root { --brand:#14b8a6; --brand-rgb:20,184,166; }
+    body[data-color='teal']   { --brand:#14b8a6; --brand-rgb:20,184,166; }
+    body[data-color='violet'] { --brand:#a78bfa; --brand-rgb:167,139,250; }
+    body[data-color='amber']  { --brand:#f59e0b; --brand-rgb:245,158,11; }
+    body[data-color='rose']   { --brand:#f43f5e; --brand-rgb:244,63,94; }
+
+    body[data-theme='dark'] { background:#0b1221; color:#e2e8f0; }
+    body[data-theme='light'] { background:#f8fafc; color:#0f172a; }
+
+    .glass { background: linear-gradient(135deg, rgba(255,255,255,0.10), rgba(255,255,255,0.05)); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.08); }
+    body[data-theme='light'] .glass { background: linear-gradient(135deg, rgba(255,255,255,0.85), rgba(255,255,255,0.65)); border-color: rgba(0,0,0,0.06); }
+
+    .neon-text { text-shadow: 0 0 10px rgba(var(--brand-rgb),0.5), 0 0 30px rgba(var(--brand-rgb),0.25); color: var(--brand); }
+    .btn { transition: transform .2s ease, box-shadow .2s ease; }
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 10px 25px rgba(var(--brand-rgb),.22); }
+    .chip { border: 1px solid rgba(var(--brand-rgb),0.35); }
+    .section { scroll-margin-top: 80px; }
+    .status-dot { width:10px; height:10px; border-radius: 999px; animation: pulse 1.6s infinite; }
+    @keyframes pulse { 0%{ box-shadow:0 0 0 0 rgba(34,197,94,.7);} 70%{ box-shadow:0 0 0 12px rgba(34,197,94,0);} 100%{ box-shadow:0 0 0 0 rgba(34,197,94,0);} }
+    details summary::-webkit-details-marker { display:none; }
+
+    .ring-brand { box-shadow:0 0 0 2px rgba(var(--brand-rgb),.6) inset; }
+
+    /* Canvas animato sotto il layout */
+    #bg { position:fixed; inset:0; z-index:-1; }
+
+    /* Modal */
+    #caseModal.hidden { display:none; }
+  </style>
+</head>
+<body data-theme="dark" data-color="teal" class="font-sans">
+
+<div id="bg"></div>
+
+<header class="p-4 flex justify-between items-center sticky top-0 z-30">
+  <h1 class="text-xl font-bold">🪪 <span class="neon-text">Dan Future</span></h1>
+  <div class="flex gap-2 items-center">
+    <a href="#contact" class="btn glass px-3 py-1 rounded text-sm" data-i18n="contacts">Contatti</a>
+    <select id="langSelect" class="px-2 py-1 rounded glass text-sm">
+      <option value="it">IT</option>
+      <option value="en">EN</option>
+    </select>
+    <!-- Switcher colori -->
+    <div class="hidden sm:flex items-center gap-2" aria-label="Cambia colore">
+      <button class="w-6 h-6 rounded-full border border-white/10 ring-brand" data-palette="teal"   style="background:#14b8a6" title="Teal"></button>
+      <button class="w-6 h-6 rounded-full border border-white/10 ring-brand" data-palette="violet" style="background:#a78bfa" title="Violet"></button>
+      <button class="w-6 h-6 rounded-full border border-white/10 ring-brand" data-palette="amber"  style="background:#f59e0b" title="Amber"></button>
+      <button class="w-6 h-6 rounded-full border border-white/10 ring-brand" data-palette="rose"   style="background:#f43f5e" title="Rose"></button>
+    </div>
+    <button id="themeToggle" class="px-3 py-1 rounded glass" aria-label="Toggle theme">🌓</button>
+  </div>
+</header>
+
+<main class="p-4 max-w-5xl mx-auto">
+  <!-- HERO -->
+  <section class="glass p-5 rounded-2xl mb-6" data-aos="fade-up">
+    <div class="flex items-center gap-4">
+      <img src="https://i.pravatar.cc/160?img=68" alt="Avatar Dan Future" class="w-16 h-16 rounded-xl ring-2 ring-brand">
+      <div>
+        <div class="flex items-center gap-3">
+          <h2 class="text-2xl font-extrabold">Dan Future</h2>
+          <span class="flex items-center gap-2 text-sm text-emerald-400"><span class="status-dot bg-emerald-400"></span><span data-i18n="available">Disponibile</span></span>
+        </div>
+        <p class="text-sm opacity-80" data-i18n="roleCity">Creative Technologist • Roma, IT</p>
+      </div>
+    </div>
+    <p id="intro" class="mt-4 opacity-90" data-i18n="heroText">Progetto esperienze digitali futuristiche: siti, app e interfacce animate. vCard condivisibile con QR, link rapidi e portfolio dinamico.</p>
+    <div class="mt-4 flex flex-wrap gap-2">
+      <a href="tel:+390612345678" class="btn glass px-3 py-2 rounded"><i class="fa-solid fa-phone"></i> <span class="lang" data-i18n="call">Chiama</span></a>
+      <a href="https://wa.me/390612345678" class="btn glass px-3 py-2 rounded"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+      <!-- Add to contacts (iOS/Android ottimizzato) -->
+      <button id="addContactBtn" class="btn glass px-3 py-2 rounded"><i class="fa-regular fa-address-card"></i> <span data-i18n="saveContact">Salva contatto</span></button>
+      <button id="shareBtn" class="btn glass px-3 py-2 rounded"><i class="fa-solid fa-share-nodes"></i> <span data-i18n="share">Condividi</span></button>
+    </div>
+  </section>
+
+  <!-- QUICK CARDS: QR + SKILLS + KPIs -->
+  <section class="grid md:grid-cols-3 gap-4 mb-8">
+    <div class="glass p-4 rounded-2xl" data-aos="fade-up">
+      <h3 class="font-semibold mb-2" data-i18n="scanQr">Scansiona il mio QR</h3>
+      <div id="qrcode" class="p-3 bg-black/10 rounded-xl w-fit"></div>
+      <p class="text-xs opacity-70 mt-2" data-i18n="qrHint">Punta la fotocamera per aprire questa vCard.</p>
+    </div>
+    <div class="glass p-4 rounded-2xl" data-aos="fade-up" data-aos-delay="50">
+      <h3 class="font-semibold mb-2" data-i18n="skills">Competenze</h3>
+      <div class="flex flex-wrap gap-2 text-sm">
+        <span class="chip px-3 py-1 rounded-full">GSAP</span>
+        <span class="chip px-3 py-1 rounded-full">WebGL</span>
+        <span class="chip px-3 py-1 rounded-full">Tailwind</span>
+        <span class="chip px-3 py-1 rounded-full">SEO</span>
+        <span class="chip px-3 py-1 rounded-full">UX Motion</span>
+      </div>
+    </div>
+    <div class="glass p-4 rounded-2xl" data-aos="fade-up" data-aos-delay="100">
+      <h3 class="font-semibold mb-2" data-i18n="numbers">Numeri</h3>
+      <div class="grid grid-cols-3 gap-3 text-center">
+        <div>
+          <div class="text-2xl font-extrabold counter" data-target="120">0</div>
+          <div class="text-xs opacity-70" data-i18n="projects">Progetti</div>
+        </div>
+        <div>
+          <div class="text-2xl font-extrabold counter" data-target="45">0</div>
+          <div class="text-xs opacity-70" data-i18n="clients">Clienti</div>
+        </div>
+        <div>
+          <div class="text-2xl font-extrabold counter" data-target="12">0</div>
+          <div class="text-xs opacity-70" data-i18n="awards">Awards</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="section mb-10" data-aos="fade-up">
+    <h3 class="text-xl font-bold mb-3" data-i18n="whatIDo">Cosa faccio</h3>
+    <div class="grid md:grid-cols-3 gap-4">
+      <div class="glass p-5 rounded-2xl">
+        <div class="text-[var(--brand)] drop-shadow-neon mb-2"><i class="fa-solid fa-sparkles"></i></div>
+        <h4 class="font-semibold" data-i18n="svc1title">Brand Microsite</h4>
+        <p class="text-sm opacity-80" data-i18n="svc1desc">Siti one-page accessibili, veloci e pronti per convertire.</p>
+      </div>
+      <div class="glass p-5 rounded-2xl">
+        <div class="text-[var(--brand)] drop-shadow-neon mb-2"><i class="fa-solid fa-vr-cardboard"></i></div>
+        <h4 class="font-semibold" data-i18n="svc2title">3D/UI Animata</h4>
+        <p class="text-sm opacity-80" data-i18n="svc2desc">Interazioni GSAP/WebGL per esperienze fluide e memorabili.</p>
+      </div>
+      <div class="glass p-5 rounded-2xl">
+        <div class="text-[var(--brand)] drop-shadow-neon mb-2"><i class="fa-solid fa-rocket"></i></div>
+        <h4 class="font-semibold" data-i18n="svc3title">Growth & Analytics</h4>
+        <p class="text-sm opacity-80" data-i18n="svc3desc">Core Web Vitals, contenuti SEO e misurazioni etiche.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PREZZI / PACCHETTI + CTA -->
+  <section id="pricing" class="section mb-10" data-aos="fade-up">
+    <div class="flex items-center justify-between mb-3 flex-wrap gap-3">
+      <h3 class="text-xl font-bold" data-i18n="pricingTitle">Prezzi & Pacchetti</h3>
+      <a href="#contact" class="btn glass px-4 py-2 rounded" data-i18n="askQuote">Richiedi preventivo</a>
+    </div>
+    <div class="grid md:grid-cols-3 gap-4">
+      <div class="glass p-5 rounded-2xl flex flex-col">
+        <h4 class="font-semibold">Starter</h4>
+        <div class="text-3xl font-extrabold my-2">€ 490</div>
+        <ul class="text-sm opacity-80 space-y-1 mb-4">
+          <li>vCard personalizzata</li>
+          <li>QR + Salva contatto</li>
+          <li>1 sezione portfolio</li>
+        </ul>
+        <a href="#contact" class="btn glass px-4 py-2 rounded mt-auto">Seleziona</a>
+      </div>
+      <div class="glass p-5 rounded-2xl ring-brand flex flex-col">
+        <h4 class="font-semibold">Pro</h4>
+        <div class="text-3xl font-extrabold my-2">€ 990</div>
+        <ul class="text-sm opacity-80 space-y-1 mb-4">
+          <li>Tutto di Starter</li>
+          <li>Portfolio dinamico + clienti</li>
+          <li>FAQ + SEO avanzata</li>
+        </ul>
+        <a href="#contact" class="btn glass px-4 py-2 rounded mt-auto">Seleziona</a>
+      </div>
+      <div class="glass p-5 rounded-2xl flex flex-col">
+        <h4 class="font-semibold">Elite</h4>
+        <div class="text-3xl font-extrabold my-2">€ 1.490</div>
+        <ul class="text-sm opacity-80 space-y-1 mb-4">
+          <li>Design su misura</li>
+          <li>Animazioni avanzate</li>
+          <li>Integrazioni custom</li>
+        </ul>
+        <a href="#contact" class="btn glass px-4 py-2 rounded mt-auto">Seleziona</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO PRO -->
+  <section id="portfolio" class="section mb-10" data-aos="fade-up">
+    <div class="flex items-center justify-between mb-3 flex-wrap gap-3">
+      <h3 class="text-xl font-bold" data-i18n="portfolio">Portfolio</h3>
+      <div class="flex flex-col sm:flex-row gap-2 sm:items-center">
+        <div class="flex gap-2 items-center">
+          <input id="search" class="glass px-3 py-2 rounded text-sm" placeholder="Search..." />
+          <button id="clearFilters" class="btn glass px-3 py-2 rounded text-sm">Pulisci</button>
+        </div>
+        <!-- Filtri multipli -->
+        <div class="flex flex-wrap gap-2" aria-label="Filtri">
+          <button class="btn glass px-3 py-2 rounded text-sm filter" data-filter-group="cat" data-filter="web">Web</button>
+          <button class="btn glass px-3 py-2 rounded text-sm filter" data-filter-group="cat" data-filter="app">App</button>
+          <button class="btn glass px-3 py-2 rounded text-sm filter" data-filter-group="cat" data-filter="brand">Brand</button>
+          <button class="btn glass px-3 py-2 rounded text-sm filter" data-filter-group="tag" data-filter="3d">3D</button>
+          <button class="btn glass px-3 py-2 rounded text-sm filter" data-filter-group="tag" data-filter="ecommerce">E-commerce</button>
+          <button class="btn glass px-3 py-2 rounded text-sm filter" data-filter-group="tag" data-filter="motion">Motion</button>
+          <button class="btn glass px-3 py-2 rounded text-sm filter" data-filter-group="tag" data-filter="saas">SaaS</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Selected filters chips -->
+    <div id="selectedFilters" class="flex flex-wrap gap-2 mb-3"></div>
+
+    <!-- Grid -->
+    <div id="projectsGrid" class="grid sm:grid-cols-2 md:grid-cols-3 gap-4"></div>
+
+    <!-- Pagination -->
+    <div class="flex items-center justify-center gap-2 mt-6">
+      <button id="prevPage" class="btn glass px-3 py-2 rounded">←</button>
+      <div id="pageInfo" class="text-sm opacity-80">1 / 1</div>
+      <button id="nextPage" class="btn glass px-3 py-2 rounded">→</button>
+    </div>
+  </section>
+
+  <!-- MODALE CASE STUDY -->
+  <div id="caseModal" class="fixed inset-0 hidden items-center justify-center p-4">
+    <div class="absolute inset-0 bg-black/50" id="caseBackdrop"></div>
+    <article class="relative glass rounded-2xl max-w-4xl w-full overflow-hidden">
+      <header class="flex items-center justify-between p-4 border-b border-white/10">
+        <h4 id="caseTitle" class="font-semibold"></h4>
+        <button id="caseClose" class="px-3 py-1 rounded">✕</button>
+      </header>
+      <div class="p-0">
+        <!-- Gallery Swiper -->
+        <div class="swiper case-swiper">
+          <div class="swiper-wrapper" id="caseSlides"></div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-pagination"></div>
+        </div>
+        <div class="p-4 grid md:grid-cols-3 gap-4">
+          <div class="md:col-span-2">
+            <p id="caseDesc" class="opacity-90"></p>
+          </div>
+          <aside class="glass rounded-xl p-3 text-sm">
+            <div class="opacity-70">Dettagli</div>
+            <div id="caseMeta" class="mt-1 flex flex-wrap gap-2"></div>
+            <a id="caseLink" href="#" target="_blank" rel="noopener" class="inline-block mt-3 underline">Visita progetto →</a>
+          </aside>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <!-- CLIENTI FORNITI (migliorata) -->
+  <section id="clientsProvided" class="section mb-10" data-aos="fade-up">
+    <div class="flex items-center justify-between mb-3">
+      <h3 class="text-xl font-bold" data-i18n="clientsProvided">Clienti forniti</h3>
+    </div>
+
+    <div class="glass p-4 rounded-2xl">
+      <div class="swiper clients-swiper">
+        <div class="swiper-wrapper">
+          <!-- Placeholder affidabili; sostituisci con i tuoi loghi (PNG/SVG) -->
+          <div class="swiper-slide flex items-center justify-center p-4">
+            <img loading="lazy" src="https://placehold.co/160x48?text=ACME" alt="ACME" class="max-h-12 filter grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition"/>
+          </div>
+          <div class="swiper-slide flex items-center justify-center p-4">
+            <img loading="lazy" src="https://placehold.co/160x48?text=Nova" alt="Nova" class="max-h-12 filter grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition"/>
+          </div>
+          <div class="swiper-slide flex items-center justify-center p-4">
+            <img loading="lazy" src="https://placehold.co/160x48?text=Zenit" alt="Zenit" class="max-h-12 filter grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition"/>
+          </div>
+          <div class="swiper-slide flex items-center justify-center p-4">
+            <img loading="lazy" src="https://placehold.co/160x48?text=Orion" alt="Orion" class="max-h-12 filter grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition"/>
+          </div>
+          <div class="swiper-slide flex items-center justify-center p-4">
+            <img loading="lazy" src="https://placehold.co/160x48?text=Pixel" alt="Pixel" class="max-h-12 filter grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition"/>
+          </div>
+          <div class="swiper-slide flex items-center justify-center p-4">
+            <img loading="lazy" src="https://placehold.co/160x48?text=Astra" alt="Astra" class="max-h-12 filter grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition"/>
+          </div>
+          <div class="swiper-slide flex items-center justify-center p-4">
+            <img loading="lazy" src="https://placehold.co/160x48?text=Quanta" alt="Quanta" class="max-h-12 filter grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition"/>
+          </div>
+          <div class="swiper-slide flex items-center justify-center p-4">
+            <img loading="lazy" src="https://placehold.co/160x48?text=Helix" alt="Helix" class="max-h-12 filter grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition"/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grid secondaria per accesso rapido (visibile su md+) -->
+    <div class="mt-4 hidden md:grid grid-cols-4 gap-3">
+      <div class="glass p-3 rounded-2xl flex items-center justify-center"><img loading="lazy" src="https://placehold.co/140x44?text=ACME" alt="ACME" class="max-h-10 opacity-70"/></div>
+      <div class="glass p-3 rounded-2xl flex items-center justify-center"><img loading="lazy" src="https://placehold.co/140x44?text=Nova" alt="Nova" class="max-h-10 opacity-70"/></div>
+      <div class="glass p-3 rounded-2xl flex items-center justify-center"><img loading="lazy" src="https://placehold.co/140x44?text=Zenit" alt="Zenit" class="max-h-10 opacity-70"/></div>
+      <div class="glass p-3 rounded-2xl flex items-center justify-center"><img loading="lazy" src="https://placehold.co/140x44?text=Orion" alt="Orion" class="max-h-10 opacity-70"/></div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="section mb-10" data-aos="fade-up">
+    <h3 class="text-xl font-bold mb-3" data-i18n="faqTitle">Domande frequenti</h3>
+    <div class="space-y-2">
+      <details class="glass rounded-2xl p-4">
+        <summary class="cursor-pointer font-semibold">Quanto tempo serve per pubblicare la vCard?</summary>
+        <div class="mt-2 text-sm opacity-80">In media 2–5 giorni lavorativi a seconda delle personalizzazioni richieste.</div>
+      </details>
+      <details class="glass rounded-2xl p-4">
+        <summary class="cursor-pointer font-semibold">Posso collegare la vCard al mio dominio?</summary>
+        <div class="mt-2 text-sm opacity-80">Sì, con DNS/hosting tuo o in managed hosting.</div>
+      </details>
+      <details class="glass rounded-2xl p-4">
+        <summary class="cursor-pointer font-semibold">Il salvataggio contatto funziona su tutti i telefoni?</summary>
+        <div class="mt-2 text-sm opacity-80">Sì, usiamo uno standard VCF 3.0 con fallback ottimizzato per iOS e Android.</div>
+      </details>
+    </div>
+  </section>
+
+  <!-- CONTATTI -->
+  <section id="contact" class="section mb-8" data-aos="fade-up">
+    <h3 class="text-xl font-bold mb-3" data-i18n="contacts">Contatti</h3>
+    <div class="grid md:grid-cols-3 gap-4 mb-4">
+      <div class="glass p-4 rounded-2xl">
+        <div class="text-sm opacity-70" data-i18n="email">Email</div>
+        <a href="mailto:hello@example.com" class="text-lg">hello@example.com</a>
+      </div>
+      <div class="glass p-4 rounded-2xl">
+        <div class="text-sm opacity-70" data-i18n="phone">Telefono</div>
+        <a href="tel:+390612345678" class="text-lg">+39 06 1234 5678</a>
+      </div>
+      <div class="glass p-4 rounded-2xl">
+        <div class="text-sm opacity-70" data-i18n="location">Sede</div>
+        <div class="text-lg">Roma, Italia</div>
+      </div>
+    </div>
+    <form class="glass p-5 rounded-2xl grid grid-cols-1 md:grid-cols-2 gap-3" onsubmit="event.preventDefault(); alert('Messaggio inviato (demo)');">
+      <input class="glass px-4 py-3 rounded" placeholder="Nome" required>
+      <input type="email" class="glass px-4 py-3 rounded" placeholder="Email" required>
+      <textarea class="glass px-4 py-3 rounded md:col-span-2" rows="4" placeholder="Scrivi il tuo messaggio..."></textarea>
+      <button class="btn glass px-5 py-3 rounded md:col-span-2"><i class="fa-regular fa-paper-plane mr-2"></i><span data-i18n="send">Invia</span></button>
+    </form>
+  </section>
+</main>
+
+<footer class="text-center text-xs opacity-70 py-8">
+  © <span id="year"></span> Dan Future • vCard demo
+</footer>
+
+<script>
+  // ===== Init libs =====
+  AOS.init({ once: true, duration: 650, easing: 'ease-out' });
+
+  // ===== Theme toggle + persist =====
+  const themeBtn = document.getElementById('themeToggle');
+  const savedTheme = localStorage.getItem('vcard:theme') || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+  document.body.dataset.theme = savedTheme;
+  themeBtn.addEventListener('click', () => {
+    const next = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
+    document.body.dataset.theme = next; localStorage.setItem('vcard:theme', next);
+  });
+
+  // ===== Color switcher (4 colori) =====
+  const savedColor = localStorage.getItem('vcard:color') || 'teal';
+  document.body.setAttribute('data-color', savedColor);
+  document.querySelectorAll('[data-palette]').forEach(btn => btn.addEventListener('click', (e) => {
+    const c = e.currentTarget.getAttribute('data-palette');
+    document.body.setAttribute('data-color', c);
+    localStorage.setItem('vcard:color', c);
+    mountVanta(); // sincronizza lo sfondo animato al nuovo colore
+  }));
+
+  // ===== Language (i18n) =====
+  const dict = {
+    it: { contacts:'Contatti', available:'Disponibile', roleCity:'Creative Technologist • Roma, IT', heroText:'Progetto esperienze digitali futuristiche: siti, app e interfacce animate. vCard condivisibile con QR, link rapidi e portfolio dinamico.', call:'Chiama', saveContact:'Salva contatto', share:'Condividi', scanQr:'Scansiona il mio QR', qrHint:'Punta la fotocamera per aprire questa vCard.', skills:'Competenze', numbers:'Numeri', projects:'Progetti', clients:'Clienti', awards:'Awards', whatIDo:'Cosa faccio', svc1title:'Brand Microsite', svc1desc:'Siti one-page accessibili, veloci e pronti per convertire.', svc2title:'3D/UI Animata', svc2desc:'Interazioni GSAP/WebGL per esperienze fluide e memorabili.', svc3title:'Growth & Analytics', svc3desc:'Core Web Vitals, contenuti SEO e misurazioni etiche.', pricingTitle:'Prezzi & Pacchetti', askQuote:'Richiedi preventivo', portfolio:'Portfolio', clientsProvided:'Clienti forniti', testimonials:'Testimonianze', faqTitle:'Domande frequenti', email:'Email', phone:'Telefono', location:'Sede', send:'Invia' },
+    en: { contacts:'Contacts', available:'Available', roleCity:'Creative Technologist • Rome, IT', heroText:'I craft futuristic digital experiences: sites, apps and motion UI. Shareable vCard with QR, quick links and dynamic portfolio.', call:'Call', saveContact:'Save contact', share:'Share', scanQr:'Scan my QR', qrHint:'Point your camera to open this vCard.', skills:'Skills', numbers:'Numbers', projects:'Projects', clients:'Clients', awards:'Awards', whatIDo:'What I do', svc1title:'Brand Microsite', svc1desc:'Accessible, fast one-pagers built to convert.', svc2title:'3D/Animated UI', svc2desc:'GSAP/WebGL interactions for smooth, memorable experiences.', svc3title:'Growth & Analytics', svc3desc:'Core Web Vitals, SEO content and ethical measurement.', pricingTitle:'Pricing & Plans', askQuote:'Request a quote', portfolio:'Portfolio', clientsProvided:'Clients served', testimonials:'Testimonials', faqTitle:'FAQ', email:'Email', phone:'Phone', location:'Location', send:'Send' }
+  };
+  const langSelect = document.getElementById('langSelect');
+  const applyLang = lng => {
+    document.querySelectorAll('[data-i18n]').forEach(el => { const key = el.getAttribute('data-i18n'); if (dict[lng][key]) el.innerHTML = dict[lng][key]; });
+    document.documentElement.lang = lng; localStorage.setItem('vcard:lang', lng);
+  };
+  const savedLang2 = localStorage.getItem('vcard:lang') || 'it';
+  langSelect.value = savedLang2; applyLang(savedLang2);
+  langSelect.addEventListener('change', e => applyLang(e.target.value));
+
+  // ===== Optimized Add to Contacts (VCF 3.0) =====
+  function buildVCard(){
+    const lines = [
+      'BEGIN:VCARD','VERSION:3.0','N:Future;Dan;;;','FN:Dan Future','TITLE:Creative Technologist','ORG:Dan Future Studio','EMAIL;TYPE=INTERNET,PREF:hello@example.com','TEL;TYPE=CELL,PREF:+390612345678','ADR;TYPE=WORK:;;Via Esempio 1;Roma;RM;00100;IT','URL:https://example.com/vcard','NOTE:Contattami per micrositi, UI animate e growth.','END:VCARD'
+    ];
+    return lines.join('\n');
+  }
+  function downloadVCF(filename, content){
+    const blob = new Blob([content], { type: 'text/vcard;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = filename; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 2000);
+  }
+  document.getElementById('addContactBtn').addEventListener('click', () => {
+    const vcf = buildVCard();
+    downloadVCF('Dan-Future.vcf', vcf);
+  });
+
+  // ===== Share =====
+  document.getElementById('shareBtn').addEventListener('click', async () => {
+    const data = { title: document.title, text: 'vCard ✨', url: window.location.href };
+    if (navigator.share) { try { await navigator.share(data);} catch(_){} } else { try { await navigator.clipboard.writeText(window.location.href); alert('Link copiato!'); } catch(_) { alert(window.location.href); } }
+  });
+
+  // ===== QR =====
+  new QRCode(document.getElementById('qrcode'), { text: window.location.href, width: 128, height: 128, colorDark:'#334155', colorLight:'transparent', correctLevel: QRCode.CorrectLevel.M });
+
+  // ===== Counters on view =====
+  const counters = document.querySelectorAll('.counter');
+  const animateCount = el => { const target = +el.dataset.target; let cur = 0; const step = Math.ceil(target / 40); const tick = () => { cur = Math.min(cur + step, target); el.textContent = cur; if (cur < target) requestAnimationFrame(tick); }; tick(); };
+  const io = new IntersectionObserver((entries) => entries.forEach(e => { if (e.isIntersecting){ animateCount(e.target); io.unobserve(e.target); } }), { threshold: 0.6 });
+  counters.forEach(c => io.observe(c));
+
+  // ===== Portfolio PRO: data, filtri multipli, skeleton, pagination, modale =====
+  const projects = [
+    { id:1, title:'SaaS Dashboard', cat:'web', tags:['saas','motion'], cover:'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=800&auto=format&fit=crop',
+      desc:'UI veloce e accessibile per un prodotto B2B.', link:'#',
+      media:[{type:'img',src:'https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1280&auto=format&fit=crop'},{type:'img',src:'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1280&auto=format&fit=crop'}]
+    },
+    { id:2, title:'Luxury E-commerce', cat:'web', tags:['ecommerce','motion'], cover:'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=800&auto=format&fit=crop',
+      desc:'Checkout ottimizzato e micro-animazioni.', link:'#',
+      media:[{type:'img',src:'https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=1280&auto=format&fit=crop'},{type:'video',src:'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4'}]
+    },
+    { id:3, title:'Fitness App', cat:'app', tags:['motion'], cover:'https://images.unsplash.com/photo-1599305445671-ac291c95aaa0?q=80&w=800&auto=format&fit=crop',
+      desc:'Allenamenti smart con progressi e badge.', link:'#',
+      media:[{type:'img',src:'https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1280&auto=format&fit=crop'}]
+    },
+    { id:4, title:'Brand Identity Nova', cat:'brand', tags:['3d'], cover:'https://images.unsplash.com/photo-1529336953121-4a2b2828d6d5?q=80&w=800&auto=format&fit=crop',
+      desc:'Sistema visivo modulare multi-piattaforma.', link:'#',
+      media:[{type:'img',src:'https://images.unsplash.com/photo-1604928053496-6b845b2ed7f1?q=80&w=1280&auto=format&fit=crop'}]
+    },
+    { id:5, title:'Evento Interattivo', cat:'web', tags:['3d','motion'], cover:'https://images.unsplash.com/photo-1602524206517-246a2b9b1f3b?q=80&w=800&auto=format&fit=crop',
+      desc:'Landing WebGL con scena 3D ottimizzata.', link:'#',
+      media:[{type:'img',src:'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1280&auto=format&fit=crop'}]
+    },
+    { id:6, title:'Tracker Salute', cat:'app', tags:['saas'], cover:'https://images.unsplash.com/photo-1557682250-33bd709cbe85?q=80&w=800&auto=format&fit=crop',
+      desc:'Metriche e grafici con notifiche smart.', link:'#',
+      media:[{type:'img',src:'https://images.unsplash.com/photo-1587620962725-abab7fe55159?q=80&w=1280&auto=format&fit=crop'}]
+    },
+    { id:7, title:'Studio Legale', cat:'web', tags:['seo'], cover:'https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=800&auto=format&fit=crop',
+      desc:'Microsito autoritativo con schema e FAQ.', link:'#',
+      media:[{type:'img',src:'https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?q=80&w=1280&auto=format&fit=crop'}]
+    },
+    { id:8, title:'Fashion Lookbook', cat:'web', tags:['ecommerce','motion'], cover:'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop',
+      desc:'Catalogo stagionale con transizioni fluide.', link:'#',
+      media:[{type:'img',src:'https://images.unsplash.com/photo-1491553895911-0055eca6402d?q=80&w=1280&auto=format&fit=crop'}]
+    }
+  ];
+
+  // Stato
+  let activeCats = new Set();
+  let activeTags = new Set();
+  let query = '';
+  let page = 1; const PAGE_SIZE = 6;
+
+  const grid = document.getElementById('projectsGrid');
+  const search = document.getElementById('search');
+  const selected = document.getElementById('selectedFilters');
+  const pageInfo = document.getElementById('pageInfo');
+  const prevPage = document.getElementById('prevPage');
+  const nextPage = document.getElementById('nextPage');
+
+  // Skeleton
+  function skeletonCards(n=PAGE_SIZE){
+    const sk = [];
+    for(let i=0;i<n;i++){
+      sk.push(`<article class="glass rounded-2xl overflow-hidden animate-pulse">
+        <div class="w-full h-40 bg-white/10"></div>
+        <div class="p-4 space-y-2">
+          <div class="h-4 w-2/3 bg-white/10 rounded"></div>
+          <div class="h-3 w-full bg-white/10 rounded"></div>
+          <div class="h-3 w-1/2 bg-white/10 rounded"></div>
+        </div>
+      </article>`);
+    }
+    grid.innerHTML = sk.join('');
+  }
+
+  // Filtri
+  function updateSelectedChips(){
+    const chips = [];
+    activeCats.forEach(c=>chips.push(`<span class="chip px-3 py-1 rounded-full text-xs">cat:${c} <button data-remove="cat:${c}">✕</button></span>`));
+    activeTags.forEach(t=>chips.push(`<span class="chip px-3 py-1 rounded-full text-xs">tag:${t} <button data-remove="tag:${t}">✕</button></span>`));
+    selected.innerHTML = chips.join('');
+    selected.querySelectorAll('[data-remove]').forEach(b=>b.addEventListener('click',e=>{
+      const [g,val]=e.currentTarget.getAttribute('data-remove').split(':');
+      if(g==='cat'){ activeCats.delete(val);} else { activeTags.delete(val);} page=1; render();
+      document.querySelectorAll(`.filter[data-filter='${val}']`).forEach(x=>x.classList.remove('ring-brand'));
+    }));
+  }
+
+  function applyFilters(items){
+    return items.filter(p=>{
+      const catOK = activeCats.size? activeCats.has(p.cat): true;
+      const tagOK = activeTags.size? p.tags?.some(t=>activeTags.has(t)) : true;
+      const qOK = query? (p.title+" "+p.desc).toLowerCase().includes(query): true;
+      return catOK && tagOK && qOK;
+    });
+  }
+
+  function paginate(items){
+    const total = Math.max(1, Math.ceil(items.length / PAGE_SIZE));
+    page = Math.min(page, total);
+    const start = (page-1)*PAGE_SIZE;
+    const slice = items.slice(start, start+PAGE_SIZE);
+    pageInfo.textContent = `${page} / ${total}`;
+    prevPage.disabled = page<=1; nextPage.disabled = page>=total;
+    return slice;
+  }
+
+  function attachOpenCaseHandlers(){
+    document.querySelectorAll('[data-open-case]').forEach(btn=>btn.addEventListener('click',()=>{
+      const id = +btn.getAttribute('data-open-case');
+      const p = projects.find(x=>x.id===id); if(p) openCase(p);
+    }));
+  }
+
+  function render(){
+    updateSelectedChips();
+    skeletonCards();
+    const filtered = applyFilters(projects);
+    const pageItems = paginate(filtered);
+    setTimeout(()=>{
+      grid.innerHTML = '';
+      pageItems.forEach(p=>{
+        const card=document.createElement('article');
+        card.className='glass rounded-2xl overflow-hidden flex flex-col';
+        card.innerHTML=`
+          <button class="group" data-open-case="${p.id}">
+            <img loading="lazy" src="${p.cover}" alt="${p.title}" class="w-full h-40 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/800x600?text=Preview';"/>
+          </button>
+          <div class="p-4 flex-1 flex flex-col">
+            <h4 class="font-semibold">${p.title}</h4>
+            <p class="text-sm opacity-80">${p.desc}</p>
+            <div class="mt-3 flex items-center justify-between text-xs opacity-70">
+              <span class="uppercase">${p.cat}${p.tags&&p.tags.length? ' · '+p.tags.join(', '):''}</span>
+              <a href="${p.link}" class="underline">Case study →</a>
+            </div>
+          </div>`;
+        grid.appendChild(card);
+      });
+      attachOpenCaseHandlers();
+    }, 350); // simulazione caricamento
+  }
+
+  // Eventi UI
+  search.addEventListener('input', ()=>{ query=(search.value||'').toLowerCase(); page=1; render(); });
+
+  document.getElementById('clearFilters').addEventListener('click',()=>{
+    activeCats.clear(); activeTags.clear(); query=''; search.value=''; page=1; render();
+    document.querySelectorAll('.filter').forEach(b=>b.classList.remove('ring-brand'));
+  });
+
+  document.querySelectorAll('.filter').forEach(btn=>btn.addEventListener('click', e=>{
+    const val = e.currentTarget.dataset.filter; const group = e.currentTarget.dataset.filterGroup;
+    if(group==='cat'){ if(activeCats.has(val)) { activeCats.delete(val); e.currentTarget.classList.remove('ring-brand'); } else { activeCats.add(val); e.currentTarget.classList.add('ring-brand'); } }
+    if(group==='tag'){ if(activeTags.has(val)) { activeTags.delete(val); e.currentTarget.classList.remove('ring-brand'); } else { activeTags.add(val); e.currentTarget.classList.add('ring-brand'); } }
+    page=1; render();
+  }));
+
+  document.getElementById('prevPage').addEventListener('click', ()=>{ if(page>1){ page--; render(); }});
+  document.getElementById('nextPage').addEventListener('click', ()=>{ page++; render(); });
+
+  render();
+
+  // ===== Modale Case Study con Swiper gallery =====
+  let caseSwiper;
+  const caseModal = document.getElementById('caseModal');
+  const caseBackdrop = document.getElementById('caseBackdrop');
+  const caseClose = document.getElementById('caseClose');
+  const caseTitle = document.getElementById('caseTitle');
+  const caseDesc = document.getElementById('caseDesc');
+  const caseSlides = document.getElementById('caseSlides');
+  const caseMeta = document.getElementById('caseMeta');
+  const caseLink = document.getElementById('caseLink');
+
+  function openCase(p){
+    caseTitle.textContent = p.title;
+    caseDesc.textContent = p.desc;
+    caseMeta.innerHTML = `<span class="chip px-2 py-1 rounded-full">Categoria: ${p.cat}</span>` + (p.tags? p.tags.map(t=>`<span class="chip px-2 py-1 rounded-full">#${t}</span>`).join(''):'');
+    caseLink.href = p.link || '#';
+    caseSlides.innerHTML = '';
+    (p.media||[{type:'img',src:p.cover}]).forEach(m=>{
+      const slide=document.createElement('div');
+      slide.className='swiper-slide';
+      slide.innerHTML = m.type==='video'
+        ? `<video controls playsinline class="w-full h-[360px] object-cover"><source src="${m.src}" type="video/mp4"/></video>`
+        : `<img src="${m.src}" alt="${p.title}" class="w-full h-[360px] object-cover" onerror="this.onerror=null;this.src='https://placehold.co/1200x800?text=Media';"/>`;
+      caseSlides.appendChild(slide);
+    });
+    caseModal.classList.remove('hidden'); caseModal.classList.add('flex');
+    document.body.style.overflow='hidden';
+    try {
+      if(caseSwiper) caseSwiper.destroy(true,true);
+      caseSwiper = new Swiper('.case-swiper', { loop:true, slidesPerView:1, spaceBetween:8, navigation:{nextEl:'.swiper-button-next', prevEl:'.swiper-button-prev'}, pagination:{el:'.swiper-pagination', clickable:true} });
+    } catch(e) {}
+  }
+  function closeCase(){ caseModal.classList.add('hidden'); caseModal.classList.remove('flex'); document.body.style.overflow=''; }
+  caseBackdrop.addEventListener('click', closeCase); caseClose.addEventListener('click', closeCase); document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeCase(); });
+
+  // ===== Clients Swiper (auto-scorrimento continuo) =====
+  try {
+    const clientsSwiper = new Swiper('.clients-swiper', {
+      loop: true,
+      freeMode: true,
+      autoplay: { delay: 0, disableOnInteraction: false },
+      speed: 4000,
+      slidesPerView: 2,
+      spaceBetween: 16,
+      breakpoints: { 640: { slidesPerView: 3 }, 768: { slidesPerView: 4 }, 1024: { slidesPerView: 6 } }
+    });
+  } catch (e) {}
+
+  // ===== Sfondo animato (Vanta.NET) sincronizzato al colore =====
+  let vbg;
+  function rgbVar(){ const s=getComputedStyle(document.body).getPropertyValue('--brand-rgb').trim().split(',').map(n=>parseInt(n,10)); return {r:s[0],g:s[1],b:s[2]}; }
+  function toHex({r,g,b}){ const h=n=>('0'+n.toString(16)).slice(-2); return `#${h(r)}${h(g)}${h(b)}`; }
+  function mountVanta(){
+    if(vbg) vbg.destroy();
+    const hex = toHex(rgbVar());
+    vbg = VANTA.NET({ el:'#bg', THREE:THREE, color: hex, backgroundColor: 0x0b1221, points: 9.0, maxDistance: 18.0, spacing: 16.0, showDots:false });
+  }
+  window.addEventListener('DOMContentLoaded', mountVanta);
+  window.addEventListener('beforeunload', ()=>{ if(vbg) vbg.destroy(); });
+
+  // ===== Footer year =====
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

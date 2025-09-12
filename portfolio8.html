@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="canonical" href="https://kdahlquist.netlify.app/" />
+  <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kristy Dahlquist Portfolio</title>
+  <meta name="description" content="Explore the work of Kristy Dahlquist, PMP. A Program Manager with experience in marketing, public speaking, AI App Building, data analysis, and community building. View her latest projects and achievements." />
+
+  <!-- Open Graph Meta Tags to show content on social media platforms -->
+  <meta property="og:title" content="Kristy Dahlquist Portfolio">
+  <meta property="og:description" content="Explore the portfolio of Kristy Dahlquist, a Program Manager skilled in building relationships, systems, and strategies.">
+  <meta property="og:image" content="https://i.postimg.cc/nzFjdXz0/Screenshot-2025-04-11-at-3-41-45-PM.png" alt="screen-shot-of-website-hero">
+  <meta property="og:url" content="https://kdahlquist.netlify.app/">
+  <meta property="og:type" content="portfolio" />
+  <meta property="og:site_name" content="Kristy Dahlquist Portfolio">
+  <!-- Robots meta tag to control search engine indexing -->
+  <meta name="robots" content="index, follow">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="https://i.postimg.cc/Gh7dsz6M/KD-favicon.png">
+  <!-- Favicon for 3x resolution iPhone: -->
+  <link rel="apple-touch-icon" sizes="180x180" href="https://i.postimg.cc/Gh7dsz6M/KD-favicon.png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Varela&display=swap" rel="stylesheet">
+</head>
+<style>
+  body {
+  background: white;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-family: "Varela", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  text-decoration: none;
+}
+
+/* Links and text styling */
+a {
+  text-decoration: none;
+  color: black;
+}
+
+p {
+  font-size: 14px;
+  margin: 0px 0px 10px 0px;
+  padding: 10px 20px;
+}
+
+h2 {
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 30px;
+  width: auto;
+}
+
+li {
+  text-decoration: none;
+  list-style: none;
+  text-align: center;
+}
+
+/* Navbar specific element styling */
+.navbar {
+  overflow: hidden;
+  background-color: black;
+  opacity: 87%;
+  box-shadow: 0 8px 6px -6px gray;
+  height: 50px;
+  width: 100%;
+  padding: 10px 0;
+  position: fixed;
+  display: in-line;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.navbar a {
+  float: left;
+  display: inline;
+  color: #dbfb63;
+  text-align: bottom;
+  text-decoration: none;
+  margin: 5px 10px;
+}
+
+.navbar a:hover {
+  margin-top: 5px;
+  width: auto;
+  color: #fff9ec;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration-line: underline;
+  text-decoration-style: wavy;
+  text-decoration-color: #3bcfd4;
+  text-underline-offset: 5px;
+}
+
+/* Styling for mobile nav menu 
+/*Code for toggle styling */
+
+.menu {
+  display: inline-block;
+  padding-left: 0px;
+  overflow: visible;
+  position: fixed;
+  background-color: black;
+  width: 100%;
+  opacity: 95%;
+  height: 55px;
+  z-index: 9;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+}
+
+/*Navbar social icons */
+#social-mobile-container {
+  /* Styling for social icons in mobile  menu */
+  margin-top: 13px;
+  margin-right: 44px;
+  float: right;
+  padding: 2px 2px 0px 2px;
+}
+
+#mobile-icons {
+  width: 25px;
+  height: 25px;
+  border: 2px solid #dbfb63;
+}
+
+.fold {
+  display: inline;
+  margin-top: -50px;
+  width: 80vw;
+  height: auto;
+  background-color: #fefbf4;
+  padding: 20px 20px 20px 40px;
+  border-radius: 5px;
+  word-wrap: break-word;
+  box-decoration-break: clone;
+  border: none;
+}
+
+.fold a {
+  display: flex;
+  flex-direction: column;
+  color: black;
+  text-decoration: none;
+  margin-left: -50px;
+  padding: 10px;
+}
+
+.fold a:hover {
+  height: 20px;
+  width: auto;
+  color: black;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration-line: underline;
+  text-decoration-style: wavy;
+  text-decoration-color: #3bcfd4;
+  text-underline-offset: 5px;
+}
+
+.unfolder {
+  display: none;
+}
+
+.toggle-label {
+  display: inline-block;
+  cursor: pointer;
+  font-size: 40px;
+  margin-top: -10px;
+  width: auto;
+  height: auto;
+  color: #dbfb63;
+}
+
+.unfold-icon,
+.fold-icon {
+  color: #dbfb63;
+  padding: 10px;
+  display: inline-block;
+}
+.unfolder ~ .fold {
+  display: none;
+}
+.unfolder ~ label .fold-icon {
+  display: none;
+  color: #3bcfd4;
+}
+
+.unfolder:checked ~ .fold {
+  display: block;
+}
+
+.unfolder:checked ~ #social-mobile-container {
+  display: none;
+}
+
+.unfolder:checked ~ label .fold-icon {
+  display: inline;
+}
+.unfolder:checked ~ label .unfold-icon,
+#connect {
+  display: none;
+}
+
+/* Callout styling */
+.callout {
+  position: relative;
+  background-color: white;
+  border-radius: 5px;
+  border: 5px solid #3bcfd4;
+  text-align: center;
+  padding: 0 0 20px 0;
+  margin: 120px auto 20px auto;
+  width: 170px;
+  height: 60px;
+  color: #333;
+}
+
+.callout::after {
+  content: "";
+  position: absolute;
+  bottom: -90px;
+  transform: rotate(35deg);
+  /* Position the tail below the callout */
+  left: 80px;
+  border-width: 55px 15px 50px 10px;
+  border-style: solid;
+  border-color: #3bcfd4 transparent transparent transparent;
+  z-index: -1;
+}
+
+.callout-text {
+  margin: 15px auto 0px auto;
+  font-family: "Amatic SC", serif;
+  font-weight: 800;
+  font-size: 40px;
+  color: black;
+}
+
+#profile-section {
+  /*styles the PROFILE section container*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height: auto;
+  width: 90vw;
+  max-width: 1000px;
+  background: none;
+  margin-bottom: 0px;
+  box-shadow: none;
+}
+
+.profile-photo {
+  /*background-image: url(https://i.postimg.cc/MTrWg6P3/Kristy-outline-profile.png); /*intial background image */
+  background-image: url(https://i.postimg.cc/WpfKqxdd/New-Profile-Hello.png);
+  height: 255px;
+  width: 255px;
+  padding-top: 0px;
+  background-size: cover;
+  border-radius: 5px;
+  margin: 0px;
+  transition: background-image 0.5s ease-in-out; /* Smooth transition */
+}
+.profile-photo:hover {
+  background-image: url(https://i.postimg.cc/7hV8dr03/blue-profile-sparkles.png);
+}
+
+@keyframes shimmer {
+  to {
+    background-position: 40%;
+  }
+}
+
+/*contains the social icons*/
+.social-icon-container {
+  display: block;
+  margin-top: 0px;
+  margin-left: 37px;
+}
+.social-icons {
+  border-radius: 150px;
+  border: 3px solid #3bcfd4;
+  background: #34444c;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+  height: 40px;
+  width: 40px;
+  margin: 5px;
+}
+
+/*This is the container that holds the text and graphics inside of current projects div*/
+
+.profile-content-box {
+  border-radius: 5px;
+
+  width: 700px;
+  max-width: 765px;
+  height: 300px;
+  padding: 5px;
+  margin: 45px 5px 10px 5px;
+
+  animation: grow 2.5s 4s 1;
+  font-size: 14px;
+}
+
+/*This is the container that holds the text and social icons inside of profile-section  div*/
+
+#name {
+  font-size: 40px;
+  margin: 10px;
+  padding: 0px;
+  box-shadow: 0;
+}
+
+#role {
+  /*Styles the role under my name "Program Manager"*/
+  margin: -20px 0px 10px 10px;
+  padding: 0px;
+  font-family: "Amatic SC", serif;
+  font-weight: bold;
+  font-size: 40px;
+  font-style: normal;
+  color: #3bcfd4;
+  text-decoration-line: underline;
+  text-decoration-style: wavy;
+  text-decoration-color: #dbfb63;
+  text-underline-offset: 5px;
+}
+
+#profile-intro-text {
+  font-size: auto;
+  margin: 0px 0px 10px 0px;
+  padding: 10px 10px;
+}
+
+@keyframes grow {
+  30% {
+    transform: scale(1.2);
+  }
+}
+
+/* This is the large white container that holds the content in all sections below the PROFILE section. */
+.section-container {
+  background-color: #f2f2f2;
+  padding-bottom: 30px;
+  margin: 15px 10px;
+  width: 90vw;
+  max-width: 1000px;
+  height: auto;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+  border-radius: 5px;
+}
+
+.section-title {
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 10px;
+}
+
+/* This is the container that holds the flip cards or quote cards in each section!! */
+.flip-card-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Skills section styling */
+#skills-section {
+  flex-direction: row;
+  padding-bottom: 30px;
+}
+/* List of skills styling*/
+#skills {
+  background: #3bcfd4;
+  width: 185px;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin: 10px;
+  text-align: center;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+}
+
+.current-projects-section {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+/* This is for the QUOTE CARD content blocks */
+.slide-button {
+  height: 17px;
+  width: 17px;
+  margin: 5px 2.5px;
+  padding: 5px;
+  color: black;
+  text-align: center;
+  background: #dbfb63;
+  border-radius: 5px;
+  font-weight: bold;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+}
+
+.ribbon {
+  width: 60px;
+  font-size: 14px;
+  padding: 4px;
+  position: absolute;
+  right: -25px;
+  top: -12px;
+  text-align: center;
+  border-radius: 25px;
+  transform: rotate(20deg);
+  background-color: #ff9800;
+  color: white;
+  z-index: 10;
+}
+
+#sneak-peak {
+  background-color: #ff6b6b;
+}
+
+.slide-button:hover {
+  text-decoration: none;
+  height: 17px;
+  width: 17px;
+  margin: 5px 2.5px;
+  padding: 8px;
+  color: black;
+  background: #3bcfd4;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.slide-button:visited {
+  background: #1b998b;
+}
+
+#social-proof-section {
+  overflow: scroll;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  background-color: #f2f2f2;
+  padding-bottom: 30px;
+  margin: 15px 10px;
+  width: 90vw;
+  max-width: 1000px;
+  height: 350px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+  border-radius: 5px;
+}
+
+.quote-card {
+  background: linear-gradient(to left, #dbfb63, #3bcfd4);
+  color: black;
+  border-radius: 5px;
+  padding: 5px 10px;
+  width: 85vw;
+  max-width: 1000px;
+  margin: 10px 20px;
+  height: auto;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+}
+
+.quote-card-inner {
+  /*the white box on the social proof section*/
+  position: sticky;
+  top: 0;
+  background: white;
+  width: 99%;
+  height: auto;
+  padding: 5px 5px;
+  margin: 3px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+/* the rest of the project card styling */
+.project-img {
+  margin: auto;
+  border-radius: 5px;
+  width: 250px;
+  height: 250px;
+}
+
+#html-css-section {
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.flip-card {
+  background: transparent;
+  width: 250px;
+  height: 250px;
+  border: none;
+  margin: 30px;
+  perspective: 1000px;
+}
+
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+/* Do a horizontal flip when you move the mouse over the flip box container */
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Position the front and back side */
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
+/* Style the front side (fallback if image is missing) */
+.flip-card-front {
+  background: linear-gradient(to left, #dbfb63, #3bcfd4);
+  color: black;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+  border-radius: 5px;
+  padding: 5px;
+  height: 250px;
+  width: 250px;
+}
+
+/* Style the back side */
+.flip-card-back {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to left, #dbfb63, #3bcfd4);
+  color: black;
+  transform: rotateY(180deg);
+  border-radius: 10px;
+  height: 250px;
+  width: 250px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+}
+
+/* Title text on the back of the flip card */
+.flip-card-back h1 {
+  font-family: "Amatic SC", serif;
+  font-weight: 800;
+  font-style: normal;
+  font-size: 40px;
+  line-height: 40px;
+  margin: 15px 5px 5px 15px;
+}
+
+.project-link {
+  text-decoration: none;
+  background-color: #fff9ec;
+  padding: 5px;
+  border-radius: 5px;
+  margin-top: -30px;
+  color: black;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+}
+
+.project-link:hover {
+  background: #dbfb63;
+  font-weight: bold;
+  text-decoration: none;
+  color: black;
+}
+
+#footer-section {
+  /*This is to adjust size of this section.*/
+  background: linear-gradient(to left, #dbfb63, #3bcfd4);
+  padding: 20px 0px 50px 0px;
+  margin: 20px auto;
+  width: 90vw;
+  height: 10vh;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+  border-radius: 5px;
+}
+
+.footer-text {
+  text-align: left;
+  width: auto;
+  height: 30vh;
+  padding: 10px 20px 10px 20px;
+}
+
+.last-updated-text {
+  width: auto;
+  color: white;
+  padding: 20px;
+  margin: auto;
+  text-align: center;
+  color: black;
+}
+
+#pull-request-link {
+  text-decoration-line: underline;
+  text-decoration-style: wavy;
+  text-decoration-color: #3bcfd4;
+  text-underline-offset: 5px;
+  font-weight: 600;
+}
+
+/* Media queries to hide dropdown menu on large screens */
+@media screen and (min-width: 481px) {
+  .menu {
+    visibility: hidden;
+  }
+}
+
+/*Mobile phone sizing */
+
+@media (max-width: 480px) {
+  body {
+    background: black;
+  }
+  .navbar {
+    display: none;
+  }
+  .menu {
+    top: 0;
+    box-shadow: 0 7px 6px -7px gray;
+  }
+  .callout {
+    margin-top: 80px;
+  }
+  #connect {
+    border: none;
+    border-radius: 2;
+    margin-left: -50px;
+    background-color: none;
+    padding: 5px;
+  }
+
+  #role {
+    color: #3bcfd4;
+  }
+  .profile-content-box {
+    height: auto;
+    background: #fefbf4;
+    animation: none;
+    margin-top: 30px;
+    margin-bottom: 0px;
+  }
+  .profile-photo {
+    background-image: url(https://i.postimg.cc/d17wHdYf/Kristy-outline-profile-white.png);
+  }
+  .quote-card {
+    height: auto;
+    width: 80vw;
+    margin-top: 20px;
+  }
+  #about-me-quote-card {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  .quote-card-inner {
+    width: 97%;
+    height: auto;
+    color: black;
+    text-align: left;
+  }
+  .flip-card {
+    margin-right: 40px;
+  }
+  .project-link:hover {
+    width: 250px;
+    height: 250px;
+    padding: 10px;
+  }
+  #footer-section {
+    height: 20vh;
+    padding-bottom: 60px;
+  }
+  .last-updated-text {
+    color: #dbfb63;
+  }
+}
+
+</style>
+<body>
+
+  <nav class="navbar">
+    <ul class="nav-list">
+      <li>
+        <a href="#current-section">Current Projects</a>
+      </li>
+      <li>
+        <a href="#AI-section">Built with AI</a>
+      </li>
+      <li>
+        <a href="#skills-section">Skills</a>
+      </li>
+      <li>
+        <a href="#social-proof-section">Social Proof</a>
+      </li>
+
+      <li>
+        <a href="#data-section">Data & PM</a>
+      </li>
+      <li>
+        <a href="#html-css-section">HTML/CSS</a>
+      </li>
+
+      <!-- <li>
+       <a href="#my-picks-section">My Picks</a>
+      </li> -->
+      <li>
+        <a href="#social-section">Connect</a>
+      </li>
+    </ul>
+  </nav>
+  <!-- Begin mobile menu styling-->
+  <div class="menu">
+    <input type="checkbox" id="toggle1" class="unfolder" />
+    <label for="toggle1" class="toggle-label">
+      <span class="unfold-icon">&#8801;</span><span class="fold-icon">&#8801;</span></label>
+
+    <div class="fold">
+      <ul>
+        <li>
+          <a href="#current-section">Current Projects</a>
+        </li>
+        <li>
+          <a href="#skills-section">Skills</a>
+        </li>
+        <li>
+          <a href="#social-proof-section">Social Proof</a>
+        </li>
+        <li>
+          <a href="#AI-section">Built with AI</a>
+        </li>
+        <li>
+          <a href="#data-section">Data & PM</a>
+        </li>
+        <li>
+          <a href="#html-css-section">HTML/CSS</a>
+        </li>
+        <li>
+        <li>
+          <a href="#social-section">Connect</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="social-icon-container" id="social-mobile-container">
+      <div>
+        <a href="https://www.linkedin.com/in/kristy-dahlquist/" target="_blank">
+          <img class="social-icons" id="mobile-icons" src="https://toppng.com/uploads/preview/linkedin-color-icon-linkedin-logo-round-11562920732qctvxkrdcd.png" alt="linkedin-logo">
+        </a>
+        <a href="https://medium.com/@kristy.dahlquist" target="_blank">
+          <img class="social-icons" id="mobile-icons" src="https://i.postimg.cc/VLmNFyWz/icons8-medium-100.png" alt="medium-logo">
+        </a>
+        <a href="https://github.com/KGutie" target="_blank">
+          <img class="social-icons" id="mobile-icons" src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" alt="github-logo">
+        </a>
+      </div>
+    </div>
+
+  </div>
+  <!-- End mobile menu  styling-->
+
+  <section class="callout">
+    <h1 class="callout-text">Welcome!</h1>
+  </section>
+  <!--This is the beginning of the PROFILE section-->
+  <section>
+    <div class="section-container" id="profile-section">
+      <div class="profile-photo-frame-1" id="social-section">
+        <div class="profile-photo"></div>
+        <div class="social-icon-container">
+          <div>
+            <a href="https://www.linkedin.com/in/kristy-dahlquist/" target="_blank">
+              <img class="social-icons" src="https://toppng.com/uploads/preview/linkedin-color-icon-linkedin-logo-round-11562920732qctvxkrdcd.png" alt="linkedin-logo">
+            </a>
+            <a href="https://medium.com/@kristy.dahlquist" target="_blank">
+              <img class="social-icons" src="https://i.postimg.cc/VLmNFyWz/icons8-medium-100.png" alt="medium-logo">
+            </a>
+            <a href="https://github.com/KGutie" target="_blank">
+              <img class="social-icons" src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" alt="github-logo">
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="profile-content-box">
+        <h2 id="name">Kristy Dahlquist, PMP</h2>
+        <h3 id="role">Program Manager</h3>
+        <p id="profile-intro-text">I’m a full-stack problem-solver with a thing for structure, strategy, and sandwiches (in no particular order). I’ve led marketing and program management efforts at customer-driven brands like REI, Okta, and Auth0—connecting developers, communities, and customers in ways that keeps things human.
+          <br><br>
+          I build programs, workflows, and experiences that make teams more effective and ideas more doable. I also love speaking about overcoming fear, building habits, community building, and the occasional misadventure. Whether I’m launching an initiative or untangling a messy system, I bring order to chaos without killing the creative energy. <br><br>
+          If you’re looking for someone who brings energy, adaptability, and a people-first, data-driven approach to every challenge, let’s connect on LinkedIn!
+        </p>
+      </div>
+    </div>
+  </section>
+  <!--This is the beginning of the CURRENT section-->
+  <section>
+    <div class="section-container">
+      <br>
+      <h2>✱ What I'm Working On</h2>
+      <p>July 2025 - September 2025<br><br> <em>Hover over each card to flip it and learn more! </em>The button on the back links to the whole project.<br><br>This quarter, I’m continuing to challenge myself to grow in public speaking, leadership, and storytelling. I'm vibe coding and building my Brag Bank App. Check out what I'm working on below.<br><br>
+      </p>
+
+      <div class="current-projects-section" id="current-section">
+
+        <!--  This is the beginning of the card code for Brag Bank -->
+        <div>
+          <div class="flip-card"> <span class="ribbon" id="sneak-peak">Sneak Peak!</span>
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <img class="project-img" src="https://i.postimg.cc/Jn8GRFtw/Brag-Bank-portfolio.png" alt="brag-bank-logo">
+              </div>
+
+              <div class="flip-card-back">
+                <h1 class="project-title">A piggy bank for your brags</h1>
+                <p>Built on vibes<br><em>(V0 + Auth0 + Supabase)</em> !</p>
+                <a target="_blank" class="project-link" href="https://rebrand.ly/brag-bank"> Start Bragging!</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--End of card-->
+
+        <!--This is the beginning of the card code for Storytelling-->
+        <div>
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front" id="current-work">
+                <img class="project-img" src="https://i.postimg.cc/VN85xvHN/stories.png" alt="photo-collage-stories">
+              </div>
+              <div class="flip-card-back">
+                <h1 class="project-title">Storytelling &<br>Public Speaking</h1>
+                <p>Once upon a time ...</p>
+                <a target="_blank" class="project-link" href="https://www.toastmasters.org/">Tell Me More</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--end of project card-->
+
+      </div>
+    </div>
+    </div>
+  </section>
+  <!--This is the beginning of the SKILLS section-->
+  <section>
+    <div class="section-container" id="skills-section">
+      <div class="section-title">
+        <h2>✱ Skills</h2>
+      </div>
+      <div class="flip-card-container">
+        <p id="skills">problem-solving</p>
+        <p id="skills">public speaking</p>
+        <p id="skills">AI app building</p>
+        <p id="skills">prompt engineering</p>
+        <p id="skills">program management</p>
+        <p id="skills">project management</p>
+        <p id="skills">community building</p>
+        <p id="skills">data analysis</p>
+        <p id="skills">strategic mindset</p>
+        <p id="skills">developer marketing</p>
+        <p id="skills">design thinking</p>
+        <p id="skills">systems thinking</p>
+      </div>
+    </div>
+  </section>
+
+  <!--This is the beginning of the SOCIAL PROOF section-->
+  <section>
+    <div class="section-container" id="social-proof-section">
+
+      <div class="section-title">
+        <h2>✱ Social Proof</h2>
+        <p>Just a few nice things former coworkers, vendors, and managers have said about working with me.</p>
+      </div>
+      <div class="flip-card-container" id="social-proof-container">
+        <!--Page links to slides-->
+        <a class="slide-button" href="#slide-1">1</a>
+        <a class="slide-button" href="#slide-2">2</a>
+        <a class="slide-button" href="#slide-3">3</a>
+        <a class="slide-button" href="#slide-4">4</a>
+        <a class="slide-button" href="#slide-5">5</a>
+
+        <!--This is the beginning of the card code #1.-->
+        <div class="quote-card" id="quote-1">
+          <div class="quote-card-inner" id="slide-1">
+
+            <p>"Kristy has been one of the most reliable, organized, strategic, and friendly teammates I had in the organization. She is a proactive teammate that helps others get set up for success by using her expertise to lead, teach, and empower others. She helped build lasting relationships not only across the organization but also with external people. These relationships will have lasting impact in our work and outcomes."<br><br> - Coworker at Auth0 by Okta</p>
+
+          </div>
+        </div>
+        <br>
+        <!--This is the beginning of the card code #2.-->
+
+        <div class="quote-card" id="quote-2">
+          <div class="quote-card-inner" id="slide-2">
+
+            <p>“Kristy has a deep knowledge and skill set in outdoor education and programming logistics. The ability to think through many moving parts of varying projects and find the best outcome is something she does incredibly well. She is incredibly driven at work to find the most efficient way of getting work done for herself and the team. She also excels at thinking from the perspective of the customer and putting their needs first which is a valuable skill to have in any industry. ”<br><br> - Former Manager at REI Outdoor Experiences</p>
+          </div>
+        </div>
+        <br>
+        <!--This is the beginning of the card code #3.-->
+        <div class="quote-card" id="quote-3">
+          <div class="quote-card-inner" id="slide-3">
+            <p>"You held our team together with a great mix of humor, professionalism and deep caring! Thank you for constantly seeking improvement for everything we did, holding us accountable to be great instructors, and always being willing to keep it real!"<br><br> - REI Outdoor Experiences Guide</p>
+          </div>
+        </div>
+        <br>
+        <!--This is the beginning of quote #4.-->
+        <div class="quote-card" id="quote-4">
+          <div class="quote-card-inner" id="slide-4">
+            <p>"I worked with Kristy as part of the Developer Relations team at Auth0 by Okta. She ran the Auth0 Ambassadors program single-handedly and was a joy to work with. Kristy was always improving the program with engaging speakers, events, and more fluid communications. She's an excellent community builder and I wouldn't hesitate to work with her again!"<br><br> - Coworker at Auth0 by Okta</p>
+          </div>
+        </div> <br>
+        <!--This is the beginning of the quote card #5.-->
+        <div class="quote-card" id="quote-5">
+          <div class="quote-card-inner" id="slide-5">
+            <p class="quote-text">"Kristy is smart, talented, and creative. She excels at creating systems and processes and is able to quickly learn new tools. We worked together to build and grow the Auth0 Ambassadors program, navigating many challenges along the way. Kristy never backed down from an obstacle and always kept the community as her first priority. She quickly garnered the support and goodwill of all of the Ambassadors as she nurtured the program and improved its day-to-day operations. <br><br>
+
+              Kristy is a world class executor. She will relentlessly pursue a task until it's complete, which she's able to accomplish through her knack for project management and her personal organization systems. In fact, Kristy became our go-to person on our team for tools and processes, first with Monday.com, then with Asana." <br><br> - Manager at Auth0 by Okta</p>
+          </div>
+        </div>
+        <br>
+        <!--This is the beginning of the quote card #6-->
+        <div class="quote-card">
+
+          <div class="quote-card-inner" id="slide-6">
+            <p>"Kristy and I worked together for one year at REI Adventures. In that time, Kristy was an important contributor to the team. She solved numerous elevated customer service issues, collaborated with operation vendors, domestic and international, daily, and played a big part in helping launch a new invoice system. She brought forth thoughtful ideas and a refreshing perspective that challenged the team to look at things differently. That’s a great asset to have on a team with little turnover. In addition, her success in outdoor education and leadership is extremely impressive and says a lot about her abilities. Her next employer will be lucky to have her."<br><br> - Program Manager at REI Adventures</p>
+          </div>
+        </div>
+
+        <!--Page links to slides-->
+        <a class="slide-button" href="#slide-1">1</a>
+        <a class="slide-button" href="#slide-2">2</a>
+        <a class="slide-button" href="#slide-3">3</a>
+        <a class="slide-button" href="#slide-4">4</a>
+        <a class="slide-button" href="#slide-5">5</a>
+        <a class="slide-button" href="#slide-6">6</a>
+
+      </div>
+    </div>
+  </section>
+  <!-- This is the beginning of the BUILT WITH AI Section -->
+  <section>
+    <div class="section-container" id="AI-section">
+      <div class="section-title">
+        <h2>✱ AI Powered Projects</h2>
+        <p><em>Hover over each card to flip it and learn more!</em> Each button on the back links to the code or site. These are tools I’ve built using AI and low-code platforms like V0 and Lovable to solve everyday inefficiencies. They reflect how I approach problem-solving: fast iterations, thoughtful design, and systems that work simply. Built with vibes.</p>
+      </div>
+
+      <div class="flip-card-container">
+        <!--This is the beginning of the card code for the Weekly Availability Scheduler.-->
+        <div>
+          <div class="flip-card"> <span class="ribbon">NEW</span>
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <img class="project-img" src="https://i.postimg.cc/9f3XPFNF/Screenshot-2025-08-01-at-10-49-30-AM.png">
+              </div>
+              <div class="flip-card-back">
+                <h1 class="project-title">Generate<br>Meeting Availability</h1>
+                <p>No Mistyped Mistakes</p>
+                <a target="_blank" class="project-link" href="https://v0-weekly-responsive-layout-ic84rudns.vercel.app/">Get Scheduling</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--end of project card-->
+
+        <!--This is the beginning of the card code for Job Clipper-->
+        <div>
+          <div class="flip-card"> <span class="ribbon">NEW</span>
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <img class="project-img" src="https://i.postimg.cc/JhVCCt44/Screenshot-2025-07-31-at-12-30-45-PM.png" alt="job-clipper-chrome-extension">
+              </div>
+              <div class="flip-card-back">
+                <h1 class="project-title">Job Clipper<br>Chrome Extension</h1>
+                <p>Clip Job Details Fast</p>
+                <a target="_blank" class="project-link" href="https://job-clipper.netlify.app/">Start Clipping</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--end of project card-->
+
+        <!--This is the beginning of the card code for the next card.-->
+
+        <div>
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <img class="project-img" src="https://i.postimg.cc/MZjQWzvD/3-AI-apps-img.png" alt="3-AI-Tools-screenshot">
+              </div>
+
+              <div class="flip-card-back">
+                <h1 class="project-title">3 AI Tools, 1 App</h1>
+                <p>No Developers<br><em>Necessary?</em> </p>
+                <a target="_blank" class="project-link" href="https://medium.com/@kristy.dahlquist/3-ai-tools-1-app-no-developers-necessary-0d6c0185cb15"> Read the Article</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--This is the beginning of the card code for the next card. Keep the last two divs after it.-->
+      </div>
+    </div>
+  </section>
+  <!-- This is the beginning of the DATA ANALYSIS & PROJECT MANAGEMENT section!-->
+  <section>
+    <div class="section-container" id="data-section">
+      <div class="section-title">
+        <h2>✱ Data Analysis & Project Management</h2>
+        <p>
+          <em>Hover over each card to flip it and learn more! </em>The button on the back links to the whole project.<br>
+        </p>
+      </div>
+
+      <div class="current-projects-section" id="current-section">
+        <!--This is the beginning of the card code for PAS-->
+        <div>
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <img class="project-img" src="https://i.postimg.cc/hPrxKkQn/Program-Assessment-Triangle.png" alt="program-assessment-triangle">
+              </div>
+              <div class="flip-card-back">
+                <h1 class="project-title">Program Assessment<br>System</h1>
+                <p>A Practical Guide</p>
+                <a target="_blank" class="project-link" href="https://www.linkedin.com/pulse/program-assessment-system-pas-practical-guide-kristy-dahlquist-pmp--ghaec/?trackingId=JF19dDd8RnGl6UGHCaBsOA%3D%3D">Get systematic!</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--end of project card-->
+
+        <!--This is the beginning of the card code for Bellabeat.-->
+        <div>
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <img class="project-img" src="https://i.postimg.cc/7hw5k8qy/Screenshot-2024-11-16-at-4-46-18-PM.png" alt="bellabeat-landing_page_screenshot">
+              </div>
+              <div class="flip-card-back">
+                <h1 class="project-title">Bellabeat<br>Case Study</h1><br>
+                <p>Google Data Analytics Project</p>
+                <a target="_blank" class="project-link" href="https://data-analytics-case-study.netlify.app/"> Track it.</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--   
+ This is the beginning of the card code for the PMP Exam Prep Guide on Airtable -->
+        <div>
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <img class="project-img" src="https://i.postimg.cc/1tNC4Vrs/PMPguide.png" alt="pmp-prep-guide-screenshot">
+              </div>
+
+              <div class="flip-card-back">
+                <h1 class="project-title">Practical PMP Prep Guide</h1>
+                <p>Prepare to Pass<br><em>(you'll need a free Airtable account)</em> !</p>
+                <a target="_blank" class="project-link" href="https://rebrand.ly/pmp-exam/prep-guide"> Let's go. I'm in!</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--End of card-->
+
+        <!--This is the beginning of the card code for the next card.-->
+
+        <!--End. Keep the last two divs after it.-->
+      </div>
+    </div>
+  </section>
+
+  <!-- This is the HTML/CSS section-->
+  <section>
+    <div class="section-container" id="html-css-section">
+      <div class="section-title">
+        <h2>✱ HTML/CSS Projects</h2>
+        <p>
+          <em>Hover over each card to flip it and learn more!</em> Each button on the back links to the code or site.<br><br>These are projects I created after taking the FreeCodeCamp HTML/CSS course, the Scrimba HTML/CSS course, and a couple of others I created on my own.
+        </p>
+      </div>
+      <div class="flip-card-container" id="html-css-section">
+        <!--This is the beginning of the card code for Portfolio Project-->
+        <div>
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <img class="project-img" src="https://i.postimg.cc/prsZnPV8/Screenshot-2024-11-02-at-12-26-35-PM.png" alt="portfolio-page-screenshot">
+              </div>
+              <div class="flip-card-back">
+                <h1 class="project-title">Portfolio</h1>
+                <p>Check it out. . .<br> wait you're already here.</p>
+                <a target="_blank" class="project-link" href="https://github.com/KGutie/kdahlquist-portfolio-24">See the code</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--This is the beginning of the card code for the Andy Warhol Soup Can-->
+        <div>
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <img class="project-img" src="https://i.postimg.cc/nrYwQvjP/Screenshot-2024-11-01-at-7-12-04-PM.png" alt="soup-can">
+              </div>
+              <div class="flip-card-back">
+                <h1 class="project-title">Art Inspired <br>Challenge</h1>
+                <p>Pure Organic HTML/CSS!</p>
+                <a class="project-link" target="_blank" href="https://andy-warhol-campbells-soup.netlify.app/">Soup is On!</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--This is the beginning of the card code for the Ishikawa Diagram Tool
+        <div>
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <img class="project-img" src="https://i.postimg.cc/tRmMm2Nf/Ishikawa-diagram.png" alt="ishikawa-form-screenshot">
+              </div>
+              <div class="flip-card-back">
+                <h1 class="project-title">Ishikawa<br>Diagram</h1>
+                <p>Get to the root of it!</p>
+                <a class="project-link" target="_blank" href="https://ishikawa-diagram-tool.netlify.app/">Because . . . Why?</a>
+              </div>
+            </div>
+          </div>
+        </div> -->
+
+        <!--This is the beginning of the card code for the Product Landing Page-->
+        <div>
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <img class="project-img" src="https://i.ibb.co/d7tS51J/Screen-Shot-2022-01-20-at-4-59-33-PM.png" alt="product-landing-page-screenshot">
+              </div>
+              <div class="flip-card-back">
+                <h1 class="project-title">Product Landing Page</h1>
+                <p>Surf Shop and Shuttle</p><br>
+                <a class="project-link" target="_blank" href="https://codepen.io/K_Gutierrez/pen/BadqMgP">Catch a Wave?</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--This is the beginning of the card code for the next card. Keep the last two divs after it.-->
+      </div>
+    </div>
+  </section>
+
+  <!--My Picks Section -->
+  <!--  <section>
+    <div class="section-container" id="my-picks-section">
+      <div class="section-title">
+        <h2>✱ My Picks </h2>
+        <p>Books, newsletters, and more.</p>
+       <div class="my-picks">
+         <ul>
+        <li>Brave Thing</li>
+        <li>Toastmasters</li>
+           <li>Linchpin</li>
+           
+        </ul>
+        </div>        
+  </section> -->
+
+  <!--Footer Section-->
+  <section>
+    <div class="section-container" id="footer-section">
+      <p class="footer-text">P.S. I designed and created this portfolio page using tools like codepen.io, Github, coolors.co and Netlify! <br><br> If you have ideas for improvement, please submit a pull request <a id="pull-request-link" target="_blank" href="https://github.com/KGutie/kdahlquist-portfolio-24"><em>here</em>.</a></p>
+    </div>
+    <p class="last-updated-text"><em>Last updated August 2025 by K.Dahlquist</em></p>
+  </section>
+</body>
+
+</html>

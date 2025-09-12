@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+</head>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Turret+Road:wght@200;300;400;500;700;800&display=swap');
+
+:root {
+  --header-height: 5rem;
+
+  --first-hue: 258;
+  --second-hue: 225;
+  --first-color: hsl(var(--first-hue), 54%, 48%);
+  --title-color: hsl(var(--second-hue), 64%, 18%);
+  --text-color: hsl(var(--first-hue), 8%, 35%);
+  --border-color: hsl(var(--second-hue), 4%, 55%);
+  --body-color: hsl(var(--first-hue), 60%, 98%);
+  --container-color: #fff;
+
+  --body-font: 'Jost', sans-serif;
+  --signature-font: 'Turret Road', sans-serif;
+  --biggest-font-size: 4.25rem;
+  --h1-font-size: 2.25rem;
+  --h2-font-size: 1.5rem;
+  --h3-font-size: 1.25rem;
+  --normal-font-size: 1rem;
+  --small-font-size: .875rem;
+  --smaller-font-size: .813rem;
+
+  --font-light: 300;
+  --font-medium: 500;
+  --font-semibold: 600;
+
+  --z-tooltip: 10;
+  --z-fixed: 100;
+}
+
+@media screen and (max-width: 1024px) {
+  :root {
+    --biggest-font-size: 2.75rem;
+    --h1-font-size: 1.5rem;
+    --h2-font-size: 1.25rem;
+    --h3-font-size: 1rem;
+    --normal-font-size: .938rem;
+    --small-font-size: .813rem;
+    --smaller-font-size: .75rem;
+  }
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body, button, input, textarea { font-family: var(--body-font); font-size: var(--normal-font-size); }
+    body { background-color: var(--body-color); color: var(--text-color); }
+    button { cursor: pointer; border: none; outline: none; }
+h1, h2, h3 { color: var(--title-color); font-weight: var(--font-semibold); }
+ul { list-style: none; }
+a { text-decoration: none; }
+p { line-height: 1.6rem; text-align: justify; }
+img { max-width: 100%; height: auto; border-radius: 0.75rem; }
+.container { max-width: 1140px; margin-left: auto; margin-right: auto; }
+.grid { display: grid; }
+.section { padding: 7rem 0 2rem; }
+.section-subtitle, .section-title { text-align: center; }
+    .section-title { font-size: var(--h1-font-size); color: var(--first-color); margin-bottom: 3rem; }
+    .section-subtitle { display: block; }
+.button { display: inline-block; background-color: var(--first-color); color: var(--container-color); padding: 0.75rem 1rem; border-radius: 0.5rem; font-weight: var(--font-medium); transition: .4s; }
+    .button:hover { background-color: var(--title-color); }
+.scroll-header { box-shadow: 0 1px 4px hsla(0, 0%, 15%, .1); }
+    .scroll-header .nav { height: var(--header-height); }
+
+/*Header*/
+.header { width: 100%; background-color: var(--container-color); position: fixed; top: 0; left: 0; z-index: var(--z-fixed); }
+.nav { height: calc(var(--header-height) + 2.5rem); display: flex; justify-content: space-between; align-items: center; column-gap: 3rem; }
+.nav-logo { display: inline-flex; align-items: center; }
+.nav-list { display: flex; column-gap: 2rem; }
+.nav-close, .nav-toggle { color: var(--title-color); display: none; }
+    .nav-toggle { font-size: 1.25rem; cursor: pointer; }
+    .nav-close { font-size: 1.5rem; position: absolute; top: 1rem; right: 1.25rem; cursor: pointer; }
+.nav-link { position: relative; color: var(--title-color); font-weight: var(--font-medium); }
+    .nav-link:hover { color: var(--first-color); }
+    .nav-link::before, .nav-link:hover::before { content: ''; position: absolute; bottom: -0.5rem; left: 0; width: 0; height: 2px; background-color: var(--first-color); border-radius: 25%; transition: 0.4s; }
+        .active-link::before, .nav-link:hover::before { width: 30px; }
+
+/*Home*/
+.home { padding: 12.5rem 0 2rem; }
+.home-container { grid-template-columns: repeat(2, 1fr); column-gap: 2rem; }
+.home-subtitle, .home-title { font-size: var(--biggest-font-size); line-height: 68px; font-weight: var(--font-light); }
+    .home-subtitle { margin-bottom: 0.75rem; }
+    .home-title { margin-bottom: 2rem; }
+        .home-title span { font-weight: var(--font-medium); }
+.home-buttons { display: flex; flex-direction: column; row-gap: 0.25rem; }
+    .home-buttons span { color: var(--first-color); font-size: var(--h1-font-size); font-weight: var(--font-medium); }
+        .home-buttons span:nth-child(2) { opacity: .7; }
+        .home-buttons span:nth-child(3) { opacity: .4; }
+.home-images { grid-template-columns: 4fr 8fr; column-gap: 1.875rem; }
+.home-group { margin-top: 2rem; grid-template-columns: 10fr 2fr; column-gap: 1.875rem; }
+.home-description { font-size: var(--h2-font-size); line-height: 36px; margin-bottom: 2.5rem; }
+    .home-description span { color: var(--title-color); font-weight: var(--font-medium); }
+.home-social { display: flex; align-items: center; }
+.home-social-follow { color: var(--title-color); font-size: 17px; font-weight: var(--font-medium); padding-right: 8.175rem; position: relative; }
+    .home-social-follow::after { content: ''; position: absolute; right: 1rem; top: 58%; width: 100px; height: 2px; background-color: hsla(var(--second-hue), 64%, 18%, 0.15); margin: -1px; }
+.home-social-links { display: inline-flex; column-gap: 0.5rem; }
+.home-social-link { display: inline-flex; align-items: center; padding: 1rem 0.875rem 0.875rem 1rem; border-radius: 0.75rem; border: 1px solid hsla(var(--second-hue), 64%, 18%, 0.15); background-color: var(--container-color); color: var(--title-color); }
+    .home-social-link i { font-size: var(--h2-font-size); }
+    .home-social-link span { display: inline-block; font-weight: var(--font-medium); white-space: nowrap; line-height: 20px; transform: translateX(1rem); max-width: 0; overflow: hidden; transition: 1.2s; }
+        .home-social-link span::after { content: ''; margin-right: 1rem; }
+            .home-social-link:hover span, .home-social-link:hover i { color: var(--first-color); }
+                .home-social-link:hover span { max-width: 400px; }
+.experience-img { width: 160px; justify-self: flex-end; }
+
+/*About*/
+.about-container { grid-template-columns: repeat(2, 1fr); column-gap: 1.875rem; }
+.about-img { justify-self: center; }
+.about-subtitle, .about-title { text-align: left; }
+    .about-title { margin-bottom: 2.5rem; }
+.about-description { color: var(--title-color); font-weight: var(--font-medium); font-size: 17px; margin-bottom: 1.5rem; }
+.about-details { margin-bottom: 2.5rem; }
+.about-award { grid-template-columns: 4fr 8fr; align-items: center; }
+.award-title { font-size: 17px; font-weight: var(--font-medium); margin-bottom: 0.5rem; }
+
+/*Services*/
+.services-container { grid-template-columns: 4.5fr 7.5fr; column-gap: 6rem; }
+.services-button { position: relative; display: inline-block; font-size: var(--h2-font-size); font-weight: var(--font-medium); line-height: 30px; cursor: pointer; padding-right: 1.25rem; transition: .4s; }
+.services-tab div:not(:last-child) { margin-bottom: 1rem; }
+    .services-button::before { content: ''; width: 0; height: 2px; position: absolute; left: 100%; top: 50%; background-color: var(--first-color); transition: .4s; }
+        .services-button.services-active::before, .services-button:hover::before { width: 100px; }
+        .services-button.services-active, .services-button:hover { color: var(--first-color); }
+.services-item { grid-template-columns: 5fr 7fr; column-gap: 1.875rem; }
+.services [data-content] { display: none; }
+    .services-active[data-content] { display: block; }
+.services-title { padding-top: 0.25rem; color: var(--title-color); font-weight: var(--font-medium); margin-bottom: 1rem; font-size: 17px; line-height: 1.6rem; text-align: justify; }
+
+/*Work*/
+.work-container { column-count: 4; column-gap: 1.875rem; }
+.work-content { position: relative; margin-bottom: 1.5rem; }
+    .work-content:hover { box-shadow: 0 2px 16px hsla(var(--second-hue), 48%, 8%, .1); }
+.work-overlay { width: 100%; height: 100%; background-color: rgba(255, 255, 255, 0.8); position: absolute; top: 0; left: 0; bottom: 0; right: 0; opacity: 0; transition: .4s; }
+    .work-content:hover .work-overlay { opacity: 1; border-radius: 0.75rem; }
+.work-overlay-icon { display: inline-block; position: absolute; top: 50%; left: 50%; margin-top: -1rem; margin-left: -1rem; font-size: 2rem; color: var(--first-color); transform: scale(0); transition: .4s; }
+    .work-content:hover .work-overlay-icon { transform: scale(1); }
+
+/*Project*/
+.project { padding: 6.25rem 0 ; background-image: url('https://i.postimg.cc/YqN54xB4/background-cta.jpg'); background-size: auto; background-repeat: no-repeat; background-attachment: fixed; background-position: center 85.1688px; }
+.project-container { place-items: center; }
+.project-title, .project-description { text-align: center; }
+    .project-title { font-size: 2rem; margin-bottom: .25rem; }
+    .project-description { font-size: var(--h3-font-size); margin-bottom: 2rem; }
+
+/*Qualification*/
+.qualification-container { grid-template-columns: repeat(2, 1fr); column-gap: 3rem; }
+.timeline-item { position: relative; padding-left: 3rem; margin-bottom: 2.5rem; }
+    .timeline-item:last-child { margin-bottom: 0; }
+    .timeline-item::before { content: ''; width: 2px; height: 60%; position: absolute; left: 0.459rem; top: 0; background-color: var(--first-color); transition: 0.4s; }
+        .timeline-item:hover::before { height: 100%; }
+.circle-dot { position: absolute; left: 0; top: 0; height: 1rem; width: 1rem; border: 2px solid var(--first-color); border-radius: 0.25rem; background-color: var(--body-color); transform: rotate(134deg); transition: 0.4s; }
+    .timeline-item:hover .circle-dot { background-color: var(--first-color); }
+.timeline-title { font-size: var(--h3-font-size); font-weight: var(--font-medium); margin-bottom: 1rem; }
+.timeline-date { display: flex; align-items: center; column-gap: 0.4rem; font-size: var(--small-font-size); color: var(--first-color); margin-bottom: 0.5rem; }
+
+/*Contact*/
+.contact-container { grid-template-columns: 6.5fr 5.5fr; column-gap: 3rem; align-items: flex-start; padding-bottom: 3rem; }
+.contact-form-group { display: grid; grid-template-columns: repeat(2, 1fr); column-gap: 1.5rem; }
+.contact-form-div { position: relative; margin-bottom: 2rem; height: 4rem; }
+.contact-form-input { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 2px solid hsl(var(--second-hue), 4%, 55%); background: none; color: var(--text-color); outline: none; border-radius: 0.75rem; padding: 1.5rem; z-index: 1; }
+.contact-form-tag { position: absolute; top: -0.75rem; left: 1.25rem; font-size: var(--smaller-font-size); padding: 0.25rem; background-color: var(--body-color); z-index: 10; }
+.contact-form-area { height: 10.25rem; }
+    .contact-form-area textarea { resize: none; }
+.contact-info { display: grid; row-gap: 1.875rem; }
+.contact-card div { display: flex; column-gap: 0.75rem; margin-bottom: 0.5rem; }
+.contact-icon { font-size: 1.8rem; color: var(--first-color); display: inline-block; margin-bottom: 0.25rem; }
+.contact-card-title, .contact-card-data { font-size: var(--normal-font-size); }
+    .contact-card-title { padding-top: 0.16rem; font-weight: var(--font-medium); }
+    .contact-card-data { display: block; margin-bottom: 0.5rem; }
+
+/*Footer*/
+.footer { background-color: var(--first-color); }
+.footer-container { padding: 2rem 0 2rem; }
+.footer-title, .footer-link { color: var(--container-color); }
+    .footer-title { font-size: var(--h1-font-size); text-align: center; margin-bottom: 2rem; }
+    .footer-link { font-size: 18px; }
+.footer-list { display: flex; justify-content: center; column-gap: 1.5rem; margin-bottom: 2.25rem; }
+.footer-social { display: flex; justify-content: center; column-gap: 1.25rem; }
+.footer-social-link { background-color: var(--body-color); color: var(--first-color); font-size: 1.25rem; padding: 0.48rem; border-radius: 0.5rem; display: inline-flex; }
+.footer-copy { display: block; text-align: center; margin-top: 4.5rem; color: var(--container-color); font-size: var(--small-font-size); }
+.footer-copy a { font-family: var(--signature-font); color: var(--container-color); }
+
+/*Lightbox*/
+.lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); z-index: 1000; display: none; justify-content: center; align-items: center; padding: 1.8rem; cursor: zoom-out; }
+    .lightbox.open { display: flex; }
+.lightbox-img { height: auto; width: auto; cursor: pointer; display: block; padding: 2.5rem 0 1.875rem; }
+.lightbox-content { position: relative; }
+    .lightbox.open .lightbox-content { animation: lightBoxImage 0.5s ease; }
+    @keyframes lightBoxImage {
+        0% { transform: scale(0.8); }
+        100% { transform: scale(1); }
+    }
+.lightbox-close { position: absolute; height: 40px; width: 40px; top: 0; right: 0; font-size: 1.8rem; color: hsl(var(--first-hue), 60%, 82%); line-height: 32px; text-align: right; transition: 0.4s; }
+    .lightbox-close:hover { color: var(--container-color); }
+.lightbox-caption { position: absolute; left: 0; bottom: 0; width: 100%; display: flex; justify-content: flex-end; color: hsl(var(--first-hue), 60%, 82%); z-index: -1; }
+.prev-item, .next-item { position: absolute; cursor: pointer; top: 50%; margin-top: -1rem; color: hsl(var(--first-hue), 60%, 82%); z-index: 110; transition: 0.4s; }
+    .prev-item { left: 1.875rem; }
+    .next-item { right: 1.875rem; }
+    .next-item .bx, .prev-item .bx { font-size: 1.75rem; }
+    .next-item:hover, .prev-item:hover { color: var(--container-color); }
+
+/*Media Queries*/
+
+@media screen and (max-width: 1208px) {
+    .container { margin-left: 1.5rem; margin-right: 1.5rem; }
+    .about-award { column-gap: 1.875rem; }
+    .services-container { column-gap: 3rem; }
+}
+
+@media screen and (max-width: 1024px) {
+    .nav-logo-img { width: 100px; }
+    .home-container { column-gap: 1.25rem; }
+    .home-group { grid-template-columns: 9.5fr 2.5fr; }
+    .home-title, .home-subtitle { line-height: 48px; }
+        .home-title { margin-bottom: 1.5rem; }
+    .home-description { font-size: var(--h3-font-size); line-height: 30px; }
+    .home-social-follow { font-size: var(--normal-font-size); }
+    .home-social-link { padding: 0.625rem 0.625rem 0.5rem 0.625rem; border-radius: 0.5rem; }
+
+    .about-title { margin-bottom: 2rem; }
+    .about-description { margin-bottom: 1rem; font-size: var(--normal-font-size); }
+    .award-title { font-size: var(--normal-font-size); }
+    .about-details { margin-bottom: 2rem; }
+    
+    .services-container { grid-template-columns: 1fr; row-gap: 3rem; }
+    .services-button.services-active::before, .services-button:hover::before { width: 80px; }
+    .services-title { font-size: var(--normal-font-size); }
+
+    .work-container { column-count: 3; }
+
+    .project-title { font-size: var(--h2-font-size); }
+    .project-description { font-size: var(--normal-font-size); margin-bottom: 1.5rem; }
+
+    .timeline-item { padding-left: 2.5rem; margin-bottom: 2rem; }
+
+    .contact-container { grid-template-columns: 7.5fr 4.5fr; column-gap: 2rem; }
+
+    .footer-link { font-size: var(--normal-font-size); }
+    .footer-social-link { padding: 0.3rem; border-radius: 0.25rem; font-size: 1rem; }
+
+}
+
+@media screen and (max-width: 768px) {
+    .section { padding: 4.5rem 0 2rem; }
+    .nav { height: var(--header-height); }
+    .nav-menu { position: fixed; background-color: var(--container-color); top: 0; right: -100%; width: 80%; height: 100%; padding: 4rem 0 0 3rem; box-shadow: -2px 0 4px hsla(250, 24%, 15%, 0.1); }
+    .show-menu { right: 0; }
+    .nav-list { flex-direction: column; row-gap: 1.5rem; }
+    .nav-toggle, .nav-close { display: block; } 
+    .nav-logo-img { width: 90px; }
+
+    .home { padding: 9rem 0 2rem; }
+    .home-container { grid-template-columns: 1fr; row-gap: 3rem; }
+    .home-images { grid-template-columns: 1fr; row-gap: 1.875rem; }
+    .home-img { width: 160px; order: 2; }
+    .slide-img { width: 225px; }
+    .swiper-slide { width: 33% !important; }
+    .home-group { grid-template-columns: 1fr; row-gap: 2.5rem; }
+    .experience-img { justify-self: flex-start; }
+
+    .about-container { grid-template-columns: 1fr; row-gap: 2.5rem; }
+    .about-img { width: 250px; }
+
+    .services-item { grid-template-columns: 1fr; row-gap: 1.875rem; }
+    .services-img { width: 350px; }
+
+    .project { padding: 4.5rem 3rem; }
+
+    .qualification-container { grid-template-columns: 1fr; row-gap: 2.5rem; }
+
+    .contact-container { grid-template-columns: 1fr; row-gap: 3rem; }
+    .contact-info { order: -1; }
+}
+
+@media screen and (max-width: 576px) {
+    .home-title { line-height: 60px; margin-bottom: 1rem; }
+    .home-subtitle { margin-bottom: 0.5rem; }
+    .swiper-slide { width: 50% !important; }
+    .home-social { flex-direction: column; align-items: flex-start; row-gap: 1.2rem; }
+    .home-social-follow::after { display: none; }
+
+    .about-award { grid-template-columns: 1fr; row-gap: 2rem; }
+    .services-img { width: 300px; }
+    .work-container { column-count: 2; }
+    .contact-form-group { grid-template-columns: 1fr; }
+}
+
+@media screen and (max-width: 350px) {
+    .container { margin-left: 1rem; margin-right: 1rem; }
+    .home-img { width: 140px; }
+    .slide-img { width: 200px; }
+    .services-button.services-active::before, .services-button:hover::before { width: 60px; }
+    .services-button { padding-right: 1rem; }
+    .work-container { column-count: 1; }
+}
+</style>
+<body>
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="index.html" class="nav-logo">
+                <img src="https://i.postimg.cc/pVZn37km/logo.png" alt="" class="nav-logo-img">
+            </a>
+
+            <div class="nav-menu" id="nav-menu">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#home" class="nav-link active-link">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="#about" class="nav-link">About</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="#services" class="nav-link">Services</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="#work" class="nav-link">Work</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="#experience" class="nav-link">Experience</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="#contact" class="nav-link">Contact</a>
+                    </li>
+                </ul>
+
+                <div class="nav-close" id="nav-close">
+                    <i class="bx bx-x"></i>
+                </div>
+            </div>
+
+            <div class="nav-toggle" id="nav-toggle">
+                <i class="bx bx-grid-alt"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+        <section class="home container" id="home">
+            <div class="home-container grid">
+                <div class="home-data">
+                    <h3 class="home-subtitle">Hello</h3>
+                    <h1 class="home-title">I'm <span>Alycia Carey</span></h1>
+                    <div class="home-buttons">
+                        <span>Photographer</span>
+                        <span>Zoologist</span>
+                        <span>Writer</span>
+                    </div>
+                </div>
+
+                <div class="home-images grid">
+                    <img src="https://i.postimg.cc/GhfZqC7F/photography-img9.jpg" alt="" class="home-img">
+
+                    <div class="swiper home-swiper">
+                        <div class="swiper-wrapper">
+                            <img src="https://i.postimg.cc/RFv8NVhB/photography-img1.jpg" alt="" class="swiper-slide slide-img">
+                            <img src="https://i.postimg.cc/vZ8nmJLV/photography-img6.jpg" alt="" class="swiper-slide slide-img">
+                            <img src="https://i.postimg.cc/VLgS27QL/photography-img7.jpg" alt="" class="swiper-slide slide-img">
+                            <img src="https://i.postimg.cc/7hD6WzK2/photography-img12.jpg" alt="" class="swiper-slide slide-img">
+                            <img src="https://i.postimg.cc/3xP3qpRx/photography-img11.jpg" alt="" class="swiper-slide slide-img">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="home-group grid">
+                <div class="home-details">
+                    <p class="home-description">I help our clients create <span> brands</span>, build digital <span> products</span> and <span> services</span>. I innovate, find oportunities and validate ideas</p>
+
+                    <div class="home-social">
+                        <span class="home-social-follow">Follow me on:</span>
+
+                        <div class="home-social-links">
+                            <a href="https://www.facebook.com/" target="_blank" class="home-social-link">
+                                <i class="bx bxl-facebook-circle"></i>
+                                <span>Like on Facebook</span>
+                            </a>
+
+                            <a href="https://www.instagram.com/" target="_blank" class="home-social-link">
+                                <i class="bx bxl-instagram-alt"></i>
+                                <span>Follow on Instagram</span>
+                            </a>
+
+                            <a href="https://www.linkedin.com/" target="_blank" class="home-social-link">
+                                <i class="bx bxl-linkedin-square"></i>
+                                <span>View my Profile</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <img src="https://i.postimg.cc/Cx471yBy/experience-img.jpg" alt="" class="experience-img">
+            </div>
+        </section>
+
+        <section class="about section" id="about">
+            <div class="about-container container grid">
+                <img src="https://i.postimg.cc/QxbQc2sj/about-img.png" alt="" class="about-img">
+
+                <div class="about-data">
+                    <span class="section-subtitle about-subtitle">My Intro</span>
+                    <h2 class="section-title about-title">About me</h2>
+
+                    <p class="about-description">Capturing the beauty of the natural world</p>
+                    <p class="about-details">I love to combine my scientific expertise with creative vision to inspire others through my images and words. My work reflects a deep respect and a commitment to sharing the wonders of nature with a wider audience</p>
+                    <div class="about-award grid">
+                        <img src="https://i.postimg.cc/Qxtz9JGY/award-img.png" alt="" class="award-img">
+
+                        <div>
+                            <h3 class="award-title">International Photography <br> Awards 2016</h3>
+                            <p class="award-details">Celebrates a wide range of photographic genres that includes categories such as portraiture, landscape, wildlife, architecture, and fine art.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="services about" id="services">
+            <span class="section-subtitle">My Services</span>
+            <h2 class="section-title">What I Offer</h2>
+
+            <div class="services-container container grid">
+                <div class="services-tab">
+                    <div>
+                        <h3 class="services-button services-active" data-target="#food-photography">Food Photography</h3>
+                    </div>
+
+                    <div>
+                        <h3 class="services-button" data-target="#wedding-photoshoot">Wedding Photoshoot</h3>
+                    </div>
+
+                    <div>
+                        <h3 class="services-button" data-target="#product-art">Product Art</h3>
+                    </div>
+
+                    <div>
+                        <h3 class="services-button" data-target="#drone-videography">Drone Videography</h3>
+                    </div>
+                </div>
+
+                <div class="services-content">
+                    <div class="services-group services-active" data-content id="food-photography">
+                        <div class="services-item grid">
+                            <img src="https://i.postimg.cc/wTBBTnL4/service-1.png" alt="" class="services-img">
+
+                            <div class="services-data">
+                                <h3 class="services-title">A Symphony of Breakfast Delights</h3>
+
+                                <p class="services-details">This mouthwatering photo collage celebrates the beauty and variety of breakfast cuisine with artistic flair. At the top, crispy flatbreads, fresh strawberries, and a bowl of jam are elegantly paired with edible flowers and herbs. The middle section captures the dynamic pour of syrup over fluffy pancakes, crowned with banana slices and greens—pure indulgence in motion. At the bottom, perfectly sliced boiled eggs rest on a bed of greens beside a glass of vibrant red juice, creating a wholesome and visually balanced plate</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="services-group" data-content id="wedding-photoshoot">
+                        <div class="services-item grid">
+                            <img src="https://i.postimg.cc/5yzW6q90/service-2.png" alt="" class="services-img">
+
+                            <div class="services-data">
+                                <h3 class="services-title">Fragments of a Forever</h3>
+
+                                <p class="services-details">This evocative collage weaves together intimate glimpses from a wedding celebration, capturing love in its many forms. The top frame, in timeless black and white, freezes a jubilant moment as the newlyweds are showered with confetti. Below, nature embraces the couple: one image features the bride in serene solitude amid lush greenery, while another shows the groom standing confidently in quiet reflection. The final shot highlights delicate hands cradling a bouquet, symbolizing hope and new beginnings. Together, these vignettes form a poetic tribute to one of life's most beautiful milestones</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="services-group" data-content id="product-art">
+                        <div class="services-item grid">
+                            <img src="https://i.postimg.cc/zGt2YH5P/service-3.png" alt="" class="services-img">
+
+                            <div class="services-data">
+                                <h3 class="services-title">Modern Rituals: Aesthetic Essentials</h3>
+
+                                <p class="services-details">This sleek product collage blends style and function with a minimalist touch. On the top left, the COCOOIL body oil stands beside a sculptural white vase and succulent, radiating spa-like serenity. The top right panel floats two DFNS lifestyle sprays—one capped in blue, the other in gold—set against a crisp white background with lush green accents, hinting at freshness and urban edge. At the bottom, the BALMUDA electric kettle anchors the composition with its clean curves and understated design, merging high-tech with timeless simplicity</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="services-group" data-content id="drone-videography">
+                        <div class="services-item grid">
+                            <img src="https://i.postimg.cc/CLJmbnZL/service-4.png" alt="" class="services-img">
+
+                            <div class="services-data">
+                                <h3 class="services-title">Escapes in Focus</h3>
+
+                                <p class="services-details">This collage celebrates the spirit of adventure through three vivid snapshots of exploration and self-expression. At the top, an aerial view of a winding road carves through lush greenery, inviting thoughts of journeys yet to be taken. The middle image is playful and serene—a person floats on a dragon-shaped inflatable in crystal-clear water, evoking summertime bliss and carefree joy. The bottom photo brings things up-close and personal, as someone aims their camera straight at the viewer, suggesting a passion for storytelling and capturing fleeting moments</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="work section" id="work">
+            <span class="section-subtitle">My Portfolio</span>
+            <h2 class="section-title">Recent Works</h2>
+
+            <div class="work-container container">
+                <div class="work-content">
+                    <img src="https://i.postimg.cc/wx57fhQH/photography-img1.jpg" alt="">
+                    <div class="work-overlay"></div>
+                    <i class="bx bx-camera work-overlay-icon"></i>
+                </div>
+
+                <div class="work-content">
+                    <img src="https://i.postimg.cc/TP8xvsTs/photography-img2.jpg" alt="">
+                    <div class="work-overlay"></div>
+                    <i class="bx bx-camera work-overlay-icon"></i>
+                </div>
+
+                <div class="work-content">
+                    <img src="https://i.postimg.cc/QCMGqGqF/photography-img3.jpg" alt="">
+                    <div class="work-overlay"></div>
+                    <i class="bx bx-camera work-overlay-icon"></i>
+                </div>
+
+                <div class="work-content">
+                    <img src="https://i.postimg.cc/MKvJMwT4/photography-img4.jpg" alt="">
+                    <div class="work-overlay"></div>
+                    <i class="bx bx-camera work-overlay-icon"></i>
+                </div>
+
+                <div class="work-content">
+                    <img src="https://i.postimg.cc/MKN21LfG/photography-img5.jpg" alt="">
+                    <div class="work-overlay"></div>
+                    <i class="bx bx-camera work-overlay-icon"></i>
+                </div>
+
+                <div class="work-content">
+                    <img src="https://i.postimg.cc/BZ7dGzgC/photography-img6.jpg" alt="">
+                    <div class="work-overlay"></div>
+                    <i class="bx bx-camera work-overlay-icon"></i>
+                </div>
+
+                <div class="work-content">
+                    <img src="https://i.postimg.cc/tCLwsV8Z/photography-img7.jpg" alt="">
+                    <div class="work-overlay"></div>
+                    <i class="bx bx-camera work-overlay-icon"></i>
+                </div>
+
+                <div class="work-content">
+                    <img src="https://i.postimg.cc/QCv4KRYG/photography-img8.jpg" alt="">
+                    <div class="work-overlay"></div>
+                    <i class="bx bx-camera work-overlay-icon"></i>
+                </div>
+
+                <div class="work-content">
+                    <img src="https://i.postimg.cc/25T07q9x/photography-img9.jpg" alt="">
+                    <div class="work-overlay"></div>
+                    <i class="bx bx-camera work-overlay-icon"></i>
+                </div>
+
+                <div class="work-content">
+                    <img src="https://i.postimg.cc/bdXgw1dq/photography-img10.jpg" alt="">
+                    <div class="work-overlay"></div>
+                    <i class="bx bx-camera work-overlay-icon"></i>
+                </div>
+
+                <div class="work-content">
+                    <img src="https://i.postimg.cc/G3B19r9f/photography-img11.jpg" alt="">
+                    <div class="work-overlay"></div>
+                    <i class="bx bx-camera work-overlay-icon"></i>
+                </div>
+
+                <div class="work-content">
+                    <img src="https://i.postimg.cc/GmR0Myz0/photography-img12.jpg" alt="">
+                    <div class="work-overlay"></div>
+                    <i class="bx bx-camera work-overlay-icon"></i>
+                </div>
+            </div>
+        </section>
+
+        <section class="project section">
+            <div class="project-bg">
+                <div class="project-container container grid">
+                    <h2 class="project-title">Want to work together?</h2>
+                    <p class="project-description">I'm available for freelancer work</p>
+                    <button class="button">Hire me!</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="experience section" id="experience">
+            <span class="section-subtitle">My Journey</span>
+            <h2 class="section-title">My Experience</h2>
+
+            <div class="qualification-container container grid">
+                <div class="experience">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="circle-dot"></div>
+                            <span class="timeline-date">
+                                <i class="bx bx-calendar"></i>2022 - Present
+                            </span>
+                            <h3 class="timeline-title">Project Consultant</h3>
+                            <p class="timeline-text">As a project consultant, I offer tailored services to help clients plan, execute, and deliver successful projects. With a focus on clear communication, strategic planning, and efficient problem-solving, I guide teams through every stage of the project lifecycle. My goal is to ensure projects are completed on time, within budget, and to the highest standards, providing expert support and actionable insights every step of the way</p>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="circle-dot"></div>
+                            <span class="timeline-date">
+                                <i class="bx bx-calendar"></i>2018 - 2022
+                            </span>
+                            <h3 class="timeline-title">UI/UX Designer</h3>
+                            <p class="timeline-text">As a UI/UX designer, I create intuitive and visually engaging digital experiences tailored to user needs. My services include user research, wireframing, prototyping, and interface design, ensuring every project is both functional and aesthetically pleasing. I focus on usability and accessibility, helping brands connect with their audiences through seamless and impactful design solutions</p>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="circle-dot"></div>
+                            <span class="timeline-date">
+                                <i class="bx bx-calendar"></i>2015 - 2018
+                            </span>
+                            <h3 class="timeline-title">Creative Head</h3>
+                            <p class="timeline-text">As a Creative Head, I lead the development of innovative concepts and oversee the creative direction of projects from start to finish. My services include managing creative teams, shaping brand identities, and ensuring that every visual and strategic element aligns with the client's vision. I am dedicated to delivering original solutions that inspire, engage, and elevate brands in a competitive market</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="experience">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="circle-dot"></div>
+                            <span class="timeline-date">
+                                <i class="bx bx-calendar"></i>2012 - 2015
+                            </span>
+                            <h3 class="timeline-title">Technical Lead</h3>
+                            <p class="timeline-text">As a Technical Lead, I provide expert guidance in designing, developing, and delivering robust technology solutions. My services include leading development teams, setting technical direction, and ensuring best practices throughout the project lifecycle. I focus on fostering collaboration, solving complex challenges, and driving innovation to achieve project goals efficiently and effectively</p>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="circle-dot"></div>
+                            <span class="timeline-date">
+                                <i class="bx bx-calendar"></i>2010 - 2012
+                            </span>
+                            <h3 class="timeline-title">Illustrator</h3>
+                            <p class="timeline-text">As an Illustrator, I bring ideas to life through compelling visuals and creative storytelling. My services include creating custom illustrations for books, branding, editorial content, and digital media. I work closely with clients to understand their vision and deliver artwork that enhances their message, ensuring each project is unique, engaging, and visually impactful</p>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="circle-dot"></div>
+                            <span class="timeline-date">
+                                <i class="bx bx-calendar"></i>2010 - 2015
+                            </span>
+                            <h3 class="timeline-title">Graphical Designer</h3>
+                            <p class="timeline-text">As a Graphical Designer, I craft visually compelling designs that communicate ideas and elevate brands. My services include creating logos, marketing materials, digital graphics, and visual identities tailored to each client's needs. I focus on blending creativity with strategy to deliver designs that are both impactful and memorable, helping clients stand out in a competitive market</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact section" id="contact">
+            <span class="section-subtitle">Get in Touch</span>
+            <h2 class="section-title">Contact me!</h2>
+
+            <div class="contact-container container grid">
+                <div class="contact-content">
+                    <form action="" class="contact-form">
+                        <div class="contact-form-group">
+                            <div class="contact-form-div">
+                                <label for="" class="contact-form-tag">Name</label>
+                                <input type="text" class="contact-form-input" placeholder="Insert your name">
+                            </div>
+
+                            <div class="contact-form-div">
+                                <label for="" class="contact-form-tag">Mail</label>
+                                <input type="email" class="contact-form-input" placeholder="Insert your email">
+                            </div>
+                        </div>
+
+                        <div class="contact-form-div">
+                            <label for="" class="contact-form-tag">Subject</label>
+                            <input type="text" class="contact-form-input" placeholder="Insert your subject">
+                        </div>
+
+                        <div class="contact-form-div contact-form-area">
+                            <label for="" class="contact-form-tag">Message</label>
+                            <textarea name="" id="" cols="30" rows="10" class="contact-form-input" placeholder="Write your message"></textarea>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <div>
+                            <i class="bx bxs-map contact-icon"></i>
+                            <h3 class="contact-card-title">My Location</h3>
+                        </div>
+
+                        <span class="contact-card-data">2150 Riverside Avenue, Jacksonville 32207, Florida, United States</span>
+                    </div>
+
+                    <div class="contact-card">
+                        <div>
+                            <i class="bx bxs-mobile contact-icon"></i>
+                            <h3 class="contact-card-title">Give a Call</h3>
+                        </div>
+
+                        <span class="contact-card-data">(904) 555-2356</span>    
+                    </div>
+
+                    <div class="contact-card">
+                        <div>
+                            <i class="bx bxs-map contact-icon"></i>
+                            <h3 class="contact-card-title">Email me</h3>
+                        </div>
+
+                        <span class="contact-card-data">helloworld@example.com</span>        
+                    </div>
+
+                    <div class="home-social-links">
+                        <a href="https://www.dribble.com/" target="_blank" class="home-social-link">
+                            <i class="bx bxl-dribbble"></i>
+                            <span>Follow me</span>
+                        </a>
+
+                        <a href="https://www.skype.com/" target="_blank" class="home-social-link">
+                            <i class="bx bxl-skype"></i>
+                            <span>Call me</span>
+                        </a>
+
+                        <a href="https://www.google.com/" target="_blank" class="home-social-link">
+                            <i class="bx bxl-google"></i>
+                            <span>Share on Google</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="lightbox">
+        <div class="lightbox-content">
+            <div class="lightbox-close">&times;</div>
+            <img src="https://i.postimg.cc/RFv8NVhB/photography-img1.jpg" alt="" onclick="nextItem()" class="lightbox-img">
+            <div class="lightbox-caption">
+                <div class="caption-counter">1 of 12</div>
+            </div>
+        </div>
+
+        <div class="lightbox-controls">
+            <div class="prev-item" onclick="prevItem()"><i class="bx bxs-left-arrow"></i></div>
+            <div class="next-item" onclick="nextItem()"><i class="bx bxs-right-arrow"></i></div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-container container">
+            <h1 class="footer-title">Alycia</h1>
+
+            <ul class="footer-list">
+                <li><a href="#" class="footer-link">About</a></li>
+                <li><a href="#" class="footer-link">Projects</a></li>
+                <li><a href="#" class="footer-link">Testimonials</a></li>
+            </ul>
+
+            <div class="footer-social">
+                <a href="https://www.facebook.com" class="footer-social-link"><i class="bx bxl-facebook"></i></a>
+                <a href="https://www.instagram.com" class="footer-social-link"><i class="bx bxl-instagram-alt"></i></a>
+                <a href="https://www.google.com" class="footer-social-link"><i class="bx bxl-google"></i></a>
+            </div>
+
+            <span class="footer-copy">&#169; <a href="https://codepen.io/leonam-silva-de-souza" target="_blank">ULTRACODE</a>. All rights reserved</span>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="main.js"></script>
+</body>
+<script>
+  /* Home Swiper */
+
+var homeSwiper = new Swiper(".home-swiper", {
+    spaceBetween: 16,
+    centeredSlides: true,
+    slidesPerView: "auto",
+    loop: 'true',
+});
+
+/* Services Tab */
+
+const tabs = document.querySelectorAll('[data-target]');
+const tabContent = document.querySelectorAll('[data-content]');
+
+tabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+        const target = document.querySelector(tab.dataset.target);
+
+        tabContent.forEach(tabContents => {
+            tabContents.classList.remove('services-active');
+        })
+
+        target.classList.add('services-active');
+
+        tabs.forEach(tab => {
+            tab.classList.remove('services-active');
+        })
+
+        tab.classList.add('services-active');
+    })
+})
+
+/* Scroll Header */
+
+function scrollHeader() {
+    const header = document.getElementById('header');
+
+    if(this.scrollY >= 50) {
+        header.classList.add('scroll-header');
+    }else {
+        header.classList.remove('scroll-header');
+    }
+}
+
+window.addEventListener('scroll', scrollHeader);
+
+/* Mobile Menu */
+
+const navMenu = document.getElementById('nav-menu');
+const navToggle = document.getElementById('nav-toggle');
+const navClose = document.getElementById('nav-close');
+
+if(navToggle) {
+    navToggle.addEventListener('click', () => {
+        navMenu.classList.add('show-menu');
+    })
+}
+
+if(navClose) {
+    navClose.addEventListener('click', () => {
+        navMenu.classList.remove('show-menu');
+    })
+}
+
+/* Removing Menu Mobile by clicking */
+
+const navLink = document.querySelectorAll('.nav-link');
+
+function linkAction() {
+    const navMenu = document.getElementById('nav-menu');
+    navMenu.classList.remove('show-menu');
+}
+
+navLink.forEach(n => n.addEventListener('click', linkAction));
+
+/* Lightbox Gallery */
+
+const portfolioItems = document.querySelectorAll('.work-content');
+const totalPorfolioItem = portfolioItems.length;
+const lightbox = document.querySelector('.lightbox');
+const lightboxImg = document.querySelector('.lightbox-img');
+const lightboxCounter = document.querySelector('.caption-counter');
+const lightboxClose = document.querySelector('.lightbox-close');
+
+for(let i = 0; i < totalPorfolioItem; i++) {
+    portfolioItems[i].addEventListener('click', function() {
+        itemIndex = i;
+        changeItem();
+        toggleLightbox();
+    })
+}
+
+function nextItem() {
+    if(itemIndex === totalPorfolioItem - 1) {
+        itemIndex = 0;
+    }else {
+        itemIndex++;
+    }
+
+    changeItem();
+}
+
+function prevItem() {
+    if(itemIndex === 0) {
+        itemIndex = totalPorfolioItem - 1;
+    }else {
+        itemIndex--;
+    }
+
+    changeItem();
+}
+
+function toggleLightbox() {
+    lightbox.classList.toggle('open');
+}
+
+function changeItem() {
+    imgSrc = portfolioItems[itemIndex].querySelector('.work-content img').getAttribute("src");
+    lightboxImg.src = imgSrc;
+    lightboxCounter.innerHTML = (itemIndex + 1) + " of " + totalPorfolioItem;
+}
+
+lightbox.addEventListener('click', function(event) {
+    if(event.target === lightboxClose || event.target === lightbox) {
+        toggleLightbox();
+    }
+})
+
+/* Changing Active Links while scrolling */
+const sections = document.querySelectorAll('section[id]');
+
+window.addEventListener('scroll', navHighlighter);
+
+function navHighlighter() {
+    let scrollY = window.pageYOffset;
+
+    sections.forEach(current => {
+        const sectionHeight = current.offsetHeight;
+        const sectionTop = current.offsetTop - 10;
+        const sectionId = current.getAttribute('id');
+
+        if(scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+            document.querySelector('.nav-menu a[href*=' + sectionId + ']').classList.add('active-link');
+        }else {
+            document.querySelector('.nav-menu a[href*=' + sectionId + ']').classList.remove('active-link');
+        }
+    })
+}
+</script>
+</html>
