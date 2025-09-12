@@ -148,7 +148,15 @@ fetch('/JSON/Jobs/company_detailes.json')
           libi.setupShareButton(
             `shareBtn-${index}`,
             `${item.job_role} at ${company.company_name} - Apply Now!`,
-            `Hey! Check out this exciting ${item.job_role} position at ${company.company_name} located in ${item.location}. Requires ${item.Experience} experience. Don't miss your chance to apply now!`,
+            `🚨 Opportunity alert! 🚨 Join **${company.company_name}** as a **${item.job_role}**.\n
+📍 Location: ${item.location}\n
+🕒 Job Type: ${item.job_type}\n
+🏢 Work mode: ${item.work_mode}\n
+💼 Experience: ${item.Experience}\n
+💰 CTC package: ${item.CTC}\n
+🎓 Qualifications: ${item.Eligible}\n
+🆔 Use Job ID: ${item.job_id} to apply. Don’t miss out! ✨\n
+👉 Apply here:\n`,
             `/services/Jobs/company%20jobs/primary/primary_job.html?company_id=${Company_id}&job_id=${index}`
           );
         });
