@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Job Listing - Java Developer Fresher at CGI Inc.</title>
+  <meta name="description" content="Apply for Java Developer Fresher role at CGI Inc. Multiple locations in India. Join our dynamic team and build scalable Java applications." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://yourwebsite.com/job/java-developer-fresher-cgi" />
+  <link rel="stylesheet" href="/CSS/loader.css" type="text/css" media="all" />
+
+
+  <!-- Open Graph and Twitter Cards omitted for brevity -->
+
+  <style>
+    /* Reset and base */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f7fa;
+      color: #2c3e50;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 1rem;
+    }
+
+    /* Job card container - clean, white with subtle shadow and rounded corners */
+    .job-card {
+      background: white;
+      max-width: 700px;
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.12);
+      padding: 2rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+      opacity: 0;
+      animation: fadeInUp 0.8s forwards ease;
+      display: flex;
+      gap: 2rem;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      transition: box-shadow 0.3s ease;
+    }
+    /* Interactive feedback on hover */
+    .job-card:hover,
+    .job-card:focus-within {
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
+    }
+
+    /* Company logo container */
+    .company-logo {
+      flex-shrink: 0;
+      width: 120px;
+      height: 120px;
+      border-radius: 16px;
+      background-color: #ecf0f1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+      margin-bottom: 1rem;
+      user-select: none;
+    }
+    .company-logo img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* Job details container */
+    .job-details {
+      flex: 1 1 400px;
+      display: flex;
+      flex-direction: column;
+      min-width: 280px;
+    }
+
+    /* Visual hierarchy for headings */
+    .job-card h1 {
+      font-weight: 700;
+      font-size: 2rem;
+      margin-bottom: 0.3rem;
+      color: #0a3d62;
+      line-height: 1.2;
+    }
+    .job-company {
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: #2980b9;
+      margin-bottom: 0.5rem;
+    }
+    /* Subtle descriptive text */
+    .job-location,
+    .job-type {
+      font-size: 1rem;
+      color: #7f8c8d;
+      margin-bottom: 1rem;
+      user-select: text;
+    }
+    .job-type {
+      background: #27ae60;
+      color: white;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 0.35rem 1rem;
+      border-radius: 25px;
+      font-size: 0.85rem;
+      display: inline-block;
+      width: fit-content;
+      user-select: none;
+    }
+
+    /* Job summary - slightly larger font weight */
+    .job-summary {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #34495e;
+      user-select: text;
+    }
+
+    /* Description with line breaks and bullet styling */
+    .job-desc {
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #4a4a4a;
+      margin-bottom: 1.8rem;
+      white-space: pre-line;
+      user-select: text;
+    }
+    .job-desc strong {
+      font-weight: 700;
+    }
+    .job-desc ul {
+      padding-left: 1.25rem;
+      margin: 0.25rem 0 1rem;
+    }
+    .job-desc ul li {
+      margin-bottom: 0.3rem;
+      list-style-type: disc;
+    }
+
+    /* Skills list as pills */
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 1.8rem;
+    }
+    .skill {
+      background: #3498db;
+      color: white;
+      border-radius: 20px;
+      padding: 0.35rem 1rem;
+      font-weight: 600;
+      font-size: 0.85rem;
+      user-select: none;
+    }
+
+    /* Job metadata list */
+    dl {
+      margin: 1rem 0 1.8rem 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      gap: 0.25rem 1rem;
+      font-size: 0.95rem;
+      color: #555;
+    }
+    dl dt {
+      font-weight: 700;
+      user-select: text;
+    }
+    dl dd {
+      margin: 0;
+      user-select: text;
+    }
+
+    /* Company info footer */
+    .company-info {
+      font-size: 0.9rem;
+      color: #7f8c8d;
+      border-top: 1px solid #ecf0f1;
+      padding-top: 1rem;
+      line-height: 1.4;
+      user-select: text;
+    }
+
+    /* Button container with gap and wrap */
+    .button-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    /* Buttons with distinct primary and secondary styles */
+    .apply-btn,
+    .share-btn {
+      font-weight: 700;
+      padding: 0.75rem 1.8rem;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      font-size: 1.1rem;
+      user-select: none;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      min-width: 120px;
+      line-height: 1.2;
+    }
+    .apply-btn {
+      background-color: #2980b9;
+      color: white;
+    }
+    .apply-btn:hover,
+    .apply-btn:focus {
+      background-color: #1c6694;
+      box-shadow: 0 8px 20px rgba(41, 128, 185, 0.6);
+      outline: none;
+    }
+    .share-btn {
+      background-color: #27ae60;
+      color: white;
+    }
+    .share-btn:hover,
+    .share-btn:focus {
+      background-color: #1e8449;
+      box-shadow: 0 8px 20px rgba(39, 174, 96, 0.6);
+      outline: none;
+    }
+
+    /* Notification for clipboard */
+    #copyNotification {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #27ae60;
+      color: white;
+      padding: 0.8rem 1.6rem;
+      border-radius: 30px;
+      font-weight: 600;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 1000;
+      user-select: none;
+    }
+
+    /* Animation */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive layout improvements */
+    @media (max-width: 720px) {
+      .job-card {
+        flex-direction: column;
+        padding: 1.5rem 1.8rem;
+      }
+      .company-logo {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 1rem;
+      }
+      .job-card h1 {
+        font-size: 1.5rem;
+      }
+      .job-company {
+        font-size: 1rem;
+      }
+      .button-group {
+        justify-content: center;
+      }
+      .apply-btn,
+      .share-btn {
+        min-width: 45%;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<main itemscope itemtype="https://schema.org/JobPosting" role="main" itemid="https://yourwebsite.com/job/1234" itemref="companyInfo">
+  <article class="job-card" role="region" aria-labelledby="jobTitle" aria-describedby="jobDesc">
+    <div class="company-logo" aria-label="Company logo" itemprop="hiringOrganization" itemscope itemtype="https://schema.org/Organization">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/CGI_Logo_2014.svg/2560px-CGI_Logo_2014.svg.png" alt="CGI Inc. Logo" itemprop="logo" />
+    </div>
+    <div class="job-details">
+      <h1 id="jobTitle" itemprop="title">Java Developer - Fresher</h1>
+      <div class="job-company" itemprop="hiringOrganization" itemscope itemtype="https://schema.org/Organization">
+        <span itemprop="name">CGI Inc.</span>
+      </div>
+
+      <!-- Added job metadata -->
+      <dl>
+        <dt>Job ID:</dt>
+        <dd itemprop="identifier">1234</dd>
+
+        <dt>Experience Required:</dt>
+        <dd itemprop="experienceRequirements">2-3 years</dd>
+
+        <dt>CTC:</dt>
+        <dd>4 LPA</dd>
+
+        <dt>Work Mode:</dt>
+        <dd>Remote</dd>
+
+        <dt>Work Type:</dt>
+        <dd>Full time / Part time / Contract</dd>
+
+        <dt>Eligible Qualification:</dt>
+        <dd>Any Degree</dd>
+
+        <dt>Location:</dt>
+        <dd itemprop="jobLocation">Mumbai</dd>
+
+        <dt>Note:</dt>
+        <dd>Immediate joining only</dd>
+
+        <dt>Duration:</dt>
+        <dd></dd>
+
+        <dt>Mandatory:</dt>
+        <dd></dd>
+      </dl>
+
+      <div class="job-summary" id="jobDesc" tabindex="0" itemprop="description">
+        <strong>We are looking for enthusiastic and motivated fresh graduates to join our development teams. The ideal candidate will have a strong understanding of core Java concepts and a passion for developing scalable applications.</strong>
+        <ul>
+          <li>Develop, test, and maintain Java applications.</li>
+          <li>Collaborate with cross-functional teams to define and design features.</li>
+          <li>Participate in code reviews and maintain best practices.</li>
+          <li>Continuously learn and upgrade technical skills.</li>
+        </ul>
+        <strong>Required Skills:</strong>
+        <ul>
+          <li>Core Java, OOPs Concepts, Data Structures</li>
+          <li>Spring Framework, Hibernate</li>
+          <li>HTML, CSS, JavaScript, SQL</li>
+          <li>Problem Solving, Analytical Thinking, Communication, Teamwork, Eagerness to Learn</li>
+        </ul>
+      </div>
+
+      <div class="skills-list" aria-label="Required skills">
+        <span class="skill">Core Java</span>
+        <span class="skill">Spring</span>
+        <span class="skill">Hibernate</span>
+        <span class="skill">HTML</span>
+        <span class="skill">CSS</span>
+        <span class="skill">JavaScript</span>
+        <span class="skill">SQL</span>
+        <span class="skill">Python</span>
+        <span class="skill">MySQL</span>
+        <span class="skill">Leadership</span>
+      </div>
+
+      <div class="button-group">
+        <a href="#" class="apply-btn" role="button" aria-label="Apply for Java Developer at CGI Inc." itemprop="applicationContact">Apply Now</a>
+        <button class="share-btn" id="shareBtn" aria-label="Share job listing">Share</button>
+      </div>
+
+      <div class="company-info" id="companyInfo" itemprop="hiringOrganization">
+        CGI Inc. is a global leader in IT and business consulting services, founded in 1976 and headquartered in Montreal, Canada. With over 90,000 professionals worldwide, CGI delivers end-to-end services including consulting, managed IT, and business process services.
+      </div>
+    </div>
+  </article>
+</main>
+
+<div id="copyNotification" role="alert" aria-live="assertive" style="opacity:0;">Link copied to clipboard!</div>
+
+<script>
+  const shareBtn = document.getElementById('shareBtn');
+  const notification = document.getElementById('copyNotification');
+
+  shareBtn.addEventListener('click', async () => {
+    const shareData = {
+      title: 'Java Developer - Fresher at CGI Inc.',
+      text: 'Check out this job opening for Java Developer - Fresher at CGI Inc.',
+      url: window.location.href
+    };
+
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+      } catch (err) {
+        // User cancelled or failed
+        console.error('Share failed:', err.message);
+      }
+    } else {
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        notification.style.opacity = '1';
+        setTimeout(() => (notification.style.opacity = '0'), 2000);
+      } catch (err) {
+        alert('Sharing is not supported and copying failed. Please copy the URL manually.');
+      }
+    }
+  });
+</script>
+</body>
+</html>
