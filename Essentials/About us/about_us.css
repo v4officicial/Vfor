@@ -1,0 +1,164 @@
+  /* Global Styles */
+    .about_us_container {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .about_us_container {
+      /*background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: #fff;*/
+        /* Adding gradient background animation */
+      background: linear-gradient(-45deg, #30cfd0, #667eea, #764ba2, #330867);
+      background-size: 400% 400%; /* Allowing the background to move */
+      animation: gradient 15s ease infinite; /* Animating the gradient */
+      color: white; /* Text color white */
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    #about_header {
+      text-align: center;
+      padding: 50px 20px 20px;
+      animation: fadeDown 1.2s ease-in-out;
+    }
+
+    #about_header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+   .about_us_container section {
+      max-width: 1100px;
+      margin: auto;
+      padding: 40px 20px;
+      animation: fadeUp 1s ease-in-out;
+    }
+
+   .about_us_container h2 {
+      margin-bottom: 20px;
+      font-size: 2rem;
+      color: #ffe082;
+      text-transform: uppercase;
+    }
+
+    .about_us_container p {
+      margin-bottom: 20px;
+      font-size: 1.05rem;
+    }
+
+    .about_us_container .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .about_us_container .card {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 12px;
+      transition: transform 0.3s, background 0.3s;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about_us_container .card::before {
+      content: "";
+      position: absolute;
+      top: -100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      transform: skewY(-20deg);
+      transition: 0.5s;
+    }
+
+    .about_us_container .card:hover::before {
+      top: 0;
+    }
+
+    .about_us_container .card:hover {
+      transform: translateY(-10px) scale(1.05);
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    
+
+    /* About + Vision Images with polygon wrap */
+    .about_us_container .about-img {
+      float: left;
+      width: 40%;
+      max-width: 400px;
+      margin: 0 20px 20px 0;
+      shape-outside: polygon(0 0, 100% 0, 85% 100%, 15% 100%); /* angled polygon */
+      clip-path: polygon(0 0, 100% 0, 85% 100%, 15% 100%);
+      object-fit: cover;
+      height: auto;
+    }
+
+    .about_us_container .vision-img {
+      float: right;
+      width: 40%;
+      max-width: 400px;
+      margin: 0 0 20px 20px;
+      shape-outside: polygon(10% 0, 90% 0, 100% 100%, 0% 100%); /* trapezoid shape */
+      clip-path: polygon(10% 0, 90% 0, 100% 100%, 0% 100%);
+      object-fit: cover;
+      height: auto;
+    }
+
+    .about_us_container section::after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeDown {
+      from {
+        opacity: 0;
+        transform: translateY(-40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive Fix */
+    @media (max-width: 768px) {
+      .about_us_container #about_header h1 {
+        font-size: 2rem;
+      }
+      .about_us_container h2 {
+        font-size: 1.5rem;
+      }
+
+      .about_us_container .about-img,
+      .vision-img {
+        float: none;
+        display: block;
+        margin: 0 auto 20px auto;
+        width: 90%;
+        max-width: none;
+        height: auto;
+        shape-outside: none;
+        clip-path: none;
+        border-radius: 8px; /* simpler look on small screens */
+      }
+    }
