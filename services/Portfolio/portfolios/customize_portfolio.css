@@ -1,0 +1,195 @@
+      /* ======== Global Reset ======== */
+#Multi_Profile_Portfolio_Manager {
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  text-align:center; 
+  margin: 10px 0;
+}
+#Multi_Profile_Portfolio_Manager {
+  margin: 0;
+  padding: 20px;
+  background: #f7f9fc;
+  color: #333;
+}
+.customize_h1{
+  text-align: center;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 3em;
+  font-weight: bold;
+  letter-spacing: 2px;
+  background: linear-gradient(90deg, #7f53ac 0%, #647dee 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 2px 2px 8px #b8c6db;
+  margin: 30px 0;
+}
+/* ======== Form Container ======== */
+.form-container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 900px;
+  margin: auto;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+.form-group {
+  margin-bottom: 15px;
+}
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+.form-group input, 
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccd;
+  border-radius: 5px;
+}
+textarea {
+  min-height: 60px;
+  resize: vertical;
+}
+
+/* ======== Buttons ======== */
+button {
+  cursor: pointer;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-top: 5px;
+  background: #4a90e2;
+  color: white;
+  transition: 0.2s;
+}
+button:hover {
+  background: #357abd;
+}
+button.delete-btn { background: #e74c3c; }
+button.delete-btn:hover { background: #c0392b; }
+button.preview-btn { background: #27ae60; }
+button.preview-btn:hover { background: #1e8449; }
+button.edit-btn { background: #f39c12; }
+button.edit-btn:hover { background: #d68910; }
+button.export-btn { background: #3f51b5; }
+label.import-btn { 
+  cursor: pointer;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-top: 5px;
+  transition: 0.2s;
+  background: #6a1b9a; 
+  color:#fff;}
+button.toggle-btn { background: #00897b; }
+
+/* ======== Saved Profiles ======== */
+.saved-profile {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin: 10px;
+  border-radius: 8px;
+  width: 250px;
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.07);
+}
+.saved-profile img.profile {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 10px 0;
+}
+
+/* ======== Lists (skills, edu, etc) ======== */
+#skillsList div,
+#educationList div,
+#projectList div,
+#workList div,
+#socialList div,
+#certList div,
+#testimonyList div {
+  background: #f0f4f8;
+  margin: 6px 0;
+  padding: 8px;
+  border-radius: 6px;
+  position: relative;
+}
+#skillsList div button,
+#educationList div button,
+#projectList div button,
+#workList div button,
+#socialList div button,
+#certList div button,
+#testimonyList div button {
+  margin: 5px 2px;
+  font-size: 12px;
+  padding: 4px 8px;
+}
+
+/* Drag visuals */
+.drag-over {
+  border: 2px dashed #4a90e2;
+}
+.dragging {
+  opacity: 0.5;
+}
+
+/* ======== Preview Modal ======== */
+#previewModal {
+  display: none;
+  position: fixed;
+  left:0;top:0;right:0;bottom:0;
+  background: rgba(0,0,0,0.7);
+  justify-content: center;
+  align-items: flex-start;
+  overflow-y: auto;
+  padding: 40px 20px;
+  z-index: 999;
+}
+.preview-content {
+  background: #fff;
+  border-radius: 12px;
+  max-width: 800px;
+  width: 100%;
+  padding: 20px 30px;
+  position: relative;
+  animation: slideDown 0.3s ease;
+}
+.preview-content h2,h3 { margin-top: 15px; }
+.close-btn {
+  position: absolute;
+  top: 10px; right: 10px;
+  background: #e74c3c;
+  color:#fff;
+  border-radius: 50%;
+  font-size:16px;
+  padding: 5px 10px;
+}
+.close-btn:hover { background:#c0392b; }
+.preview-header {
+  display:flex;
+  gap:15px;
+  align-items:center;
+}
+.preview-header img {
+  width:80px;height:80px;border-radius:50%;object-fit:cover;
+}
+@keyframes slideDown {
+  from {opacity:0;transform:translateY(-20px);}
+  to {opacity:1;transform:translateY(0);}
+}
+
+/* Responsive */
+@media(max-width:768px){
+  .saved-profile { width: 100%; margin:10px 0; }
+  .preview-content { padding:15px; }
+}
+

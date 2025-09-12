@@ -1,0 +1,473 @@
+console.log("connected customize");
+import * as libi from '/libi/lib.js';
+import * as home from '/JS/Home/home_page.js';
+
+
+// Container HTML block
+export var form_container = `
+<h1 class="customize_h1">Customize Your Portfolio </h1>
+
+<div id="Multi_Profile_Portfolio_Manager" >
+  <label><b>Switch Profile:</b></label>
+  <select id="profileSelector"><option value="">-- Select --</option></select>
+  <button id="newProfileBtn">➕ New Profile</button><br>
+  <button class="export-btn" id="exportBtn">⬇ Export</button>
+  <label class="import-btn">⬆ Import<input type="file" id="importFile" style="display:none"></label>
+  <button class="toggle-btn" id="toggleReorderBtn">🔀 Toggle Reorder Mode</button>
+</div>
+
+<div class="form-container">
+  <!-- General -->
+  <div class="form-group"><label>Profile Name (Unique):</label><input type="text" id="profileName"></div>
+  <div class="form-group"><label>First Name:</label><input type="text" id="firstName"></div>
+  <div class="form-group"><label>Last Name:</label><input type="text" id="lastName"></div>
+  <div class="form-group"><label>Intro:</label><textarea id="introduction"></textarea></div>
+  <div class="form-group"><label>About Me:</label><textarea id="aboutMe"></textarea></div>
+  <div class="form-group"><label>Phone:</label><input type="text" id="phone"></div>
+  <div class="form-group"><label>Email:</label><input type="email" id="email"></div>
+  <div class="form-group"><label>Specialization:</label>
+    <select id="specialization"><option value="">--Select--</option>
+      <option>Web Developer</option><option>Mobile App Developer</option>
+      <option>Data Scientist</option><option>UI/UX Designer</option>
+      <option>Software Engineer</option><option>Other</option></select>
+  </div>
+
+  <!-- Skills -->
+  <div class="form-group">
+    <label>Skill:</label>
+    <input type="text" id="skillInput" placeholder="Skill">
+    <label>Level (0-100%):</label>
+    <input type="range" id="levelInput" min="0" max="100" value="0">
+    <button id="addSkillBtn">Add</button>
+    <div id="skillsList"></div>
+  </div>
+
+  <!-- Experience -->
+  <div class="form-group"><label>Experience Level:</label>
+      <select id="experience"><option value="">--Select--</option><option>Fresher</option><option>1-2 years</option><option>3-5 years</option><option>6-10 years</option><option>10+ years</option></select>
+    </div>
+  <div class="form-group"><label>Profile Pic (URL):</label><input type="" id="profilePic"></div>
+  <div class="form-group"><label>background Pic (URL):</label><input type="url" id="backgroundPic"></div>
+
+  <!-- Education -->
+  <div class="form-group">
+    <label>Education:</label>
+    <input type="text" id="eduInstitution" placeholder="Institution"><input type="text" id="eduCourse" placeholder="Course">
+    <input type="text" id="eduSpecialization" placeholder="Specialization"><input type="month" id="eduStart"><input type="month" id="eduEnd"><input type="text" id="eduScore" placeholder="CGPA/Percentage">
+    <button id="addEducationBtn">Add</button>
+    <div id="educationList"></div>
+  </div>
+
+  <!-- Projects -->
+  <div class="form-group">
+    <label>Projects:</label>
+    <input type="text" id="projTitle" placeholder="Title"><textarea id="projDesc" placeholder="Description"></textarea><input type="text" id="projUrl" placeholder="Project URL"><input type="text" id="projImage" placeholder="Image URL">
+    <button id="addProjectBtn">Add</button>
+    <div id="projectList"></div>
+  </div>
+
+  <!-- Work -->
+  <div class="form-group">
+    <label>Work Experience:</label>
+    <input type="text" id="workCompany" placeholder="Company"><input type="text" id="workRole" placeholder="Role"><input type="month" id="workStart"><input type="month" id="workEnd"><textarea id="workDesc" placeholder="Description"></textarea>
+    <button id="addWorkBtn">Add</button>
+    <div id="workList"></div>
+  </div>
+
+  <!-- Social -->
+  <div class="form-group">
+    <label>Social Links:</label>
+    <select id="socialPlatform"><option value="">-- Select Platform --</option>
+      <option value="facebook">Facebook</option><option value="twitter">Twitter</option>
+      <option value="linkedin">LinkedIn</option><option value="github">GitHub</option>
+      <option value="instagram">Instagram</option><option value="youtube">YouTube</option>
+      <option value="whatsapp">WhatsApp</option><option value="telegram">Telegram</option>
+      <option value="other">Other</option></select>
+    <input type="text" id="socialInput" placeholder="Profile URL">
+    <button id="addSocialBtn">Add</button>
+    <div id="socialList"></div>
+  </div>
+
+  <!-- Other -->
+  <div class="form-group"><label>Resume Link:</label><input type="text" id="resumeLink"></div>
+  <div class="form-group"><label>WhatsApp:</label><input type="text" id="whatsapp"></div>
+  <div class="form-group"><label>Address:</label><textarea id="address"></textarea></div>
+  <div class="form-group"><label>About Skills:</label><textarea id="aboutSkills"></textarea></div>
+  <div class="form-group"><label>Contact Note:</label><textarea id="contactNote"></textarea></div>
+
+  <!-- Certifications -->
+  <div class="form-group">
+    <label>Certifications:</label>
+    <input type="text" id="certTitle" placeholder="Certification Title">
+    <input type="month" id="certStart">
+    <input type="month" id="certEnd">
+    <input type="text" id="certIssuer" placeholder="Issued By">
+    <input type="number" id="certRating" placeholder="Rating (1-5)" min="1" max="5">
+    <input type="url" id="certURL" placeholder="Certificate URL">
+    <button id="addCertBtn">Add</button>
+    <div id="certList"></div>
+  </div>
+
+  <!-- Testimonials -->
+  <div class="form-group">
+    <label>Testimonials:</label>
+    <input type="text" id="testimonyName" placeholder="Name">
+    <input type="url" id="image_url" placeholder="Image URL">
+    <input type="text" id="testimonyRole" placeholder="Role / Position">
+    <textarea id="testimonyText" placeholder="Testimonial"></textarea>
+    <input type="number" id="testimonyRating" placeholder="Rating (1-5)" min="1" max="5">
+    <button id="addTestimonyBtn">Add</button>
+    <div id="testimonyList"></div>
+  </div>
+
+  <button id="saveBtn">💾 Save / Update</button>
+</div>
+
+<h2>Saved Profiles</h2><div class="saved-data" id="savedProfiles"></div>
+
+<!-- Preview -->
+<div id="previewModal">
+  <div class="preview-content">
+    <button class="close-btn" id="previewCloseBtn">✖ Close</button>
+    <div id="previewBody"></div>
+  </div>
+</div>
+`;
+
+// Insert the initial container into element with class "main_main"
+libi.get_set_all_class("main_main", form_container);
+
+//custom page operations
+  /* =================== Reorder Toggle =================== */
+let reorderMode = false;
+function toggleReorder(){
+  reorderMode = !reorderMode;
+  alert("Reorder Mode " + (reorderMode ? "ON" : "OFF"));
+  // re-render lists to toggle reorder buttons
+  setSkillList(getSkillList());
+  setEducationList(getEducationList());
+  setProjectList(getProjectList());
+  setWorkList(getWorkList());
+  setSocialList(getSocialList());
+  setCertList(getCertList());
+  setTestList(getTestList());
+}
+
+/* =================== Drag / Drop =================== */
+let dragSrcEl = null;
+function dragStart(e){
+  dragSrcEl = this;
+  e.dataTransfer.effectAllowed = "move";
+  e.dataTransfer.setData("text/plain", null);
+  this.classList.add("dragging");
+}
+function dragOver(e){ e.preventDefault(); this.classList.add("drag-over"); }
+function dragLeave(){ this.classList.remove("drag-over"); }
+function dropItem(e){
+  e.preventDefault(); e.stopPropagation();
+  this.classList.remove("drag-over");
+  dragSrcEl.classList.remove("dragging");
+  if(dragSrcEl !== this){
+    this.parentNode.insertBefore(dragSrcEl, this);
+  }
+}
+function reapplyDragEvents(node){
+  node.addEventListener("dragstart",dragStart);
+  node.addEventListener("dragover",dragOver);
+  node.addEventListener("dragleave",dragLeave);
+  node.addEventListener("drop",dropItem);
+  node.addEventListener("dragend",()=>node.classList.remove("dragging"));
+}
+
+/* ↑↓ Move (mobile fallback) */
+function moveUp(el){ let p=el.previousElementSibling; if(p) el.parentNode.insertBefore(el,p); }
+function moveDown(el){ let n=el.nextElementSibling; if(n) el.parentNode.insertBefore(n,el); }
+
+/* =================== Generic Builder =================== */
+function buildDisplay(div,obj,viewTemplate,editFn,saveFn){
+  div.dataset.json = JSON.stringify(obj);
+  div.draggable = true;
+  reapplyDragEvents(div);
+  div.innerHTML = viewTemplate(obj)+`<br>
+    <button onclick="(${editFn.name})(this)">✏ Edit</button>
+    <button onclick="this.parentElement.remove()">🗑 Delete</button>`+
+    (reorderMode?`<button onclick="moveUp(this.parentElement)">⬆ Up</button>
+                   <button onclick="moveDown(this.parentElement)">⬇ Down</button>`:"");
+  // keep function refs
+  div.dataset.editFn = editFn.name;
+  div.dataset.saveFn = saveFn.name;
+  div.dataset.viewFn = viewTemplate.name;
+}
+
+/* Cancel Edit Restore */
+function cancelEdit(btn,json,displayFn){
+  let d=btn.parentElement;
+  let o=JSON.parse(json.replace(/&quot;/g,'"'));
+  let viewFn = window[d.dataset.viewFn];
+  let editFn = window[d.dataset.editFn];
+  let saveFn = window[d.dataset.saveFn];
+  buildDisplay(d,o,viewFn,editFn,saveFn);
+}
+
+/* =================== CRUD ITEMS =================== */
+// Skills
+function addSkill(){let o={name:skillInput.value,level:levelInput.value};if(!o.name)return;
+ let d=document.createElement("div");d.className="skill-item";skillsList.appendChild(d);
+ buildDisplay(d,o,skillDisplay,skillEdit,saveSkill);skillInput.value="";levelInput.value=0;}
+function skillDisplay(o){return `<i class="fa fa-check"></i> ${o.name} (${o.level}%)`;}
+function skillEdit(btn){let d=btn.parentElement,o=JSON.parse(d.dataset.json);
+ d.innerHTML=`<input value="${o.name}" class="sn"><input type="range" min="0" max="100" value="${o.level}" class="sl">
+ <button onclick="saveSkill(this)">💾</button><button onclick="cancelEdit(this,'${d.dataset.json.replace(/"/g,'&quot;')}',skillDisplay)">❌</button>`;}
+function saveSkill(btn){let d=btn.parentElement,o={name:d.querySelector(".sn").value,level:d.querySelector(".sl").value};
+ buildDisplay(d,o,skillDisplay,skillEdit,saveSkill);}
+function getSkillList(){return [...skillsList.children].map(c=>JSON.parse(c.dataset.json));}
+function setSkillList(arr){skillsList.innerHTML="";arr.forEach(o=>{let d=document.createElement("div");d.className="skill-item";
+ skillsList.appendChild(d);buildDisplay(d,o,skillDisplay,skillEdit,saveSkill);});}
+
+// Education
+function addEducation(){let o={institution:eduInstitution.value,course:eduCourse.value,specialization:eduSpecialization.value,
+ start:eduStart.value,end:eduEnd.value,score:eduScore.value};if(!o.institution||!o.course)return;
+ let d=document.createElement("div");d.className="edu-item";educationList.appendChild(d);
+ buildDisplay(d,o,eduDisplay,eduEdit,saveEducation);
+ eduInstitution.value=eduCourse.value=eduSpecialization.value=eduStart.value=eduEnd.value=eduScore.value="";}
+function eduDisplay(o){return `<b>${o.institution}</b><br>${o.course} - ${o.specialization}<br>${o.start} to ${o.end}<br>Score: ${o.score}`;}
+function eduEdit(btn){let d=btn.parentElement,o=JSON.parse(d.dataset.json);
+ d.innerHTML=`<input value="${o.institution}" class="ei"><input value="${o.course}" class="ec"><input value="${o.specialization}" class="es">
+ <input type=month value="${o.start}" class="est"><input type=month value="${o.end}" class="een"><input value="${o.score}" class="esc">
+ <button onclick="saveEducation(this)">💾</button><button onclick="cancelEdit(this,'${d.dataset.json.replace(/"/g,'&quot;')}',eduDisplay)">❌</button>`;}
+function saveEducation(btn){let d=btn.parentElement,o={institution:d.querySelector(".ei").value,course:d.querySelector(".ec").value,
+ specialization:d.querySelector(".es").value,start:d.querySelector(".est").value,end:d.querySelector(".een").value,score:d.querySelector(".esc").value};
+ buildDisplay(d,o,eduDisplay,eduEdit,saveEducation);}
+function getEducationList(){return [...educationList.children].map(c=>JSON.parse(c.dataset.json));}
+function setEducationList(arr){educationList.innerHTML="";arr.forEach(o=>{let d=document.createElement("div");d.className="edu-item";
+ educationList.appendChild(d);buildDisplay(d,o,eduDisplay,eduEdit,saveEducation);});}
+
+// Projects
+function addProject(){let o={title:projTitle.value,desc:projDesc.value,url:projUrl.value,img:projImage.value};if(!o.title)return;
+ let d=document.createElement("div");d.className="project-item";projectList.appendChild(d);buildDisplay(d,o,projDisplay,projEdit,saveProject);
+ projTitle.value=projDesc.value=projUrl.value=projImage.value="";}
+function projDisplay(o){return `<b>${o.title}</b><br>${o.desc}<br>${o.url?'<a href="'+o.url+'" target=_blank>'+o.url+'</a>':""}<br>${o.img?'<img src="'+o.img+'" style="max-width:100px">':""}`;}
+function projEdit(btn){let d=btn.parentElement,o=JSON.parse(d.dataset.json);
+ d.innerHTML=`<input value="${o.title}" class="pt"><textarea class="pd">${o.desc}</textarea><input value="${o.url}" class="pu"><input value="${o.img}" class="pi">
+ <button onclick="saveProject(this)">💾</button><button onclick="cancelEdit(this,'${d.dataset.json.replace(/"/g,'&quot;')}',projDisplay)">❌</button>`;}
+function saveProject(btn){let d=btn.parentElement,o={title:d.querySelector(".pt").value,desc:d.querySelector(".pd").value,
+ url:d.querySelector(".pu").value,img:d.querySelector(".pi").value};buildDisplay(d,o,projDisplay,projEdit,saveProject);}
+function getProjectList(){return [...projectList.children].map(c=>JSON.parse(c.dataset.json));}
+function setProjectList(arr){projectList.innerHTML="";arr.forEach(o=>{let d=document.createElement("div");d.className="project-item";
+ projectList.appendChild(d);buildDisplay(d,o,projDisplay,projEdit,saveProject);});}
+
+// Work
+function addWork(){let o={company:workCompany.value,role:workRole.value,start:workStart.value,end:workEnd.value,desc:workDesc.value};if(!o.company||!o.role)return;
+ let d=document.createElement("div");d.className="work-item";workList.appendChild(d);buildDisplay(d,o,workDisplay,workEdit,saveWork);
+ workCompany.value=workRole.value=workStart.value=workEnd.value=workDesc.value="";}
+function workDisplay(o){return `<b>${o.company}</b> - ${o.role}<br>${o.start} to ${o.end}<br>${o.desc}`;}
+function workEdit(btn){let d=btn.parentElement,o=JSON.parse(d.dataset.json);
+ d.innerHTML=`<input value="${o.company}" class="wc"><input value="${o.role}" class="wr"><input type=month value="${o.start}" class="ws"><input type=month value="${o.end}" class="we"><textarea class="wd">${o.desc}</textarea>
+ <button onclick="saveWork(this)">💾</button><button onclick="cancelEdit(this,'${d.dataset.json.replace(/"/g,'&quot;')}',workDisplay)">❌</button>`;}
+function saveWork(btn){let d=btn.parentElement,o={company:d.querySelector(".wc").value,role:d.querySelector(".wr").value,start:d.querySelector(".ws").value,end:d.querySelector(".we").value,desc:d.querySelector(".wd").value};
+ buildDisplay(d,o,workDisplay,workEdit,saveWork);}
+function getWorkList(){return [...workList.children].map(c=>JSON.parse(c.dataset.json));}
+function setWorkList(arr){workList.innerHTML="";arr.forEach(o=>{let d=document.createElement("div");d.className="work-item";
+ workList.appendChild(d);buildDisplay(d,o,workDisplay,workEdit,saveWork);});}
+
+// Social
+function addSocial(){let platform=socialPlatform.value,url=socialInput.value.trim();if(!platform||!url)return;
+ let o={platform,url};let d=document.createElement("div");d.className="social-item";socialList.appendChild(d);
+ buildDisplay(d,o,socialDisplay,socialEdit,saveSocial);socialPlatform.value="";socialInput.value="";}
+function socialDisplay(o){let icons={facebook:"fab fa-facebook",twitter:"fab fa-twitter",linkedin:"fab fa-linkedin",github:"fab fa-github",instagram:"fab fa-instagram",youtube:"fab fa-youtube",whatsapp:"fab fa-whatsapp",telegram:"fab fa-telegram",other:"fa fa-link"};
+ let ico=icons[o.platform]||"fa fa-link";return `<i class="${ico}"></i> <b>${o.platform}</b> - <a href="${o.url}" target="_blank">${o.url}</a>`;}
+function socialEdit(btn){let d=btn.parentElement,o=JSON.parse(d.dataset.json);
+ d.innerHTML=`<select class="slPlatform">
+   <option value="facebook"${o.platform=="facebook"?"selected":""}>Facebook</option>
+   <option value="twitter"${o.platform=="twitter"?"selected":""}>Twitter</option>
+   <option value="linkedin"${o.platform=="linkedin"?"selected":""}>LinkedIn</option>
+   <option value="github"${o.platform=="github"?"selected":""}>GitHub</option>
+   <option value="instagram"${o.platform=="instagram"?"selected":""}>Instagram</option>
+   <option value="youtube"${o.platform=="youtube"?"selected":""}>YouTube</option>
+   <option value="whatsapp"${o.platform=="whatsapp"?"selected":""}>WhatsApp</option>
+   <option value="telegram"${o.platform=="telegram"?"selected":""}>Telegram</option>
+   <option value="other"${o.platform=="other"?"selected":""}>Other</option></select>
+   <input value="${o.url}" class="slUrl">
+   <button onclick="saveSocial(this)">💾</button><button onclick="cancelEdit(this,'${d.dataset.json.replace(/"/g,'&quot;')}',socialDisplay)">❌</button>`;}
+function saveSocial(btn){let d=btn.parentElement,o={platform:d.querySelector(".slPlatform").value,url:d.querySelector(".slUrl").value.trim()};
+ buildDisplay(d,o,socialDisplay,socialEdit,saveSocial);}
+function getSocialList(){return [...socialList.children].map(c=>JSON.parse(c.dataset.json));}
+function setSocialList(arr){socialList.innerHTML="";arr.forEach(o=>{let d=document.createElement("div");d.className="social-item";
+ socialList.appendChild(d);buildDisplay(d,o,socialDisplay,socialEdit,saveSocial);});}
+
+// ===== Certifications (Full schema) =====
+function addCert(){let o={title:certTitle.value,issuer:certIssuer.value,start:certStart.value,end:certEnd.value,rating:certRating.value,url:certURL.value};if(!o.title)return;
+ let d=document.createElement("div");d.className="cert-item";certList.appendChild(d);buildDisplay(d,o,certDisplay,certEdit,saveCert);
+ certTitle.value=certIssuer.value=certStart.value=certEnd.value=certRating.value=certURL.value="";}
+function certDisplay(o){return `<b>${o.title}</b> (${o.issuer||""})<br>${o.start||""}–${o.end||""}<br>Rating:${o.rating||"-"}/5 ${o.url?`<a href="${o.url}" target="_blank">View</a>`:""}`;}
+function certEdit(btn){let d=btn.parentElement,o=JSON.parse(d.dataset.json);
+ d.innerHTML=`<input value="${o.title}" class="ct"><input value="${o.issuer}" class="ci"><input type=month value="${o.start}" class="cs"><input type=month value="${o.end}" class="ce"><input type=number min=1 max=5 value="${o.rating}" class="cr"><input value="${o.url}" class="cu">
+ <button onclick="saveCert(this)">💾</button><button onclick="cancelEdit(this,'${d.dataset.json.replace(/"/g,'&quot;')}',certDisplay)">❌</button>`;}
+function saveCert(btn){let d=btn.parentElement,o={title:d.querySelector(".ct").value,issuer:d.querySelector(".ci").value,start:d.querySelector(".cs").value,end:d.querySelector(".ce").value,rating:d.querySelector(".cr").value,url:d.querySelector(".cu").value};
+ buildDisplay(d,o,certDisplay,certEdit,saveCert);}
+function getCertList(){return [...certList.children].map(c=>JSON.parse(c.dataset.json));}
+function setCertList(arr){certList.innerHTML="";arr.forEach(o=>{let d=document.createElement("div");d.className="cert-item";certList.appendChild(d);buildDisplay(d,o,certDisplay,certEdit,saveCert);});}
+
+// ===== Testimonials (Full schema) =====
+function addTestimony(){let o={name:testimonyName.value,role:testimonyRole.value,image:image_url.value,text:testimonyText.value,rating:testimonyRating.value};if(!o.name||!o.text)return;
+ let d=document.createElement("div");d.className="test-item";testimonyList.appendChild(d);buildDisplay(d,o,testDisplay,testEdit,saveTestimony);
+ testimonyName.value=testimonyRole.value=image_url.value=testimonyText.value=testimonyRating.value="";}
+function testDisplay(o){return `<b>${o.name}</b> (${o.role||""}) ${o.rating? "⭐".repeat(o.rating):""}<br>${o.image?`<img src="${o.image}" style="max-width:80px">`:""}<br>"${o.text}"`;}
+function testEdit(btn){let d=btn.parentElement,o=JSON.parse(d.dataset.json);
+ d.innerHTML=`<input value="${o.name}" class="tn"><input value="${o.role}" class="tr"><input value="${o.image}" class="ti"><textarea class="tt">${o.text}</textarea><input type=number min=1 max=5 value="${o.rating}" class="tg">
+ <button onclick="saveTestimony(this)">💾</button><button onclick="cancelEdit(this,'${d.dataset.json.replace(/"/g,'&quot;')}',testDisplay)">❌</button>`;}
+function saveTestimony(btn){let d=btn.parentElement,o={name:d.querySelector(".tn").value,role:d.querySelector(".tr").value,image:d.querySelector(".ti").value,text:d.querySelector(".tt").value,rating:d.querySelector(".tg").value};
+ buildDisplay(d,o,testDisplay,testEdit,saveTestimony);}
+function getTestList(){return [...testimonyList.children].map(c=>JSON.parse(c.dataset.json));}
+function setTestList(arr){testimonyList.innerHTML="";arr.forEach(o=>{let d=document.createElement("div");d.className="test-item";testimonyList.appendChild(d);buildDisplay(d,o,testDisplay,testEdit,saveTestimony);});}
+
+/* =================== Save / Load / Storage =================== */
+function saveData(){
+ let n=profileName.value;if(!n) return alert("Enter profile name");
+ let d={profileName:n,firstName:firstName.value,lastName:lastName.value,introduction:introduction.value,aboutMe:aboutMe.value,
+  phone:phone.value,email:email.value,specialization:specialization.value,skills:getSkillList(),experience:experience.value,
+  profilePic:profilePic.value,backgroundPic:backgroundPic.value,education:getEducationList(),projects:getProjectList(),work:getWorkList(),
+  socialLinks:getSocialList(),resumeLink:resumeLink.value,whatsapp:whatsapp.value,address:address.value,aboutSkills:aboutSkills.value,
+  contactNote:contactNote.value,certifications:getCertList(),testimonials:getTestList()};
+ let ps=getAllProfiles(),i=ps.findIndex(p=>p.profileName===n);if(i>=0) ps[i]=d;else ps.push(d);
+ saveAllProfiles(ps);loadProfilesDropdown();displayProfiles();alert("Saved!");}
+
+function getAllProfiles(){return JSON.parse(localStorage.getItem("portfolioProfiles")||"[]");}
+function saveAllProfiles(d){localStorage.setItem("portfolioProfiles",JSON.stringify(d));}
+
+function editProfile(n){let p=getAllProfiles().find(x=>x.profileName===n);if(!p)return;
+ profileName.value=p.profileName;firstName.value=p.firstName;lastName.value=p.lastName;introduction.value=p.introduction;aboutMe.value=p.aboutMe;
+ phone.value=p.phone;email.value=p.email;specialization.value=p.specialization;experience.value=p.experience;profilePic.value=p.profilePic;backgroundPic.value=p.backgroundPic;
+ setSkillList(p.skills||[]);setEducationList(p.education||[]);setProjectList(p.projects||[]);setWorkList(p.work||[]);setSocialList(p.socialLinks||[]);
+ resumeLink.value=p.resumeLink;whatsapp.value=p.whatsapp;address.value=p.address;aboutSkills.value=p.aboutSkills;contactNote.value=p.contactNote;
+ setCertList(p.certifications||[]);setTestList(p.testimonials||[]);}
+
+function deleteProfile(n){if(!confirm("Delete "+n+"?"))return;saveAllProfiles(getAllProfiles().filter(p=>p.profileName!==n));loadProfilesDropdown();displayProfiles();}
+function newProfile(){document.querySelectorAll("input,textarea,select").forEach(e=>e.value="");
+ skillsList.innerHTML=educationList.innerHTML=projectList.innerHTML=workList.innerHTML=socialList.innerHTML=certList.innerHTML=testimonyList.innerHTML="";}
+function loadProfilesDropdown(){profileSelector.innerHTML='<option value="">-- Select --</option>';
+ getAllProfiles().forEach(p=>{let o=document.createElement("option");o.value=p.profileName;o.textContent=p.profileName;profileSelector.appendChild(o);});}
+function loadSelectedProfile(){if(profileSelector.value) editProfile(profileSelector.value);}
+
+function displayProfiles(){let cs=savedProfiles,ps=getAllProfiles();if(!ps.length){cs.innerHTML="No profiles";return;}
+ cs.innerHTML=ps.map(p=>`<div class="saved-profile"><b>${p.profileName}</b><br>${p.firstName} ${p.lastName}<br>${p.email}<br>${p.profilePic?'<img src="'+p.profilePic+'" class="profile">':""}<br>
+ <button class="edit-btn" onclick="editProfile('${p.profileName}')">✏ Edit</button>
+ <button class="delete-btn" onclick="deleteProfile('${p.profileName}')">🗑 Delete</button>
+ <button class="preview-btn" onclick="previewProfile('${p.profileName}')">👁 Preview</button></div>`).join("");}
+
+/* =================== Preview =================== */
+function previewProfile(n){let p=getAllProfiles().find(x=>x.profileName===n);if(!p)return;
+ let h=`<div class="preview-header">${p.profilePic?'<img src="'+p.profilePic+'">':""}<div><h2>${p.firstName} ${p.lastName}</h2><p><b>${p.specialization||""}</b></p><p>${p.introduction||""}</p></div></div><hr>`;
+ h+=`<h3>About Me</h3>${p.aboutMe||"-"}`;
+ h+=`<h3>Skills</h3>${p.skills?.length?'<ul>'+p.skills.map(s=>`<li>${s.name} - ${s.level}%</li>`).join("")+'</ul>':"-"}`;
+ h+=`<h3>Education</h3>${p.education?.length?'<ul>'+p.education.map(e=>`<li><b>${e.institution}</b> - ${e.course} (${e.specialization})<br>${e.start} to ${e.end}<br>Score: ${e.score}</li>`).join("")+'</ul>':"-"}`;
+ h+=`<h3>Projects</h3>${p.projects?.length?'<ul>'+p.projects.map(pr=>`<li><b>${pr.title}</b><br>${pr.desc}<br>${pr.url?`<a href="${pr.url}" target="_blank">${pr.url}</a>`:""}${pr.img?`<br><img src="${pr.img}" style="max-width:120px">`:""}</li>`).join("")+'</ul>':"-"}`;
+ h+=`<h3>Work</h3>${p.work?.length?'<ul>'+p.work.map(w=>`<li><b>${w.company}</b> - ${w.role}<br>${w.start} to ${w.end}<br>${w.desc}</li>`).join("")+'</ul>':"-"}`;
+ h+=`<h3>Certifications</h3>${p.certifications?.length?'<ul>'+p.certifications.map(c=>`<li><b>${c.title}</b> - ${c.issuer||""} ${c.start} to ${c.end} ${c.rating?`⭐${c.rating}`:""} ${c.url?`<a href="${c.url}" target="_blank">View</a>`:""}</li>`).join("")+'</ul>':"-"}`;
+ h+=`<h3>Testimonials</h3>${p.testimonials?.length?'<ul>'+p.testimonials.map(t=>`<li>${t.image?`<img src="${t.image}" style="width:60px">`:""} <b>${t.name}</b> (${t.role||""}) ${t.rating? "⭐".repeat(t.rating):""}<br>"${t.text}"</li>`).join("")+'</ul>':"-"}`;
+ h+=`<h3>Social</h3>${p.socialLinks?.length?'<ul>'+p.socialLinks.map(s=>`<li>${s.platform}: <a href="${s.url}" target="_blank">${s.url}</a></li>`).join("")+'</ul>':"-"}`;
+ h+=`<hr><h3>Contact</h3>Email:${p.email} | Phone:${p.phone} | WhatsApp:${p.whatsapp}<br>Address:${p.address}<br>Resume:${p.resumeLink?`<a href="${p.resumeLink}" target="_blank">View Resume</a>`:"-"}`;
+ previewBody.innerHTML=h;previewModal.style.display="flex";}
+function closePreview(){previewModal.style.display="none";}
+
+/* =================== Export / Import =================== */
+function exportProfiles(){const a=document.createElement("a");a.href="data:text/json,"+encodeURIComponent(JSON.stringify(getAllProfiles()));a.download="profiles.json";a.click();}
+function importProfiles(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();
+ r.onload=x=>{try{saveAllProfiles(JSON.parse(x.target.result));loadProfilesDropdown();displayProfiles();}catch{alert("Invalid file");}};
+ r.readAsText(f);}
+
+/* Init */
+loadProfilesDropdown();displayProfiles();
+ 
+  document.addEventListener("DOMContentLoaded", () => {
+    // Cache elements
+    const profileSelector = document.getElementById("profileSelector");
+    const newProfileBtn = document.getElementById("newProfileBtn");
+    const exportBtn = document.getElementById("exportBtn");
+    const importInput = document.getElementById("importFile");
+    const toggleReorderBtn = document.getElementById("toggleReorderBtn");
+    const saveBtn = document.getElementById("saveBtn");
+    const savedProfilesDiv = document.getElementById("savedProfiles");
+    const previewModal = document.getElementById("previewModal");
+    const previewBody = document.getElementById("previewBody");
+    const previewCloseBtn = document.getElementById("previewCloseBtn");
+
+    // Add buttons inside form
+    const addSkillBtn = document.getElementById("addSkillBtn");
+    const addEducationBtn = document.getElementById("addEducationBtn");
+    const addProjectBtn = document.getElementById("addProjectBtn");
+    const addWorkBtn = document.getElementById("addWorkBtn");
+    const addSocialBtn = document.getElementById("addSocialBtn");
+    const addCertBtn = document.getElementById("addCertBtn");
+    const addTestimonyBtn = document.getElementById("addTestimonyBtn");
+
+    // Event Listeners
+    profileSelector.addEventListener("change", loadSelectedProfile);
+    newProfileBtn.addEventListener("click", newProfile);
+    exportBtn.addEventListener("click", exportProfiles);
+    importInput.addEventListener("change", importProfiles);
+    toggleReorderBtn.addEventListener("click", toggleReorder);
+    saveBtn.addEventListener("click", saveData);
+    previewCloseBtn.addEventListener("click", closePreview);
+    previewModal.addEventListener("click", closePreview);
+    previewModal.querySelector(".preview-content").addEventListener("click", e => e.stopPropagation());
+
+    addSkillBtn.addEventListener("click", addSkill);
+    addEducationBtn.addEventListener("click", addEducation);
+    addProjectBtn.addEventListener("click", addProject);
+    addWorkBtn.addEventListener("click", addWork);
+    addSocialBtn.addEventListener("click", addSocial);
+    addCertBtn.addEventListener("click", addCert);
+    addTestimonyBtn.addEventListener("click", addTestimony);
+
+    // Delegated event handling for saved profiles container buttons (edit, delete, preview)
+    savedProfilesDiv.addEventListener("click", e => {
+      const target = e.target;
+      if (target.classList.contains("edit-btn")) {
+        const profName = target.closest(".saved-profile").querySelector("b").textContent;
+        editProfile(profName);
+      } else if (target.classList.contains("delete-btn")) {
+        const profName = target.closest(".saved-profile").querySelector("b").textContent;
+        deleteProfile(profName);
+      } else if (target.classList.contains("preview-btn")) {
+        const profName = target.closest(".saved-profile").querySelector("b").textContent;
+        previewProfile(profName);
+      }
+    });
+
+    // Delegated event handling for in-list buttons (edit, save, cancel, reorder)
+    function delegateListEvents(listId, editFn, saveFn, displayFn) {
+      const list = document.getElementById(listId);
+      list.addEventListener("click", e => {
+        if (e.target.tagName !== "BUTTON") return;
+        const btn = e.target;
+        const div = btn.parentElement;
+
+        if (btn.textContent.includes("Edit")) editFn(btn);
+        else if (btn.textContent.includes("💾")) saveFn(btn);
+        else if (btn.textContent.includes("❌")) cancelEdit(btn, div.dataset.json.replace(/"/g, '&quot;'), displayFn);
+        else if (btn.textContent.includes("Up")) moveUp(div);
+        else if (btn.textContent.includes("Down")) moveDown(div);
+      });
+    }
+
+    delegateListEvents("skillsList", skillEdit, saveSkill, skillDisplay);
+    delegateListEvents("educationList", eduEdit, saveEducation, eduDisplay);
+    delegateListEvents("projectList", projEdit, saveProject, projDisplay);
+    delegateListEvents("workList", workEdit, saveWork, workDisplay);
+    delegateListEvents("socialList", socialEdit, saveSocial, socialDisplay);
+    delegateListEvents("certList", certEdit, saveCert, certDisplay);
+    delegateListEvents("testimonyList", testEdit, saveTestimony, testDisplay);
+
+    // Initial population
+    loadProfilesDropdown();
+    displayProfiles();
+  });
+  
+  
+  //stylesheet link
+var css_link=`
+  <link rel="stylesheet" href="/services/Portfolio/portfolios/customize_portfolio.css" type="text/css" media="all" />
+`;
+
+libi.get_set_tag_index_plus("head",0,css_link);
