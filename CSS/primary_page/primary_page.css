@@ -1,0 +1,281 @@
+      /* Reset and base */
+
+    .section2 {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f7fa;
+      color: #2c3e50;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 1rem;
+    }
+    /* Job card container - clean, white with subtle shadow and rounded corners */
+    .job-card {
+      background: white;
+      max-width: 700px;
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.12);
+      padding: 2rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+      opacity: 0;
+      animation: fadeInUp 0.8s forwards ease;
+      display: flex;
+      gap: 2rem;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      transition: box-shadow 0.3s ease;
+    }
+    /* Interactive feedback on hover */
+    .job-card:hover,
+    .job-card:focus-within {
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
+    }
+
+    /* Company logo container */
+    .company-logo {
+      flex-shrink: 0;
+      width: 120px;
+      height: 120px;
+      border-radius: 16px;
+      background-color: #ecf0f1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+      margin-bottom: 1rem;
+      user-select: none;
+    }
+    .company-logo img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* Job details container */
+    .job-details {
+      flex: 1 1 400px;
+      display: flex;
+      flex-direction: column;
+      min-width: 280px;
+    }
+
+    /* Visual hierarchy for headings */
+    .job-card h1 {
+      font-weight: 700;
+      font-size: 2rem;
+      margin-bottom: 0.3rem;
+      color: #0a3d62;
+      line-height: 1.2;
+    }
+    .job-company {
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: #2980b9;
+      margin-bottom: 0.5rem;
+    }
+    /* Subtle descriptive text */
+    .job-location,
+    .job-type {
+      font-size: 1rem;
+      color: #7f8c8d;
+      margin-bottom: 1rem;
+      user-select: text;
+    }
+    .job-type {
+      background: #27ae60;
+      color: white;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 0.35rem 1rem;
+      border-radius: 25px;
+      font-size: 0.85rem;
+      display: inline-block;
+      width: fit-content;
+      user-select: none;
+    }
+
+    /* Job summary - slightly larger font weight */
+    .job-summary {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #34495e;
+      user-select: text;
+    }
+
+    /* Description with line breaks and bullet styling */
+    .job-desc {
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #4a4a4a;
+      margin-bottom: 1.8rem;
+      white-space: pre-line;
+      user-select: text;
+    }
+    .job-desc strong {
+      font-weight: 700;
+    }
+    .job-desc ul {
+      padding-left: 1.25rem;
+      margin: 0.25rem 0 1rem;
+    }
+    .job-desc ul li {
+      margin-bottom: 0.3rem;
+      list-style-type: disc;
+    }
+
+    /* Skills list as pills */
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 1.8rem;
+    }
+    .skill {
+      background: #3498db;
+      color: white;
+      border-radius: 20px;
+      padding: 0.35rem 1rem;
+      font-weight: 600;
+      font-size: 0.85rem;
+      user-select: none;
+    }
+
+    /* Job metadata list */
+    dl {
+      margin: 1rem 0 1.8rem 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      gap: 0.25rem 1rem;
+      font-size: 0.95rem;
+      color: #555;
+    }
+    dl dt {
+      font-weight: 700;
+      user-select: text;
+    }
+    dl dd {
+      margin: 0;
+      user-select: text;
+    }
+
+    /* Company info footer */
+    .company-info {
+      font-size: 0.9rem;
+      color: #7f8c8d;
+      border-top: 1px solid #ecf0f1;
+      padding-top: 1rem;
+      line-height: 1.4;
+      user-select: text;
+    }
+
+    /* Button container with gap and wrap */
+    .button-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    /* Buttons with distinct primary and secondary styles */
+    .apply-btn,
+    .share-btn {
+      font-weight: 700;
+      padding: 0.75rem 1.8rem;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      font-size: 1.1rem;
+      user-select: none;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      min-width: 120px;
+      line-height: 1.2;
+    }
+    .apply-btn {
+      background-color: #2980b9;
+      color: white;
+    }
+    .apply-btn:hover,
+    .apply-btn:focus {
+      background-color: #1c6694;
+      box-shadow: 0 8px 20px rgba(41, 128, 185, 0.6);
+      outline: none;
+    }
+    .share-btn {
+      background-color: #27ae60;
+      color: white;
+    }
+    .share-btn:hover,
+    .share-btn:focus {
+      background-color: #1e8449;
+      box-shadow: 0 8px 20px rgba(39, 174, 96, 0.6);
+      outline: none;
+    }
+
+    /* Notification for clipboard */
+    #copyNotification {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #27ae60;
+      color: white;
+      padding: 0.8rem 1.6rem;
+      border-radius: 30px;
+      font-weight: 600;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 1000;
+      user-select: none;
+    }
+
+    /* Animation */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive layout improvements */
+    @media (max-width: 720px) {
+      .job-card {
+        flex-direction: column;
+        padding: 1.5rem 1.8rem;
+      }
+      .company-logo {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 1rem;
+      }
+      .job-card h1 {
+        font-size: 1.5rem;
+      }
+      .job-company {
+        font-size: 1rem;
+      }
+      .button-group {
+        justify-content: center;
+      }
+      .apply-btn,
+      .share-btn {
+        min-width: 45%;
+        font-size: 1rem;
+      }
+    }
