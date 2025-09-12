@@ -1,0 +1,74 @@
+[
+  {
+    "job_role":"Data science",
+    "job_id":2344,
+    "Experience":"2-3yr",
+    "CTC":"4LPA",
+    "work_mode":"Remote",
+    "Eligible":"Any Degree",
+    "location":"mumbai",
+     "job_summary":"Motivated and detail-oriented professional with experience in fast-paced environments seeking to contribute to Amazon's mission of customer obsession and innovation. Skilled in problem-solving, communication, and teamwork to deliver exceptional results. Adept at adapting to Amazon's leadership principles and dynamic work culture. Committed to driving operational excellence and supporting company growth.",
+    "role_detailes":[
+      "Develop, test, and maintain Java applications.",
+      "Collaborate with cross-functional teams to define and design features.",
+      "Participate in code reviews and maintain best practices.",
+      "Continuously learn and upgrade technical skills."
+      ],
+    "Note":"immediate joining only",
+    "mandatory":"",
+    "skills_expected":[
+      "Core Java, OOPs Concepts, Data Structures",
+      "Spring Framework, Hibernate",
+      "HTML, CSS, JavaScript, SQL",
+      "Problem Solving, Analytical Thinking, Communication", "Teamwork, Eagerness to Learn"
+      ],
+    "skills":["Python","mysql","leadership"],
+    "job_discription_url":"/services/Jobs/company jobs/primary/primary_job.html",
+    "apply_link":"https://www.amazon.jobs/en/jobs/3041241/logistics-specialist-logistics"
+  },
+  {
+    "job_role":"software developer",
+    "job_id":2344,
+    "Experience":"0-1yr",
+    "CTC":"6LPA",
+    "work_mode":"onsite",
+    "Eligible":"Any Degree",
+    "location":"banglore",
+    "job_summary":"",
+    "Note":"immediate joining only",
+    "mandatory":"NA",
+    "skills_expected":[
+      "Core Java, OOPs Concepts, Data Structures",
+      "Spring Framework, Hibernate",
+      "HTML, CSS, JavaScript, SQL",
+      "Problem Solving, Analytical Thinking, Communication, Teamwork, Eagerness to Learn"
+      ],
+    "skills":["ms office","java","power bi"],
+    "job_discription_url":"/services/Jobs/company jobs/primary/primary_job.html",
+    "apply_link":"https://www.amazon.jobs/en/jobs/3057798/graduate-shift-manager-wenden-bei-koln-nordrhein-westfalen"
+  },
+    {
+    "job_role":"",
+    "job_id":1234,
+    "Experience":"2-3yr",
+    "CTC":"4LPA",
+    "work_mode":"Remote",
+    "work_type":"Full time/part time/contract",
+    "Eligible":"Any Degree",
+    "location":"mumbai",
+     "job_summary":"",
+    "Note":"immediate joining only",
+    "Duration":"",
+    "mandatory":"",
+    "skills_expected": [
+  "Core Java, OOPs Concepts, Data Structures",
+  "Spring Framework, Hibernate",
+  "HTML, CSS, JavaScript, SQL",
+  "Problem Solving, Analytical Thinking, Communication, Teamwork, Eagerness to Learn"
+],
+    "skills":["Python","mysql","leadership"],
+    "job_discription_url":"",
+    "apply_link":""
+  }
+  
+]
