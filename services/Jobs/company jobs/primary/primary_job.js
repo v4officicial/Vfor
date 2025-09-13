@@ -168,7 +168,15 @@ fetch('/JSON/Jobs/company_detailes.json')
     libi.a_href('apply_link', `${job.apply_link}`);
     libi.setupShareButton('shareBtn',
   `${job.job_role} at ${company.company_name} - Apply Now!`,
-  `Hey! Check out this exciting ${job.job_role} position at ${company.company_name} located in ${job.location}. Requires ${job.Experience} experience. Don't miss your chance to apply now!`,
+  `🚨 Opportunity alert! 🚨 Join **${company.company_name}** as a **${job.job_role}**.\n
+📍 Location: ${job.location}\n
+🕒 Job Type: ${job.job_type}\n
+🏢 Work mode: ${job.work_mode}\n
+💼 Experience: ${job.Experience}\n
+💰 CTC package: ${job.CTC}\n
+🎓 Qualifications: ${job.Eligible}\n
+🆔 Use Job ID: ${job.job_id} to apply. Don’t miss out! ✨\n
+👉 Apply here:\n`,
   window.location.href
 );
 
