@@ -9,15 +9,6 @@ var g=`
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
 `;*/
 var css_link=`
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-65XNZ964HG"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-65XNZ964HG');
-</script>
 <link rel="stylesheet" href="/CSS/loader.css" type="text/css" media="all" />
 <link rel="stylesheet" href="/CSS/Home/footer/footer.css" type="text/css" media="all" />
 <link rel="stylesheet" href="/CSS/Home/header/headerBG.css" media="all" />
