@@ -1,5 +1,5 @@
 //console.log("jobs.js connected");
-import * as libi from '/libi/lib.js';
+/*import * as libi from '/libi/lib.js';
 import * as home from '/JS/Home/home_page.js';
 
 
@@ -44,8 +44,8 @@ fetch('/JSON/Jobs/company_detailes.json')
   })
   .catch(error => console.error('Error loading JSON:', error));
 
-
-/*// jobs.js
+*/
+// jobs.js
 
 import * as libi from '/libi/lib.js';
 import * as home from '/JS/Home/home_page.js';
@@ -97,4 +97,3 @@ async function loadCompanyCards() {
 
 // Run the function to load cards
 loadCompanyCards();
-*/
