@@ -25,7 +25,7 @@ Clone and set up the project locally:
 
 bash
 # Clone the repo
-git clone https://github.com/yourusername/vfor.git
+git clone https://github.com/v4officicial/Vfor.git
 
 # Navigate into project directory
 cd vfor
