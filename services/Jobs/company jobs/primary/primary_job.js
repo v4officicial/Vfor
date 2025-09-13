@@ -96,7 +96,7 @@ fetch('/JSON/Jobs/company_detailes.json')
           <dd itemprop="experienceRequirements">${job.Experience}</dd>
 
           <dt>CTC:</dt>
-          <dd itemprop="baseSalary">${job.CTC}</dd>
+          <dd itemprop="baseSalary">${job.Expected_CTC}</dd>
 
           <dt>Work Mode:</dt>
           <dd>${job.work_mode}</dd>
@@ -173,7 +173,7 @@ fetch('/JSON/Jobs/company_detailes.json')
 🕒 Job Type: ${job.job_type}\n
 🏢 Work mode: ${job.work_mode}\n
 💼 Experience: ${job.Experience}\n
-💰 CTC package: ${job.CTC}\n
+💰 CTC package: ${job.Expected_CTC}\n
 🎓 Qualifications: ${job.Eligible}\n
 🆔 Use Job ID: ${job.job_id} to apply. Don’t miss out! ✨\n
 👉 Apply here:\n`,
