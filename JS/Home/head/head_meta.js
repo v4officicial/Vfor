@@ -1,4 +1,4 @@
-console.log("head_meta.js connected successful");
+//console.log("head_meta.js connected successful");
 export var head_req=`
 <link rel="icon" type="image/x-icon" href="https://images.app.goo.gl/RPU61MVB9YqLKibh8">
 <script type="module" src="/libi/lib.js"></script>
