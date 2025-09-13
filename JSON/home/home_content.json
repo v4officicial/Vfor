@@ -7,27 +7,27 @@
 {
   "header":"Resume",
   "icon":"fa fa-file-text",
-  "href_link":"#"
+  "href_link":"/pre_launch.html"
 },
 {
   "header": "Portfolio",
   "icon": "fa fa-address-card-o",
-  "href_link": "#"
+  "href_link": "/pre_launch.html"
 },
 {
   "header": "V-card",
   "icon": "fa fa-id-card",
-  "href_link": "#"
+  "href_link": "/pre_launch.html"
 },
 {
   "header": "Career Insights",
   "icon": "fa fa-bullhorn",
-  "href_link": "#"
+  "href_link": "/pre_launch.html"
 },
 {
   "header": "Blogs",
   "icon": "fa fa-newspaper-o",
-  "href_link": "#"
+  "href_link": "/pre_launch.html"
 }
 ]
 
