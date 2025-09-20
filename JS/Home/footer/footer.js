@@ -49,7 +49,7 @@ export var footer=`
           <h2 class="footer-menu-name"> Legal</h2>
           <ul id="menu-legal" class="footer-menu-list">
             <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-170434">
-              <a href="#">Privacy Notice</a>
+              <a href="/Essentials/Privacy policy/privacy_policy.html">Privacy Notice</a>
             </li>
             <li class="menu-item menu-item-type-post_type menu-item-object-page">
               <a href="#">Terms of Use</a>
