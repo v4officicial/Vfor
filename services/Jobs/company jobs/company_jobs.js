@@ -72,9 +72,9 @@ fetch('/JSON/Jobs/company_detailes.json')
       if (shareBtn) {
         shareBtn.addEventListener("click", () => {
           libi.setupShareButton(
-            `shareBtn-${index}`,
-            `${item.job_role} at ${company.company_name} - Apply Now!`,
-            `🚨 Opportunity alert! 🚨 Join **${company.company_name}** as a **${item.job_role}**.\n
+  `shareBtn-${index}`,
+  `${item.job_role} at ${company.company_name} - Apply Now!`,
+  `🚨 Opportunity alert! 🚨 Join **${company.company_name}** as a **${item.job_role}**.\n
 📍 Location: ${item.location}\n
 🕒 Job Type: ${item.job_type}\n
 🏢 Work mode: ${item.work_mode}\n
@@ -82,12 +82,12 @@ fetch('/JSON/Jobs/company_detailes.json')
 💰 CTC package: ${item.Expected_CTC}\n
 🎓 Qualifications: ${item.Eligible}\n
 🆔 Use Job ID: ${item.job_id} to apply. Don’t miss out! ✨\n
-👉 Apply here:\n  /services/Jobs/company%20jobs/primary/primary_job.html?company_id=${Company_id}&job_id=${index}\n\n
+👉 Apply here:\n/services/Jobs/company%20jobs/primary/primary_job.html?company_id=${Company_id}&job_id=${index}\n\n
 Stay updated by joining our communities:\n
-📱 WhatsApp: \n https://chat.whatsapp.com/JOKrLLf9lfGDQAWJsP8Bbc
-📡 Telegram: \n https://t.me/vfor_jobs_for_all\n`,
-`👉 Apply here:\n /services/Jobs/company%20jobs/primary/primary_job.html?company_id=${Company_id}&job_id=${index}`
-          );
+📱 WhatsApp: https://chat.whatsapp.com/JOKrLLf9lfGDQAWJsP8Bbc\n
+📡 Telegram: https://t.me/vfor_jobs_for_all\n`,
+  `👉 Apply here:\n/services/Jobs/company%20jobs/primary/primary_job.html?company_id=${Company_id}&job_id=${index}`
+);
         });
       }
     });
