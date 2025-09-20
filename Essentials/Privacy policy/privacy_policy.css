@@ -1,0 +1,28 @@
+.privacy_policy_container {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 20px;
+      line-height: 1.6;
+      color: #333;
+    }
+   .privacy_policy_container h1, h2, h3 {
+      color: #0056b3;
+    }
+    .privacy_policy_container p {
+      margin-bottom: 1em;
+    }
+   .privacy_policy_container ul {
+      margin-left: 20px;
+    }
+    
+   .privacy_policy_container a {
+      color: #0056b3;
+      text-decoration: none;
+    }
+    .privacy_policy_container a:hover {
+      text-decoration: underline;
+    }
+    .privacy_policy_container .faq-item {
+      margin-bottom: 1.5em;
+    }
