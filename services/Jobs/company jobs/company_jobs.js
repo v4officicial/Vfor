@@ -82,8 +82,11 @@ fetch('/JSON/Jobs/company_detailes.json')
 💰 CTC package: ${item.Expected_CTC}\n
 🎓 Qualifications: ${item.Eligible}\n
 🆔 Use Job ID: ${item.job_id} to apply. Don’t miss out! ✨\n
-👉 Apply here:\n`,
-            `/services/Jobs/company%20jobs/primary/primary_job.html?company_id=${Company_id}&job_id=${index}`
+👉 Apply here:\n  /services/Jobs/company%20jobs/primary/primary_job.html?company_id=${Company_id}&job_id=${index}\n\n
+Stay updated by joining our communities:\n
+📱 WhatsApp: \n https://chat.whatsapp.com/JOKrLLf9lfGDQAWJsP8Bbc
+📡 Telegram: \n https://t.me/vfor_jobs_for_all\n`,
+`👉 Apply here:\n /services/Jobs/company%20jobs/primary/primary_job.html?company_id=${Company_id}&job_id=${index}`
           );
         });
       }

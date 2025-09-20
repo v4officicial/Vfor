@@ -1,1 +1,139 @@
-{}
+[
+  {
+"job_role": "Test & Validation Engineer - Paint/Surface",
+"job_id": "",
+"Experience": "4 - 6 Years",
+"job_type": "R&D",
+"Expected_CTC": "Not Disclosed",
+"work_mode": "Not Specified",
+"Eligible": "B.E/B. Tech in Paint Technology",
+"location": "Not Specified",
+"job_summary": "Responsible for knowledge and hands-on experience in various surface coating technologies used in the automotive industry, paint and powder coating process selection, evaluation, testing, and validation of painted and coated parts.",
+"role_detailes": [
+"Paint selection, application processes, testing & validation of painted panels and parts.",
+"Powder coating process selection, evaluation and optimization for cost and performance.",
+"Selection and evaluation of electro-plating, anodising, and other coatings for electrical applications (PCB, Connectors).",
+"Failure investigation and root-cause analysis in surface treatment related failures and prescribing remedies.",
+"Knowledge and adherence to internal standards and test procedures related to surface treatment.",
+"Travel to supplier sites for trials, audits, and resolving technical issues."
+],
+"Note": "",
+"mandatory": "",
+"skills_expected": [
+"Knowledge of various types of paint, powder coating, electro-plating and hard coating processes.",
+"Experience in paint and powder coating application processes and defect detection.",
+"Understanding of electro-plating like Zn plating, Ni-Cr plating, hard chrome plating.",
+"Knowledge of anodising, Nikasil coating, ceramic coating etc.",
+"Ability to perform failure investigation and root cause analysis.",
+"Awareness of standards and test procedures related to surface treatment.",
+"Good team player with positive attitude and proactiveness."
+],
+"skills": [
+"Surface coating technologies in automotive industry",
+"Paint and powder coating selection and evaluation",
+"Electro-plating and hard coating processes",
+"Failure investigation and root-cause analysis",
+"Knowledge of relevant standards and testing procedures",
+"Team collaboration and proactive problem solving",
+"Supplier coordination and travel for audits and trials"
+],
+"job_discription_url": "/services/Jobs/company jobs/primary/primary_job.html",
+"apply_link": "https://www.bajajauto.com/careers/job/ex-material-science-paint-surface/13678"
+},
+{
+"job_role": "iOS Developer",
+"job_id": "",
+"Experience": "3 - 8 Years",
+"job_type": "R&D",
+"Expected_CTC": "Not Disclosed",
+"work_mode": "Not Specified",
+"Eligible": "ME/MTech in Computer Science/IT/Electronics or BE/B.Tech in Computer Science/IT/Electronics or Diploma in Advanced Computing from C-DAC",
+"location": "Bangalore RO (CTL), Karnataka",
+"job_summary": "Responsible for designing, developing, and maintaining iOS applications within the Intelligent Systems – Tools division, focusing on mobile app development using Swift and Objective-C, ensuring high-quality performance and robust UI/UX design.",
+"role_detailes": [
+"Develop proficient iOS applications using Swift and Objective-C.",
+"Utilize Xcode, Cocoa Touch, and iOS SDK to create customer-facing apps with excellent UI/UX.",
+"Implement RESTful API integration, manage app lifecycle including memory management and performance optimization.",
+"Use Git for version control and manage App Store submissions and updates.",
+"Integrate cloud backend services for real-time data syncing and app functionality.",
+"Optional skills include Bluetooth Low Energy (BLE), Wi-Fi, Maps integration, media SDKs integration, cloud platform experience, embedded systems knowledge, and automotive-related platform exposure.",
+"Travel or collaboration as required to support development and deployment."
+],
+"Note": "",
+"mandatory": "",
+"skills_expected": [
+"Proficiency in Swift and Objective-C.",
+"Experience with Xcode, Cocoa Touch, and iOS SDK.",
+"Strong UI/UX design skills.",
+"Experience with RESTful APIs and data formats like JSON and XML.",
+"App lifecycle and memory management expertise.",
+"Version control with Git.",
+"Knowledge of App Store submission processes.",
+"Experience with cloud backend integrations.",
+"Preferred: Experience with BLE, Wi-Fi, Maps SDK, media SDKs, cloud platforms, embedded systems, automotive platforms."
+],
+"skills": [
+"iOS mobile app development",
+"Swift and Objective-C programming",
+"Xcode, Cocoa Touch, iOS SDK usage",
+"UI/UX design and performance optimization",
+"RESTful API integration",
+"Memory management and app lifecycle",
+"Git version control",
+"Cloud service integration",
+"Bluetooth Low Energy and Wi-Fi communication",
+"Maps and media SDK integration",
+"Embedded systems and automotive platform knowledge"
+],
+"job_discription_url": "/services/Jobs/company jobs/primary/primary_job.html",
+"apply_link": "https://www.bajajauto.com/careers/job/rider-app-ios-developer/13534"
+},
+{
+"job_role": "Android Developer",
+"job_id": "",
+"Experience": "3 - 8 Years",
+"job_type": "R&D",
+"Expected_CTC": "Not Disclosed",
+"work_mode": "Not Specified",
+"Eligible": "ME/MTech in Computer Science/IT/Electronics or BE/B.Tech in Computer Science/IT/Electronics or Diploma in Advanced Computing from C-DAC",
+"location": "Bangalore RO (CTL), Karnataka",
+"job_summary": "Responsible for designing, developing, and maintaining Android applications within the Intelligent Systems – Tools division, focusing on mobile app development using Java and Kotlin, ensuring high-quality performance and adherence to Android’s Material Design principles.",
+"role_detailes": [
+"Develop proficient Android applications using Java and Kotlin.",
+"Utilize Android Studio and the Android SDK to create customer-facing apps with excellent UI/UX following Material Design.",
+"Implement RESTful API integration and manage Android app lifecycle including performance optimization and troubleshooting.",
+"Use Git for version control and manage Play Store submissions and updates.",
+"Integrate cloud backend services for real-time data syncing and app functionality.",
+"Optional skills include Bluetooth Low Energy (BLE), Wi-Fi, Maps integration, media SDKs integration, cloud platform experience, embedded software systems knowledge, and exposure to Android Auto.",
+"Travel or collaboration as required to support development and deployment."
+],
+"Note": "",
+"mandatory": "",
+"skills_expected": [
+"Proficiency in Java and Kotlin.",
+"Experience with Android Studio and Android SDK.",
+"Strong UI/UX design skills with Material Design principles.",
+"Experience with RESTful APIs and data formats like JSON and XML.",
+"Android app lifecycle and performance management expertise.",
+"Version control with Git.",
+"Knowledge of Play Store submission processes.",
+"Experience with cloud backend integrations.",
+"Preferred: Experience with BLE, Wi-Fi, Maps SDK, media SDKs, cloud platforms, embedded systems, automotive platforms."
+],
+"skills": [
+"Android mobile app development",
+"Java and Kotlin programming",
+"Android Studio and Android SDK usage",
+"UI/UX design and Material Design",
+"RESTful API integration",
+"App lifecycle and performance optimization",
+"Git version control",
+"Cloud service integration",
+"Bluetooth Low Energy and Wi-Fi communication",
+"Maps and media SDK integration",
+"Embedded systems and automotive platform knowledge"
+],
+"job_discription_url": "/services/Jobs/company jobs/primary/primary_job.html",
+"apply_link": "https://www.bajajauto.com/careers/job/rider-app-android-developer/13533"
+}
+]
