@@ -52,7 +52,7 @@ export var footer=`
               <a href="/Essentials/Privacy policy/privacy_policy.html">Privacy Notice</a>
             </li>
             <li class="menu-item menu-item-type-post_type menu-item-object-page">
-              <a href="#">Terms of Use</a>
+              <a href="/Essentials/Terms and conditions/terms_&_conditions.html">Terms of Use</a>
             </li>
           </ul>
         </div>
