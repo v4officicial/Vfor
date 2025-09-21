@@ -94,8 +94,8 @@ fetch('/JSON/Jobs/company_detailes.json')
 👉 Apply here:\n ${window.location.origin}/services/Jobs/company%20jobs/primary/primary_job.html?company_id=${Company_id}&job_id=${index}\n\n
 **Stay updated by joining our communities:**\n
 📱 WhatsApp: https://chat.whatsapp.com/JOKrLLf9lfGDQAWJsP8Bbc\n
-📡 Telegram: https://t.me/vfor_jobs_for_all\n`,
-            `👉 Apply here: \n ${window.location.origin}/services/Jobs/company%20jobs/primary/primary_job.html?company_id=${Company_id}&job_id=${index}`
+📡 Telegram: https://t.me/vfor_jobs_for_all\n\n 👉 Apply here: \n`,
+            ` ${window.location.origin}/services/Jobs/company%20jobs/primary/primary_job.html?company_id=${Company_id}&job_id=${index}`
           );
         });
       }
