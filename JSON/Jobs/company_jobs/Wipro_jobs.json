@@ -200,6 +200,61 @@
   ],
   "job_discription_url": "/services/Jobs/company jobs/primary/primary_job.html",
   "apply_link": "https://careers.wipro.com/job/Production-Agent/96958-en_US"
+},
+{
+"job_role": "Test Engineer - L4",
+"job_id": "75808",
+"Experience": "5-8 Years",
+"job_type": "Not specified",
+"Expected_CTC": "₹5.8 lakhs - ₹26.3 lakhs per annum",
+"work_mode": "Not specified",
+"Eligible": "Not specified",
+"location": "Not specified",
+"job_summary": "Prepare test cases and perform testing of product/platform/solution to be deployed at client end ensuring it meets 100% quality assurance parameters.",
+"role_detailes": [
+"Understand test requirements and design test cases for the product.",
+"Author test planning with knowledge of business and testable requirements.",
+"Implement Wipro's testing methods using model based testing for efficient test generation.",
+"Ensure peer review of test cases to reduce rework.",
+"Work with development team to identify and capture test cases and ensure version control.",
+"Define testing criteria, parameters, scope/out-of-scope, and involve in User Acceptance Testing (UAT).",
+"Automate test lifecycle process through VB macros, scheduling, GUI automation, etc.",
+"Design and execute automation framework and reporting.",
+"Develop and automate tests for software validation including setting up test environments and executing cases.",
+"Ensure defect reports follow defined norms with clear descriptions and replication steps.",
+"Detect bugs, prepare defect reports, and track test progress.",
+"Ensure no rejection/slippage of deliverables within Wipro/Customer SLAs and norms.",
+"Create and release test status dashboards to stakeholders after each test cycle.",
+"Provide feedback on usability, serviceability, and quality risks to stakeholders.",
+"Maintain high-quality interaction with customers including emails, fault tracking, calls, and business etiquette.",
+"Ensure timely delivery of Work Status Reports (WSRs), test execution reports and dashboard updates.",
+"Update accurate effort tracking in project tools like eCube and TMS.",
+"Respond timely to customer requests with no complaints internally or externally."
+],
+"Note": "Applications from people with disabilities are explicitly welcome.",
+"mandatory": "Test Automation",
+"skills_expected": [
+"Test automation using VB macros, scheduling, GUI automation",
+"Test case design and planning",
+"Knowledge of model based testing",
+"Defect detection and reporting",
+"Test environment setup and automation framework design",
+"Effective communication with clients",
+"On-time reporting and documentation",
+"Strong troubleshooting and problem-solving skills"
+],
+"skills": [
+"Test automation",
+"Test planning and design",
+"Model based testing",
+"Defect management",
+"Automation frameworks",
+"Customer communication",
+"Reporting and documentation",
+"Troubleshooting"
+],
+ "job_discription_url": "/services/Jobs/company jobs/primary/primary_job.html",
+"apply_link": "https://careers.wipro.com/job/Test-Engineer-L4/75808-en_US"
 }
 
 
