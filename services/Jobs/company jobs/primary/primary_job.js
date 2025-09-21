@@ -150,11 +150,11 @@ fetch('/JSON/Jobs/company_detailes.json')
 💰 CTC package: ${job.Expected_CTC}\n
 🎓 Qualifications: ${job.Eligible}\n
 🆔 Use Job ID: ${job.job_id} to apply. Don’t miss out! ✨\n
-👉 Apply here:\n${window.location.href}\n\n
+👉 Apply here:\n ${window.location.href}\n\n
 **Stay updated by joining our communities:**\n
 📱 WhatsApp: https://chat.whatsapp.com/JOKrLLf9lfGDQAWJsP8Bbc\n
-📡 Telegram: https://t.me/vfor_jobs_for_all\n`,
-  `👉 Apply here:\n${window.location.href}`
+📡 Telegram: https://t.me/vfor_jobs_for_all\n\n`,
+  `👉 Apply here:\n ${window.location.href}`
 );
 
 
