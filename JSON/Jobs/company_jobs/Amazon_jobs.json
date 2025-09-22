@@ -1,74 +1,173 @@
 [
-  {
-    "job_role":"Data science",
-    "job_id":2344,
-    "Experience":"2-3yr",
-    "CTC":"4LPA",
-    "work_mode":"Remote",
-    "Eligible":"Any Degree",
-    "location":"mumbai",
-     "job_summary":"Motivated and detail-oriented professional with experience in fast-paced environments seeking to contribute to Amazon's mission of customer obsession and innovation. Skilled in problem-solving, communication, and teamwork to deliver exceptional results. Adept at adapting to Amazon's leadership principles and dynamic work culture. Committed to driving operational excellence and supporting company growth.",
-    "role_detailes":[
-      "Develop, test, and maintain Java applications.",
-      "Collaborate with cross-functional teams to define and design features.",
-      "Participate in code reviews and maintain best practices.",
-      "Continuously learn and upgrade technical skills."
-      ],
-    "Note":"immediate joining only",
-    "mandatory":"",
-    "skills_expected":[
-      "Core Java, OOPs Concepts, Data Structures",
-      "Spring Framework, Hibernate",
-      "HTML, CSS, JavaScript, SQL",
-      "Problem Solving, Analytical Thinking, Communication", "Teamwork, Eagerness to Learn"
-      ],
-    "skills":["Python","mysql","leadership"],
-    "job_discription_url":"/services/Jobs/company jobs/primary/primary_job.html",
-    "apply_link":"https://www.amazon.jobs/en/jobs/3041241/logistics-specialist-logistics"
-  },
-  {
-    "job_role":"software developer",
-    "job_id":2344,
-    "Experience":"0-1yr",
-    "CTC":"6LPA",
-    "work_mode":"onsite",
-    "Eligible":"Any Degree",
-    "location":"banglore",
-    "job_summary":"",
-    "Note":"immediate joining only",
-    "mandatory":"NA",
-    "skills_expected":[
-      "Core Java, OOPs Concepts, Data Structures",
-      "Spring Framework, Hibernate",
-      "HTML, CSS, JavaScript, SQL",
-      "Problem Solving, Analytical Thinking, Communication, Teamwork, Eagerness to Learn"
-      ],
-    "skills":["ms office","java","power bi"],
-    "job_discription_url":"/services/Jobs/company jobs/primary/primary_job.html",
-    "apply_link":"https://www.amazon.jobs/en/jobs/3057798/graduate-shift-manager-wenden-bei-koln-nordrhein-westfalen"
-  },
-    {
-    "job_role":"",
-    "job_id":1234,
-    "Experience":"2-3yr",
-    "CTC":"4LPA",
-    "work_mode":"Remote",
-    "work_type":"Full time/part time/contract",
-    "Eligible":"Any Degree",
-    "location":"mumbai",
-     "job_summary":"",
-    "Note":"immediate joining only",
-    "Duration":"",
-    "mandatory":"",
-    "skills_expected": [
-  "Core Java, OOPs Concepts, Data Structures",
-  "Spring Framework, Hibernate",
-  "HTML, CSS, JavaScript, SQL",
-  "Problem Solving, Analytical Thinking, Communication, Teamwork, Eagerness to Learn"
-],
-    "skills":["Python","mysql","leadership"],
-    "job_discription_url":"",
-    "apply_link":""
-  }
+{
+  "job_role": "Software Development Engineer II, HST Health Foundation",
+  "job_id": "3088840",
+  "Experience": "3+ years of non-internship professional software development experience and 2+ years in design or architecture of scalable systems",
+  "job_type": "Full time",
+  "Expected_CTC": "35-55 LPA",
+  "work_mode": "Onsite",
+  "Eligible": "Bachelor’s degree in Computer Science or equivalent",
+  "location": "Bengaluru, Karnataka, India",
+  "job_summary": "As a Software Development Engineer II at HST Health Foundation, you will design and build secure, reliable, and scalable engineering solutions for Amazon’s healthcare technology platform. The role demands deep technical expertise, problem-solving at the architecture stage, and high-quality standards to deliver impactful healthcare services.",
+  "role_detailes": [
+    "Design, architect, and develop scalable and reliable software systems to support healthcare technology products.",
+    "Collaborate with cross-functional teams to define solution spaces for well-defined business problems.",
+    "Ensure secure and high-quality code through reviews, standards adherence, and best engineering practices.",
+    "Contribute to ideation, design discussions, and long-term architecture strategies.",
+    "Participate in operational excellence by monitoring, debugging, and improving system reliability.",
+    "Rapidly solve ambiguous problems using modern technologies and engineering practices.",
+    "Drive technical initiatives that contribute to the long-term vision of Amazon Healthcare products."
+  ],
+  "Note": "Amazon never asks for fees or deposits in any form during the recruitment process. Job seekers are advised to safeguard themselves from fraudulent job offers.",
+  "mandatory": "Minimum 3+ years professional software development experience, 2+ years system design or architecture experience, and proficiency in at least one programming language.",
+  "skills_expected": [
+    "Software System Design & Architecture",
+    "Full Software Development Life Cycle",
+    "Scalable & Reliable Service Design",
+    "Source Control Management",
+    "Code Reviews & Coding Standards",
+    "Testing & Deployment Automation",
+    "Problem Solving & Debugging",
+    "Secure Software Engineering"
+  ],
+  "skills": [
+    "Programming (Java, C++, Python, or similar)",
+    "Distributed Systems Design",
+    "Cloud-based Development (AWS preferable)",
+    "Data Structures & Algorithms",
+    "Software Testing & Debugging",
+    "Agile Development",
+    "System Reliability Engineering",
+    "API Design",
+    "Architecture Reviews",
+    "Cross-team Collaboration"
+  ],
+  "job_discription_url": "/services/Jobs/company jobs/primary/primary_job.html",
+  "apply_link": "https://www.amazon.jobs/en/jobs/3088840/software-dev-engineer-ii-hst-health-foundation"
+},
+{
+  "job_role": "Software Dev Engineer I, Amazon University Talent Acquisition",
+  "job_id": "2811224",
+  "Experience": "Entry-level (0-2 years), internship or project experience preferred",
+  "job_type": "Full time",
+  "Expected_CTC": "18-28 LPA",
+  "work_mode": "Onsite",
+  "Eligible": "Bachelor’s degree or above in Computer Science, Computer Engineering, or related field",
+  "location": "Bangalore, Karnataka, India",
+  "job_summary": "As a Software Development Engineer I with Amazon University Talent Acquisition, you will design, code, and build innovative technologies from scratch to solve large-scale distributed computing challenges. This role is aimed at fresh graduates or early-career engineers who want to create impactful products, features, and services with mentorship and hands-on exposure to Amazon’s ecosystem.",
+  "role_detailes": [
+    "Collaborate with senior Amazonians on product ideation, design, and implementation.",
+    "Develop distributed, scalable, and fault-tolerant systems in a large-scale computing environment.",
+    "Run predictions, indexing, and querying at scale using distributed technologies.",
+    "Write clean, high-quality, and maintainable code for well-defined problem statements.",
+    "Participate in agile development and deliver in short, rapid development cycles.",
+    "Learn to handle ambiguous challenges and abstract problem spaces while building software systems."
+  ],
+  "Note": "Applications are reviewed on a rolling basis. Amazon never asks for fees or deposits during recruitment. Safeguard yourself from fraudulent offers.",
+  "mandatory": "Strong fundamentals in computer science (OOP, data structures, algorithms, complexity analysis, problem solving) and proficiency in at least one language (C/C++, Java, Python, or Perl).",
+  "skills_expected": [
+    "Computer Science Fundamentals",
+    "Object-Oriented Design",
+    "Algorithm Design & Analysis",
+    "Data Structures",
+    "Problem Solving",
+    "Complexity Analysis",
+    "Programming (Java, C++, Python, or Perl)"
+  ],
+  "skills": [
+    "Distributed Systems",
+    "Multi-tier Architectures",
+    "Database Fundamentals (Relational Databases)",
+    "Optimization Mathematics (Linear & Nonlinear Programming)",
+    "Agile Development",
+    "Technical Communication",
+    "Abstract/Undefined Problem Solving"
+  ],
+  "job_discription_url": "/services/Jobs/company jobs/primary/primary_job.html",
+  "apply_link": "https://www.amazon.jobs/en/jobs/2811224/software-dev-engineer-i-amazon-university-talent-acquisition"
+},
+{
+  "job_role": "Software Development Engineer III, Prime Video Content Localization and Accessibility",
+  "job_id": "3088279",
+  "experience": "5+ years professional software development experience (non-internship)",
+  "job_type": "Full time",
+  "expected_ctc": "40-55 LPA",
+  "work_mode": "Onsite",
+  "eligible": "Bachelor’s degree in Computer Science or equivalent (preferred, not mandatory if experience is strong)",
+  "location": "Bengaluru, Karnataka, India",
+  "job_summary": "As an SDE III in Prime Video’s Content Localization & Accessibility team, you will lead the design and development of scalable solutions that enable multilingual and accessible content for customers worldwide. This role requires leadership in system architecture, coding, and mentoring, while innovating with GenAI-based automation and human-in-the-loop systems to improve speed, quality, and compliance of video accessibility offerings.",
+  "role_detailes": [
+    "Lead design and architecture of large-scale distributed systems for localization and accessibility features in Prime Video.",
+    "Innovate with GenAI to generate multilingual assets (subtitles, captions, audio descriptions) at scale.",
+    "Build workflow management tooling, automation pipelines, and optimized human-in-the-loop solutions.",
+    "Mentor junior engineers, act as Tech Lead, and review design/code to ensure system reliability and scalability.",
+    "Ensure compliance with regulatory requirements for accessibility (captions, audio descriptions) across global territories.",
+    "Collaborate with product, design, and cross-functional teams to deliver high-impact solutions for international customer experience."
+  ],
+  "note": "Prime Video is expanding inclusivity by building industry-first accessibility solutions like Dialogue Boost. Regulatory compliance and customer obsession drive innovation in this team.",
+  "mandatory": "At least 5 years of hands-on software development, programming expertise, and demonstrated leadership in system design/architecture. Experience mentoring or leading engineering teams is essential.",
+  "skills_expected": [
+    "Software Architecture & Design Patterns",
+    "Reliability and Scaling of Distributed Systems",
+    "Backend Development (Java, Python, C++, or similar)",
+    "Full SDLC experience (coding standards, reviews, version control, testing, operations)",
+    "Mentorship and Technical Leadership"
+  ],
+  "skills": [
+    "GenAI-based Automation",
+    "Multilingual Content Localization",
+    "Accessibility Technologies (captions, audio descriptions)",
+    "Supply-Chain Automation",
+    "Workflow Tooling",
+    "Agile & Cross-Team Collaboration"
+  ],
+  "job_discription_url": "/services/Jobs/company jobs/primary/primary_job.html",
+  "apply_link": "https://www.amazon.jobs/en/jobs/3088279/software-development-engineer-iii-prime-video-content-localization-and-accessibility"
+},
+{
+  "job_role": "Financial Analyst CA Industrial Trainee",
+  "job_id": "3069943",
+  "Experience": "CA articleship with 12 months left; prior exposure to finance, accounting, and data-driven decision-making preferred",
+  "job_type": "Internship / Industrial Training (Full time during articleship balance period)",
+  "Expected_CTC": "3-6 LPA (as per industry standards for CA Industrial Trainees at Amazon in India)",
+  "work_mode": "Onsite",
+  "Eligible": "CA students who have cleared IPCC / Intermediate (preferably in first attempt or rankholder) with 12 months of articleship remaining",
+  "location": "Bengaluru, Karnataka, India",
+  "job_summary": "As part of the Operations Finance team, the trainee will work with business and finance leaders to produce and deliver financial analysis supporting decision making, cost management, and efficiency improvements for Amazon’s fulfillment and delivery operations.",
+  "role_detailes": [
+    "Work with key stakeholders across cross-functional teams in Operations and Finance.",
+    "Support Finance team by producing and delivering detailed financial analysis to aid decision-making.",
+    "Partner with Operations to manage fulfillment centers and delivery stations in a cost-efficient manner.",
+    "Assist in identifying financial risks, corrective actions, and cost optimization opportunities.",
+    "Collaborate with leaders on strategic planning, budgeting, reporting, and variance analysis."
+  ],
+  "Note": "Amazon never asks for fees or deposits in any form during recruitment process. Candidates are advised to report fraudulent job offers.",
+  "mandatory": "Ongoing CA articleship with minimum 12 months of training period left from date of joining",
+  "skills_expected": [
+    "Financial Analysis & Reporting",
+    "Data-driven Decision Support",
+    "Knowledge of Financial Controls & Procedures",
+    "Advanced MS Excel",
+    "Experience with TM1, SQL, or Data Warehouse tools (preferred)"
+  ],
+  "skills": [
+    "Accounting & Finance Fundamentals",
+    "Variance Analysis",
+    "Operations Finance Management",
+    "Risk Identification & Mitigation",
+    "Financial Planning & Budgeting",
+    "Cross-functional Collaboration",
+    "Problem Solving",
+    "Business Communication",
+    "Data Analysis",
+    "Process Optimization"
+  ],
+  "job_discription_url": "/services/Jobs/company jobs/primary/primary_job.html",
+  "apply_link": "https://www.amazon.jobs/en/jobs/3069943/financial-analyst-ca-industrial-trainee"
+}
+
+
+
+
   
 ]
