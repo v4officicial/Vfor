@@ -1,1 +1,483 @@
-{}
+[
+  {
+  "job_role": "Working Student DME Enterprise Sales",
+  "job_id": "R158193",
+  "Experience": "No prior work experience required, currently enrolled in a full-time university degree",
+  "job_type": "Working Student - 12 months placement",
+  "Expected_CTC": "€18,000 - €24,000 annually (based on typical Adobe working student salary ranges in Germany)",
+  "work_mode": "Onsite (Munich, Bavaria, Germany)",
+  "Eligible": "Currently enrolled in a full-time university program with ability to complete a 12-month work placement",
+  "location": "Munich, Bavaria, Germany",
+  "job_summary": "Support Adobe’s Digital Media Enterprise Sales team in Germany, Austria, and Switzerland by engaging with enterprise customers, contributing to internal initiatives, planning and reporting, and learning about complex software sales and cross-functional collaboration in a leading technology company.",
+  "role_detailes": [
+    "Take part in engagements for enterprise customers in the DACH region.",
+    "Contribute to internal initiatives, planning, and reporting tasks.",
+    "Collaborate with Sales, Marketing, Product, and Professional Services teams.",
+    "Help develop offerings tailored to customer needs.",
+    "Gain exposure to selling complex enterprise software solutions.",
+    "Build a professional network within Adobe.",
+    "Learn and develop technical and business leadership skills in a global tech company."
+  ],
+  "Note": "Adobe is an Equal Employment Opportunity employer and does not discriminate based on gender, race, color, ethnicity, nationality, age, disability, religion, sexual orientation, gender identity, veteran status, or other protected characteristics.",
+  "mandatory": "Currently enrolled in a full-time university degree; able to commit to 12 months placement",
+  "skills_expected": [
+    "Analytical and quantitative problem-solving skills",
+    "Data research and hypothesis development",
+    "Interpersonal and communication skills",
+    "Team collaboration",
+    "Intellectual curiosity and quick learning",
+    "Energy, positivity, and personal drive",
+    "Ability to communicate complex ideas effectively"
+  ],
+  "skills": [
+    "Problem Analysis",
+    "Business Research",
+    "Customer Engagement",
+    "Team Collaboration",
+    "Strategic Thinking",
+    "Enterprise Software Exposure",
+    "Cross-functional Communication",
+    "Adaptability",
+    "Networking",
+    "Leadership Development"
+  ],
+  "job_discription_url": "/services/Jobs/company jobs/primary/primary_job.html",
+  "apply_link": "https://careers.adobe.com/us/en/job/R158193/Working-Student-DME-Enterprise-Sales"
+},
+{
+  "job_role": "2026 Intern - Software Engineer",
+  "job_id": "R158531",
+  "Experience": "Previous related experience in software engineering through coursework, projects, or internships",
+  "job_type": "Full time Internship (May - September 2026)",
+  "Expected_CTC": "$38 - $51 per hour (equivalent to approx. $6,600 - $8,900 monthly; $79,000 - $106,000 annualized in the U.S.)",
+  "work_mode": "Hybrid (co-located between home and assigned Adobe office)",
+  "Eligible": "Currently enrolled full-time in a Bachelor's or Master’s in Computer Science, Computer Engineering, Electrical Engineering, or equivalent with expected graduation between December 2026 – June 2027",
+  "location": "San Jose, CA / Austin, TX / San Francisco, CA / Lehi, UT / Seattle, WA / New York, NY, United States",
+  "job_summary": "Adobe is seeking Software Engineer Interns for Summer 2026 to design, develop, and test software systems or applications for enhancements and new products across Creative Cloud, Document Cloud, Experience Cloud, or Adobe’s platform infrastructure. Interns will gain hands-on engineering experience while collaborating on high-performance, reliable, and scalable software solutions.",
+  "role_detailes": [
+    "Develop high-performance, reliable, testable, and maintainable code.",
+    "Participate in software development activities: design, coding, reviews, testing, bug fixing, and documentation.",
+    "Collaborate with engineers in daily stand-ups and team meetings.",
+    "Provide feedback and uplift peers while contributing to a positive team environment.",
+    "Work independently and collaboratively in a fast-paced engineering team.",
+    "Adapt to evolving requirements and learn new technologies quickly.",
+    "Perform additional tasks based on team-specific needs."
+  ],
+  "Note": "Adobe is an Equal Employment Opportunity employer and complies with state-specific fair chance ordinances and legal requirements. Adobe does not discriminate based on gender, race, ethnicity, age, disability, religion, sexual orientation, gender identity, veteran status, or other protected categories.",
+  "mandatory": "Enrollment in relevant technical degree program with graduation between Dec 2026 – June 2027 and ability to commit to full-time internship May–Sep 2026",
+  "skills_expected": [
+    "Analytical and problem-solving skills",
+    "Experience with Java, C++, JavaScript, or Python",
+    "Understanding of the software development lifecycle",
+    "Ability to quickly learn new technologies",
+    "Team collaboration and communication skills",
+    "Technical documentation and code review experience"
+  ],
+  "skills": [
+    "Software Development",
+    "Frontend and Backend Engineering",
+    "Cloud Platforms",
+    "Data Engineering",
+    "Mobile and Web App Development",
+    "Big Data Problem Solving",
+    "Code Review Practices",
+    "Agile/Scrum Collaboration",
+    "Scalable System Design",
+    "Technical Communication"
+  ],
+  "job_discription_url": "/services/Jobs/company jobs/primary/primary_job.html",
+  "apply_link": "https://careers.adobe.com/us/en/job/R158531/2026-Intern-Software-Engineer"
+},
+{
+  "job_role": "2026 AI/ML Intern - Machine Learning Engineer",
+  "job_id": "R158493",
+  "Experience": "Prior academic projects, internships, or research in machine learning, AI, or data science",
+  "job_type": "Full time Internship (May - September 2026)",
+  "Expected_CTC": "$38 - $51 per hour (approx. $6,600 - $8,900 monthly; $79,000 - $106,000 annualized in the U.S.)",
+  "work_mode": "Hybrid (co-located with assigned Adobe office)",
+  "Eligible": "Currently enrolled Bachelor’s or Master’s student in Computer Science, Machine Learning, Data Science, or related field with graduation expected Dec 2026 – June 2027",
+  "location": "Job available in 7 locations (multiple U.S. offices)",
+  "job_summary": "Join Adobe’s AI/ML team as a Machine Learning Engineer Intern to research and build intelligent algorithms that enhance Creative Cloud, Document Cloud, and Experience Cloud. Work with big data, develop innovative ML models, and deploy scalable AI-powered solutions.",
+  "role_detailes": [
+    "Design, implement, and evaluate machine learning algorithms.",
+    "Work with large-scale datasets for training and testing models.",
+    "Collaborate with cross-functional engineering and research teams.",
+    "Develop prototypes to test new ML capabilities in Adobe products.",
+    "Document models, code, and experiments clearly for team knowledge sharing."
+  ],
+  "Note": "Adobe is an Equal Employment Opportunity employer and complies with U.S. fair chance and accessibility laws.",
+  "mandatory": "Enrollment in technical degree with focus on AI/ML and ability to commit to full internship duration",
+  "skills_expected": [
+    "Machine Learning Algorithms",
+    "Python, TensorFlow, or PyTorch",
+    "Statistical Data Analysis",
+    "Big Data Processing",
+    "Research and Experimentation",
+    "Collaboration and Communication"
+  ],
+  "skills": [
+    "AI Model Development",
+    "Neural Network Training",
+    "Cloud ML Deployment",
+    "Data Engineering",
+    "Mathematical Optimization",
+    "Prototyping and Research"
+  ],
+  "job_discription_url": "/services/Jobs/company jobs/primary/primary_job.html",
+  "apply_link": "https://careers.adobe.com/us/en/job/R158493/2026-AI-ML-Intern-Machine-Learning-Engineer"
+},
+{
+  "job_role": "2026 Intern - Research Scientist/Engineer",
+  "job_id": "R160317",
+  "Experience": "Prior coursework, research, or projects in computer science research areas such as graphics, systems, ML, or HCI",
+  "job_type": "Full time Internship (May - September 2026)",
+  "Expected_CTC": "$38 - $51 per hour (approx. $6,600 - $8,900 monthly; $79,000 - $106,000 annualized)",
+  "work_mode": "Hybrid (U.S. office-based internship)",
+  "Eligible": "PhD or Master’s students in Computer Science, Engineering, or related research fields with graduation date beyond 2026",
+  "location": "Job available in 7 locations (multiple Adobe research centers in U.S.)",
+  "job_summary": "Work as part of Adobe Research as a Research Scientist/Engineer Intern, contributing to cutting-edge projects in areas such as graphics, AI/ML, systems, and human-computer interaction. Collaborate with senior researchers to publish findings and influence next-generation Adobe products.",
+  "role_detailes": [
+    "Conduct independent research on assigned topics.",
+    "Collaborate with Adobe researchers to prototype innovative concepts.",
+    "Implement and test algorithms to validate research hypotheses.",
+    "Contribute to publications and patents where possible.",
+    "Present research results to internal teams and stakeholders."
+  ],
+  "Note": "Adobe Research internships offer opportunities to advance science and directly influence Adobe’s products.",
+  "mandatory": "Currently enrolled PhD or MS researcher in relevant area with ability to work full-time internship May–Sep 2026",
+  "skills_expected": [
+    "Research Methodology",
+    "Algorithm Design",
+    "Programming (Python, C++, or Java)",
+    "Scientific Writing",
+    "Mathematical Modeling",
+    "Collaboration with Research Scientists"
+  ],
+  "skills": [
+    "Machine Learning",
+    "Computer Graphics",
+    "Data Science",
+    "Human-Computer Interaction",
+    "Cloud Systems Research",
+    "Peer-reviewed Publications"
+  ],
+  "job_discription_url": "/services/Jobs/company jobs/primary/primary_job.html",
+  "apply_link": "https://careers.adobe.com/us/en/job/R160317/2026-Intern-Research-Scientist-Engineer"
+},
+{
+  "job_role": "2026 Intern - Associate Product Manager",
+  "job_id": "R158879",
+  "Experience": "Previous experience in product management, academic projects, or internships in business/tech fields",
+  "job_type": "Full time Internship (May - September 2026)",
+  "Expected_CTC": "$35 - $45 per hour (approx. $6,000 - $7,800 monthly; $72,000 - $93,000 annualized in U.S.)",
+  "work_mode": "Hybrid (office + remote, based on manager/team location)",
+  "Eligible": "Currently enrolled MBA, Business, Engineering, or related degree program with graduation between Dec 2026 – June 2027",
+  "location": "Job available in 2 locations (U.S.)",
+  "job_summary": "Adobe Associate Product Manager Interns help define product vision and strategy, translate customer needs into features, and collaborate with design and engineering to bring innovative digital experiences to life.",
+  "role_detailes": [
+    "Support product vision, roadmap, and execution for Adobe products.",
+    "Conduct market research and analyze customer requirements.",
+    "Collaborate with cross-functional teams to ship product features.",
+    "Collect feedback for continuous product improvement.",
+    "Develop presentations and reporting for stakeholders."
+  ],
+  "Note": "This internship offers a unique opportunity to work on customer-facing product strategy in a leading design and experience software company.",
+  "mandatory": "Enrollment in business/related program with product management interest",
+  "skills_expected": [
+    "Analytical Thinking",
+    "Market Research",
+    "Strategic Planning",
+    "Cross-functional Collaboration",
+    "Customer-focused Mindset",
+    "Presentation & Communication"
+  ],
+  "skills": [
+    "Product Roadmapping",
+    "Customer Insights",
+    "Agile Product Development",
+    "Stakeholder Management",
+    "Business Analysis",
+    "Innovation Mindset"
+  ],
+  "job_discription_url": "/services/Jobs/company jobs/primary/primary_job.html",
+  "apply_link": "https://careers.adobe.com/us/en/job/R158879/2026-Intern-Associate-Product-Manager"
+},
+{
+  "job_role": "2026 Intern - Associate Technical Account Manager",
+  "job_id": "R158733",
+  "Experience": "Prior customer support, account management, or technical consulting experience (coursework, projects, or internships)",
+  "job_type": "Full time Internship (May - September 2026)",
+  "Expected_CTC": "$32 - $40 per hour (approx. $5,500 - $7,000 monthly; $66,000 - $84,000 annualized in U.S.)",
+  "work_mode": "Hybrid (Adobe office + remote work as scheduled)",
+  "Eligible": "Currently enrolled undergraduate or graduate student in Business, Computer Science, or related programs with graduation in 2026–2027",
+  "location": "Job available in 4 locations (U.S.)",
+  "job_summary": "Work closely with Adobe’s Technical Account Managers to support enterprise customers, deliver technical guidance, and ensure customer success across Adobe platforms. Build skills at the intersection of technology and customer relationship management.",
+  "role_detailes": [
+    "Assist in managing enterprise customer accounts.",
+    "Respond to and resolve technical inquiries.",
+    "Document and track customer issues with solutions.",
+    "Collaborate with cross-functional teams to ensure customer satisfaction.",
+    "Build knowledge of Adobe products and solutions."
+  ],
+  "Note": "Great opportunity for students aspiring to work at the intersection of technology, support, and business.",
+  "mandatory": "Enrollment in relevant academic program with ability to work full-time internship during summer 2026",
+  "skills_expected": [
+    "Customer Account Management",
+    "Problem-solving",
+    "Technical Documentation",
+    "Collaboration",
+    "Presentation Skills",
+    "Adobe Product Knowledge"
+  ],
+  "skills": [
+    "Customer Support",
+    "Enterprise Solutions",
+    "CRM Tools",
+    "Technical Advisory",
+    "Stakeholder Engagement",
+    "Issue Resolution"
+  ],
+  "job_discription_url": "/services/Jobs/company jobs/primary/primary_job.html",
+  "apply_link": "https://careers.adobe.com/us/en/job/R158733/2026-Intern-Associate-Technical-Account-Manager"
+},
+{
+  "job_role": "2026 Intern - Adobe Sales Academy BDR",
+  "job_id": "R158093",
+  "Experience": "Prior coursework or internships in sales, marketing, or customer engagement preferred",
+  "job_type": "Full time Internship (May - September 2026)",
+  "Expected_CTC": "$25 - $35 per hour (approx. $4,300 - $6,000 monthly; $52,000 - $72,000 annualized in U.S.)",
+  "work_mode": "Hybrid (assigned Adobe Sales office + remote work)",
+  "Eligible": "Currently enrolled undergraduate or graduate student in Business, Sales, Marketing, or related with graduation Dec 2026 – June 2027",
+  "location": "Job available in 4 locations (U.S.)",
+  "job_summary": "Join Adobe Sales Academy as a Business Development Representative (BDR) Intern and gain hands-on experience in customer outreach, lead qualification, and enterprise sales strategy in a leading digital experience software company.",
+  "role_detailes": [
+    "Generate and qualify sales leads for Adobe products.",
+    "Collaborate with sales executives to prepare customer outreach.",
+    "Research prospective accounts and industries.",
+    "Develop communication strategies for customer engagement.",
+    "Track and document progress in CRM systems."
+  ],
+  "Note": "Focused on preparing students for careers in enterprise sales and business development with mentorship and hands-on training.",
+  "mandatory": "Enrollment in relevant program with business/sales orientation and full-time summer availability",
+  "skills_expected": [
+    "Sales Prospecting",
+    "Lead Qualification",
+    "CRM Tracking",
+    "Customer Communication",
+    "Market Research",
+    "Collaboration with Sales Teams"
+  ],
+  "skills": [
+    "Sales Development",
+    "Enterprise Customer Outreach",
+    "Customer Relationship Management",
+    "Pipeline Building",
+    "Negotiation & Communication",
+    "Team Collaboration"
+  ],
+  "job_discription_url": "/services/Jobs/company jobs/primary/primary_job.html",
+  "apply_link": "https://careers.adobe.com/us/en/job/R158093/2026-Intern-Adobe-Sales-Academy-BDR"
+},
+{
+  "job_role": "Staff Machine Learning Engineer",
+  "job_id": "R159477",
+  "Experience": "8+ years building ML solutions at scale and 3+ years architecting cloud services for large-scale use, reliability, and performance",
+  "job_type": "Full time",
+  "Expected_CTC": "$162,000 - $301,200 annually (equivalent to approx. ₹134 - ₹249 LPA in Indian currency)",
+  "work_mode": "Onsite (San Jose, CA office with possible hybrid flexibility)",
+  "Eligible": "PhD or MS degree in Computer Science, Statistics, Electrical Engineering, Applied Math, Operations Research, Econometrics, or related fields",
+  "location": "San Jose, California, United States of America",
+  "job_summary": "Adobe’s Experience Intelligence Team is hiring a Staff Machine Learning Engineer to lead the design, development, and deployment of scalable ML and Generative AI solutions for product recommendations, user targeting, workflow optimization, and insight generation. The role includes technical leadership, architecture design, CI/CD ownership, and mentoring other engineers.",
+  "role_detailes": [
+    "Design, build, and maintain scalable ML solutions with large-scale data in production.",
+    "Lead architectural design for optimized ML pipelines and cloud services.",
+    "Collaborate with product management and engineering to develop AI-driven features.",
+    "Define technical direction, review builds, and establish standards for scalability, reliability, and maintainability.",
+    "Own CI/CD and monitoring systems for ML solutions in production.",
+    "Mentor engineers across ML and backend engineering fields to foster technical excellence."
+  ],
+  "Note": "Adobe is an Equal Employment Opportunity employer and adheres to U.S. fair chance ordinances. Compensation includes salary, incentives, and may include long-term equity grants.",
+  "mandatory": "PhD/MS in a quantitative field, 8+ years ML experience, 3+ years cloud architecture experience",
+  "skills_expected": [
+    "Generative AI and Deep Learning",
+    "Production-grade ML System Development",
+    "Big Data Handling and Optimization",
+    "Cloud Infrastructure (AWS, Azure, GCP)",
+    "End-to-End ML Pipeline Architecture",
+    "CI/CD Pipelines and Monitoring",
+    "Technical Leadership and Mentorship"
+  ],
+  "skills": [
+    "Machine Learning Engineering",
+    "Generative AI Applications",
+    "Data Mining",
+    "Large-Scale Cloud Systems",
+    "Cross-team Collaboration",
+    "Scalable System Design",
+    "Leadership in Engineering",
+    "Programming (Python, Java, C)"
+  ],
+  "job_discription_url": "/services/Jobs/company jobs/primary/primary_job.html",
+  "apply_link": "https://careers.adobe.com/us/en/job/R159477/Staff-Machine-Learning-Engineer"
+},
+{
+  "job_role": "Data Scientist/Analyst",
+  "job_id": "R157694",
+  "Experience": "3-5 years in data science, analytics, or related domains",
+  "job_type": "Full time",
+  "Expected_CTC": "18-35 LPA (based on market data for Adobe Data Scientist/Analyst roles in India)",
+  "work_mode": "Onsite (Bangalore, Karnataka, India / Noida, Uttar Pradesh, India)",
+  "Eligible": "Bachelor’s or Master’s degree in Computer Science, Statistics, Data Science, Engineering, Applied Math, or related fields",
+  "location": "Bangalore, Karnataka, India / Noida, Uttar Pradesh, India",
+  "job_summary": "Adobe’s A.com Data Scientist/Analyst role focuses on analytics, insights, SEO, and forecasting for Digital Media and Digital Experience businesses. The position involves leveraging Adobe Experience Cloud, data science techniques, forecasting models, and SEO analytics to optimize customer journeys and growth KPIs across multiple Adobe digital surfaces.",
+  "role_detailes": [
+    "Utilize Adobe Experience Cloud tools (Adobe Analytics, CJA, etc.) along with SQL/Hive to analyze, interpret, and visualize visitor/customer behavior.",
+    "Identify trends, balance structured and unstructured data, and provide insights into market dynamics, SEO performance, and customer engagement.",
+    "Collaborate with Marketing, Finance, Product, and eCommerce teams to map end-to-end customer journeys and support business targets tracking.",
+    "Build and enhance models for forecasting, LTV prediction, SEO optimization, next-best product recommendations, CTR improvement, and keyword clustering.",
+    "Own development of SEO dashboards, reporting systems, and maintain statistical models for SEO insights.",
+    "Conduct hypothesis testing, growth planning, A/B test result analysis, and provide actionable recommendations to stakeholders.",
+    "Interpret customer intent using voice of customer analytics and deliver deeper actionable insights.",
+    "Partner with data engineering teams for dashboarding, report creation, and visual data storytelling for leadership and stakeholders."
+  ],
+  "Note": "Adobe provides equal employment opportunities and does not discriminate based on protected characteristics. Accessibility accommodations are available on request.",
+  "mandatory": "3-5 years of experience in analytics or data science roles with hands-on expertise in Adobe Analytics, SQL/Hive, and predictive modeling",
+  "skills_expected": [
+    "Web and Product Analytics",
+    "SEO Analytics and Forecasting",
+    "SQL/Hive Data Querying",
+    "Adobe Experience Cloud Tools (Adobe Analytics, CJA, Debugger)",
+    "Data Interpretation and Insight Extraction",
+    "Predictive Modeling and Forecasting",
+    "Statistical Analysis",
+    "A/B Testing and Experimentation",
+    "Cross-functional Stakeholder Collaboration",
+    "Visualization and Storytelling of Insights"
+  ],
+  "skills": [
+    "Data Mining and Trend Analysis",
+    "Machine Learning Model Development",
+    "SEO Optimization",
+    "Forecasting Techniques",
+    "Business Performance Metrics Analysis (Traffic, CVR, ARR, LTV, CTR)",
+    "Customer Behavior Analysis",
+    "KPI Tracking and Reporting",
+    "Cross-surface Journey Analytics",
+    "Statistical Hypothesis Testing",
+    "Data Storytelling for Business Strategy"
+  ],
+  "job_discription_url": "/services/Jobs/company jobs/primary/primary_job.html",
+  "apply_link": "https://careers.adobe.com/us/en/job/R157694/Data-Scientist-Analyst"
+},
+{
+  "job_role": "Developer Relations Support Engineer",
+  "job_id": "R160283",
+  "Experience": "Minimum 8+ years in developer support, technical support, or related customer-facing engineering roles",
+  "job_type": "Full time",
+  "Expected_CTC": "25-45 LPA (based on Adobe support/developer relations roles in India with 8+ years experience)",
+  "work_mode": "Onsite (Bangalore, Karnataka, India)",
+  "Eligible": "Bachelor’s degree in Computer Science or related field, or equivalent practical experience",
+  "location": "Bangalore, Karnataka, India",
+  "job_summary": "As a Developer Relations Support Engineer, you will empower developers to unlock the full potential of the Adobe Express developer platform by delivering technical support, troubleshooting integrations, providing solutions, improving support processes, and creating documentation to enhance the developer experience.",
+  "role_detailes": [
+    "Collaborate with external developers and partners to troubleshoot integration issues by replicating problems, reviewing and creating code snippets, and providing actionable solutions.",
+    "Diagnose and resolve complex technical issues including APIs, integrations, and custom configurations within Adobe Express.",
+    "Set clear expectations for issue resolution timelines and provide regular updates.",
+    "Effectively communicate complex technical concepts in a simplified manner for developers.",
+    "Engage in community forums, provide timely solutions, and escalate critical issues per SLAs.",
+    "Identify recurring technical issues, document solutions, and share insights across teams to scale developer support.",
+    "Improve support processes for efficiency and effectiveness.",
+    "Create developer documentation, offer mentorship, and provide guidance for successful tool adoption.",
+    "Monitor support metrics, analyze data to identify trends, and share improvement opportunities.",
+    "Collaborate with global teams across time zones to resolve issues efficiently."
+  ],
+  "Note": "Adobe is an Equal Employment Opportunity employer and does not discriminate based on any legally protected characteristic. Accessibility assistance is available upon request.",
+  "mandatory": "8+ years relevant experience in developer/technical support with expertise in JavaScript, APIs, and developer engagement",
+  "skills_expected": [
+    "API Troubleshooting and Integration Support",
+    "JavaScript Development and Debugging",
+    "Customer/Developer Technical Engagement",
+    "Issue Replication and Problem Analysis",
+    "Documentation Writing and Process Improvement",
+    "Community Engagement and Escalation Management",
+    "Cross-team Collaboration",
+    "Support Metrics Analysis",
+    "Developer Mentorship and Enablement",
+    "Clear Technical Communication"
+  ],
+  "skills": [
+    "Developer Relations",
+    "API Support",
+    "JavaScript Programming",
+    "Problem Solving and Debugging",
+    "Customer Empathy and Service Delivery",
+    "Technical Troubleshooting",
+    "Process Optimization",
+    "Community and Forum Engagement",
+    "Global Collaboration",
+    "Documentation and Knowledge Sharing"
+  ],
+  "job_discription_url": "/services/Jobs/company jobs/primary/primary_job.html",
+  "apply_link": "https://careers.adobe.com/us/en/job/R160283/Developer-Relations-Support-Engineer"
+},
+{
+  "job_role": "Inside Sales Representative 2 - Own Quota",
+  "job_id": "R160204",
+  "Experience": "3+ years in enterprise or mid-market sales, preferably in SaaS solutions with international sales exposure",
+  "job_type": "Full time",
+  "Expected_CTC": "18-32 LPA (based on Adobe Inside Sales/Account Manager salaries in India with 3+ years SaaS experience and NA market exposure)",
+  "work_mode": "Remote (Uttar Pradesh, India)",
+  "Eligible": "Bachelor’s Degree or equivalent, with experience in SaaS/technology sales; proven ability to manage enterprise accounts and international clients",
+  "location": "Remote, Uttar Pradesh, India",
+  "job_summary": "Responsible for managing and growing relationships with large enterprise customers in the ICX book of business, driving revenue growth through upselling and cross-selling SaaS-based Adobe solutions (Acrobat, Acrobat AI, Express, Acrobat Sign), and acting as a trusted advisor to senior executives including the C-Suite.",
+  "role_detailes": [
+    "Develop and manage relationships with enterprise customers at multiple levels including IT, procurement, and executive leadership.",
+    "Drive revenue growth by identifying upsell and cross-sell opportunities across Adobe’s Digital Media solutions.",
+    "Reach out to a large set of accounts, build strong business connects, and nurture long-term partnerships.",
+    "Understand customer business needs, document workflow challenges, and propose tailored solutions.",
+    "Manage sales pipeline, provide weekly updates, and ensure accurate forecasting.",
+    "Research customer contracts, purchase history, and prospecting using LinkedIn, ZoomInfo, and internal tools.",
+    "Devise account-specific connect strategies and outreach plans.",
+    "Conduct video and Teams meetings for account reviews, strategy discussions, and solution mapping.",
+    "Perform outbound prospecting to engage new decision-makers within existing accounts.",
+    "Lead pricing and negotiations aligned with customer needs and Adobe’s growth objectives.",
+    "Coordinate with solution specialists for expanding portfolio adoption including Creative Cloud, Substance, Acrobat, and Adobe Sign.",
+    "Serve as the voice of the customer internally and influence product and strategy decisions.",
+    "Stay updated with SaaS industry trends in document and creative domains to provide insights to clients."
+  ],
+  "Note": "Adobe is an Equal Employment Opportunity employer and does not discriminate based on any protected status. Accessibility support is available during the hiring process.",
+  "mandatory": "Minimum 3 years in enterprise/mid-market SaaS sales with proven track record of managing accounts and delivering ARR growth; exposure to North America markets preferred.",
+  "skills_expected": [
+    "Account Management and Strategic Planning",
+    "Enterprise SaaS Sales Experience",
+    "Upselling and Cross-Selling",
+    "Pipeline and Forecast Management",
+    "Customer Needs Analysis",
+    "Executive Relationship Building (C-Suite Engagement)",
+    "Outbound Prospecting and Lead Qualification",
+    "Negotiation and Value-Based Selling",
+    "Product Demos and Solution Positioning",
+    "Collaboration with Specialists and Cross-functional Teams"
+  ],
+  "skills": [
+    "Sales Strategy Execution",
+    "International Sales Exposure (NA markets)",
+    "Relationship Management",
+    "SaaS Revenue Growth",
+    "Communication and Presentation",
+    "Market Research and Prospecting",
+    "Contract Review and Expansion Opportunity Analysis",
+    "Customer-Centric Solution Selling",
+    "Negotiation Leadership",
+    "Industry Knowledge in Creative and Document Domains"
+  ],
+  "job_discription_url": "/services/Jobs/company jobs/primary/primary_job.html",
+  "apply_link": "https://careers.adobe.com/us/en/job/R160204/Inside-Sales-Representative-2-Own-Quota"
+}
+
+
+
+
+
+
+]
