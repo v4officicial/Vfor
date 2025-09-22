@@ -164,7 +164,57 @@
   ],
   "job_discription_url": "/services/Jobs/company jobs/primary/primary_job.html",
   "apply_link": "https://www.amazon.jobs/en/jobs/3069943/financial-analyst-ca-industrial-trainee"
+},
+{
+  "job_role": "Software Development Engineer, Prime Video Experience Tech",
+  "job_id": "3089780",
+  "Experience": "3+ years of professional software development experience, including 2+ years in design/architecture of scalable systems",
+  "job_type": "Full time",
+  "Expected_CTC": "35-55 LPA",
+  "work_mode": "Onsite",
+  "Eligible": "Bachelor's degree in Computer Science or equivalent, with experience in at least one programming language and full software development life cycle",
+  "location": "Bengaluru, Karnataka, India",
+  "job_summary": "As a Software Development Engineer at Prime Video, you will design, develop, and maintain highly scalable backend systems and APIs that power streaming services for millions of users globally. This includes building low-latency, reliable software for diverse devices, collaborating across teams to define long-term architecture, and ensuring operational excellence through AWS technologies. You will also mentor engineers and leverage emerging technologies, including GenAI developer efficiency tools.",
+  "role_detailes": [
+    "Design, develop, and maintain scalable systems enabling Prime Video streaming services.",
+    "Define software architecture using diverse technologies, languages, and systems.",
+    "Develop and operate APIs handling billions of playback start requests with low latency.",
+    "Collaborate with cross-functional teams to influence technical strategies and roadmaps.",
+    "Communicate effectively with stakeholders to align engineering goals.",
+    "Explore and integrate industry trends and modern technologies.",
+    "Utilize AWS services such as EC2, S3, DynamoDB, Kinesis, and CloudFront.",
+    "Mentor and guide junior engineers for technical growth and team impact."
+  ],
+  "Note": "Amazon never asks for fees or deposits during the recruitment process. Candidates should beware of fraudulent offers.",
+  "mandatory": "Minimum 3 years of professional software development experience and 2 years in system design or architecture",
+  "skills_expected": [
+    "Backend System Design & Development",
+    "API Development & Optimization",
+    "High-scale Distributed Systems",
+    "Cloud Technologies (AWS EC2, S3, DynamoDB, Kinesis, CloudFront)",
+    "System Architecture & Design Patterns",
+    "Low-latency Application Development",
+    "Cross-team Technical Collaboration",
+    "GenAI-based Developer Productivity Tools",
+    "Operational Excellence & Monitoring",
+    "Mentorship & Technical Leadership"
+  ],
+  "skills": [
+    "Java, C++, or Python Development",
+    "Object-oriented Programming",
+    "Scalability and Reliability Engineering",
+    "Full Software Development Lifecycle",
+    "Continuous Integration & Deployment",
+    "Source Control (Git)",
+    "Code Reviews & Testing",
+    "Problem-solving & Analytical Thinking",
+    "Effective Communication",
+    "Agile Development Practices"
+  ],
+  "job_discription_url": "/services/Jobs/company jobs/primary/primary_job.html",
+  "apply_link": "https://www.amazon.jobs/en/jobs/3089780/software-development-engineer-prime-video-experience-tech"
 }
+
 
 
 
