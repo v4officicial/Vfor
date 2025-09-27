@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Natural Remedies Blog</title>
+  <style>
+    /* Base Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #2c3e50;
+      background-color: #f5f9f7;
+      line-height: 1.6;
+    }
+    header {
+      background: linear-gradient(135deg, #6db584, #a2d39c);
+      color: white;
+      padding: 4rem 1rem;
+      text-align: center;
+      overflow: hidden;
+      position: relative;
+    }
+    header h1 {
+      font-size: 3rem;
+      animation: fadeInUp 1.5s ease forwards;
+      opacity: 0;
+    }
+    header p {
+      font-size: 1.25rem;
+      margin-top: 1rem;
+      animation: fadeInUp 2s ease forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    nav {
+      margin-top: 2rem;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 1rem;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: #f0e68c;
+    }
+
+    main {
+      max-width: 960px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+    }
+    .blog-posts {
+      display: grid;
+      grid-gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+    .post-card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 12px 18px rgba(0, 0, 0, 0.06);
+      overflow: hidden;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: all 0.6s ease;
+    }
+    .post-card.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .post-image {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .post-content {
+      padding: 1rem 1.5rem 1.5rem;
+    }
+    .post-title {
+      font-size: 1.3rem;
+      color: #2c3e50;
+      margin-bottom: 0.5rem;
+    }
+    .post-excerpt {
+      font-size: 1rem;
+      color: #666;
+      margin-bottom: 1rem;
+    }
+    .post-meta {
+      font-size: 0.875rem;
+      color: #999;
+    }
+
+    footer {
+      text-align: center;
+      background: #6db584;
+      color: white;
+      padding: 1.5rem 1rem;
+      margin-top: 4rem;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      nav a {
+        margin: 0 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Natural Remedies Blog</h1>
+    <p>Discover the Power of Nature for Health & Wellness</p>
+    <nav>
+      <a href="#posts">Blog Posts</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="posts" class="blog-posts">
+      <article class="post-card">
+        <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=600&q=80" alt="Herbal Tea" class="post-image" />
+        <div class="post-content">
+          <h2 class="post-title">Healing Herbal Teas You Should Try</h2>
+          <p class="post-excerpt">Explore the benefits of herbal teas including chamomile, peppermint, and echinacea for common ailments and relaxation.</p>
+          <p class="post-meta">By Jane Doe | Sep 25, 2025</p>
+        </div>
+      </article>
+      <article class="post-card">
+        <img src="https://images.unsplash.com/photo-1518972559570-1c0606a1a753?auto=format&fit=crop&w=600&q=80" alt="Essential Oils" class="post-image" />
+        <div class="post-content">
+          <h2 class="post-title">Top Essential Oils for Natural Healing</h2>
+          <p class="post-excerpt">Learn how lavender, tea tree, and eucalyptus oils can support mental clarity, skin care, and respiratory health.</p>
+          <p class="post-meta">By John Smith | Sep 20, 2025</p>
+        </div>
+      </article>
+      <article class="post-card">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Herbal Supplements" class="post-image" />
+        <div class="post-content">
+          <h2 class="post-title">Herbal Supplements: What Works and Why</h2>
+          <p class="post-excerpt">A comprehensive guide to natural supplements like turmeric, ginseng, and garlic for boosting immunity.</p>
+          <p class="post-meta">By Emma Lee | Sep 15, 2025</p>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Natural Remedies Blog. All rights reserved.
+  </footer>
+
+  <script>
+    // Animate post cards on scroll into view
+    const posts = document.querySelectorAll('.post-card');
+
+    function revealPosts() {
+      const windowBottom = window.innerHeight + window.scrollY;
+
+      posts.forEach(post => {
+        const postTop = post.offsetTop + post.offsetHeight / 4;
+
+        if (windowBottom > postTop) {
+          post.classList.add('visible');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', revealPosts);
+    window.addEventListener('load', revealPosts);
+  </script>
+
+</body>
+</html>

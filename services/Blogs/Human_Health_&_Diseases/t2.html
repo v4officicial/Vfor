@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Luxury Natural Remedies Blog</title>
+  <style>
+    /* Reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Georgia', serif;
+      color: #2f4f4f;
+      background: #fefcf7;
+      line-height: 1.6;
+    }
+    a {
+      text-decoration: none;
+      color: #4a7c59;
+      transition: color 0.3s ease;
+    }
+    a:hover {
+      color: #a7c957;
+    }
+
+    /* Container */
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      margin: auto;
+      padding: 2rem 0;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, #8ccf7e, #537a4b);
+      color: #fefcf7;
+      padding: 3rem 1rem;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    header h1 {
+      font-size: 3rem;
+      letter-spacing: 2px;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+      animation: fadeInDown 1.5s ease forwards;
+      opacity: 0;
+    }
+    header nav {
+      margin-top: 1rem;
+    }
+    header nav a {
+      font-weight: 600;
+      text-transform: uppercase;
+      margin: 0 1rem;
+      font-size: 1.1rem;
+      opacity: 0.85;
+    }
+    header nav a:hover {
+      opacity: 1;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Hero Section */
+    .hero {
+      background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1400&q=80') no-repeat center/cover;
+      height: 420px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #fefcf7;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
+      margin-bottom: 3rem;
+      padding: 0 1rem;
+    }
+    .hero h2 {
+      font-size: 2.8rem;
+      letter-spacing: 1.5px;
+      font-weight: 600;
+      max-width: 900px;
+      animation: slideInUp 1.8s ease forwards;
+      opacity: 0;
+    }
+    .hero p {
+      margin-top: 1rem;
+      font-size: 1.3rem;
+      max-width: 800px;
+      animation: slideInUp 2s ease forwards;
+      opacity: 0;
+    }
+    .hero button {
+      margin-top: 2rem;
+      background: #a7c957;
+      border: none;
+      padding: 0.8rem 2.2rem;
+      border-radius: 40px;
+      font-weight: 700;
+      color: #fefcf7;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(167,201,87,0.6);
+      transition: background 0.4s ease;
+      animation: fadeIn 3s ease forwards;
+      opacity: 0;
+    }
+    .hero button:hover {
+      background: #82ab3d;
+      box-shadow: 0 6px 20px rgba(130,171,61,0.8);
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    /* Blog grid */
+    .blog-grid {
+      display: grid;
+      gap: 2.2rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+    .blog-card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    .blog-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    }
+    .blog-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+    }
+    .blog-card-content {
+      padding: 1.5rem 1.4rem 2rem;
+    }
+    .blog-card-content h3 {
+      font-size: 1.4rem;
+      margin-bottom: 0.7rem;
+      color: #355e3b;
+    }
+    .blog-card-content p {
+      font-size: 1rem;
+      color: #666;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+    .blog-meta {
+      font-size: 0.85rem;
+      color: #a1a1a1;
+      font-style: italic;
+      letter-spacing: 0.3px;
+    }
+
+    /* Footer */
+    footer {
+      background: #537a4b;
+      color: #fefcf7;
+      text-align: center;
+      padding: 1.8rem 1rem;
+      margin-top: 4rem;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      .hero h2 {
+        font-size: 2rem;
+      }
+      .hero p {
+        font-size: 1rem;
+      }
+      .hero button {
+        font-size: 1rem;
+        padding: 0.7rem 1.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Human Health & Natural Remedies</h1>
+    <nav>
+      <a href="#remedies">Remedies</a>
+      <a href="#tips">Tips</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Rediscover the Healing Power of Nature</h2>
+    <p>Explore traditional and modern natural remedies crafted to nurture your health and wellness.</p>
+    <button onclick="document.getElementById('remedies').scrollIntoView({behavior:'smooth'})">Explore Remedies</button>
+  </section>
+
+  <main class="container" id="remedies">
+    <h2 style="color:#355e3b; margin-bottom:2rem; text-align:center; font-family: 'Georgia', serif;">Featured Natural Remedies</h2>
+    <div class="blog-grid">
+      <article class="blog-card">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Herbal Tea" />
+        <div class="blog-card-content">
+          <h3>Soothing Herbal Teas</h3>
+          <p>Discover the calming benefits of chamomile, peppermint, and ginger teas for better digestion and relaxation.</p>
+          <div class="blog-meta">By Emily Rose | Sep 25, 2025</div>
+        </div>
+      </article>
+      <article class="blog-card">
+        <img src="https://images.unsplash.com/photo-1526045612212-70caf35c14df?auto=format&fit=crop&w=600&q=80" alt="Essential Oils" />
+        <div class="blog-card-content">
+          <h3>Healing Essential Oils</h3>
+          <p>From lavender to tea tree, understand how essential oils can boost mental clarity and heal skin ailments.</p>
+          <div class="blog-meta">By Gabriel Green | Sep 23, 2025</div>
+        </div>
+      </article>
+      <article class="blog-card">
+        <img src="https://images.unsplash.com/photo-1468071174046-657d9d351a40?auto=format&fit=crop&w=600&q=80" alt="Herbal Supplements" />
+        <div class="blog-card-content">
+          <h3>Natural Supplements Guide</h3>
+          <p>A detailed look into turmeric, echinacea, and ginseng supplements for immune support and inflammation relief.</p>
+          <div class="blog-meta">By Sarah Park | Sep 20, 2025</div>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2025 Natural Remedies Luxe. All rights reserved.
+  </footer>
+
+</body>
+</html>

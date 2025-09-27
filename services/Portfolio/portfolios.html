@@ -1,14 +1,108 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Responsive Portfolio Cards</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="/libi/jquery-3.6.0.min.js"></script>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f4f4f4;
+  }
+  .portfolio-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 32px rgba(0,0,0,0.15);
+  }
+  .card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+   .card iframe {
+    width: 100%;
+    height: 360px;
+    object-fit: cover;
+  }
+  .card-content {
+    padding: 20px;
+  }
+  .card-title {
+    font-size: 1.25rem;
+    margin: 0 0 10px 0;
+    color: #333;
+  }
+  .card-description {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.4;
+  }
+</style>
 </head>
-
 <body>
-  
-</body>
 
+<div class="portfolio-container">
+  <div class="card">
+    <img src="https://via.placeholder.com/400x180.png?text=Project+1" alt="Project 1" />
+    <div class="card-content">
+      <h3 class="card-title">Project One</h3>
+      <p class="card-description">A stylish and responsive portfolio card example featuring an image, title, and description.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="https://via.placeholder.com/400x180.png?text=Project+2" alt="Project 2" />
+    <div class="card-content">
+      <h3 class="card-title">Project Two</h3>
+      <p class="card-description">Clean design with subtle hover animation to enhance user interaction on portfolios.</p>
+    </div>
+  </div>
+
+  <div class="card">
+      <!--i display start-->
+  <a name="view">
+  <iframe onload="display()" src="/portfolio8.html" name="preview"  id="dis" class="dis"
+  width="" title="display" >
+  </iframe>
+  </a>
+  <!--i display end-->
+  </div>
+</div>
+
+</body>
+<script>
+
+  //iframe display
+  function display(html_data,css_data,js_data){
+    document.getElementById("dis").contentDocument.open();
+    var html=document.getElementById("html").value;
+    var css=document.getElementById("css").value;
+    var js=document.getElementById("js").value;
+    var final=html+css+js;
+    // document.querySelector('iframe').contentDocument.write(final);
+    document.getElementById("dis").contentDocument.write(final);
+    document.getElementById("dis").contentDocument.close();
+  }
+  // iframe dis end
+</script>
+<div class="scripts">
+  <script type="module" src="/services/Portfolio/portfolios.js"></script>
+</div>
 </html>
