@@ -65,8 +65,7 @@ fetch('/JSON/Jobs/company_detailes.json')
       </section>
        <!--****ad unit start****-->
        
-<div id="container-b2cd190f5b8c86c5bf4db473bd059b8b"></div>
-<script async="async" data-cfasync="false" src="//pl27751964.revenuecpmgate.com/b2cd190f5b8c86c5bf4db473bd059b8b/invoke.js"></script>
+
 <!--**** ad unit end ****-->
       <!-- Section 2 (Job Posting Schema) -->
       <section class="section2 lazy-section" itemscope 
