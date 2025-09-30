@@ -25,7 +25,7 @@ export var menubar=`
               <a href="#!">Resume</a>
             </li>
             <li>
-              <a href="#!">Portfolio</a>
+              <a href="https://www.revenuecpmgate.com/qy8c35nu?key=953a359706d598fd3333bbf22dcae309">Portfolio</a>
             </li>
             <li>
               <a href="#!">V-card</a>

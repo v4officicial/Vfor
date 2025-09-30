@@ -63,7 +63,10 @@ fetch('/JSON/Jobs/company_detailes.json')
           <span>Scroll to explore</span>
         </div>
       </section>
-
+       <!--****ad unit start****-->
+       <script async="async" data-cfasync="false" src="//pl27751964.revenuecpmgate.com/b2cd190f5b8c86c5bf4db473bd059b8b/invoke.js"></script>
+<div id="container-b2cd190f5b8c86c5bf4db473bd059b8b"></div>
+<!--**** ad unit end ****-->
       <!-- Section 2 (Job Posting Schema) -->
       <section class="section2 lazy-section" itemscope 
             itemtype="https://schema.org/JobPosting" role="main" 
@@ -132,6 +135,11 @@ fetch('/JSON/Jobs/company_detailes.json')
       <div id="copyNotification" role="alert" aria-live="assertive" style="opacity:0;">
         Link copied to clipboard!
       </div>
+      
+      
+       <!--****ad unit start****-->
+       <script type='text/javascript' src='//pl27751939.revenuecpmgate.com/f5/07/a1/f507a1cda83acce519969d9f0f7d6dc9.js'></script>
+ <!--****ad unit end****-->
     `;
 
     // Injecting job content into the DOM
