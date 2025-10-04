@@ -90,7 +90,23 @@ export var footer=`
         </div>
         <div class="footer-call-to-action">
           <h2 class="footer-call-to-action-title"> You Call Us</h2>
-          <p class="footer-call-to-action-link-wrapper"> <a class="footer-call-to-action-link" href="tel:0124-64XXXX" target="_self"> v4.officicials@gmail.com </a></p>
+          <!-- Phone Contact -->
+<p class="footer-call-to-action-link-wrapper">
+  <a class="footer-call-to-action-link" href="tel:+9112446XXXX" target="_self">
+    📞 +91 124 46XXXX
+  </a>
+</p>
+
+<!-- Email Contact -->
+<p class="footer-call-to-action-link-wrapper">
+  <a class="footer-call-to-action-link" href="mailto:v4.officials@gmail.com" target="_self">
+    ✉️ v4.officials@gmail.com
+  </a>
+</p>
+<p class="footer-call-to-action-link-wrapper">
+  <a class="footer-call-to-action-link" href="mailto:v4.officials@gmail.com" target="_self">
+    ✉️  support@vfor.in/a>
+</p>
         </div>
       </div>
       <div class="footer-social-links"> <svg class="footer-social-amoeba-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 236 54">
