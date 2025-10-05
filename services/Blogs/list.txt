@@ -1,0 +1,199 @@
+Head and Brain
+Headaches and migraines
+
+Concussions and head injury
+
+Stroke
+
+Epilepsy and seizures
+
+Dementia (Alzheimer’s, Lewy Body disease)
+
+Brain tumors
+
+Meningitis
+
+Sinusitis
+
+Eyes and Vision
+Cataracts
+
+Glaucoma
+
+Macular degeneration
+
+Conjunctivitis (pink eye)
+
+Dry eyes
+
+Eye infections
+
+Diabetic retinopathy
+
+Ears
+Ear infections
+
+Hearing loss
+
+Tinnitus (ringing)
+
+Balance disorders (vestibular problems)
+
+Nose and Throat
+Sinusitis
+
+Allergic rhinitis (hay fever)
+
+Nosebleeds
+
+Tonsillitis
+
+Pharyngitis (sore throat)
+
+Laryngitis
+
+Mouth and Teeth
+Tooth decay
+
+Gum disease (gingivitis, periodontitis)
+
+Oral thrush
+
+Mouth ulcers
+
+Oral cancer
+
+Neck
+Thyroid disorders (hyperthyroidism, hypothyroidism)
+
+Goitre
+
+Neck pain (muscle strain, cervical spondylosis)
+
+Lymphadenopathy (swollen lymph nodes)
+
+Chest and Lung
+Asthma
+
+Chronic obstructive pulmonary disease (COPD)
+
+Pneumonia
+
+Lung cancer
+
+Tuberculosis
+
+Heart
+Hypertension (high blood pressure)
+
+Coronary artery disease (angina, heart attack)
+
+Heart failure
+
+Arrhythmia
+
+Abdomen and Digestive System
+Gastritis
+
+Peptic ulcers
+
+Gastroesophageal reflux (GERD/heartburn)
+
+Hepatitis
+
+Liver cirrhosis
+
+Gallstones
+
+Pancreatitis
+
+Appendicitis
+
+Irritable bowel syndrome (IBS)
+
+Crohn’s disease and ulcerative colitis
+
+Intestinal obstruction
+
+Constipation
+
+Diarrhea
+
+Urinary and Reproductive
+Urinary tract infection (UTI)
+
+Kidney stones
+
+Incontinence (urinary, stool)
+
+Prostate disorders
+
+Polycystic ovary syndrome (PCOS)
+
+Endometriosis
+
+Menstrual disorders
+
+Infertility
+
+Muscles, Bones, and Joints
+Arthritis (osteoarthritis, rheumatoid arthritis)
+
+Osteoporosis
+
+Back pain
+
+Broken/fractured bones
+
+Muscle strains and sprains
+
+Gout
+
+Skin, Hair, and Nails
+Acne
+
+Eczema
+
+Psoriasis
+
+Fungal infections
+
+Skin cancer (melanoma, non-melanoma)
+
+Warts
+
+Alopecia (hair loss)
+
+Nail infections
+
+Legs, Feet, and Toes
+Varicose veins
+
+Deep vein thrombosis (DVT)
+
+Leg ulcers
+
+Plantar fasciitis
+
+Athlete’s foot
+
+Ingrown toenails
+
+Bunions
+
+Whole Body and General Conditions
+Obesity
+
+Diabetes
+
+Anemia
+
+Allergies
+
+Autoimmune diseases (lupus, MS)
+
+Infectious diseases (HIV, flu, COVID-19)
+
+Cancer (various types)
+
+Chronic fatigue syndrome
