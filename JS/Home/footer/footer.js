@@ -89,7 +89,7 @@ export var footer=`
           <a class="footer-call-to-action-button button" href="#" target="_self"> Get in Touch </a>
         </div>
         <div class="footer-call-to-action">
-          <h2 class="footer-call-to-action-title"> You Call Us</h2>
+          <h2 class="footer-call-to-action-title"> Contact Us</h2>
           <!-- Phone Contact -->
 <p class="footer-call-to-action-link-wrapper">
   <a class="footer-call-to-action-link" href="tel:+9112446XXXX" target="_self">
