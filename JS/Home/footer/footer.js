@@ -105,7 +105,7 @@ export var footer=`
 </p>
 <p class="footer-call-to-action-link-wrapper">
   <a class="footer-call-to-action-link" href="mailto:v4.officials@gmail.com" target="_self">
-    ✉️  support@vfor.in/a>
+    ✉️  support@vfor.in</a>
 </p>
         </div>
       </div>
