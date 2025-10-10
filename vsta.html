@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>VAST Fullscreen Popup Ad</title>
+<style>
+  html, body {
+    margin: 0; padding: 0; height: 100%; overflow: hidden;
+  }
+  #adContainer {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+    visibility: hidden;
+  }
+  #videoElement {
+    max-width: 100%;
+    max-height: 100%;
+  }
+  #skipButton {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 8px 16px;
+    font-size: 16px;
+    background-color: rgba(255,255,255,0.8);
+    border: none;
+    cursor: pointer;
+    display: none;
+    z-index: 100000;
+  }
+  #countdownText {
+    position: absolute;
+    bottom: 20px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    z-index: 100000;
+  }
+</style>
+</head>
+<body>
+
+<div id="adContainer" aria-label="Video ad container" role="region" aria-live="polite">
+  <video id="videoElement" playsinline></video>
+  <button id="skipButton" aria-label="Skip ad">Skip Ad</button>
+  <div id="countdownText"></div>
+</div>
+
+<script src="https://imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
+<script>
+  let adDisplayContainer;
+  let adsLoader;
+  let adsManager;
+  let adContainer = document.getElementById('adContainer');
+  let videoElement = document.getElementById('videoElement');
+  let skipButton = document.getElementById('skipButton');
+  let countdownText = document.getElementById('countdownText');
+
+  function initIMA() {
+    // Create the ad display container.
+    adDisplayContainer = new google.ima.AdDisplayContainer(adContainer, videoElement);
+    adsLoader = new google.ima.AdsLoader(adDisplayContainer);
+
+    adsLoader.addEventListener(
+      google.ima.AdsManagerLoadedEvent.Type.ADS_MANAGER_LOADED,
+      onAdsManagerLoaded,
+      false
+    );
+
+    adsLoader.addEventListener(
+      google.ima.AdErrorEvent.Type.AD_ERROR,
+      onAdError,
+      false
+    );
+
+    // Initialize the container. Must happen via user gesture on mobile devices.
+    adDisplayContainer.initialize();
+
+    // Request video ads from the provided VAST tag URL.
+    let adsRequest = new google.ima.AdsRequest();
+    adsRequest.adTagUrl = 'https://impracticalshoulder.com/dGmVF.zid/GjNFvNZWGQUv/Dehmu9puIZDUnlpkLPfTnY/2ZNazDIL3eMcTykptHNMjxYY3CMTj/cwyGM_AW';
+    adsRequest.linearAdSlotWidth = window.innerWidth;
+    adsRequest.linearAdSlotHeight = window.innerHeight;
+    adsRequest.nonLinearAdSlotWidth = window.innerWidth;
+    adsRequest.nonLinearAdSlotHeight = 150;
+
+    adsLoader.requestAds(adsRequest);
+  }
+
+  function onAdsManagerLoaded(adsManagerLoadedEvent) {
+    adsManager = adsManagerLoadedEvent.getAdsManager(videoElement);
+
+    adsManager.addEventListener(
+      google.ima.AdEvent.Type.CONTENT_PAUSE_REQUESTED,
+      () => { adContainer.style.visibility = 'visible'; }
+    );
+
+    adsManager.addEventListener(
+      google.ima.AdEvent.Type.CONTENT_RESUME_REQUESTED,
+      () => { adContainer.style.visibility = 'hidden'; }
+    );
+
+    adsManager.addEventListener(
+      google.ima.AdEvent.Type.STARTED,
+      () => { setupCountdown(); }
+    );
+
+    adsManager.addEventListener(
+      google.ima.AdEvent.Type.ALL_ADS_COMPLETED,
+      () => { adContainer.style.visibility = 'hidden'; }
+    );
+
+    adsManager.addEventListener(
+      google.ima.AdEvent.Type.SKIPPABLE_STATE_CHANGED,
+      () => {
+        if (adsManager.hasSkipButton()) {
+          skipButton.style.display = 'block';
+        }
+      }
+    );
+
+    skipButton.addEventListener('click', () => {
+      adsManager.skip();
+      adContainer.style.visibility = 'hidden';
+    });
+
+    try {
+      adsManager.init(window.innerWidth, window.innerHeight, google.ima.ViewMode.FULLSCREEN);
+      adsManager.start();
+    } catch (adError) {
+      console.log('Ad error: ', adError);
+      adContainer.style.visibility = 'hidden';
+    }
+  }
+
+  function onAdError(adErrorEvent) {
+    console.log('Ad error: ', adErrorEvent.getError());
+    if (adsManager) {
+      adsManager.destroy();
+    }
+    adContainer.style.visibility = 'hidden';
+  }
+
+  function setupCountdown() {
+    let remainingTime = adsManager.getRemainingTime();
+    countdownText.textContent = `Ad ends in ${Math.ceil(remainingTime)} seconds`;
+
+    let countdownInterval = setInterval(() => {
+      remainingTime = adsManager.getRemainingTime();
+      if (remainingTime <= 0) {
+        clearInterval(countdownInterval);
+        countdownText.textContent = '';
+      } else {
+        countdownText.textContent = `Ad ends in ${Math.ceil(remainingTime)} seconds`;
+      }
+    }, 1000);
+  }
+
+  // Initialize IMA SDK after user interaction is required on mobile devices
+  document.addEventListener('click', function onFirstClick() {
+    document.removeEventListener('click', onFirstClick);
+    initIMA();
+  });
+</script>
+
+</body>
+</html>

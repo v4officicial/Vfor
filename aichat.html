@@ -3,250 +3,125 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Floatable Chatbot</title>
+<title>Adaptive Full Page Popup Ad</title>
 <style>
-  body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  background: #f0f0f0;
-}
-
-/* Floating chat button */
-#chat-toggle-btn {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 56px;
-  height: 56px;
-  background-color: #007bff;
-  border-radius: 50%;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  color: white;
-  font-size: 28px;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1001;
-  transition: background-color 0.3s ease;
-}
-#chat-toggle-btn:hover {
-  background-color: #0056b3;
-}
-
-/* Chatbot container */
-.chatbot-container {
-  position: fixed;
-  bottom: 90px;
-  right: 20px;
-  background: white;
-  width: 90vw;          /* responsive width (90% viewport width) */
-  max-width: 400px;     /* max width for bigger screens */
-  height: 70vh;         /* responsive height (70% viewport height) */
-  max-height: 600px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  display: flex;
-  flex-direction: column;
-  z-index: 1000;
-  overflow: hidden;
-  display: none; /* Hidden initially */
-  transition: width 0.3s ease, height 0.3s ease;
-}
-
-#chat-window {
-  flex-grow: 1;
-  padding: 15px;
-  overflow-y: auto;
-  border-bottom: 1px solid #ddd;
-  height: auto; /* let flexbox handle height */
-  max-height: calc(100% - 60px); /* prevent overflow beyond container */
-}
-
-.message {
-  margin-bottom: 12px;
-  max-width: 75%;
-  padding: 8px 12px;
-  border-radius: 12px;
-  clear: both;
-  word-wrap: break-word; /* prevent horizontal scrolling */
-}
-
-.user-message {
-  background-color: #007bff;
-  color: white;
-  float: right;
-  text-align: right;
-}
-
-.bot-message {
-  background-color: #e5e5ea;
-  color: black;
-  float: left;
-  text-align: left;
-}
-
-#input-area {
-  display: flex;
-  padding: 10px;
-  border-top: 1px solid #ddd;
-  background-color: #fafafa;
-  flex-shrink: 0;
-}
-
-#input-msg {
-  flex-grow: 1;
-  padding: 10px 15px;
-  font-size: 1rem;
-  border-radius: 20px;
-  border: 1px solid #ccc;
-  outline: none;
-  min-width: 0; /* fix for flexbox shrinking issue */
-}
-
-#send-btn {
-  background-color: #007bff;
-  border: none;
-  color: white;
-  padding: 0 20px;
-  margin-left: 10px;
-  border-radius: 20px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s ease;
-  flex-shrink: 0;
-}
-#send-btn:hover {
-  background-color: #0056b3;
-}
-
-/* Responsive adjustments */
-@media (max-width: 480px) {
-  .chatbot-container {
-    width: 95vw;
-    height: 60vh;
-    bottom: 80px;
-    right: 10px;
-    max-width: none;
-    max-height: none;
+  /* Full page overlay */
+  #popupOverlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;   /* Viewport width */
+    height: 100vh;  /* Viewport height */
+    background: rgba(0,0,0,0.75);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    box-sizing: border-box;
+    overflow: auto; /* Enable scrolling if content larger than viewport */
   }
-  #chat-toggle-btn {
-    width: 50px;
-    height: 50px;
-    font-size: 24px;
-    bottom: 15px;
+
+  /* Centered popup content */
+  #popupContent {
+    background: white;
+    padding: 1.5rem 2rem;
+    border-radius: 8px;
+    max-width: 90vw;       /* Max width relative to viewport */
+    max-height: 80vh;      /* Max height relative to viewport */
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    overflow-y: auto;      /* Scroll inside if content exceeds max-height */
+  }
+
+  /* Close button initially hidden */
+  #closeBtn {
+    position: absolute;
+    top: 10px;
     right: 15px;
+    font-size: 2rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #333;
+    display: none; /* Hide initially */
+    line-height: 1;
   }
-  #input-msg {
-    font-size: 0.9rem;
-  }
-  #send-btn {
-    font-size: 0.9rem;
-    padding: 0 15px;
-  }
-}
 
-@media (min-width: 1024px) {
-  .chatbot-container {
-    width: 350px;
-    height: 550px;
-    bottom: 100px;
-    right: 25px;
+  /* Countdown text */
+  #countdownText {
+    margin-top: 1.25rem;
+    font-size: 1.125rem;
+    font-weight: bold;
   }
-}
+
+  /* Responsive smaller screen adjustments */
+  @media (max-width: 480px) {
+    #popupContent {
+      padding: 1rem 1.25rem;
+      max-width: 95vw;
+      max-height: 75vh;
+    }
+    #closeBtn {
+      font-size: 1.5rem;
+      right: 10px;
+      top: 8px;
+    }
+    #countdownText {
+      font-size: 1rem;
+    }
+  }
 </style>
 </head>
 <body>
 
-<!-- Floating chat button -->
-<button id="chat-toggle-btn" aria-label="Toggle chat">💬</button>
-
-<!-- Chatbot container -->
-<div class="chatbot-container" id="chatbot">
-  <div id="chat-window"></div>
-  <div id="input-area">
-    <input type="text" id="input-msg" placeholder="Type a message..." autocomplete="off" />
-    <button id="send-btn">Send</button>
+<div id="popupOverlay" role="dialog" aria-modal="true" aria-labelledby="popupTitle" aria-describedby="popupDesc">
+  <div id="popupContent">
+    <button id="closeBtn" aria-label="Close popup">×</button>
+    <h2 id="popupTitle">Special Offer!</h2>
+    <p id="popupDesc">Get 10% off your purchase when you sign up!</p>
+    <div id="countdownText">Closing in 20 seconds</div>
   </div>
 </div>
 
 <script>
-  const chatWindow = document.getElementById('chat-window');
-  const inputMsg = document.getElementById('input-msg');
-  const sendBtn = document.getElementById('send-btn');
-  const chatbot = document.getElementById('chatbot');
-  const chatToggleBtn = document.getElementById('chat-toggle-btn');
+  document.addEventListener('DOMContentLoaded', function() {
+    const popup = document.getElementById('popupOverlay');
+    const closeBtn = document.getElementById('closeBtn');
+    const countdownText = document.getElementById('countdownText');
+    let countdown = 20;  // seconds
 
-  // Toggle chatbot visibility
-  chatToggleBtn.addEventListener('click', () => {
-    if (chatbot.style.display === 'flex') {
-      chatbot.style.display = 'none';
-    } else {
-      chatbot.style.display = 'flex';
-      inputMsg.focus();
+    // Show popup on page load
+    popup.style.display = 'flex';
+
+    function updateCountdown() {
+      countdown--;
+      if (countdown > 0) {
+        countdownText.textContent = `Closing in ${countdown} seconds`;
+        setTimeout(updateCountdown, 1000);
+      } else {
+        countdownText.textContent = 'You can now close this popup.';
+        closeBtn.style.display = 'block'; // Show close button after countdown ends
+      }
     }
-  });
 
-  // Simple bot responses based on keywords
-  function getBotResponse(message) {
-  const msg = message.toLowerCase();
+    setTimeout(updateCountdown, 1000);
 
-  if (msg.includes('hello') || msg.includes('hi')) {
-    return "Hello! How can I help you today?";
-  }
-  if (msg.includes('how are you')) {
-    return "I'm good, thanks for asking!";
-  }
-  if (msg.includes('bye')) {
-    return "Goodbye! Have a great day!";
-  }
-  if (msg.includes('what is your name')) {
-    return "I'm your friendly chatbot.";
-  }
-  if (msg.includes('hours') || msg.includes('open') || msg.includes('opening time')) {
-    return "Our working hours are 9 AM to 6 PM, Monday to Friday.";
-  }
-  if (msg.includes('contact') || msg.includes('phone') || msg.includes('email')) {
-    return "You can contact us at support@example.com or call 123-456-7890.";
-  }
-  if (msg.includes('help') || msg.includes('support')) {
-    return "Sure, I am here to help! Feel free to ask your questions.";
-  }
-  if (msg.includes('pricing') || msg.includes('cost')) {
-    return "Our pricing varies depending on the product or service. Please specify which one.";
-  }
-  if (msg.includes('location') || msg.includes('address')) {
-    return "We are located at 123 Main Street, Your City.";
-  }
+    function closePopup() {
+      popup.style.display = 'none';
+    }
 
-  return "Sorry, I don't understand that yet. Could you rephrase?";
-}
-  // Append messages to chat
-  function appendMessage(text, className) {
-    const msgDiv = document.createElement('div');
-    msgDiv.className = `message ${className}`;
-    msgDiv.textContent = text;
-    chatWindow.appendChild(msgDiv);
-    chatWindow.scrollTop = chatWindow.scrollHeight;
-  }
+    closeBtn.addEventListener('click', closePopup);
 
-  // Send message handler
-  function sendMessage() {
-    const userText = inputMsg.value.trim();
-    if(userText === '') return;
-    appendMessage(userText, 'user-message');
-    inputMsg.value = '';
-
-    setTimeout(() => {
-      const botReply = getBotResponse(userText);
-      appendMessage(botReply, 'bot-message');
-    }, 600);
-  }
-
-  sendBtn.addEventListener('click', sendMessage);
-  inputMsg.addEventListener('keypress', (e) => {
-    if(e.key === 'Enter') sendMessage();
+    popup.addEventListener('click', function(event) {
+      if (countdown <= 0 && event.target === popup) {
+        closePopup();
+      }
+    });
   });
 </script>
 
