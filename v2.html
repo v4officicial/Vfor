@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <title>Full Screen Popup with Aspect Ratio</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/openplayerjs@1.12.1/dist/openplayer.min.css">
     <style>
         * {
             margin: 0;
@@ -116,44 +117,67 @@
             <div class="popup-timer"><span class="seconds"></span> second(s) left</div>
             <div class="btn-close disabled" role="button" aria-label="Close">x</div>
             <div style="flex:1; display:flex; align-items:center; justify-content:center; color:white; font-size:1.3rem;">
-                <a href="https://cloudminecrypto.com/?invite_code=yNazJPbxRKvqE479"><img src="https://images.ctfassets.net/v44fuld738we/18IcGWV5xEzRIaAqTqnkI9/f0ab4179763b339ea43d21578ccbfdbb/Mining.gif"></a>
+                 <script src="//cdn.jsdelivr.net/npm/openplayerjs@1.12.1/dist/openplayer.min.js"></script>
+
+  <video class="op-player op-player__media" id="video" controls playsinline>
+         <source src="//commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" type="video/mp4">
+  </video>
             </div>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script>
         $(document).ready(function () {
-            var $duration = 10;
+            var initialDuration = 20;
+            var timerDuration = initialDuration;
             var closeEnabled = false;
-            function startTimer() {
-                $duration--;
-                $('.seconds').text($duration);
-                if ($duration <= 0) {
-                    clearInterval($myTimer);
-                    closeEnabled = true;
-                    $('.btn-close').removeClass('disabled');
-                    $('.btn-close').css('pointer-events', 'auto');
-                }
-            }
-            setTimeout(function () {
-                $('.seconds').text($duration);
-                $('.popup-wrap').fadeIn(1500);
-                // Start timer interval
-                $myTimer = setInterval(startTimer, 1000);
+            var timerInterval;
 
-                // Close button click behavior
-                $('.popup .btn-close').on('click', function () {
-                    if (!closeEnabled) {
-                        // Ad click behavior
-                        alert("Ad clicked! Close button not enabled yet.");
-                        // Example: window.open('https://your-ad-link.com', '_blank');
-                        return;
-                    }
-                    // Close after timeout
-                    clearInterval($myTimer);
-                    $('.popup-wrap').fadeOut(500);
-                });
+            // Show popup after 1 second delay
+            setTimeout(function () {
+                $('.popup-wrap').fadeIn(1500);
+                $('.seconds').text(timerDuration);
             }, 1000);
+
+            // Initialize OpenPlayer
+            var player = new OpenPlayer('video', 'https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/ad_rule_samples&ciu_szs=300x250&ad_rule=1&impl=s&gdfp_req=1&env=vp&output=vmap&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ar%3Dpremidpostoptimizedpod&cmsid=496&vid=short_onecue&correlator=');
+            player.init();
+
+            function startCountdown() {
+                if (timerInterval) return; // Prevent multiple intervals
+                timerDuration = initialDuration;
+                $('.seconds').text(timerDuration);
+                closeEnabled = false;
+                $('.btn-close').addClass('disabled').css('pointer-events', 'none');
+
+                timerInterval = setInterval(function () {
+                    timerDuration--;
+                    $('.seconds').text(timerDuration);
+                    if (timerDuration <= 0) {
+                        clearInterval(timerInterval);
+                        timerInterval = null;
+                        closeEnabled = true;
+                        $('.btn-close').removeClass('disabled').css('pointer-events', 'auto');
+                    }
+                }, 1000);
+            }
+
+            // Start timer when user clicks to play the video
+            var videoElement = player.getElement();
+            videoElement.addEventListener('play', function () {
+                startCountdown();
+            });
+
+            // Close button click behavior
+            $('.popup .btn-close').on('click', function () {
+                if (!closeEnabled) {
+                    alert("Ad clicked! Close button not enabled yet.");
+                    // Example: window.open('https://your-ad-link.com', '_blank');
+                    return;
+                }
+                clearInterval(timerInterval);
+                $('.popup-wrap').fadeOut(500);
+            });
         });
     </script>
 </body>
