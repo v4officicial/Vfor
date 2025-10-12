@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>VAST Ad Compatible Video Player</title>
+  <style>
+    #video-container {
+      position: relative;
+      width: 640px;
+      height: 360px;
+      background-color: black;
+    }
+    video {
+      width: 100%;
+      height: 100%;
+    }
+    #ad-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+  <div id="video-container">
+    <video id="content-video" controls playsinline>
+      <source src="/main_Resource/ads/video ads/The_Bread_-_Animated_Short_Film_by_GULU(360p).mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+    <div id="ad-container"></div>
+  </div>
+
+  <script src="https://imasdk.googleapis.com/js/sdkloader/ima3_debug.js"></script>
+  <script>
+    const contentVideo = document.getElementById('content-video');
+    const adContainer = document.getElementById('ad-container');
+
+    const vastAdTagUrl = "https://impracticalshoulder.com/dgm.F/zhdJGyNXv-ZaGqUo/ceAmh9OubZlUflFk/PgTbYX2MNNziIF3nMJTtkNtcNIjNYi3sM/j/c/y/MzCcZ/sUabW/1MpUd/D_0FxL";
+
+    let adDisplayContainer;
+    let adsLoader;
+    let adsManager;
+
+    function initIMA() {
+      // Create the ad display container.
+      adDisplayContainer = new google.ima.AdDisplayContainer(adContainer, contentVideo);
+
+      // Initialize the container. MUST be done via a user action on mobile browsers.
+      adDisplayContainer.initialize();
+
+      // Create ads loader.
+      adsLoader = new google.ima.AdsLoader(adDisplayContainer);
+
+      // Listen and respond to ads loaded and error events.
+      adsLoader.addEventListener(
+        google.ima.AdsManagerLoadedEvent.Type.ADS_MANAGER_LOADED,
+        onAdsManagerLoaded,
+        false
+      );
+      adsLoader.addEventListener(
+        google.ima.AdErrorEvent.Type.AD_ERROR,
+        onAdError,
+        false
+      );
+
+      // Request video ads.
+      const adsRequest = new google.ima.AdsRequest();
+      adsRequest.adTagUrl = vastAdTagUrl;
+
+      // Specify ad slot sizes.
+      adsRequest.linearAdSlotWidth = 640;
+      adsRequest.linearAdSlotHeight = 360;
+      adsRequest.nonLinearAdSlotWidth = 640;
+      adsRequest.nonLinearAdSlotHeight = 150;
+
+      adsLoader.requestAds(adsRequest);
+    }
+
+    function onAdsManagerLoaded(adsManagerLoadedEvent) {
+      adsManager = adsManagerLoadedEvent.getAdsManager(contentVideo);
+
+      adsManager.addEventListener(
+        google.ima.AdErrorEvent.Type.AD_ERROR,
+        onAdError
+      );
+      adsManager.addEventListener(
+        google.ima.AdEvent.Type.CONTENT_PAUSE_REQUESTED,
+        () => contentVideo.pause()
+      );
+      adsManager.addEventListener(
+        google.ima.AdEvent.Type.CONTENT_RESUME_REQUESTED,
+        () => contentVideo.play()
+      );
+
+      try {
+        adsManager.init(640, 360, google.ima.ViewMode.NORMAL);
+        adsManager.start();
+      } catch (adError) {
+        console.error('AdsManager could not start:', adError);
+        contentVideo.play();
+      }
+    }
+
+    function onAdError(adErrorEvent) {
+      console.error('Ad error:', adErrorEvent.getError());
+      if (adsManager) {
+        adsManager.destroy();
+      }
+      contentVideo.play();
+    }
+
+    // Start the ad playback on user interaction (required by mobile browsers)
+    contentVideo.addEventListener('play', () => {
+      if (!adDisplayContainer) {
+        initIMA();
+      }
+    }, { once: true }); // Initialize only once
+  </script>
+</body>
+</html>
