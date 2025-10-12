@@ -1,229 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <title>Full Screen Popup with Aspect Ratio</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/openplayerjs@1.12.1/dist/openplayer.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
-        html, body {
-            width: 100%;
-            height: 100%;
-        }
-        .popup-wrap {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: none;
-            z-index: 9999;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .popup {
-            position: relative;
-            width: 90vw;
-            max-width: 500px;
-            aspect-ratio: 1 / 1; /* keeps height = width for square */
-            background-color: rgba(0, 0, 0, 1);
-            border-radius: 14px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.35);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-       .popup-timer {
-            position: absolute;
-            top: 12px;
-            right: 14px;
-            background: rgba(255, 255, 255, 0.15);
-            color: #fff;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-weight: 600;
-            font-size: 1.15rem;
-            letter-spacing: 0.03em;
-            box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
-            user-select: none;
-            transition: all 0.3s ease;
-            min-width: 85px;
-            text-align: center;
-        }
-        /* Responsive scaling */
-        @media (max-width: 600px) {
-            .popup-timer {
-                font-size: 1rem;
-                padding: 5px 11px;
-                top: 8px;
-                right: 10px;
-                min-width: 70px;
-            }
-        }
-        .btn-close {
-            background-color: #fff;
-            width: 25px;
-            height: 25px;
-            text-align: center;
-            line-height: 22px;
-            position: absolute;
-            right: -10px;
-            top: -10px;
-            cursor: pointer;
-            transition: all 0.5s ease;
-            border-radius: 50%;
-            font-size: 1.2rem;
-        }
-        .btn-close:hover {
-            transform: rotate(360deg);
-        }
-        /* Disabled close button style */
-        .btn-close.disabled {
-            cursor: not-allowed;
-            opacity: 0.6;
-            pointer-events: none;
-        }
-        @media (max-width: 600px) {
-            .popup {
-                width: 90vw;
-                max-width: none;
-                aspect-ratio: 1 / 1;
-            }
-            .popup-timer {
-                font-size: 1rem;
-                right: 7px;
-                top: 7px;
-            }
-            .btn-close {
-                width: 24px;
-                height: 24px;
-                right: -8px;
-                top: -8px;
-                font-size: 1rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>VAST Ad Compatible Video Player</title>
+  <style>
+    #video-container {
+      position: relative;
+      width: 640px;
+      height: 360px;
+      background-color: black;
+    }
+    video {
+      width: 100%;
+      height: 100%;
+    }
+    #ad-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 10;
+    }
+  </style>
 </head>
 <body>
-    <div class="popup-wrap" role="dialog" aria-modal="true" tabindex="-1">
-        <div class="popup">
-            <div class="popup-timer"><span class="seconds"></span> second(s) left</div>
-            <div class="btn-close disabled" role="button" aria-label="Close">x</div>
-            <div style="flex:1; display:flex; align-items:center; justify-content:center; color:white; font-size:1.3rem;">
-                 <script src="//cdn.jsdelivr.net/npm/openplayerjs@1.12.1/dist/openplayer.min.js"></script>
+  <div id="video-container">
+    <video id="content-video" controls playsinline>
+  <source src="video.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+    <div id="ad-container"></div>
+  </div>
 
-  <video class="op-player op-player__media" id="video" controls playsinline>
-         <source src="/main_Resource/ads/video ads/horse ride.mp4" type="video/mp4">
-  </video>
-            </div>
-        </div>
-    </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var initialDuration = 20;
-            var timerDuration = initialDuration;
-            var closeEnabled = false;
-            var timerInterval;
+  <script src="https://imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
+  <script>
+    const contentVideo = document.getElementById('content-video');
+    const adContainer = document.getElementById('ad-container');
 
-            var popupWrap = document.querySelector('.popup-wrap');
-            var secondsSpan = document.querySelector('.popup-timer .seconds');
-            var btnClose = document.querySelector('.btn-close');
-            var videoElement = document.getElementById('video');
+    // VAST Ad Tag URL (your provided URL)
+    const vastAdTagUrl = "https://impracticalshoulder.com/dgm.F/zhdJGyNXv-ZaGqUo/ceAmh9OubZlUflFk/PgTbYX2MNNziIF3nMJTtkNtcNIjNYi3sM/j/c/y/MzCcZ/sUabW/1MpUd/D_0FxL";
 
-            // Function to fade in the popup over 1500ms
-            function fadeIn(element, duration) {
-                element.style.opacity = 0;
-                element.style.display = 'flex';
-                var last = +new Date();
-                var opacity = 0;
-                var tick = function () {
-                    opacity += (new Date() - last) / duration;
-                    last = +new Date();
-                    if (opacity < 1) {
-                        element.style.opacity = opacity;
-                        requestAnimationFrame(tick);
-                    } else {
-                        element.style.opacity = 1;
-                    }
-                };
-                tick();
-            }
+    let adDisplayContainer;
+    let adsLoader;
+    let adsManager;
 
-            // Function to fade out the popup over 500ms
-            function fadeOut(element, duration) {
-                element.style.opacity = 1;
-                var last = +new Date();
-                var opacity = 1;
-                var tick = function () {
-                    opacity -= (new Date() - last) / duration;
-                    last = +new Date();
-                    if (opacity > 0) {
-                        element.style.opacity = opacity;
-                        requestAnimationFrame(tick);
-                    } else {
-                        element.style.opacity = 0;
-                        element.style.display = 'none';
-                    }
-                };
-                tick();
-            }
+    function initIMA() {
+      // Create the ad display container.
+      adDisplayContainer = new google.ima.AdDisplayContainer(adContainer, contentVideo);
 
-            setTimeout(function () {
-                fadeIn(popupWrap, 1500);
-                secondsSpan.textContent = timerDuration;
-            }, 1000);
+      // Initialize the container. Must be done via a user action on mobile devices.
+      adDisplayContainer.initialize();
 
-            // Initialize OpenPlayer
-            var player = new OpenPlayer('video', 'https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/ad_rule_samples&ciu_szs=300x250&ad_rule=1&impl=s&gdfp_req=1&env=vp&output=vmap&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ar%3Dpremidpostoptimizedpod&cmsid=496&vid=short_onecue&correlator=');
-            player.init();
+      // Create ads loader.
+      adsLoader = new google.ima.AdsLoader(adDisplayContainer);
 
-            function startCountdown() {
-                if (timerInterval) return; // Prevent multiple intervals
-                timerDuration = initialDuration;
-                secondsSpan.textContent = timerDuration;
-                closeEnabled = false;
-                btnClose.classList.add('disabled');
-                btnClose.style.pointerEvents = 'none';
+      // Listen and respond to ads loaded and error events.
+      adsLoader.addEventListener(
+        google.ima.AdsManagerLoadedEvent.Type.ADS_MANAGER_LOADED,
+        onAdsManagerLoaded,
+        false
+      );
+      adsLoader.addEventListener(
+        google.ima.AdErrorEvent.Type.AD_ERROR,
+        onAdError,
+        false
+      );
 
-                timerInterval = setInterval(function () {
-                    timerDuration--;
-                    secondsSpan.textContent = timerDuration;
-                    if (timerDuration <= 0) {
-                        clearInterval(timerInterval);
-                        timerInterval = null;
-                        closeEnabled = true;
-                        btnClose.classList.remove('disabled');
-                        btnClose.style.pointerEvents = 'auto';
-                    }
-                }, 1000);
-            }
+      // Request video ads.
+      const adsRequest = new google.ima.AdsRequest();
+      adsRequest.adTagUrl = vastAdTagUrl;
 
-            // Start timer when user clicks to play the video
-            videoElement.addEventListener('play', function () {
-                startCountdown();
-            });
+      // Specify the linear and nonlinear slot sizes. This helps the SDK to size ads appropriately.
+      adsRequest.linearAdSlotWidth = 640;
+      adsRequest.linearAdSlotHeight = 360;
+      adsRequest.nonLinearAdSlotWidth = 640;
+      adsRequest.nonLinearAdSlotHeight = 150;
 
-            // Close button click behavior
-            btnClose.addEventListener('click', function () {
-                if (!closeEnabled) {
-                    alert("Ad clicked! Close button not enabled yet.");
-                    // Example: window.open('https://your-ad-link.com', '_blank');
-                    return;
-                }
-                if (timerInterval) {
-                    clearInterval(timerInterval);
-                    timerInterval = null;
-                }
-                fadeOut(popupWrap, 500);
-            });
-        });
-    </script>
+      adsLoader.requestAds(adsRequest);
+    }
+
+    function onAdsManagerLoaded(adsManagerLoadedEvent) {
+      // Get the ads manager.
+      adsManager = adsManagerLoadedEvent.getAdsManager(contentVideo);
+
+      // Add listeners to the required events.
+      adsManager.addEventListener(
+        google.ima.AdErrorEvent.Type.AD_ERROR,
+        onAdError
+      );
+      adsManager.addEventListener(
+        google.ima.AdEvent.Type.CONTENT_PAUSE_REQUESTED,
+        onContentPauseRequested
+      );
+      adsManager.addEventListener(
+        google.ima.AdEvent.Type.CONTENT_RESUME_REQUESTED,
+        onContentResumeRequested
+      );
+
+      try {
+        // Initialize the ads manager. Ad rules playlist can be loaded and rendered after this.
+        adsManager.init(640, 360, google.ima.ViewMode.NORMAL);
+        adsManager.start();
+      } catch (adError) {
+        console.error('AdsManager could not start:', adError);
+        contentVideo.play();
+      }
+    }
+
+    function onAdError(adErrorEvent) {
+      console.error('Ad error:', adErrorEvent.getError());
+      if (adsManager) {
+        adsManager.destroy();
+      }
+      contentVideo.play();
+    }
+
+    function onContentPauseRequested() {
+      contentVideo.pause();
+    }
+
+    function onContentResumeRequested() {
+      contentVideo.play();
+    }
+
+    // Start ad playback on user interaction (required by mobile browsers).
+    contentVideo.addEventListener('play', () => {
+      if (!adDisplayContainer) {
+        initIMA();
+      }
+    });
+
+    // Optional: load and play content video if you want.
+    contentVideo.src = "/main_Resource/ads/video ads/The_Bread_-_Animated_Short_Film_by_GULU(360p).mp4";
+  </script>
+  <script src="https://imasdk.googleapis.com/js/sdkloader/ima3_debug.js"></script>
 </body>
 </html>
