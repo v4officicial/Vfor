@@ -1,286 +1,188 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8" />
-    <title>Full Screen Popup with Aspect Ratio and Google IMA VAST Ads</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/openplayerjs@1.12.1/dist/openplayer.min.css" />
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
-        html, body {
-            width: 100%;
-            height: 100%;
-            background: #000;
-        }
-        .popup-wrap {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: rgba(0, 0, 0, 0.7);
-            display: none;
-            z-index: 9999;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .popup {
-            position: relative;
-            width: 90vw;
-            max-width: 640px;
-            aspect-ratio: 16 / 9; /* widescreen aspect */
-            background-color: rgba(0, 0, 0, 1);
-            border-radius: 14px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.7);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        .popup-timer {
-            position: absolute;
-            top: 12px;
-            right: 14px;
-            background: rgba(255, 255, 255, 0.15);
-            color: #fff;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-weight: 600;
-            font-size: 1.15rem;
-            letter-spacing: 0.03em;
-            box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
-            user-select: none;
-            transition: all 0.3s ease;
-            min-width: 85px;
-            text-align: center;
-            z-index: 1010;
-        }
-        @media (max-width: 600px) {
-            .popup-timer {
-                font-size: 1rem;
-                padding: 5px 11px;
-                top: 8px;
-                right: 10px;
-                min-width: 70px;
-            }
-        }
-        .btn-close {
-            background-color: #fff;
-            width: 25px;
-            height: 25px;
-            text-align: center;
-            line-height: 22px;
-            position: absolute;
-            right: -10px;
-            top: -10px;
-            cursor: pointer;
-            transition: all 0.5s ease;
-            border-radius: 50%;
-            font-size: 1.2rem;
-            z-index: 1010;
-        }
-        .btn-close:hover {
-            transform: rotate(360deg);
-        }
-        .btn-close.disabled {
-            cursor: not-allowed;
-            opacity: 0.6;
-            pointer-events: none;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Video Player with HilltopAds VAST</title>
+  
 </head>
 <body>
-    <div class="popup-wrap" role="dialog" aria-modal="true" tabindex="-1">
-        <div class="popup">
-            <div class="popup-timer"><span class="seconds">20</span> second(s) left</div>
-            <div class="btn-close disabled" role="button" aria-label="Close">×</div>
-            <video class="op-player op-player__media" id="video" controls playsinline preload="auto" width="100%" height="100%">
-                <source src="//commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-            </video>
-            <div id="adContainer" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:auto; z-index:1000;"></div>
-        </div>
-    </div>
+  <div id="video-wrapper">
+    <video id="video-id" poster="https://via.placeholder.com/640x480?text=Loading+Video">
+      <source src="/main_Resource/ads/video ads/The_Bread_-_Animated_Short_Film_by_GULU(360p).mp4" type="video/mp4" />
+      <!-- Fallback source for testing -->
+      <!-- <source src="https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4" type="video/mp4" /> -->
+      Your browser does not support the video tag.
+    </video>
+    <div id="play-overlay" onclick="document.getElementById('video-id').play(); this.style.display='none';">▶ Play Video</div>
+  </div>
+  
+  <script src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script>
+  <script>
+    const video = document.getElementById('video-id');
+    let myFP;  // Player instance
+    let initialized = false;  // Flag to prevent multiple inits
+    let adRetryCount = 0;  // For optional retry on error
+    const MAX_RETRIES = 1;  // Retry VAST once on fail
+    let logDebounce = {};  // Simple debounce for logs
+    const commonLayout = {
+      controlBar: {
+        autoHideTimeout: 3,
+        animated: true,
+        autoHide: true
+      },
+      htmlOnPauseBlock: {
+        html: null,
+        height: null,
+        width: null
+      },
+      autoPlay: false,
+      mute: true,
+      allowTheatre: true,
+      playPauseAnimation: false,
+      playbackRateEnabled: false,
+      allowDownload: false,
+      playButtonShowing: false,
+      fillToContainer: true,
+      posterImage: null,
+      primaryColor: ""
+    };
 
-    <script src="https://cdn.jsdelivr.net/npm/openplayerjs@1.12.1/dist/openplayer.min.js"></script>
-    <script src="https://imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var initialDuration = 20;
-            var timerDuration = initialDuration;
-            var closeEnabled = false;
-            var timerInterval;
+    // Debounced log function
+    function debouncedLog(type, msg) {
+      const key = type + Date.now().toString().slice(-5);
+      if (!logDebounce[key]) {
+        logDebounce[key] = true;
+        setTimeout(() => delete logDebounce[key], 1000);
+        console.log(msg);
+      }
+    }
 
-            var popupWrap = document.querySelector('.popup-wrap');
-            var secondsSpan = document.querySelector('.popup-timer .seconds');
-            var btnClose = document.querySelector('.btn-close');
-            var videoElement = document.getElementById('video');
-            var adContainer = document.getElementById('adContainer');
-
-            // Show popup with fade-in
-            function fadeIn(element, duration) {
-                element.style.opacity = 0;
-                element.style.display = 'flex';
-                var last = +new Date();
-                var opacity = 0;
-                var tick = function () {
-                    opacity += (new Date() - last) / duration;
-                    last = +new Date();
-                    if (opacity < 1) {
-                        element.style.opacity = opacity;
-                        requestAnimationFrame(tick);
-                    } else {
-                        element.style.opacity = 1;
-                    }
-                };
-                tick();
-            }
-
-            // Fade out popup
-            function fadeOut(element, duration) {
-                element.style.opacity = 1;
-                var last = +new Date();
-                var opacity = 1;
-                var tick = function () {
-                    opacity -= (new Date() - last) / duration;
-                    last = +new Date();
-                    if (opacity > 0) {
-                        element.style.opacity = opacity;
-                        requestAnimationFrame(tick);
-                    } else {
-                        element.style.opacity = 0;
-                        element.style.display = 'none';
-                    }
-                };
-                tick();
-            }
-
-            // Initialize OpenPlayerJS
-            var player = new OpenPlayer('video');
-            player.init();
-
-            // IMA SDK variables
-            var adsLoader, adsManager, adDisplayContainer;
-            var adsInitialized = false;
-
-            function createAdDisplayContainer() {
-                adDisplayContainer = new google.ima.AdDisplayContainer(adContainer, videoElement);
-            }
-
-            function setupIMA() {
-                createAdDisplayContainer();
-                adsLoader = new google.ima.AdsLoader(adDisplayContainer);
-
-                adsLoader.addEventListener(
-                    google.ima.AdsManagerLoadedEvent.Type.ADS_MANAGER_LOADED,
-                    onAdsManagerLoaded,
-                    false
-                );
-                adsLoader.addEventListener(
-                    google.ima.AdErrorEvent.Type.AD_ERROR,
-                    onAdError,
-                    false
-                );
-
-                videoElement.onended = () => {
-                    adsLoader.contentComplete();
-                };
-            }
-
-            function requestAds() {
-                var adsRequest = new google.ima.AdsRequest();
-                adsRequest.adTagUrl = encodeURI("https://impracticalshoulder.com/d/mSFCz.d/GYNjv/ZOGDU-/ke/m/9iuCZvU/l/kNPqTJYr2NNrzXIS3RMQTvk/tjN_jOYE3zMDjtcYyxMhChZIs/aAWB1ypndoDO0Rxj");
-                adsRequest.linearAdSlotWidth = popupWrap.clientWidth;
-                adsRequest.linearAdSlotHeight = popupWrap.clientHeight;
-                adsRequest.nonLinearAdSlotWidth = popupWrap.clientWidth;
-                adsRequest.nonLinearAdSlotHeight = 150;
-
-                adsLoader.requestAds(adsRequest);
-            }
-
-            function onAdsManagerLoaded(adsManagerLoadedEvent) {
-                adsManager = adsManagerLoadedEvent.getAdsManager(videoElement);
-
-                adsManager.addEventListener(google.ima.AdErrorEvent.Type.AD_ERROR, onAdError);
-                adsManager.addEventListener(google.ima.AdEvent.Type.CONTENT_PAUSE_REQUESTED, () => {
-                    videoElement.pause();
-                });
-                adsManager.addEventListener(google.ima.AdEvent.Type.CONTENT_RESUME_REQUESTED, () => {
-                    videoElement.play();
-                });
-
-                try {
-                    adsManager.init(popupWrap.clientWidth, popupWrap.clientHeight, google.ima.ViewMode.NORMAL);
-                    adsManager.start();
-                } catch (adError) {
-                    console.error('AdsManager could not start:', adError);
-                    videoElement.play();
-                }
-            }
-
-            function onAdError(adErrorEvent) {
-                console.error('Ad error:', adErrorEvent.getError());
-                if (adsManager) {
-                    adsManager.destroy();
-                }
-                videoElement.play();
-            }
-
-            function startCountdown() {
-                if (timerInterval) return;
-                timerDuration = initialDuration;
-                secondsSpan.textContent = timerDuration;
-                closeEnabled = false;
-                btnClose.classList.add('disabled');
-                btnClose.style.pointerEvents = 'none';
-
-                timerInterval = setInterval(function () {
-                    timerDuration--;
-                    secondsSpan.textContent = timerDuration;
-                    if (timerDuration <= 0) {
-                        clearInterval(timerInterval);
-                        timerInterval = null;
-                        closeEnabled = true;
-                        btnClose.classList.remove('disabled');
-                        btnClose.style.pointerEvents = 'auto';
-                    }
-                }, 1000);
-            }
-
-            // Show popup after short delay
-            setTimeout(() => {
-                fadeIn(popupWrap, 1500);
-            }, 1000);
-
-            // Play button - here video autoplay kicks in
-            videoElement.addEventListener('play', function () {
-                if (!adsInitialized) {
-                    adDisplayContainer.initialize();
-                    setupIMA();
-                    requestAds();
-                    adsInitialized = true;
-                }
-                startCountdown();
-            });
-
-            // Close popup button
-            btnClose.addEventListener('click', function () {
-                if (!closeEnabled) {
-                    alert("Please watch the ad before closing.");
-                    return;
-                }
-                if (timerInterval) {
-                    clearInterval(timerInterval);
-                    timerInterval = null;
-                }
-                fadeOut(popupWrap, 500);
-                videoElement.pause();
-            });
+    // Handle metadata loading
+    video.addEventListener('loadedmetadata', function() {
+      const duration = video.duration;
+      debouncedLog('metadata', 'Video duration loaded: ' + duration + ' seconds');
+      
+      if (duration > 1 && !isNaN(duration) && !initialized) {
+        initialized = true;
+        console.log('Initializing Fluid Player with HilltopAds VAST (~' + Math.round(duration / 60) + ' min)');
+        
+        myFP = fluidPlayer('video-id', {
+          layoutControls: commonLayout,
+          vastOptions: {
+            adList: [
+              {
+                roll: "preRoll",
+                // HilltopAds VAST with CORS proxy (activate at https://cors-anywhere.herokuapp.com/ first)
+                vastTag: "https://cors-anywhere.herokuapp.com/https://impracticalshoulder.com/dgm.F/zhdJGyNXv-ZaGqUo/ceAmh9OubZlUflFk/PgTbYX2MNNziIF3nMJTtkNtcNIjNYi3sM/j/c/y/MzCcZ/sUabW/1MpUd/D_0FxL",
+                // Self-proxy example (uncomment if set up):
+                // vastTag: "/vast-proxy.php?url=" + encodeURIComponent("https://impracticalshoulder.com/dgm.F/zhdJGyNXv-ZaGqUo/ceAmh9OubZlUflFk/PgTbYX2MNNziIF3nMJTtkNtcNIjNYi3sM/j/c/y/MzCcZ/sUabW/1MpUd/D_0FxL"),
+                // Fallback Google test (uncomment if HilltopAds fails):
+                // vastTag: "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dskippablelinear&correlator=123",
+                adText: ""
+              }
+            ],
+            adCTAText: false,
+            adCTATextPosition: "",
+            debug: true,
+            vastLoadTimeout: 30000,  // 30s for ad networks
+            vastLoadFailTimeout: 5000,
+            vastRetryAttempts: 2,
+            vastVersion: "4.0",
+            vastAdUnit: "",
+            vastError: true  // Enable detailed error reporting
+          }
         });
-    </script>
+
+        // Corrected camelCase VAST events (no [FP_ERROR] now)
+        myFP.on('vastAdLoaded', function(e) {
+          console.log('HilltopAds VAST XML loaded successfully:', e);
+          adRetryCount = 0;
+        });
+        myFP.on('vastAdError', function(e) {
+          console.error('HilltopAds VAST Ad Error Details:', e);
+          console.error('Error Code:', e.code || 'Unknown');  // 101/900
+          console.error('Error Message:', e.message || 'No message');
+          if (e.message && (e.message.toLowerCase().includes('cors') || e.message.toLowerCase().includes('fetch') || e.message.toLowerCase().includes('blocked'))) {
+            console.error('Detected CORS Issue - Activate proxy or contact HilltopAds support!');
+          }
+          console.error('VAST URL Attempted:', e.vastTagUrl || 'Unknown URL');
+          if ((e.code === 101 || e.code === 900) && adRetryCount < MAX_RETRIES) {
+            adRetryCount++;
+            console.log(`Retry ${adRetryCount}/${MAX_RETRIES} - Reinitializing without ads...`);
+            setTimeout(() => {
+              if (myFP && typeof myFP.destroy === 'function') myFP.destroy();
+              myFP = fluidPlayer('video-id', {
+                layoutControls: commonLayout,
+                vastOptions: { adList: [] }  // No ads
+              });
+              video.play().catch(err => console.warn('Play after retry:', err));
+            }, 1000);
+          } else {
+            console.log('Max retries reached or non-retryable error - Skipping ads');
+          }
+          // Resume main video
+          setTimeout(() => {
+            if (video.paused) {
+              video.play().catch(err => console.warn('Resume play after ad error:', err));
+            }
+          }, 100);
+        });
+        myFP.on('vastAdImpression', function(e) {
+          console.log('HilltopAds Ad impression tracked (ad started):', e);
+        });
+        myFP.on('vastAdVideoStart', function(e) {
+          console.log('HilltopAds Ad video playing');
+        });
+        myFP.on('vastAdComplete', function(e) {
+          console.log('HilltopAds Ad completed - transitioning to main video');
+          setTimeout(() => video.play().catch(err => console.warn('Play main video:', err)), 500);
+        });
+        myFP.on('vastAdSkip', function(e) {
+          console.log('HilltopAds Ad skipped by user');
+        });
+        myFP.on('vastAdClick', function(e) {
+          console.log('HilltopAds Ad clicked - tracking URL fired');
+        });
+        myFP.on('vastAdEnd', function(e) {
+          console.log('HilltopAds Ad ended/stopped');
+        });
+        // Player error (lowercase)
+        myFP.on('error', function(e) {
+          console.error('Player Error:', e);
+        });
+
+        // Show play overlay (check config autoPlay, not video prop)
+        const config = { autoPlay: false };  // From commonLayout
+        if (!config.autoPlay) {
+          document.getElementById('play-overlay').style.display = 'block';
+        }
+      } else if (duration <= 1 || isNaN(duration)) {
+        debouncedLog('invalid', 'Early/invalid duration - waiting for full metadata...');
+      }
+    });
+
+    video.addEventListener('error', function(e) {
+      console.error('Video load error:', e);
+      document.getElementById('play-overlay').style.display = 'none';
+    });
+
+    video.addEventListener('canplay', function() {
+      debouncedLog('canplay', 'Video can play - ready!');
+    });
+
+    // Fallback: Init without ads after 30s
+    setTimeout(() => {
+      if (!initialized) {
+        console.log('Fallback: Initializing without ads (metadata timeout)');
+        initialized = true;
+        myFP = fluidPlayer('video-id', {
+          layoutControls: commonLayout,
+          vastOptions: { adList: [] }
+        });
+        setTimeout(() => video.play().catch(err => console.warn('Fallback play:', err)), 500);
+      }
+    }, 30000);
+  </script>
 </body>
 </html>
