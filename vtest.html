@@ -5,10 +5,16 @@
 <title>Flexible Responsive Full Page Popup Ad</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body { width: 100%; height: 100%; overflow-x: hidden; font-family: Arial, sans-serif; }
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+  html, body {
+    width: 100%; height: 100%; overflow-x: hidden;
+    font-family: Arial, sans-serif;
+  }
   .popup-wrap {
-    position: fixed; top: 0; left: 0;
+    position: fixed;
+    top: 0; left: 0;
     width: 100vw; height: 100vh;
     background-color: rgba(0,0,0,0.65);
     display: none;
@@ -24,13 +30,27 @@
     border-radius: 16px;
     max-width: 95vw;
     max-height: 85vh;
+    width: auto;
+    height: auto;
     box-shadow: 0 15px 50px rgba(0,0,0,0.7);
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
     padding: 0;
-    width: auto; height: auto;
+  }
+  .popup a {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+  }
+  .popup img {
+    display: block;
+    max-width: 100%;
+    max-height: 85vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
   }
   .btn-close {
     position: absolute;
@@ -41,7 +61,8 @@
     border-radius: 50%;
     background: #fff;
     color: #000;
-    font-weight: bold; font-size: 1.5rem;
+    font-weight: bold;
+    font-size: 1.5rem;
     line-height: 32px;
     text-align: center;
     cursor: pointer;
@@ -49,7 +70,9 @@
     transition: transform 0.3s ease;
     z-index: 10;
   }
-  .btn-close:hover { transform: scale(1.1) rotate(90deg); }
+  .btn-close:hover {
+    transform: scale(1.1) rotate(90deg);
+  }
   .btn-close.disabled {
     cursor: not-allowed;
     opacity: 0.5;
@@ -58,15 +81,16 @@
   }
   .popup-timer {
     position: absolute;
-    top: 12px; right: 60px;
-    background: rgba(255,255,255,0.15);
+    top: 12px;
+    right: 60px;
+    background: rgba(255, 255, 255, 0.15);
     color: #fff;
     padding: 6px 14px;
     border-radius: 20px;
     font-weight: 600;
     font-size: 1.15rem;
     letter-spacing: 0.03em;
-    box-shadow: 0 0 8px rgba(255,255,255,0.2);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
     user-select: none;
     min-width: 85px;
     text-align: center;
@@ -75,32 +99,46 @@
   @media (max-width: 480px) {
     .popup-wrap { padding: 0.5rem; }
     .btn-close {
-      width: 24px; height: 24px;
-      font-size: 1.2rem; line-height: 24px;
-      top: 8px; right: 8px;
+      width: 24px;
+      height: 24px;
+      font-size: 1.2rem;
+      line-height: 24px;
+      top: 8px;
+      right: 8px;
     }
     .popup-timer {
-      font-size: 1rem; padding: 5px 11px;
-      top: 8px; right: 44px; min-width: 70px;
+      font-size: 1rem;
+      padding: 5px 11px;
+      top: 8px;
+      right: 44px;
+      min-width: 70px;
     }
   }
-  /* Aspect Ratio Container */
-  .aspect-ratio-16x9 {
+
+  /* Responsive aspect ratio container for video and ad */
+  #video-container {
     position: relative;
     width: 100%;
-    max-width: 640px; /* Optional: max size desktop */
-    margin: 0 auto;
-    background: #000;
-    padding-top: 56.25%; /* 16:9 Ratio */
+    max-width: 640px;
+    padding-top: 56.25%; /* 16:9 aspect ratio */
+    background-color: black;
+    overflow: hidden;
   }
-  .aspect-ratio-16x9 > video,
-  .aspect-ratio-16x9 > #ad-container {
+  #video-container video,
+  #ad-container {
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
-    display: block;
   }
+  /* ad container pointer events disabled to allow video controls */
+  #ad-container {
+    pointer-events: none;
+    z-index: 10;
+  }
+
 </style>
 </head>
 <body>
@@ -109,7 +147,7 @@
   <div class="popup">
     <div class="popup-timer"><span class="seconds"></span> second(s) left</div>
     <div class="btn-close disabled" role="button" aria-label="Close popup">×</div>
-    <div id="video-container" class="aspect-ratio-16x9">
+    <div id="video-container">
       <video id="content-video" controls playsinline>
         <source src="video.mp4" type="video/mp4" />
         Your browser does not support the video tag.
@@ -145,7 +183,7 @@ $(document).ready(function () {
     $seconds.text(duration);
     $popupWrap.fadeIn(400);
 
-    // Timer starts on video play only
+    // Start timer on video play
     contentVideo.addEventListener('play', function () {
       if (timerStarted) return;
       timerStarted = true;
@@ -162,6 +200,7 @@ $(document).ready(function () {
       $popupWrap.fadeOut(300);
     });
 
+    // Optional: close popup if clicking overlay
     $popupWrap.on('click', function (e) {
       if (e.target === this && closeEnabled) {
         clearInterval(timerInterval);
@@ -188,11 +227,13 @@ function initIMA() {
   adsLoader = new google.ima.AdsLoader(adDisplayContainer);
   adsLoader.addEventListener(
     google.ima.AdsManagerLoadedEvent.Type.ADS_MANAGER_LOADED,
-    onAdsManagerLoaded, false
+    onAdsManagerLoaded,
+    false
   );
   adsLoader.addEventListener(
     google.ima.AdErrorEvent.Type.AD_ERROR,
-    onAdError, false
+    onAdError,
+    false
   );
   const adsRequest = new google.ima.AdsRequest();
   adsRequest.adTagUrl = vastAdTagUrl;
@@ -231,13 +272,20 @@ function onAdError(adErrorEvent) {
   }
   contentVideo.play();
 }
-function onContentPauseRequested() { contentVideo.pause(); }
-function onContentResumeRequested() { contentVideo.play(); }
+function onContentPauseRequested() {
+  contentVideo.pause();
+}
+function onContentResumeRequested() {
+  contentVideo.play();
+}
 contentVideo.addEventListener('play', () => {
-  if (!adDisplayContainer) { initIMA(); }
+  if (!adDisplayContainer) {
+    initIMA();
+  }
 });
 contentVideo.src = "/main_Resource/ads/video ads/The_Bread_-_Animated_Short_Film_by_GULU(360p).mp4";
 </script>
 <script src="https://imasdk.googleapis.com/js/sdkloader/ima3_debug.js"></script>
+
 </body>
 </html>
