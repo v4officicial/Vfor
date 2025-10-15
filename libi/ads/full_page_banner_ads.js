@@ -1,18 +1,3 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
-  <script src="https://imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
-</head>
-
-<body>
-  
-</body>
-<!--<script type="module" src="/libi/ads/full_page_banner_ads.js"></script>-->
-<script>
 (function() {
   // Prefix for unique class names
   const classPrefix = 'mytopad-';
@@ -241,5 +226,3 @@
   document.addEventListener('DOMContentLoaded', injectPopupAd); // Re-inject on DOM load
   
 })();
-</script>
-</html>
