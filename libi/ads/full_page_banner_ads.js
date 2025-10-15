@@ -139,7 +139,7 @@
     link.rel = 'noopener noreferrer';
     
     const img = document.createElement('img');
-    img.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWIxmdqoMAtFmwSR-3BzxPBM_WTDi0sLAs-QG463jj2g&s=10';
+    img.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUg_jk5IjZpRy6rgeIY0QLjXSid0BG1a161mDN-7Hv-nXjRvNCGaogoQ&s=10';
     img.alt = 'Ad Banner';
     
     link.appendChild(img);
