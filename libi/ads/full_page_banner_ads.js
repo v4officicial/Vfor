@@ -150,7 +150,7 @@
     document.body.appendChild(popupWrap);
     
     // Timer control
-    let duration = 25;
+    let duration = 10;
     let closeEnabled = false;
     let timerInterval;
     
