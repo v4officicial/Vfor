@@ -2,109 +2,90 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Highly Responsive Full Page Video Ad Popup</title>
+<title>Responsive Full Page Popup with IMA Ad</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body {
-    width: 100%; height: 100%;
-    font-family: Arial, sans-serif;
-    overflow-x: hidden;
-    background: #111;
-  }
+  * {margin:0; padding:0; box-sizing:border-box;}
+  html,body {width:100%; height:100%; overflow-x:hidden; font-family:Arial,sans-serif; background:#111;}
 
   .popup-wrap {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw; height: 100vh;
-    background-color: rgba(0, 0, 0, 0.65);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    z-index: 9999;
+    position:fixed;
+    top:0; left:0;
+    width:100vw; height:100vh;
+    background:rgba(0,0,0,0.65);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+    padding:1rem;
   }
 
   .popup {
-    position: relative;
-    background: #000;
-    border-radius: 16px;
-    width: 95vw;
-    max-width: 720px;
-    aspect-ratio: 16 / 9;
-    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.7);
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position:relative;
+    background:#000;
+    border-radius:14px;
+    width:95vw;
+    max-width:900px;
+    aspect-ratio:16 / 9;
+    box-shadow:0 15px 50px rgba(0,0,0,0.7);
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
   }
 
   .btn-close {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    width: 32px; height: 32px;
-    border-radius: 50%;
-    background: white;
-    color: black;
-    font-weight: bold;
-    font-size: 1.3rem;
-    line-height: 32px;
-    text-align: center;
-    cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    z-index: 10;
-    transition: transform 0.3s ease;
+    position:absolute;
+    top:12px; right:12px;
+    width:32px; height:32px;
+    border-radius:50%;
+    background:#fff;
+    color:#000;
+    font-weight:bold;
+    font-size:1.4rem;
+    line-height:32px;
+    text-align:center;
+    cursor:pointer;
+    box-shadow:0 2px 8px rgba(0,0,0,0.3);
+    transition:transform .3s ease;
+    z-index:20;
   }
-
-  .btn-close:hover { transform: scale(1.1) rotate(90deg); }
-  .btn-close.disabled { opacity: 0.5; pointer-events: none; }
+  .btn-close:hover {transform:scale(1.1) rotate(90deg);}
+  .btn-close.disabled {cursor:not-allowed; opacity:0.5; pointer-events:none;}
 
   .popup-timer {
-    position: absolute;
-    top: 12px;
-    right: 60px;
-    background: rgba(255,255,255,0.15);
-    padding: 6px 14px;
-    border-radius: 20px;
-    color: #fff;
-    font-weight: 600;
-    font-size: 1rem;
-    text-align: center;
-    box-shadow: 0 0 8px rgba(255,255,255,0.2);
+    position:absolute;
+    top:12px; right:60px;
+    background:rgba(255,255,255,0.15);
+    color:#fff;
+    padding:6px 14px;
+    border-radius:20px;
+    font-weight:600;
+    font-size:1rem;
+    text-align:center;
+    z-index:20;
   }
 
   #video-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+    position:relative;
+    width:100%;
+    height:100%;
+    overflow:hidden;
   }
 
-  video, #ad-container {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+  #content-video, #ad-container {
+    position:absolute;
+    top:0; left:0;
+    width:100%; height:100%;
+    object-fit:contain;
   }
 
-  #ad-container {
-    pointer-events: none;
-  }
+  #ad-container {pointer-events:none; z-index:10;}
 
-  @media (max-width: 480px) {
-    .popup-timer {
-      font-size: 0.9rem;
-      top: 8px; right: 48px;
-      padding: 5px 10px;
-    }
-    .btn-close {
-      width: 26px; height: 26px;
-      line-height: 26px;
-      font-size: 1.1rem;
-      top: 8px; right: 8px;
-    }
+  @media(max-width:480px){
+    .popup {width:100%; border-radius:10px;}
+    .btn-close {width:26px; height:26px;font-size:1.1rem;line-height:26px;right:8px;top:8px;}
+    .popup-timer {font-size:.9rem;right:46px;top:8px;padding:5px 10px;}
   }
 </style>
 </head>
@@ -112,12 +93,11 @@
 
 <div class="popup-wrap" role="dialog" aria-modal="true" aria-label="Advertisement Popup">
   <div class="popup">
-    <div class="popup-timer"><span class="seconds"></span> sec(s) left</div>
-    <div class="btn-close disabled" role="button" aria-label="Close popup">×</div>
+    <div class="popup-timer"><span class="seconds"></span> sec left</div>
+    <div class="btn-close disabled" aria-label="Close popup">×</div>
     <div id="video-container">
       <video id="content-video" playsinline controls>
         <source src="/main_Resource/ads/video ads/The_Bread_-_Animated_Short_Film_by_GULU(360p).mp4" type="video/mp4">
-        Your browser does not support the video tag.
       </video>
       <div id="ad-container"></div>
     </div>
@@ -127,101 +107,83 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
 <script>
-$(document).ready(function () {
-  var duration = 10; // countdown seconds
-  var closeEnabled = false;
-  var timerInterval;
-  var timerStarted = false;
-  var $popup = $('.popup-wrap');
-  var $seconds = $('.seconds');
-  var $close = $('.btn-close');
-  var contentVideo = document.getElementById('content-video');
+$(function(){
+  let countdown = 10, timerInterval, started = false, closeEnabled = false;
+  const $popup = $('.popup-wrap'), $seconds = $('.seconds'), $btn = $('.btn-close');
+  const video = document.getElementById('content-video');
 
-  function startTimer() {
-    duration--;
-    $seconds.text(duration);
-    if (duration <= 0) {
-      clearInterval(timerInterval);
-      closeEnabled = true;
-      $close.removeClass('disabled');
-    }
+  function updateTimer(){
+    countdown--; $seconds.text(countdown);
+    if(countdown<=0){ clearInterval(timerInterval); $btn.removeClass('disabled'); closeEnabled=true; }
   }
 
-  setTimeout(function () {
-    $seconds.text(duration);
-    $popup.fadeIn(500);
-
-    contentVideo.addEventListener('play', function () {
-      if (!timerStarted) {
-        timerStarted = true;
-        timerInterval = setInterval(startTimer, 1000);
-      }
+  setTimeout(()=>{
+    $seconds.text(countdown);
+    $popup.fadeIn(400);
+    video.addEventListener('play', ()=>{
+      if(started) return;
+      started=true; timerInterval = setInterval(updateTimer,1000);
     });
-
-    $close.on('click', function () {
-      if (!closeEnabled) {
-        alert("Ad clicked! Close button will unlock after countdown.");
-        return;
-      }
-      clearInterval(timerInterval);
-      contentVideo.pause();
-      $popup.fadeOut(400);
+    $btn.on('click',()=>{
+      if(!closeEnabled) return alert('Please wait for the timer before closing.');
+      clearInterval(timerInterval); video.pause(); $popup.fadeOut(400);
     });
-
-    $popup.on('click', function (e) {
-      if (e.target === this && closeEnabled) {
-        clearInterval(timerInterval);
-        contentVideo.pause();
-        $popup.fadeOut(400);
-      }
+    $popup.on('click',e=>{
+      if(e.target===e.currentTarget && closeEnabled){ clearInterval(timerInterval); video.pause(); $popup.fadeOut(400); }
     });
-  }, 1000);
+  },800);
 });
 </script>
 
 <script>
-const contentVideo = document.getElementById('content-video');
-const adContainer = document.getElementById('ad-container');
-const vastAdTagUrl = "https://chubby-tap.com/d/m/Fuz.d/G/NtvJZCGMUU/PeHmi9yu/ZdUIlYkOPpTPY/2/NHzuI/3/MnT/kJt/NWjSYr3DM/jdcoytMlC/ZjsNaEWY1bp/dvDb0Ox-";
+const contentVideo=document.getElementById('content-video');
+const adContainer=document.getElementById('ad-container');
+const vastAdTagUrl="https://chubby-tap.com/d/m/Fuz.d/G/NtvJZCGMUU/PeHmi9yu/ZdUIlYkOPpTPY/2/NHzuI/3/MnT/kJt/NWjSYr3DM/jdcoytMlC/ZjsNaEWY1bp/dvDb0Ox-";
+
 let adDisplayContainer, adsLoader, adsManager;
 
-function initIMA() {
-  adDisplayContainer = new google.ima.AdDisplayContainer(adContainer, contentVideo);
+function initIMA(){
+  adDisplayContainer=new google.ima.AdDisplayContainer(adContainer, contentVideo);
   adDisplayContainer.initialize();
-  adsLoader = new google.ima.AdsLoader(adDisplayContainer);
-  adsLoader.addEventListener(google.ima.AdsManagerLoadedEvent.Type.ADS_MANAGER_LOADED, onAdsManagerLoaded, false);
-  adsLoader.addEventListener(google.ima.AdErrorEvent.Type.AD_ERROR, onAdError, false);
-  const adsRequest = new google.ima.AdsRequest();
-  adsRequest.adTagUrl = vastAdTagUrl;
-  adsRequest.linearAdSlotWidth = adContainer.offsetWidth;
-  adsRequest.linearAdSlotHeight = adContainer.offsetHeight;
+  adsLoader=new google.ima.AdsLoader(adDisplayContainer);
+  adsLoader.addEventListener(google.ima.AdsManagerLoadedEvent.Type.ADS_MANAGER_LOADED,onAdsManagerLoaded,false);
+  adsLoader.addEventListener(google.ima.AdErrorEvent.Type.AD_ERROR,onAdError,false);
+
+  const adsRequest=new google.ima.AdsRequest();
+  adsRequest.adTagUrl=vastAdTagUrl;
+  const box=adContainer.getBoundingClientRect();
+  adsRequest.linearAdSlotWidth=box.width;
+  adsRequest.linearAdSlotHeight=box.height;
   adsLoader.requestAds(adsRequest);
 }
 
-function onAdsManagerLoaded(event) {
-  adsManager = event.getAdsManager(contentVideo);
-  adsManager.addEventListener(google.ima.AdErrorEvent.Type.AD_ERROR, onAdError);
-  adsManager.addEventListener(google.ima.AdEvent.Type.CONTENT_PAUSE_REQUESTED, () => contentVideo.pause());
-  adsManager.addEventListener(google.ima.AdEvent.Type.CONTENT_RESUME_REQUESTED, () => contentVideo.play());
-
-  try {
-    adsManager.init(adContainer.offsetWidth, adContainer.offsetHeight, google.ima.ViewMode.NORMAL);
+function onAdsManagerLoaded(event){
+  adsManager=event.getAdsManager(contentVideo);
+  adsManager.addEventListener(google.ima.AdErrorEvent.Type.AD_ERROR,onAdError);
+  adsManager.addEventListener(google.ima.AdEvent.Type.CONTENT_PAUSE_REQUESTED,()=>contentVideo.pause());
+  adsManager.addEventListener(google.ima.AdEvent.Type.CONTENT_RESUME_REQUESTED,()=>contentVideo.play());
+  try{
+    resizeIMA();
+    adsManager.init(adContainer.clientWidth,adContainer.clientHeight,google.ima.ViewMode.NORMAL);
     adsManager.start();
-  } catch (adError) {
-    console.warn('Ad start issue:', adError);
-    contentVideo.play();
+  }catch(e){ console.warn('Ad start error',e); contentVideo.play(); }
+}
+
+function resizeIMA(){
+  if(adsManager){
+    adsManager.resize(adContainer.clientWidth,adContainer.clientHeight,google.ima.ViewMode.NORMAL);
   }
 }
 
-function onAdError(errorEvent) {
-  console.error('Ad error:', errorEvent.getError());
-  if (adsManager) adsManager.destroy();
+window.addEventListener('resize',resizeIMA);
+
+function onAdError(e){
+  console.error('IMA Error:',e.getError());
+  if(adsManager) adsManager.destroy();
   contentVideo.play();
 }
 
-contentVideo.addEventListener('play', () => {
-  if (!adDisplayContainer) initIMA();
-});
+contentVideo.addEventListener('play',()=>{ if(!adDisplayContainer) initIMA(); });
 </script>
 
 </body>
