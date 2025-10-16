@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>Responsive Full Page Popup Ad with IMA SDK</title>
+<title>Flexible Responsive Full Page Popup Ad</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <style>
-  /* Reset */
+  /* Reset and base styles */
   * {
     margin: 0; padding: 0; box-sizing: border-box;
   }
@@ -13,7 +13,8 @@
     width: 100%; height: 100%; overflow-x: hidden;
     font-family: Arial, sans-serif;
   }
-  /* Popup background and center */
+
+  /* Fullscreen overlay */
   .popup-wrap {
     position: fixed;
     top: 0; left: 0;
@@ -22,10 +23,11 @@
     display: none;
     justify-content: center;
     align-items: center;
-    padding: 1rem;
+    padding: 1rem; /* padding for viewport edges */
     z-index: 9999;
-    overflow-y: auto;
+    overflow-y: auto; /* scroll if needed on small devices */
   }
+
   /* Popup container */
   .popup {
     position: relative;
@@ -40,9 +42,27 @@
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    padding: 0;
+    padding: 0; /* no internal padding to avoid shrinking banner */
   }
-  /* Close button */
+
+  /* Banner/ad image wrapper link */
+  .popup a {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  /* Banner image adapts */
+  .popup video {
+    display: block;
+    max-width: 100%;
+    max-height: 85vh;
+    width: auto;
+    height: auto;
+    object-fit: contain; /* fits within container, no cropping */
+  }
+
+  /* Close button styling */
   .btn-close {
     position: absolute;
     top: 12px;
@@ -70,7 +90,8 @@
     pointer-events: none;
     transform: none;
   }
-  /* Timer display */
+
+  /* Timer badge */
   .popup-timer {
     position: absolute;
     top: 12px;
@@ -88,8 +109,12 @@
     text-align: center;
     z-index: 10;
   }
+
+  /* Scrollbar for mobile */
   @media (max-width: 480px) {
-    .popup-wrap { padding: 0.5rem; }
+    .popup-wrap {
+      padding: 0.5rem;
+    }
     .btn-close {
       width: 24px;
       height: 24px;
@@ -106,57 +131,26 @@
       min-width: 70px;
     }
   }
-  /* Responsive aspect ratio container for video and ad */
-  #video-container {
-    position: relative;
-    width: 100%;
-    max-width: 640px;
-    aspect-ratio: 16 / 9;
-    background-color: black;
-    overflow: hidden;
-  }
-  /* Fallback for aspect-ratio */
-  @supports not (aspect-ratio: 16 / 9) {
-    #video-container {
-      height: 0;
-      padding-top: 56.25%; /* 16:9 fallback */
-    }
-  }
-  /* Video and Ad container fill */
-  #content-video,
-  #ad-container {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    object-fit: contain;
-  }
-  /* Enable pointer events on ad container for mobile */
-  #ad-container {
-    pointer-events: none;
-    z-index: 10;
-  }
 </style>
 </head>
 <body>
 
-<!-- Popup structure -->
 <div class="popup-wrap" role="dialog" aria-modal="true" tabindex="-1" aria-label="Advertisement Popup">
   <div class="popup">
-    <div class="popup-timer"><span class="seconds">10</span> second(s) left</div>
+    <div class="popup-timer"><span class="seconds"></span> second(s) left</div>
     <div class="btn-close disabled" role="button" aria-label="Close popup">×</div>
+    <!--banner c2 ad-->
     <div id="video-container">
-      <video id="content-video" controls playsinline webkit-playsinline>
-        <source src="/main_Resource/ads/video ads/The_Bread_-_Animated_Short_Film_by_GULU(360p).mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-      <div id="ad-container"></div>
-    </div>
+  <video id="content-video" controls playsinline>
+    <source src="video.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+  <div id="ad-container"></div>
+</div>
   </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="https://imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
-
 <script>
 $(document).ready(function () {
   var duration = 10;
@@ -167,10 +161,6 @@ $(document).ready(function () {
   var $btnClose = $('.btn-close');
   var $seconds = $('.seconds');
   var contentVideo = document.getElementById('content-video');
-  var adContainer = document.getElementById('ad-container');
-
-  // Initialize IMA SDK variables
-  var adDisplayContainer, adsLoader, adsManager;
 
   function startTimer() {
     duration--;
@@ -182,111 +172,115 @@ $(document).ready(function () {
     }
   }
 
-  // IMA initialization triggered by user interaction (video play)
-  function initIMA() {
-    if (adDisplayContainer) return; // Already initialized
-
-    adDisplayContainer = new google.ima.AdDisplayContainer(adContainer, contentVideo);
-    adDisplayContainer.initialize(); // Must be called upon user interaction
-
-    adsLoader = new google.ima.AdsLoader(adDisplayContainer);
-
-    adsLoader.addEventListener(
-      google.ima.AdsManagerLoadedEvent.Type.ADS_MANAGER_LOADED,
-      onAdsManagerLoaded,
-      false
-    );
-
-    adsLoader.addEventListener(
-      google.ima.AdErrorEvent.Type.AD_ERROR,
-      onAdError,
-      false
-    );
-
-    var adsRequest = new google.ima.AdsRequest();
-    adsRequest.adTagUrl = "https://chubby-tap.com/d/m/Fuz.d/G/NtvJZCGMUU/PeHmi9yu/ZdUIlYkOPpTPY/2/NHzuI/3/MnT/kJt/NWjSYr3DM/jdcoytMlC/ZjsNaEWY1bp/dvDb0Ox-";
-    adsRequest.linearAdSlotWidth = 640;
-    adsRequest.linearAdSlotHeight = 360;
-    adsRequest.nonLinearAdSlotWidth = 640;
-    adsRequest.nonLinearAdSlotHeight = 150;
-
-    adsLoader.requestAds(adsRequest);
-  }
-
-  // Called when ads are loaded and ready
-  function onAdsManagerLoaded(event) {
-    adsManager = event.getAdsManager(contentVideo);
-
-    adsManager.addEventListener(google.ima.AdErrorEvent.Type.AD_ERROR, onAdError);
-
-    adsManager.addEventListener(google.ima.AdEvent.Type.CONTENT_PAUSE_REQUESTED, function() {
-      contentVideo.pause();
-    });
-
-    adsManager.addEventListener(google.ima.AdEvent.Type.CONTENT_RESUME_REQUESTED, function() {
-      contentVideo.play();
-    });
-
-    try {
-      adsManager.init(640, 360, google.ima.ViewMode.NORMAL);
-      adsManager.start();
-    } catch (error) {
-      console.error('AdsManager could not start:', error);
-      contentVideo.play();
-    }
-  }
-
-  // Handle ad errors
-  function onAdError(adErrorEvent) {
-    console.error('Ad error:', adErrorEvent.getError());
-    if (adsManager) {
-      adsManager.destroy();
-    }
-    contentVideo.play();
-  }
-
-  // Show popup after short delay
   setTimeout(function () {
     $seconds.text(duration);
     $popupWrap.fadeIn(400);
-  }, 1000);
 
-  // Start timer and initialize IMA on first video play
-  contentVideo.addEventListener('play', function () {
-    if (!timerStarted) {
+    // Start timer on video play
+    contentVideo.addEventListener('play', function () {
+      if (timerStarted) return;
       timerStarted = true;
       timerInterval = setInterval(startTimer, 1000);
-      initIMA();
-    }
-  });
+    });
 
-  // Close button handler
-  $btnClose.on('click', function () {
-    if (!closeEnabled) {
-      alert("Ad clicked! Close button not enabled yet.");
-      return;
-    }
-    clearInterval(timerInterval);
-    if (adsManager) {
-      adsManager.destroy();
-    }
-    contentVideo.pause();
-    $popupWrap.fadeOut(300);
-  });
-
-  // Optional: close popup when clicking outside popup content
-  $popupWrap.on('click', function (e) {
-    if (e.target === this && closeEnabled) {
-      clearInterval(timerInterval);
-      if (adsManager) {
-        adsManager.destroy();
+    $btnClose.on('click', function () {
+      if (!closeEnabled) {
+        alert("Ad clicked! Close button not enabled yet.");
+        return;
       }
+      clearInterval(timerInterval);
       contentVideo.pause();
       $popupWrap.fadeOut(300);
-    }
-  });
+    });
+
+    // Optional: close popup if clicking overlay
+    $popupWrap.on('click', function (e) {
+      if (e.target === this && closeEnabled) {
+        clearInterval(timerInterval);
+        contentVideo.pause();
+        $popupWrap.fadeOut(300);
+      }
+    });
+  }, 1000);
 });
 </script>
+
+
+<script src="https://imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
+<script>
+const contentVideo = document.getElementById('content-video');
+const adContainer = document.getElementById('ad-container');
+const vastAdTagUrl = "https://chubby-tap.com/d/m/Fuz.d/G/NtvJZCGMUU/PeHmi9yu/ZdUIlYkOPpTPY/2/NHzuI/3/MnT/kJt/NWjSYr3DM/jdcoytMlC/ZjsNaEWY1bp/dvDb0Ox-";
+
+let adDisplayContainer;
+let adsLoader;
+let adsManager;
+
+function initIMA() {
+  adDisplayContainer = new google.ima.AdDisplayContainer(adContainer, contentVideo);
+  adDisplayContainer.initialize();
+  adsLoader = new google.ima.AdsLoader(adDisplayContainer);
+  adsLoader.addEventListener(
+    google.ima.AdsManagerLoadedEvent.Type.ADS_MANAGER_LOADED,
+    onAdsManagerLoaded,
+    false
+  );
+  adsLoader.addEventListener(
+    google.ima.AdErrorEvent.Type.AD_ERROR,
+    onAdError,
+    false
+  );
+  const adsRequest = new google.ima.AdsRequest();
+  adsRequest.adTagUrl = vastAdTagUrl;
+  adsRequest.linearAdSlotWidth = 640;
+  adsRequest.linearAdSlotHeight = 360;
+  adsRequest.nonLinearAdSlotWidth = 640;
+  adsRequest.nonLinearAdSlotHeight = 150;
+  adsLoader.requestAds(adsRequest);
+}
+function onAdsManagerLoaded(adsManagerLoadedEvent) {
+  adsManager = adsManagerLoadedEvent.getAdsManager(contentVideo);
+  adsManager.addEventListener(
+    google.ima.AdErrorEvent.Type.AD_ERROR,
+    onAdError
+  );
+  adsManager.addEventListener(
+    google.ima.AdEvent.Type.CONTENT_PAUSE_REQUESTED,
+    onContentPauseRequested
+  );
+  adsManager.addEventListener(
+    google.ima.AdEvent.Type.CONTENT_RESUME_REQUESTED,
+    onContentResumeRequested
+  );
+  try {
+    adsManager.init(640, 360, google.ima.ViewMode.NORMAL);
+    adsManager.start();
+  } catch (adError) {
+    console.error('AdsManager could not start:', adError);
+    contentVideo.play();
+  }
+}
+function onAdError(adErrorEvent) {
+  console.error('Ad error:', adErrorEvent.getError());
+  if (adsManager) {
+    adsManager.destroy();
+  }
+  contentVideo.play();
+}
+function onContentPauseRequested() {
+  contentVideo.pause();
+}
+function onContentResumeRequested() {
+  contentVideo.play();
+}
+contentVideo.addEventListener('play', () => {
+  if (!adDisplayContainer) {
+    initIMA();
+  }
+});
+contentVideo.src = "/main_Resource/ads/video ads/The_Bread_-_Animated_Short_Film_by_GULU(360p).mp4";
+</script>
+<script src="https://imasdk.googleapis.com/js/sdkloader/ima3_debug.js"></script>
 
 </body>
 </html>
