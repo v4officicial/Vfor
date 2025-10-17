@@ -133,21 +133,15 @@
     }
   }
   
-  
-  /* Make video and ad container exactly overlap and fill container */
-  
-  #ad-container {
-    position: absolute;
-    top: 0; 
-    width: 100%; height: 100%;
-    object-fit: contain;
-  }
-
-  /* Disable pointer events on ad container to allow clicks on video controls */
-  #ad-container {
-    pointer-events: none;
-    z-index: 10;
-  }
+ #ad-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5; /* below the close button but above video */
+  pointer-events: none;
+}
 
 </style>
 </head>
