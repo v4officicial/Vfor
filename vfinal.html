@@ -133,7 +133,22 @@
     }
   }
   
+#ad-container {
+  position: relative;
+  width: 100%;
+  max-width: 640px; /* or suitable max width for your ad */
+  padding-top: 56.25%; /* 16:9 aspect ratio (9/16 = 0.5625) */
+  overflow: hidden;
+}
 
+#ad-container video {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Or 'cover' to fill fully and crop if preferred */
+  background-color: black; /* fallback background */
+}
 
 </style>
 </head>
