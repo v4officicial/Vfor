@@ -136,18 +136,35 @@
 #video-container {
   position: relative;
   width: 100%;
-  height: 100%; /* ensures parent defines a fixed size */
+  max-width: 100%;
+  aspect-ratio: 16 / 9; /* maintain video’s natural ratio on all devices */
+  overflow: hidden; /* prevent ad or video overflow */
 }
 
 #ad-container {
-  position: absolute; /* overlays on top of the video */
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(255, 0, 0, 0.1); /* optional transparent backup */
+  max-width: 100%;
+  max-height: 100%;
+  background-color: transparent;
   z-index: 20;
-  pointer-events: none; /* allows video interaction while ad overlays */
+  display: block;
+  pointer-events: none; /* don’t block video */
+  object-fit: contain; /* ensures visual content scales correctly */
+}
+
+@media (max-width: 768px) {
+  #video-container {
+    aspect-ratio: 16 / 9;
+    height: auto;
+  }
+  #ad-container {
+    width: 100%;
+    height: 100%;
+  }
 }
   
 </style>
