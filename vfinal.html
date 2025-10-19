@@ -73,7 +73,7 @@
   #video-container {
     position: relative;
     width: 100%;
-    padding-top: 56.25%; /* 16:9 */
+    padding-top: 56.25%;
     overflow: hidden;
     cursor: pointer;
   }
@@ -90,10 +90,11 @@
   #ad-container {
     z-index: 20;
     background-color: transparent;
-    pointer-events: none; /* initially none, enabled once ad plays */
+    pointer-events: none; /* Initially no pointer events */
+    cursor: pointer; 
   }
   @media (max-width: 768px) {
-    #video-container { padding-top: 75%; } /* 4:3 */
+    #video-container { padding-top: 75%; }
     .popup-timer { font-size: 1rem; right: 48px; }
     .btn-close { width: 28px; height: 28px; font-size: 1.1rem; }
   }
@@ -121,7 +122,7 @@
 <script src="https://imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
 <script>
 $(document).ready(function () {
-  let duration = 45;
+  let duration = 10;
   let closeEnabled = false;
   let timerStarted = false;
   let timerInterval;
@@ -152,7 +153,7 @@ $(document).ready(function () {
       timerInterval = setInterval(startTimer, 1000);
     });
 
-    // Allow clicking on video container to toggle video play/pause
+    // Toggle play/pause on video container click
     videoContainer.addEventListener('click', () => {
       if (contentVideo.paused) {
         contentVideo.play();
@@ -169,6 +170,9 @@ $(document).ready(function () {
       clearInterval(timerInterval);
       contentVideo.pause();
       $popupWrap.fadeOut(300);
+
+      // Disable ad container pointer events when popup closes
+      adContainer.style.pointerEvents = 'none';
     });
 
     $popupWrap.on('click', (e) => {
@@ -176,11 +180,11 @@ $(document).ready(function () {
         clearInterval(timerInterval);
         contentVideo.pause();
         $popupWrap.fadeOut(300);
+        adContainer.style.pointerEvents = 'none'; // Disable ad clicks
       }
     });
   }, 1000);
 
-  /*** IMA SDK integration ***/
   const vastAdTagUrl = "https://chubby-tap.com/d/m/Fuz.d/G/NtvJZCGMUU/PeHmi9yu/ZdUIlYkOPpTPY/2/NHzuI/3/MnT/kJt/NWjSYr3DM/jdcoytMlC/ZjsNaEWY1bp/dvDb0Ox-";
 
   let adDisplayContainer, adsLoader, adsManager;
@@ -191,29 +195,36 @@ $(document).ready(function () {
     adsLoader = new google.ima.AdsLoader(adDisplayContainer);
     adsLoader.addEventListener(google.ima.AdsManagerLoadedEvent.Type.ADS_MANAGER_LOADED, onAdsManagerLoaded);
     adsLoader.addEventListener(google.ima.AdErrorEvent.Type.AD_ERROR, onAdError);
-
-    const adsRequest = new google.ima.AdsRequest();
-    adsRequest.adTagUrl = vastAdTagUrl;
-    adsRequest.linearAdSlotWidth = adContainer.offsetWidth;
-    adsRequest.linearAdSlotHeight = adContainer.offsetHeight;
-    adsRequest.nonLinearAdSlotWidth = adContainer.offsetWidth;
-    adsRequest.nonLinearAdSlotHeight = 150;
-    adsLoader.requestAds(adsRequest);
   }
 
   function onAdsManagerLoaded(e) {
     adsManager = e.getAdsManager(contentVideo);
     adsManager.addEventListener(google.ima.AdErrorEvent.Type.AD_ERROR, onAdError);
+
+    // When ad starts, enable clicks on ad container
+    adsManager.addEventListener(google.ima.AdEvent.Type.STARTED, () => {
+      adContainer.style.pointerEvents = "auto";
+    });
+
+    // When ad stops, disable clicks on ad container
+    adsManager.addEventListener(google.ima.AdEvent.Type.COMPLETE, () => {
+      adContainer.style.pointerEvents = "none";
+    });
+
+    adsManager.addEventListener(google.ima.AdEvent.Type.SKIPPED, () => {
+      adContainer.style.pointerEvents = "none";
+    });
+
     adsManager.addEventListener(google.ima.AdEvent.Type.CONTENT_PAUSE_REQUESTED, () => contentVideo.pause());
     adsManager.addEventListener(google.ima.AdEvent.Type.CONTENT_RESUME_REQUESTED, () => contentVideo.play());
+
     try {
       adsManager.init(adContainer.offsetWidth, adContainer.offsetHeight, google.ima.ViewMode.NORMAL);
       adsManager.start();
-      // Enable clicks on ad container once ad starts playing
-      adContainer.style.pointerEvents = "auto";
     } catch (err) {
       console.error('Ad initialization failed', err);
       contentVideo.play();
+      adContainer.style.pointerEvents = "none";
     }
   }
 
@@ -221,13 +232,23 @@ $(document).ready(function () {
     console.error('Ad error:', event.getError());
     if (adsManager) adsManager.destroy();
     contentVideo.play();
+    adContainer.style.pointerEvents = "none";
   }
 
   contentVideo.addEventListener('play', () => {
-    if (!adDisplayContainer) initIMA();
+    if (!adDisplayContainer) {
+      initIMA();
+      // Request ads just after initialization
+      const adsRequest = new google.ima.AdsRequest();
+      adsRequest.adTagUrl = vastAdTagUrl;
+      adsRequest.linearAdSlotWidth = adContainer.offsetWidth;
+      adsRequest.linearAdSlotHeight = adContainer.offsetHeight;
+      adsRequest.nonLinearAdSlotWidth = adContainer.offsetWidth;
+      adsRequest.nonLinearAdSlotHeight = 150;
+      adsLoader.requestAds(adsRequest);
+    }
   });
 });
 </script>
-
 </body>
 </html>
