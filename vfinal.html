@@ -3,12 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Responsive Video Ad Popup with Skip Button</title>
+<title>Responsive Full Page Popup Ad</title>
 <style>
   /* Reset and base styles */
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body {
-    width: 100%; height: 100%;
+    width: 100%;
+    height: 100%;
     font-family: Arial, sans-serif;
     overflow-x: hidden;
   }
@@ -40,6 +41,45 @@
     overflow: hidden;
   }
 
+  /* Close button */
+  .btn-close {
+    position: absolute;
+    top: 12px; right: 12px;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: #fff;
+    color: #000;
+    font-size: 1.4rem;
+    font-weight: bold;
+    line-height: 32px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    z-index: 10;
+  }
+  .btn-close:hover { transform: scale(1.1) rotate(90deg); }
+  .btn-close.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+    transform: none;
+  }
+
+  /* Timer badge */
+  .popup-timer {
+    position: absolute;
+    top: 12px; right: 60px;
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-align: center;
+    min-width: 80px;
+    z-index: 10;
+  }
+
   /* Responsive video wrapper using aspect ratio */
   #video-container {
     position: relative;
@@ -58,97 +98,36 @@
 
   #content-video {
     object-fit: contain;
-    z-index: 10;
   }
 
   #ad-container {
-    z-index: 20;
-    background-color: transparent;
-    pointer-events: none; /* Allow pointer events here */
-  }
-
-  /* Skip button inside ad container */
-  #skip-button {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    z-index: 30;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: #fff;
-    color: #000;
-    font-weight: bold;
-    font-size: 1.2rem;
-    line-height: 40px;
-    text-align: center;
-    cursor: not-allowed;
-    opacity: 0.5;
+    z-index: -1;
     pointer-events: none;
-    user-select: none;
-    transition: all 0.3s ease;
-  }
-  #skip-button.enabled {
-    cursor: pointer;
-    opacity: 1;
-    pointer-events: auto;
-  }
-  #skip-button:hover.enabled {
-    transform: scale(1.2) rotate(20deg);
-    background: #f00;
-    color: #fff;
-  }
-
-  /* Close button fallback outside ad container */
-  .btn-close {
-    display: none;
-  }
-
-  /* Timer badge */
-  .popup-timer {
-    position: absolute;
-    top: 12px; right: 60px;
-    background: rgba(255,255,255,0.15);
-    color: #fff;
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-weight: 600;
-    font-size: 1.1rem;
-    text-align: center;
-    min-width: 80px;
-    z-index: 10;
+    background-color: transparent;
   }
 
   /* Adjust for mobile screens */
   @media (max-width: 768px) {
-    #video-container { padding-top: 75%; } /* 4:3 */
+    #video-container { padding-top: 75%; } /* 4:3 for smaller ratios */
     .popup-timer { font-size: 1rem; right: 48px; }
-    #skip-button {
-      width: 32px;
-      height: 32px;
-      line-height: 32px;
-      font-size: 1rem;
-    }
+    .btn-close { width: 28px; height: 28px; font-size: 1.1rem; }
   }
 </style>
 </head>
 <body>
 
-<div class="popup-wrap" role="dialog" aria-modal="true" tabindex="-1" aria-label="Advertisement Popup">
+<div class="popup-wrap">
   <div class="popup">
-    <div class="popup-timer"><span id="timer-seconds"></span> sec</div>
+    <div class="popup-timer"><span class="seconds"></span> sec</div>
+    <div class="btn-close disabled">×</div>
 
-    <div id="video-container" aria-label="Ad video container">
-      <video id="content-video" controls playsinline
-        poster="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgB4FisStERcFQ-_6PRXKXWkNb71hhxIWX1J3UXFQGWA&s=10"
-        aria-label="Advertisement video player">
+    <div id="video-container">
+      <video id="content-video" controls playsinline 
+        poster="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgB4FisStERcFQ-_6PRXKXWkNb71hhxIWX1J3UXFQGWA&s=10">
         <source src="/main_Resource/ads/video ads/The_Bread_-_Animated_Short_Film_by_GULU(360p).mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
-
-      <div id="ad-container" aria-label="Advertisement interactive container">
-        <button id="skip-button" aria-label="Skip Advertisement" disabled>×</button>
-      </div>
+      <div id="ad-container"></div>
     </div>
   </div>
 </div>
@@ -157,76 +136,101 @@
 <script>
 $(document).ready(function () {
   let duration = 10;
+  let closeEnabled = false;
   let timerStarted = false;
   let timerInterval;
   const $popupWrap = $('.popup-wrap');
-  const $timerSeconds = $('#timer-seconds');
-  const $skipButton = $('#skip-button')[0];
+  const $btnClose = $('.btn-close');
+  const $seconds = $('.seconds');
   const contentVideo = document.getElementById('content-video');
 
-  // Show popup with timer and enable skip after countdown
-  function startCountdown() {
-    $timerSeconds.text(duration);
-    timerInterval = setInterval(() => {
-      duration--;
-      if (duration <= 0) {
-        clearInterval(timerInterval);
-        $timerSeconds.text('0');
-        enableSkipButton();
-      } else {
-        $timerSeconds.text(duration);
-      }
-    }, 1000);
+  function startTimer() {
+    duration--;
+    $seconds.text(duration);
+    if (duration <= 0) {
+      clearInterval(timerInterval);
+      closeEnabled = true;
+      $btnClose.removeClass('disabled').css('pointer-events', 'auto');
+    }
   }
 
-  function enableSkipButton() {
-    $skipButton.disabled = false;
-    $skipButton.classList.add('enabled');
-    $skipButton.style.cursor = 'pointer';
-    $skipButton.removeAttribute('disabled');
-  }
-
-  function disableSkipButton() {
-    $skipButton.disabled = true;
-    $skipButton.classList.remove('enabled');
-    $skipButton.style.cursor = 'not-allowed';
-    $skipButton.setAttribute('disabled', true);
-  }
-
-  // Start popup and video
   setTimeout(() => {
+    $seconds.text(duration);
     $popupWrap.fadeIn(400);
-  }, 500);
 
-  contentVideo.addEventListener('play', () => {
-    if (!timerStarted) {
+    contentVideo.addEventListener('play', () => {
+      if (timerStarted) return;
       timerStarted = true;
-      startCountdown();
-    }
-  });
+      timerInterval = setInterval(startTimer, 1000);
+    });
 
-  // Skip button click handler
-  $skipButton.addEventListener('click', () => {
-    if ($skipButton.disabled) {
-      alert('Please watch the ad for a few seconds before skipping.');
-      return;
-    }
-    clearInterval(timerInterval);
-    contentVideo.pause();
-    $popupWrap.fadeOut(300);
-  });
-
-  // Let video be clickable as normal by no pointer block on video element
-  contentVideo.style.pointerEvents = 'auto';
-
-  // Optional: clicking outside video closes popup only if skip enabled
-  $popupWrap.on('click', function (e) {
-    if (e.target === this && !$skipButton.disabled) {
+    $btnClose.on('click', () => {
+      if (!closeEnabled) {
+        alert("Please watch the ad for a few seconds before closing.");
+        return;
+      }
       clearInterval(timerInterval);
       contentVideo.pause();
       $popupWrap.fadeOut(300);
-    }
-  });
+    });
+
+    $popupWrap.on('click', (e) => {
+      if (e.target === e.currentTarget && closeEnabled) {
+        clearInterval(timerInterval);
+        contentVideo.pause();
+        $popupWrap.fadeOut(300);
+      }
+    });
+  }, 1000);
+});
+</script>
+
+<script src="https://imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
+<script>
+const contentVideo = document.getElementById('content-video');
+const adContainer = document.getElementById('ad-container');
+const vastAdTagUrl = "https://chubby-tap.com/d/m/Fuz.d/G/NtvJZCGMUU/PeHmi9yu/ZdUIlYkOPpTPY/2/NHzuI/3/MnT/kJt/NWjSYr3DM/jdcoytMlC/ZjsNaEWY1bp/dvDb0Ox-";
+
+let adDisplayContainer, adsLoader, adsManager;
+
+function initIMA() {
+  adDisplayContainer = new google.ima.AdDisplayContainer(adContainer, contentVideo);
+  adDisplayContainer.initialize();
+  adsLoader = new google.ima.AdsLoader(adDisplayContainer);
+  adsLoader.addEventListener(google.ima.AdsManagerLoadedEvent.Type.ADS_MANAGER_LOADED, onAdsManagerLoaded);
+  adsLoader.addEventListener(google.ima.AdErrorEvent.Type.AD_ERROR, onAdError);
+
+  const adsRequest = new google.ima.AdsRequest();
+  adsRequest.adTagUrl = vastAdTagUrl;
+  adsRequest.linearAdSlotWidth = adContainer.offsetWidth;
+  adsRequest.linearAdSlotHeight = adContainer.offsetHeight;
+  adsRequest.nonLinearAdSlotWidth = adContainer.offsetWidth;
+  adsRequest.nonLinearAdSlotHeight = 150;
+  adsLoader.requestAds(adsRequest);
+}
+
+function onAdsManagerLoaded(e) {
+  adsManager = e.getAdsManager(contentVideo);
+  adsManager.addEventListener(google.ima.AdErrorEvent.Type.AD_ERROR, onAdError);
+  adsManager.addEventListener(google.ima.AdEvent.Type.CONTENT_PAUSE_REQUESTED, () => contentVideo.pause());
+  adsManager.addEventListener(google.ima.AdEvent.Type.CONTENT_RESUME_REQUESTED, () => contentVideo.play());
+  try {
+    adsManager.init(adContainer.offsetWidth, adContainer.offsetHeight, google.ima.ViewMode.NORMAL);
+    adsManager.start();
+  } catch (err) {
+    console.error('Ad initialization failed', err);
+    contentVideo.play();
+  }
+}
+
+function onAdError(event) {
+  console.error('Ad error:', event.getError());
+  if (adsManager) adsManager.destroy();
+  contentVideo.play();
+}
+
+contentVideo.addEventListener('play', () => {
+  if (!adDisplayContainer) initIMA();
 });
 </script>
 
