@@ -5,16 +5,16 @@
 <title>Flexible Responsive Full Page Popup Ad</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <style>
-  /* Reset and base styles */
-  * {
-    margin: 0; padding: 0; box-sizing: border-box;
-  }
+ /* Reset and base styles */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body {
-    width: 100%; height: 100%; overflow-x: hidden;
+    width: 100%;
+    height: 100%;
     font-family: Arial, sans-serif;
+    overflow-x: hidden;
   }
 
-  /* Fullscreen overlay */
+  /* Overlay background */
   .popup-wrap {
     position: fixed;
     top: 0; left: 0;
@@ -23,71 +23,44 @@
     display: none;
     justify-content: center;
     align-items: center;
-    padding: 1rem; /* padding for viewport edges */
+    padding: 1rem;
     z-index: 9999;
-    overflow-y: auto; /* scroll if needed on small devices */
   }
 
-  /* Popup container */
- 
+  /* Popup box */
   .popup {
     position: relative;
     background: #000;
     border-radius: 16px;
     max-width: 95vw;
     max-height: 85vh;
-    width: auto;
-    height: auto;
     box-shadow: 0 15px 50px rgba(0,0,0,0.7);
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    padding: 0; /* no internal padding to avoid shrinking banner */
   }
 
-  /* Banner/ad image wrapper link */
-  .popup a {
-    display: block;
-    max-width: 100%;
-    max-height: 100%;
-  }
-
-  /* Banner image adapts */
-  .popup video {
-    display: block;
-    max-width: 100%;
-    max-height: 85vh;
-    width: auto;
-    height: auto;
-    object-fit: contain; /* fits within container, no cropping */
-  }
-
-  /* Close button styling */
+  /* Close button */
   .btn-close {
     position: absolute;
-    top: 12px;
-    right: 12px;
-    width: 32px;
-    height: 32px;
+    top: 12px; right: 12px;
+    width: 32px; height: 32px;
     border-radius: 50%;
     background: #fff;
     color: #000;
+    font-size: 1.4rem;
     font-weight: bold;
-    font-size: 1.5rem;
     line-height: 32px;
     text-align: center;
     cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
     transition: transform 0.3s ease;
     z-index: 10;
   }
-  .btn-close:hover {
-    transform: scale(1.1) rotate(90deg);
-  }
+  .btn-close:hover { transform: scale(1.1) rotate(90deg); }
   .btn-close.disabled {
-    cursor: not-allowed;
     opacity: 0.5;
+    cursor: not-allowed;
     pointer-events: none;
     transform: none;
   }
@@ -95,77 +68,50 @@
   /* Timer badge */
   .popup-timer {
     position: absolute;
-    top: 12px;
-    right: 60px;
-    background: rgba(255, 255, 255, 0.15);
+    top: 12px; right: 60px;
+    background: rgba(255,255,255,0.15);
     color: #fff;
     padding: 6px 14px;
     border-radius: 20px;
     font-weight: 600;
-    font-size: 1.15rem;
-    letter-spacing: 0.03em;
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
-    user-select: none;
-    min-width: 85px;
+    font-size: 1.1rem;
     text-align: center;
+    min-width: 80px;
     z-index: 10;
   }
 
-  /* Scrollbar for mobile */
-  @media (max-width: 480px) {
-    .popup-wrap {
-      padding: 0.5rem;
-    }
-    .btn-close {
-      width: 24px;
-      height: 24px;
-      font-size: 1.2rem;
-      line-height: 24px;
-      top: 8px;
-      right: 8px;
-    }
-    .popup-timer {
-      font-size: 1rem;
-      padding: 5px 11px;
-      top: 8px;
-      right: 44px;
-      min-width: 70px;
-    }
-  }
-  
-#video-container {
-  position: relative;
-  width: 100%;
-  max-width: 100%;
-  aspect-ratio: 16 / 9; /* maintain video’s natural ratio on all devices */
-  overflow: hidden; /* prevent ad or video overflow */
-}
-
-#ad-container {
-  position: absolute;
-  top: 0;
-  /*left: 0;
-  width: 100%;
-  height: 100%;
-  max-width: 100%;
-  max-height: 100%;
-  background-color: transparent;
-  z-index: 20;
-  display: block;
-  pointer-events: none; /* don’t block video */
-  object-fit: contain; /* ensures visual content scales correctly */
-}
-
-@media (max-width: 768px) {
+  /* Responsive video wrapper using aspect ratio */
   #video-container {
-    aspect-ratio: 16 / 9;
-    height: auto;
-  }
-  #ad-container {
+    position: relative;
     width: 100%;
-    height: auto;
+    padding-top: 56.25%; /* 16:9 ratio */
+    overflow: hidden;
   }
-}
+
+  #content-video,
+  #ad-container {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  #content-video {
+    object-fit: contain;
+  }
+
+  #ad-container {
+    z-index: 20;
+    pointer-events: none;
+    background-color: transparent;
+  }
+
+  /* Adjust for mobile screens */
+  @media (max-width: 768px) {
+    #video-container { padding-top: 75%; } /* 4:3 for smaller ratios */
+    .popup-timer { font-size: 1rem; right: 48px; }
+    .btn-close { width: 28px; height: 28px; font-size: 1.1rem; }
+  }
 </style>
 </head>
 <body>
