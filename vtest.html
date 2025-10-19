@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Responsive Full Page Popup Ad</title>
 <style>
-  /* Reset and base styles */
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body {
     width: 100%;
@@ -13,8 +12,6 @@
     font-family: Arial, sans-serif;
     overflow-x: hidden;
   }
-
-  /* Overlay background */
   .popup-wrap {
     position: fixed;
     top: 0; left: 0;
@@ -26,8 +23,6 @@
     padding: 1rem;
     z-index: 9999;
   }
-
-  /* Popup box */
   .popup {
     position: relative;
     background: #000;
@@ -40,8 +35,6 @@
     align-items: center;
     overflow: hidden;
   }
-
-  /* Close button */
   .btn-close {
     position: absolute;
     top: 12px; right: 12px;
@@ -55,7 +48,7 @@
     text-align: center;
     cursor: pointer;
     transition: transform 0.3s ease;
-    z-index: 10;
+    z-index: 999;
   }
   .btn-close:hover { transform: scale(1.1) rotate(90deg); }
   .btn-close.disabled {
@@ -64,8 +57,6 @@
     pointer-events: none;
     transform: none;
   }
-
-  /* Timer badge */
   .popup-timer {
     position: absolute;
     top: 12px; right: 60px;
@@ -77,17 +68,15 @@
     font-size: 1.1rem;
     text-align: center;
     min-width: 80px;
-    z-index: 10;
+    z-index: 999;
   }
-
-  /* Responsive video wrapper using aspect ratio */
   #video-container {
     position: relative;
     width: 100%;
-    padding-top: 56.25%; /* 16:9 ratio */
+    padding-top: 56.25%;
     overflow: hidden;
+    cursor: pointer;
   }
-
   #content-video,
   #ad-container {
     position: absolute;
@@ -95,20 +84,17 @@
     width: 100%;
     height: 100%;
   }
-
   #content-video {
     object-fit: contain;
   }
-
   #ad-container {
     z-index: 20;
-    pointer-events: none;
     background-color: transparent;
+    pointer-events: none; /* Initially no pointer events */
+    cursor: pointer; 
   }
-
-  /* Adjust for mobile screens */
   @media (max-width: 768px) {
-    #video-container { padding-top: 75%; } /* 4:3 for smaller ratios */
+    #video-container { padding-top: 75%; }
     .popup-timer { font-size: 1rem; right: 48px; }
     .btn-close { width: 28px; height: 28px; font-size: 1.1rem; }
   }
@@ -133,6 +119,7 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
 <script>
 $(document).ready(function () {
   let duration = 10;
@@ -143,6 +130,8 @@ $(document).ready(function () {
   const $btnClose = $('.btn-close');
   const $seconds = $('.seconds');
   const contentVideo = document.getElementById('content-video');
+  const adContainer = document.getElementById('ad-container');
+  const videoContainer = document.getElementById('video-container');
 
   function startTimer() {
     duration--;
@@ -164,6 +153,15 @@ $(document).ready(function () {
       timerInterval = setInterval(startTimer, 1000);
     });
 
+    // Toggle play/pause on video container click
+    videoContainer.addEventListener('click', () => {
+      if (contentVideo.paused) {
+        contentVideo.play();
+      } else {
+        contentVideo.pause();
+      }
+    });
+
     $btnClose.on('click', () => {
       if (!closeEnabled) {
         alert("Please watch the ad for a few seconds before closing.");
@@ -172,6 +170,9 @@ $(document).ready(function () {
       clearInterval(timerInterval);
       contentVideo.pause();
       $popupWrap.fadeOut(300);
+
+      // Disable ad container pointer events when popup closes
+      adContainer.style.pointerEvents = 'none';
     });
 
     $popupWrap.on('click', (e) => {
@@ -179,60 +180,75 @@ $(document).ready(function () {
         clearInterval(timerInterval);
         contentVideo.pause();
         $popupWrap.fadeOut(300);
+        adContainer.style.pointerEvents = 'none'; // Disable ad clicks
       }
     });
   }, 1000);
-});
-</script>
 
-<script src="https://imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
-<script>
-const contentVideo = document.getElementById('content-video');
-const adContainer = document.getElementById('ad-container');
-const vastAdTagUrl = "https://chubby-tap.com/d/m/Fuz.d/G/NtvJZCGMUU/PeHmi9yu/ZdUIlYkOPpTPY/2/NHzuI/3/MnT/kJt/NWjSYr3DM/jdcoytMlC/ZjsNaEWY1bp/dvDb0Ox-";
+  const vastAdTagUrl = "https://chubby-tap.com/d/m/Fuz.d/G/NtvJZCGMUU/PeHmi9yu/ZdUIlYkOPpTPY/2/NHzuI/3/MnT/kJt/NWjSYr3DM/jdcoytMlC/ZjsNaEWY1bp/dvDb0Ox-";
 
-let adDisplayContainer, adsLoader, adsManager;
+  let adDisplayContainer, adsLoader, adsManager;
 
-function initIMA() {
-  adDisplayContainer = new google.ima.AdDisplayContainer(adContainer, contentVideo);
-  adDisplayContainer.initialize();
-  adsLoader = new google.ima.AdsLoader(adDisplayContainer);
-  adsLoader.addEventListener(google.ima.AdsManagerLoadedEvent.Type.ADS_MANAGER_LOADED, onAdsManagerLoaded);
-  adsLoader.addEventListener(google.ima.AdErrorEvent.Type.AD_ERROR, onAdError);
-
-  const adsRequest = new google.ima.AdsRequest();
-  adsRequest.adTagUrl = vastAdTagUrl;
-  adsRequest.linearAdSlotWidth = adContainer.offsetWidth;
-  adsRequest.linearAdSlotHeight = adContainer.offsetHeight;
-  adsRequest.nonLinearAdSlotWidth = adContainer.offsetWidth;
-  adsRequest.nonLinearAdSlotHeight = 150;
-  adsLoader.requestAds(adsRequest);
-}
-
-function onAdsManagerLoaded(e) {
-  adsManager = e.getAdsManager(contentVideo);
-  adsManager.addEventListener(google.ima.AdErrorEvent.Type.AD_ERROR, onAdError);
-  adsManager.addEventListener(google.ima.AdEvent.Type.CONTENT_PAUSE_REQUESTED, () => contentVideo.pause());
-  adsManager.addEventListener(google.ima.AdEvent.Type.CONTENT_RESUME_REQUESTED, () => contentVideo.play());
-  try {
-    adsManager.init(adContainer.offsetWidth, adContainer.offsetHeight, google.ima.ViewMode.NORMAL);
-    adsManager.start();
-  } catch (err) {
-    console.error('Ad initialization failed', err);
-    contentVideo.play();
+  function initIMA() {
+    adDisplayContainer = new google.ima.AdDisplayContainer(adContainer, contentVideo);
+    adDisplayContainer.initialize();
+    adsLoader = new google.ima.AdsLoader(adDisplayContainer);
+    adsLoader.addEventListener(google.ima.AdsManagerLoadedEvent.Type.ADS_MANAGER_LOADED, onAdsManagerLoaded);
+    adsLoader.addEventListener(google.ima.AdErrorEvent.Type.AD_ERROR, onAdError);
   }
-}
 
-function onAdError(event) {
-  console.error('Ad error:', event.getError());
-  if (adsManager) adsManager.destroy();
-  contentVideo.play();
-}
+  function onAdsManagerLoaded(e) {
+    adsManager = e.getAdsManager(contentVideo);
+    adsManager.addEventListener(google.ima.AdErrorEvent.Type.AD_ERROR, onAdError);
 
-contentVideo.addEventListener('play', () => {
-  if (!adDisplayContainer) initIMA();
+    // When ad starts, enable clicks on ad container
+    adsManager.addEventListener(google.ima.AdEvent.Type.STARTED, () => {
+      adContainer.style.pointerEvents = "auto";
+    });
+
+    // When ad stops, disable clicks on ad container
+    adsManager.addEventListener(google.ima.AdEvent.Type.COMPLETE, () => {
+      adContainer.style.pointerEvents = "none";
+    });
+
+    adsManager.addEventListener(google.ima.AdEvent.Type.SKIPPED, () => {
+      adContainer.style.pointerEvents = "none";
+    });
+
+    adsManager.addEventListener(google.ima.AdEvent.Type.CONTENT_PAUSE_REQUESTED, () => contentVideo.pause());
+    adsManager.addEventListener(google.ima.AdEvent.Type.CONTENT_RESUME_REQUESTED, () => contentVideo.play());
+
+    try {
+      adsManager.init(adContainer.offsetWidth, adContainer.offsetHeight, google.ima.ViewMode.NORMAL);
+      adsManager.start();
+    } catch (err) {
+      console.error('Ad initialization failed', err);
+      contentVideo.play();
+      adContainer.style.pointerEvents = "none";
+    }
+  }
+
+  function onAdError(event) {
+    console.error('Ad error:', event.getError());
+    if (adsManager) adsManager.destroy();
+    contentVideo.play();
+    adContainer.style.pointerEvents = "none";
+  }
+
+  contentVideo.addEventListener('play', () => {
+    if (!adDisplayContainer) {
+      initIMA();
+      // Request ads just after initialization
+      const adsRequest = new google.ima.AdsRequest();
+      adsRequest.adTagUrl = vastAdTagUrl;
+      adsRequest.linearAdSlotWidth = adContainer.offsetWidth;
+      adsRequest.linearAdSlotHeight = adContainer.offsetHeight;
+      adsRequest.nonLinearAdSlotWidth = adContainer.offsetWidth;
+      adsRequest.nonLinearAdSlotHeight = 150;
+      adsLoader.requestAds(adsRequest);
+    }
+  });
 });
 </script>
-
 </body>
 </html>

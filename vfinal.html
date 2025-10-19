@@ -90,7 +90,7 @@
   #ad-container {
     z-index: 20;
     background-color: transparent;
-    pointer-events: none; /* Initially no pointer events */
+    pointer-events: none;
     cursor: pointer; 
   }
   @media (max-width: 768px) {
@@ -133,6 +133,9 @@ $(document).ready(function () {
   const adContainer = document.getElementById('ad-container');
   const videoContainer = document.getElementById('video-container');
 
+  // IMA SDK variables
+  let adDisplayContainer, adsLoader, adsManager;
+
   function startTimer() {
     duration--;
     $seconds.text(duration);
@@ -143,52 +146,7 @@ $(document).ready(function () {
     }
   }
 
-  setTimeout(() => {
-    $seconds.text(duration);
-    $popupWrap.fadeIn(400);
-
-    contentVideo.addEventListener('play', () => {
-      if (timerStarted) return;
-      timerStarted = true;
-      timerInterval = setInterval(startTimer, 1000);
-    });
-
-    // Toggle play/pause on video container click
-    videoContainer.addEventListener('click', () => {
-      if (contentVideo.paused) {
-        contentVideo.play();
-      } else {
-        contentVideo.pause();
-      }
-    });
-
-    $btnClose.on('click', () => {
-      if (!closeEnabled) {
-        alert("Please watch the ad for a few seconds before closing.");
-        return;
-      }
-      clearInterval(timerInterval);
-      contentVideo.pause();
-      $popupWrap.fadeOut(300);
-
-      // Disable ad container pointer events when popup closes
-      adContainer.style.pointerEvents = 'none';
-    });
-
-    $popupWrap.on('click', (e) => {
-      if (e.target === e.currentTarget && closeEnabled) {
-        clearInterval(timerInterval);
-        contentVideo.pause();
-        $popupWrap.fadeOut(300);
-        adContainer.style.pointerEvents = 'none'; // Disable ad clicks
-      }
-    });
-  }, 1000);
-
-  const vastAdTagUrl = "https://chubby-tap.com/d/m/Fuz.d/G/NtvJZCGMUU/PeHmi9yu/ZdUIlYkOPpTPY/2/NHzuI/3/MnT/kJt/NWjSYr3DM/jdcoytMlC/ZjsNaEWY1bp/dvDb0Ox-";
-
-  let adDisplayContainer, adsLoader, adsManager;
-
+  // Initialize IMA SDK
   function initIMA() {
     adDisplayContainer = new google.ima.AdDisplayContainer(adContainer, contentVideo);
     adDisplayContainer.initialize();
@@ -201,12 +159,10 @@ $(document).ready(function () {
     adsManager = e.getAdsManager(contentVideo);
     adsManager.addEventListener(google.ima.AdErrorEvent.Type.AD_ERROR, onAdError);
 
-    // When ad starts, enable clicks on ad container
     adsManager.addEventListener(google.ima.AdEvent.Type.STARTED, () => {
       adContainer.style.pointerEvents = "auto";
     });
 
-    // When ad stops, disable clicks on ad container
     adsManager.addEventListener(google.ima.AdEvent.Type.COMPLETE, () => {
       adContainer.style.pointerEvents = "none";
     });
@@ -235,10 +191,71 @@ $(document).ready(function () {
     adContainer.style.pointerEvents = "none";
   }
 
+  setTimeout(() => {
+    $seconds.text(duration);
+    $popupWrap.fadeIn(400);
+
+    contentVideo.addEventListener('play', () => {
+      if (timerStarted) return;
+      timerStarted = true;
+      timerInterval = setInterval(startTimer, 1000);
+    });
+
+    videoContainer.addEventListener('click', () => {
+      if (contentVideo.paused) {
+        contentVideo.play();
+      } else {
+        contentVideo.pause();
+      }
+    });
+
+    $btnClose.on('click', () => {
+      if (!closeEnabled) {
+        alert("Please watch the ad for a few seconds before closing.");
+        return;
+      }
+      clearInterval(timerInterval);
+      contentVideo.pause();
+      contentVideo.currentTime = 0;
+
+      if (adsManager) {
+        try {
+          adsManager.destroy();
+        } catch (e) {
+          console.warn('Failed to destroy adsManager:', e);
+        }
+      }
+
+      $popupWrap.fadeOut(300);
+      adContainer.style.pointerEvents = 'none';
+    });
+
+    $popupWrap.on('click', (e) => {
+      if (e.target === e.currentTarget && closeEnabled) {
+        clearInterval(timerInterval);
+        contentVideo.pause();
+        contentVideo.currentTime = 0;
+
+        if (adsManager) {
+          try {
+            adsManager.destroy();
+          } catch (e) {
+            console.warn('Failed to destroy adsManager:', e);
+          }
+        }
+
+        $popupWrap.fadeOut(300);
+        adContainer.style.pointerEvents = 'none';
+      }
+    });
+  }, 1000);
+
+  const vastAdTagUrl = "https://chubby-tap.com/d/m/Fuz.d/G/NtvJZCGMUU/PeHmi9yu/ZdUIlYkOPpTPY/2/NHzuI/3/MnT/kJt/NWjSYr3DM/jdcoytMlC/ZjsNaEWY1bp/dvDb0Ox-";
+
   contentVideo.addEventListener('play', () => {
     if (!adDisplayContainer) {
       initIMA();
-      // Request ads just after initialization
+
       const adsRequest = new google.ima.AdsRequest();
       adsRequest.adTagUrl = vastAdTagUrl;
       adsRequest.linearAdSlotWidth = adContainer.offsetWidth;
