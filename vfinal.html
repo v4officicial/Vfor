@@ -116,21 +116,21 @@
 </head>
 <body>
 
-<div class="popup-wrap" role="dialog" aria-modal="true" tabindex="-1" aria-label="Advertisement Popup">
+<div class="popup-wrap">
   <div class="popup">
-    <div class="popup-timer"><span class="seconds"></span> second(s) left</div>
-    <div class="btn-close disabled" role="button" aria-label="Close popup">×</div>
-    <!--banner c2 ad-->
+    <div class="popup-timer"><span class="seconds"></span> sec</div>
+    <div class="btn-close disabled">×</div>
+
     <div id="video-container">
-  <video id="content-video" controls playsinline poster="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgB4FisStERcFQ-_6PRXKXWkNb71hhxIWX1J3UXFQGWA&s=10">
-    <source src="video.mp4" type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
-  <div id="ad-container"></div>
-</div>
+      <video id="content-video" controls playsinline 
+        poster="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgB4FisStERcFQ-_6PRXKXWkNb71hhxIWX1J3UXFQGWA&s=10">
+        <source src="video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <div id="ad-container"></div>
+    </div>
   </div>
 </div>
-
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
 $(document).ready(function () {
