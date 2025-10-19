@@ -2,19 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>Flexible Responsive Full Page Popup Ad</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Responsive Video Ad Popup with Skip Button</title>
 <style>
   /* Reset and base styles */
-  * {
-    margin: 0; padding: 0; box-sizing: border-box;
-  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body {
-    width: 100%; height: 100%; overflow-x: hidden;
+    width: 100%; height: 100%;
     font-family: Arial, sans-serif;
+    overflow-x: hidden;
   }
 
-  /* Fullscreen overlay */
+  /* Overlay background */
   .popup-wrap {
     position: fixed;
     top: 0; left: 0;
@@ -23,276 +22,213 @@
     display: none;
     justify-content: center;
     align-items: center;
-    padding: 1rem; /* padding for viewport edges */
+    padding: 1rem;
     z-index: 9999;
-    overflow-y: auto; /* scroll if needed on small devices */
   }
 
-  /* Popup container */
- 
+  /* Popup box */
   .popup {
     position: relative;
     background: #000;
     border-radius: 16px;
     max-width: 95vw;
     max-height: 85vh;
-    width: auto;
-    height: auto;
     box-shadow: 0 15px 50px rgba(0,0,0,0.7);
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    padding: 0; /* no internal padding to avoid shrinking banner */
   }
 
-  /* Banner/ad image wrapper link */
-  .popup a {
-    display: block;
-    max-width: 100%;
-    max-height: 100%;
+  /* Responsive video wrapper using aspect ratio */
+  #video-container {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 ratio */
+    overflow: hidden;
   }
 
-  /* Banner image adapts */
-  .popup video {
-    display: block;
-    max-width: 100%;
-    max-height: 85vh;
-    width: auto;
-    height: auto;
-    object-fit: contain; /* fits within container, no cropping */
+  #content-video,
+  #ad-container {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
   }
 
-  /* Close button styling */
-  .btn-close {
+  #content-video {
+    object-fit: contain;
+    z-index: 10;
+  }
+
+  #ad-container {
+    z-index: 20;
+    background-color: transparent;
+    pointer-events: none; /* Allow pointer events here */
+  }
+
+  /* Skip button inside ad container */
+  #skip-button {
     position: absolute;
     top: 12px;
     right: 12px;
-    width: 32px;
-    height: 32px;
+    z-index: 30;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     background: #fff;
     color: #000;
     font-weight: bold;
-    font-size: 1.5rem;
-    line-height: 32px;
+    font-size: 1.2rem;
+    line-height: 40px;
     text-align: center;
-    cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-    transition: transform 0.3s ease;
-    z-index: 10;
-  }
-  .btn-close:hover {
-    transform: scale(1.1) rotate(90deg);
-  }
-  .btn-close.disabled {
     cursor: not-allowed;
     opacity: 0.5;
     pointer-events: none;
-    transform: none;
+    user-select: none;
+    transition: all 0.3s ease;
+  }
+  #skip-button.enabled {
+    cursor: pointer;
+    opacity: 1;
+    pointer-events: auto;
+  }
+  #skip-button:hover.enabled {
+    transform: scale(1.2) rotate(20deg);
+    background: #f00;
+    color: #fff;
+  }
+
+  /* Close button fallback outside ad container */
+  .btn-close {
+    display: none;
   }
 
   /* Timer badge */
   .popup-timer {
     position: absolute;
-    top: 12px;
-    right: 60px;
-    background: rgba(255, 255, 255, 0.15);
+    top: 12px; right: 60px;
+    background: rgba(255,255,255,0.15);
     color: #fff;
     padding: 6px 14px;
     border-radius: 20px;
     font-weight: 600;
-    font-size: 1.15rem;
-    letter-spacing: 0.03em;
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
-    user-select: none;
-    min-width: 85px;
+    font-size: 1.1rem;
     text-align: center;
+    min-width: 80px;
     z-index: 10;
   }
 
-  /* Scrollbar for mobile */
-  @media (max-width: 480px) {
-    .popup-wrap {
-      padding: 0.5rem;
-    }
-    .btn-close {
-      width: 24px;
-      height: 24px;
-      font-size: 1.2rem;
-      line-height: 24px;
-      top: 8px;
-      right: 8px;
-    }
-    .popup-timer {
+  /* Adjust for mobile screens */
+  @media (max-width: 768px) {
+    #video-container { padding-top: 75%; } /* 4:3 */
+    .popup-timer { font-size: 1rem; right: 48px; }
+    #skip-button {
+      width: 32px;
+      height: 32px;
+      line-height: 32px;
       font-size: 1rem;
-      padding: 5px 11px;
-      top: 8px;
-      right: 44px;
-      min-width: 70px;
     }
   }
-  
- #ad-container {
-    background-color: red;
-    width: 100%; /* fits parent container width */
-    height: 100%; /* fits parent container height */
-    z-index: 20;
-    display: block; /* defaults to block-level for div */
-}
-  
 </style>
 </head>
 <body>
 
-<div class="popup-wrap">
+<div class="popup-wrap" role="dialog" aria-modal="true" tabindex="-1" aria-label="Advertisement Popup">
   <div class="popup">
-    <div class="popup-timer"><span class="seconds"></span> sec</div>
-    <div class="btn-close disabled">×</div>
+    <div class="popup-timer"><span id="timer-seconds"></span> sec</div>
 
-    <div id="video-container">
-      <video id="content-video" controls playsinline 
-        poster="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgB4FisStERcFQ-_6PRXKXWkNb71hhxIWX1J3UXFQGWA&s=10">
+    <div id="video-container" aria-label="Ad video container">
+      <video id="content-video" controls playsinline
+        poster="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgB4FisStERcFQ-_6PRXKXWkNb71hhxIWX1J3UXFQGWA&s=10"
+        aria-label="Advertisement video player">
         <source src="/main_Resource/ads/video ads/The_Bread_-_Animated_Short_Film_by_GULU(360p).mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
-      <div id="ad-container"></div>
+
+      <div id="ad-container" aria-label="Advertisement interactive container">
+        <button id="skip-button" aria-label="Skip Advertisement" disabled>×</button>
+      </div>
     </div>
   </div>
 </div>
 
-
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
 $(document).ready(function () {
-  var duration = 10;
-  var closeEnabled = false;
-  var timerInterval;
-  var timerStarted = false;
-  var $popupWrap = $('.popup-wrap');
-  var $btnClose = $('.btn-close');
-  var $seconds = $('.seconds');
-  var contentVideo = document.getElementById('content-video');
+  let duration = 10;
+  let timerStarted = false;
+  let timerInterval;
+  const $popupWrap = $('.popup-wrap');
+  const $timerSeconds = $('#timer-seconds');
+  const $skipButton = $('#skip-button')[0];
+  const contentVideo = document.getElementById('content-video');
 
-  function startTimer() {
-    duration--;
-    $seconds.text(duration);
-    if (duration <= 0) {
-      clearInterval(timerInterval);
-      closeEnabled = true;
-      $btnClose.removeClass('disabled').css('pointer-events', 'auto');
-    }
+  // Show popup with timer and enable skip after countdown
+  function startCountdown() {
+    $timerSeconds.text(duration);
+    timerInterval = setInterval(() => {
+      duration--;
+      if (duration <= 0) {
+        clearInterval(timerInterval);
+        $timerSeconds.text('0');
+        enableSkipButton();
+      } else {
+        $timerSeconds.text(duration);
+      }
+    }, 1000);
   }
 
-  setTimeout(function () {
-    $seconds.text(duration);
+  function enableSkipButton() {
+    $skipButton.disabled = false;
+    $skipButton.classList.add('enabled');
+    $skipButton.style.cursor = 'pointer';
+    $skipButton.removeAttribute('disabled');
+  }
+
+  function disableSkipButton() {
+    $skipButton.disabled = true;
+    $skipButton.classList.remove('enabled');
+    $skipButton.style.cursor = 'not-allowed';
+    $skipButton.setAttribute('disabled', true);
+  }
+
+  // Start popup and video
+  setTimeout(() => {
     $popupWrap.fadeIn(400);
+  }, 500);
 
-    // Start timer on video play
-    contentVideo.addEventListener('play', function () {
-      if (timerStarted) return;
+  contentVideo.addEventListener('play', () => {
+    if (!timerStarted) {
       timerStarted = true;
-      timerInterval = setInterval(startTimer, 1000);
-    });
+      startCountdown();
+    }
+  });
 
-    $btnClose.on('click', function () {
-      if (!closeEnabled) {
-        alert("Ad clicked! Close button not enabled yet.");
-        return;
-      }
+  // Skip button click handler
+  $skipButton.addEventListener('click', () => {
+    if ($skipButton.disabled) {
+      alert('Please watch the ad for a few seconds before skipping.');
+      return;
+    }
+    clearInterval(timerInterval);
+    contentVideo.pause();
+    $popupWrap.fadeOut(300);
+  });
+
+  // Let video be clickable as normal by no pointer block on video element
+  contentVideo.style.pointerEvents = 'auto';
+
+  // Optional: clicking outside video closes popup only if skip enabled
+  $popupWrap.on('click', function (e) {
+    if (e.target === this && !$skipButton.disabled) {
       clearInterval(timerInterval);
       contentVideo.pause();
       $popupWrap.fadeOut(300);
-    });
-
-    // Optional: close popup if clicking overlay
-    $popupWrap.on('click', function (e) {
-      if (e.target === this && closeEnabled) {
-        clearInterval(timerInterval);
-        contentVideo.pause();
-        $popupWrap.fadeOut(300);
-      }
-    });
-  }, 1000);
+    }
+  });
 });
 </script>
-
-
-<script src="https://imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
-<script>
-const contentVideo = document.getElementById('content-video');
-const adContainer = document.getElementById('ad-container');
-const vastAdTagUrl = "https://chubby-tap.com/d/m/Fuz.d/G/NtvJZCGMUU/PeHmi9yu/ZdUIlYkOPpTPY/2/NHzuI/3/MnT/kJt/NWjSYr3DM/jdcoytMlC/ZjsNaEWY1bp/dvDb0Ox-";
-
-let adDisplayContainer;
-let adsLoader;
-let adsManager;
-
-function initIMA() {
-  adDisplayContainer = new google.ima.AdDisplayContainer(adContainer, contentVideo);
-  adDisplayContainer.initialize();
-  adsLoader = new google.ima.AdsLoader(adDisplayContainer);
-  adsLoader.addEventListener(
-    google.ima.AdsManagerLoadedEvent.Type.ADS_MANAGER_LOADED,
-    onAdsManagerLoaded,
-    false
-  );
-  adsLoader.addEventListener(
-    google.ima.AdErrorEvent.Type.AD_ERROR,
-    onAdError,
-    false
-  );
-  const adsRequest = new google.ima.AdsRequest();
-  adsRequest.adTagUrl = vastAdTagUrl;
-  adsRequest.linearAdSlotWidth = 640;
-  adsRequest.linearAdSlotHeight = 360;
-  adsRequest.nonLinearAdSlotWidth = 640;
-  adsRequest.nonLinearAdSlotHeight = 150;
-  adsLoader.requestAds(adsRequest);
-}
-function onAdsManagerLoaded(adsManagerLoadedEvent) {
-  adsManager = adsManagerLoadedEvent.getAdsManager(contentVideo);
-  adsManager.addEventListener(
-    google.ima.AdErrorEvent.Type.AD_ERROR,
-    onAdError
-  );
-  adsManager.addEventListener(
-    google.ima.AdEvent.Type.CONTENT_PAUSE_REQUESTED,
-    onContentPauseRequested
-  );
-  adsManager.addEventListener(
-    google.ima.AdEvent.Type.CONTENT_RESUME_REQUESTED,
-    onContentResumeRequested
-  );
-  try {
-    adsManager.init(640, 360, google.ima.ViewMode.NORMAL);
-    adsManager.start();
-  } catch (adError) {
-    console.error('AdsManager could not start:', adError);
-    contentVideo.play();
-  }
-}
-function onAdError(adErrorEvent) {
-  console.error('Ad error:', adErrorEvent.getError());
-  if (adsManager) {
-    adsManager.destroy();
-  }
-  contentVideo.play();
-}
-function onContentPauseRequested() {
-  contentVideo.pause();
-}
-function onContentResumeRequested() {
-  contentVideo.play();
-}
-contentVideo.addEventListener('play', () => {
-  if (!adDisplayContainer) {
-    initIMA();
-  }
-});
-contentVideo.src = "/main_Resource/ads/video ads/The_Bread_-_Animated_Short_Film_by_GULU(360p).mp4";
-</script>
-<script src="https://imasdk.googleapis.com/js/sdkloader/ima3_debug.js"></script>
 
 </body>
 </html>
