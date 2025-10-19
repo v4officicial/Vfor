@@ -1,242 +1,275 @@
 (function() {
-  // Inject CSS styles
-  var css = `
-    /* Reset and base styles */
-    /** {
-      margin: 0; padding: 0; box-sizing: border-box;
-    }
-    html, body {
-      width: 100%; height: 100%; overflow-x: hidden;
-      font-family: Arial, sans-serif;
-    }*/
-
-    /* Fullscreen overlay */
-    .popup-wrap {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      background-color: rgba(0,0,0,0.65);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      padding: 1rem; /* padding for viewport edges */
-      z-index: 9999;
-      overflow-y: auto; /* scroll if needed on small devices */
-    }
-
-    /* Popup container */
-    .popup {
-      position: relative;
-      background: #000;
-      border-radius: 16px;
-      max-width: 95vw;
-      max-height: 85vh;
-      width: auto;
-      height: auto;
-      box-shadow: 0 15px 50px rgba(0,0,0,0.7);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      padding: 0; /* no internal padding to avoid shrinking banner */
-    }
-
-    /* Banner/ad image wrapper link */
-    .popup a {
-      display: block;
-      max-width: 100%;
-      max-height: 100%;
-    }
-
-    /* Banner image adapts */
-    .popup img {
-      display: block;
-      max-width: 100%;
-      max-height: 85vh;
-      width: auto;
-      height: auto;
-      object-fit: contain; /* fits within container, no cropping */
-    }
-
-    /* Close button styling */
-    .btn-close {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: #fff;
-      color: #000;
-      font-weight: bold;
-      font-size: 1.5rem;
-      line-height: 32px;
-      text-align: center;
-      cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-      transition: transform 0.3s ease;
-      z-index: 10;
-    }
-    .btn-close:hover {
-      transform: scale(1.1) rotate(90deg);
-    }
-    .btn-close.disabled {
-      cursor: not-allowed;
-      opacity: 0.5;
-      pointer-events: none;
-      transform: none;
-    }
-
-    /* Timer badge */
-    .popup-timer {
-      position: absolute;
-      top: 12px;
-      right: 60px;
-      background: rgba(255, 255, 255, 0.15);
-      color: #fff;
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-weight: 600;
-      font-size: 1.15rem;
-      letter-spacing: 0.03em;
-      box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
-      user-select: none;
-      min-width: 85px;
-      text-align: center;
-      z-index: 10;
-    }
-
-    /* Scrollbar for mobile */
-    @media (max-width: 480px) {
-      .popup-wrap {
-        padding: 0.5rem;
-      }
-      .btn-close {
-        width: 24px;
-        height: 24px;
-        font-size: 1.2rem;
-        line-height: 24px;
-        top: 8px;
-        right: 8px;
-      }
-      .popup-timer {
-        font-size: 1rem;
-        padding: 5px 11px;
-        top: 8px;
-        right: 44px;
-        min-width: 70px;
-      }
-    }
-  `;
-
-  var style = document.createElement('style');
+  // Create style element with popup CSS
+  const style = document.createElement('style');
   style.type = 'text/css';
-  style.appendChild(document.createTextNode(css));
-  document.head.appendChild(style);
+  style.textContent = `
+  /* Reset and base styles */
+/*  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 100%;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+  }*/
 
-  // Create popup DOM elements
-  var popupWrap = document.createElement('div');
-  popupWrap.className = 'popup-wrap';
-  popupWrap.setAttribute('role', 'dialog');
-  popupWrap.setAttribute('aria-modal', 'true');
-  popupWrap.setAttribute('tabindex', '-1');
-  popupWrap.setAttribute('aria-label', 'Advertisement Popup');
-
-  var popup = document.createElement('div');
-  popup.className = 'popup';
-
-  var timer = document.createElement('div');
-  timer.className = 'popup-timer';
-  var timerSpan = document.createElement('span');
-  timerSpan.className = 'seconds';
-  timer.appendChild(timerSpan);
-  timer.appendChild(document.createTextNode(' second(s) left'));
-
-  var btnClose = document.createElement('div');
-  btnClose.className = 'btn-close disabled';
-  btnClose.setAttribute('role', 'button');
-  btnClose.setAttribute('aria-label', 'Close popup');
-  btnClose.textContent = '×'; // ×
-
-  var link = document.createElement('a');
-  link.href = 'https://chubby-tap.com/G5bIuE';
-  link.target = '_blank';
-  link.rel = 'noopener noreferrer';
-
-  var img = document.createElement('img');
-  img.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWIxmdqoMAtFmwSR-3BzxPBM_WTDi0sLAs-QG463jj2g&s=10';
-  img.alt = 'Ad Banner';
-
-  link.appendChild(img);
-  popup.appendChild(timer);
-  popup.appendChild(btnClose);
-  popup.appendChild(link);
-  popupWrap.appendChild(popup);
-  document.body.appendChild(popupWrap);
-
-  // Timer and controls logic
-  var duration = 25;
-  var closeEnabled = false;
-  var timerInterval;
-
-  function startTimer() {
-    duration--;
-    timerSpan.textContent = duration;
-    if (duration <= 0) {
-      clearInterval(timerInterval);
-      closeEnabled = true;
-      btnClose.classList.remove('disabled');
-      btnClose.style.pointerEvents = 'auto';
-    }
+  /* Overlay background */
+  .popup-wrap {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background-color: rgba(0,0,0,0.65);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    z-index: 9999;
   }
 
-  // Show popup and start timer after 1sec delay
-  setTimeout(function() {
-    timerSpan.textContent = duration;
-    // Fade in popup
-    popupWrap.style.display = 'flex';
-    popupWrap.style.opacity = 0;
-    var op = 0;
-    var fadeInInterval = setInterval(function() {
-      if (op >= 1) clearInterval(fadeInInterval);
-      popupWrap.style.opacity = op;
-      op += 0.05;
-    }, 20);
+  /* Popup box */
+  .popup {
+    position: relative;
+    background: #000;
+    border-radius: 16px;
+    max-width: 95vw;
+    max-height: 85vh;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
 
-    timerInterval = setInterval(startTimer, 1000);
+  /* Close button */
+  .btn-close {
+    position: absolute;
+    top: 12px; right: 12px;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: #fff;
+    color: #000;
+    font-size: 1.4rem;
+    font-weight: bold;
+    line-height: 32px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    z-index: 999;
+  }
+  .btn-close:hover { transform: scale(1.1) rotate(90deg); }
+  .btn-close.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+    transform: none;
+  }
 
-    btnClose.addEventListener('click', function() {
-      if (!closeEnabled) {
-        alert('Ad clicked! Close button not enabled yet.');
-        return;
-      }
-      clearInterval(timerInterval);
-      // Fade out popup
-      var op = 1;
-      var fadeOutInterval = setInterval(function() {
-        if (op <= 0) {
-          clearInterval(fadeOutInterval);
-          popupWrap.style.display = 'none';
+  /* Timer badge */
+  .popup-timer {
+    position: absolute;
+    top: 12px; right: 60px;
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-align: center;
+    min-width: 80px;
+    z-index: 999;
+  }
+
+  /* Responsive video wrapper using aspect ratio */
+  #video-container {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 ratio */
+    overflow: hidden;
+  }
+
+  #content-video,
+  #ad-container {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  #content-video {
+    object-fit: contain;
+  }
+
+  #ad-container {
+    z-index: 20;
+    cursor: pointer; 
+    pointer-events: none;
+    background-color: transparent;
+  }
+
+  /* Adjust for mobile screens */
+  @media (max-width: 768px) {
+    #video-container { padding-top: 75%; } /* 4:3 for smaller ratios */
+    .popup-timer { font-size: 1rem; right: 48px; }
+    .btn-close { width: 28px; height: 28px; font-size: 1.1rem; }
+  }
+  `;
+  document.head.appendChild(style);
+  
+  // Create popup HTML structure
+  const popupWrap = document.createElement('div');
+  popupWrap.className = 'popup-wrap';
+  popupWrap.style.display = 'none';
+  
+  const popup = document.createElement('div');
+  popup.className = 'popup';
+  
+  popup.innerHTML = `
+    <div class="popup-timer"><span class="seconds"></span> sec</div>
+    <div class="btn-close disabled">×</div>
+    <div id="video-container">
+      <video id="content-video" controls playsinline poster="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgB4FisStERcFQ-_6PRXKXWkNb71hhxIWX1J3UXFQGWA&s=10">
+        <source src="/main_Resource/ads/video ads/The_Bread_-_Animated_Short_Film_by_GULU(360p).mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <div id="ad-container"></div>
+    </div>
+  `;
+  
+  popupWrap.appendChild(popup);
+  document.body.appendChild(popupWrap);
+  
+  // Load required external scripts dynamically
+  function loadScript(src) {
+    return new Promise((resolve, reject) => {
+      const s = document.createElement('script');
+      s.src = src;
+      s.onload = resolve;
+      s.onerror = reject;
+      document.head.appendChild(s);
+    });
+  }
+  
+  Promise.all([
+    loadScript('https://code.jquery.com/jquery-3.7.1.min.js'),
+    loadScript('https://imasdk.googleapis.com/js/sdkloader/ima3.js')
+  ]).then(() => {
+    const $ = window.jQuery;
+    $(function() {
+      let duration = 10;
+      let closeEnabled = false;
+      let timerStarted = false;
+      let timerInterval;
+      const $popupWrap = $('.popup-wrap');
+      const $btnClose = $('.btn-close');
+      const $seconds = $('.seconds');
+      const contentVideo = document.getElementById('content-video');
+      const adContainer = document.getElementById('ad-container');
+      
+      // IMA SDK vars
+      let adDisplayContainer, adsLoader, adsManager;
+      
+      // Timer countdown function
+      function startTimer() {
+        duration--;
+        $seconds.text(duration);
+        if (duration <= 0) {
+          clearInterval(timerInterval);
+          closeEnabled = true;
+          $btnClose.removeClass('disabled').css('pointer-events', 'auto');
         }
-        popupWrap.style.opacity = op;
-        op -= 0.05;
-      }, 20);
-    });
-
-    popupWrap.addEventListener('click', function(e) {
-      if (e.target === popupWrap && closeEnabled) {
-        clearInterval(timerInterval);
-        // Fade out popup
-        var op = 1;
-        var fadeOutInterval = setInterval(function() {
-          if (op <= 0) {
-            clearInterval(fadeOutInterval);
-            popupWrap.style.display = 'none';
-          }
-          popupWrap.style.opacity = op;
-          op -= 0.05;
-        }, 20);
       }
+      
+      // IMA initialization
+      function initIMA() {
+        adDisplayContainer = new google.ima.AdDisplayContainer(adContainer, contentVideo);
+        adDisplayContainer.initialize();
+        adsLoader = new google.ima.AdsLoader(adDisplayContainer);
+        adsLoader.addEventListener(google.ima.AdsManagerLoadedEvent.Type.ADS_MANAGER_LOADED, onAdsManagerLoaded);
+        adsLoader.addEventListener(google.ima.AdErrorEvent.Type.AD_ERROR, onAdError);
+        
+        const adsRequest = new google.ima.AdsRequest();
+        adsRequest.adTagUrl = "https://chubby-tap.com/d/m/Fuz.d/G/NtvJZCGMUU/PeHmi9yu/ZdUIlYkOPpTPY/2/NHzuI/3/MnT/kJt/NWjSYr3DM/jdcoytMlC/ZjsNaEWY1bp/dvDb0Ox-";
+        adsRequest.linearAdSlotWidth = adContainer.offsetWidth;
+        adsRequest.linearAdSlotHeight = adContainer.offsetHeight;
+        adsRequest.nonLinearAdSlotWidth = adContainer.offsetWidth;
+        adsRequest.nonLinearAdSlotHeight = 150;
+        adsLoader.requestAds(adsRequest);
+      }
+      
+      function onAdsManagerLoaded(e) {
+        adsManager = e.getAdsManager(contentVideo);
+        adsManager.addEventListener(google.ima.AdErrorEvent.Type.AD_ERROR, onAdError);
+        adsManager.addEventListener(google.ima.AdEvent.Type.CONTENT_PAUSE_REQUESTED, () => contentVideo.pause());
+        adsManager.addEventListener(google.ima.AdEvent.Type.CONTENT_RESUME_REQUESTED, () => contentVideo.play());
+        
+        try {
+          adsManager.init(adContainer.offsetWidth, adContainer.offsetHeight, google.ima.ViewMode.NORMAL);
+          adsManager.start();
+          adContainer.style.pointerEvents = "auto";
+        } catch (err) {
+          console.error('Ad initialization failed', err);
+          contentVideo.play();
+          adContainer.style.pointerEvents = "none";
+        }
+      }
+      
+      function onAdError(event) {
+        console.error('Ad error:', event.getError());
+        if (adsManager) {
+          try {
+            adsManager.destroy();
+          } catch (e) {}
+        }
+        contentVideo.play();
+        adContainer.style.pointerEvents = "none";
+      }
+      
+      // Show popup and start timer on load
+      setTimeout(() => {
+        $seconds.text(duration);
+        $popupWrap.fadeIn(400);
+        
+        contentVideo.addEventListener('play', () => {
+          if (timerStarted) return;
+          timerStarted = true;
+          timerInterval = setInterval(startTimer, 1000);
+        });
+        
+        // Initialize ads when content video first plays
+        contentVideo.addEventListener('play', () => {
+          if (!adDisplayContainer) initIMA();
+        });
+        
+        // Close button handler
+        $btnClose.on('click', () => {
+          if (!closeEnabled) {
+            alert("Please watch the ad for a few seconds before closing.");
+            return;
+          }
+          clearInterval(timerInterval);
+          contentVideo.pause();
+          contentVideo.currentTime = 0;
+          if (adsManager) {
+            try { adsManager.destroy(); } catch (e) {}
+          }
+          adContainer.style.pointerEvents = 'none';
+          $popupWrap.fadeOut(300);
+        });
+        
+        // Close popup on outside click if allowed
+        $popupWrap.on('click', (e) => {
+          if (e.target === e.currentTarget && closeEnabled) {
+            clearInterval(timerInterval);
+            contentVideo.pause();
+            contentVideo.currentTime = 0;
+            if (adsManager) {
+              try { adsManager.destroy(); } catch (e) {}
+            }
+            adContainer.style.pointerEvents = 'none';
+            $popupWrap.fadeOut(300);
+          }
+        });
+        
+      }, 1000);
     });
-  }, 1000);
+  }).catch(console.error);
 })();
