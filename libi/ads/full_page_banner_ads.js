@@ -227,7 +227,7 @@
   
 })();*/
 
-(function() {
+/*(function() {
   const classPrefix = 'mytopad-';
   
   const css = `
@@ -395,6 +395,190 @@
     });
 
     // Observe DOM only until close
+    observer = new MutationObserver(() => {
+      if (!document.body.contains(popupWrap)) document.body.appendChild(popupWrap);
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    fadeIn();
+  }
+  
+  injectPopupAd();
+  document.addEventListener('DOMContentLoaded', injectPopupAd);
+})();*/
+
+(function() {
+  const classPrefix = 'mytopad-';
+  
+  const css = `
+    .${classPrefix}popup-wrap {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background-color: rgba(0,0,0,0.65);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      z-index: 2147483647 !important;
+      overflow-y: auto;
+    }
+    .${classPrefix}popup {
+      position: relative;
+      background: #000;
+      border-radius: 16px;
+      max-width: 95vw;
+      max-height: 85vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+    .${classPrefix}popup img {
+      display: block;
+      max-width: 100%;
+      max-height: 85vh;
+      object-fit: contain;
+    }
+    .${classPrefix}btn-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #fff;
+      color: #000;
+      font-weight: bold;
+      font-size: 1.5rem;
+      text-align: center;
+      line-height: 32px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      z-index: 10;
+    }
+    .${classPrefix}btn-close:hover { transform: scale(1.1) rotate(90deg); }
+    .${classPrefix}btn-close.disabled { cursor: not-allowed; opacity: 0.5; pointer-events: none; }
+    .${classPrefix}popup-timer {
+      position: absolute;
+      top: 12px;
+      right: 60px;
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 1.15rem;
+      min-width: 85px;
+      text-align: center;
+      z-index: 10;
+    }
+  `;
+
+  function injectPopupAd() {
+    if (document.querySelector('.' + classPrefix + 'popup-wrap')) return;
+    
+    const style = document.createElement('style');
+    style.type = 'text/css';
+    style.appendChild(document.createTextNode(css));
+    document.head.prepend(style);
+
+    const popupWrap = document.createElement('div');
+    popupWrap.className = classPrefix + 'popup-wrap';
+    popupWrap.setAttribute('role', 'dialog');
+
+    const popup = document.createElement('div');
+    popup.className = classPrefix + 'popup';
+
+    const timer = document.createElement('div');
+    timer.className = classPrefix + 'popup-timer';
+    const timerSpan = document.createElement('span');
+    timerSpan.className = 'seconds';
+    timerSpan.textContent = '10';
+    timer.appendChild(timerSpan);
+    timer.appendChild(document.createTextNode(' second(s) left'));
+
+    const btnClose = document.createElement('div');
+    btnClose.className = classPrefix + 'btn-close disabled';
+    btnClose.textContent = '×';
+
+    const link = document.createElement('a');
+    link.href = 'https://chubby-tap.com/G5bIuE';
+    link.target = '_blank';
+
+    const img = document.createElement('img');
+    img.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWIxmdqoMAtFmwSR-3BzxPBM_WTDi0sLAs-QG463jj2g&s=10';
+    img.alt = 'Ad Banner';
+    link.appendChild(img);
+
+    popup.appendChild(timer);
+    popup.appendChild(btnClose);
+    popup.appendChild(link);
+    popupWrap.appendChild(popup);
+    document.body.appendChild(popupWrap);
+
+    let duration = 10;
+    let timerInterval;
+    let observer;
+
+    popupWrap.style.display = 'flex';
+    popupWrap.style.opacity = 0;
+    popupWrap.style.pointerEvents = 'auto';
+
+    function fadeIn() {
+      let op = 0;
+      const fade = setInterval(() => {
+        op += 0.05;
+        popupWrap.style.opacity = op;
+        if (op >= 1) {
+          clearInterval(fade);
+          timerInterval = setInterval(() => {
+            duration--;
+            timerSpan.textContent = duration;
+            if (duration <= 0) {
+              clearInterval(timerInterval);
+              btnClose.classList.remove('disabled');
+            }
+          }, 1000);
+        }
+      }, 20);
+    }
+
+    function cleanup() {
+      clearInterval(timerInterval);
+      if (observer) observer.disconnect();
+      popupWrap.style.display = 'none';
+      popupWrap.style.pointerEvents = 'none'; // Disable all clicks
+      style.remove();
+      popupWrap.remove();
+      document.removeEventListener('DOMContentLoaded', injectPopupAd);
+    }
+
+    function fadeOutPopup() {
+      let op = 1;
+      popupWrap.style.pointerEvents = 'none'; // Blocks clicks during fade-out
+      const fade = setInterval(() => {
+        op -= 0.05;
+        popupWrap.style.opacity = op;
+        if (op <= 0) {
+          clearInterval(fade);
+          cleanup(); // Full destruction
+        }
+      }, 20);
+    }
+
+    btnClose.addEventListener('click', () => {
+      if (btnClose.classList.contains('disabled')) {
+        alert('Please wait until the countdown finishes.');
+        return;
+      }
+      fadeOutPopup();
+    });
+
+    popupWrap.addEventListener('click', (e) => {
+      if (e.target === popupWrap && !btnClose.classList.contains('disabled')) fadeOutPopup();
+    });
+
     observer = new MutationObserver(() => {
       if (!document.body.contains(popupWrap)) document.body.appendChild(popupWrap);
     });
