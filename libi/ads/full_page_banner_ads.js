@@ -297,7 +297,6 @@
 
   function injectPopupAd() {
     if (document.querySelector('.' + classPrefix + 'popup-wrap')) return;
-    
     const style = document.createElement('style');
     style.type = 'text/css';
     style.appendChild(document.createTextNode(css));
@@ -343,7 +342,6 @@
 
     popupWrap.style.display = 'flex';
     popupWrap.style.opacity = 0;
-    popupWrap.style.pointerEvents = 'auto';
 
     function fadeIn() {
       let op = 0;
@@ -367,22 +365,19 @@
     function cleanup() {
       clearInterval(timerInterval);
       if (observer) observer.disconnect();
-      popupWrap.style.display = 'none';
-      popupWrap.style.pointerEvents = 'none'; // Disable all clicks
-      style.remove();
       popupWrap.remove();
+      style.remove();
       document.removeEventListener('DOMContentLoaded', injectPopupAd);
     }
 
     function fadeOutPopup() {
       let op = 1;
-      popupWrap.style.pointerEvents = 'none'; // Blocks clicks during fade-out
       const fade = setInterval(() => {
         op -= 0.05;
         popupWrap.style.opacity = op;
         if (op <= 0) {
           clearInterval(fade);
-          cleanup(); // Full destruction
+          cleanup(); // Fully stop everything
         }
       }, 20);
     }
@@ -399,6 +394,7 @@
       if (e.target === popupWrap && !btnClose.classList.contains('disabled')) fadeOutPopup();
     });
 
+    // Observe DOM only until close
     observer = new MutationObserver(() => {
       if (!document.body.contains(popupWrap)) document.body.appendChild(popupWrap);
     });
