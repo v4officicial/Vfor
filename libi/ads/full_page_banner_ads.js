@@ -441,6 +441,9 @@
       max-width: 100%;
       max-height: 85vh;
       object-fit: contain;
+      user-select: none;
+      -webkit-user-drag: none;
+      -webkit-touch-callout: none;
     }
     .${classPrefix}btn-close {
       position: absolute;
@@ -510,6 +513,10 @@
     const img = document.createElement('img');
     img.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWIxmdqoMAtFmwSR-3BzxPBM_WTDi0sLAs-QG463jj2g&s=10';
     img.alt = 'Ad Banner';
+    img.draggable = false;
+    img.addEventListener('contextmenu', e => e.preventDefault());
+    img.addEventListener('dragstart', e => e.preventDefault());
+
     link.appendChild(img);
 
     popup.appendChild(timer);
@@ -547,10 +554,12 @@
     function cleanup() {
       clearInterval(timerInterval);
       if (observer) observer.disconnect();
-      // Disable image click permanently
+      // Disable any form of interactivity permanently
       link.removeAttribute('href');
       link.style.pointerEvents = 'none';
-      // Remove DOM elements
+      img.style.pointerEvents = 'none';
+      img.removeEventListener('contextmenu', e => e.preventDefault());
+      img.removeEventListener('dragstart', e => e.preventDefault());
       popupWrap.remove();
       style.remove();
       document.removeEventListener('DOMContentLoaded', injectPopupAd);
