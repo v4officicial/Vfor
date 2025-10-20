@@ -1,143 +1,118 @@
+
 (function() {
-  // Create style element with popup CSS
+  const classPrefix = 'mytopad-';
+  const TOP_Z = 2147483647;
+
+  // Inject unique CSS with highest global priority
+  const css = `
+    .${classPrefix}popup-wrap {
+      position: fixed !important;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background-color: rgba(0,0,0,0.65);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      z-index: ${TOP_Z} !important;
+      overflow-y: auto;
+    }
+    .${classPrefix}popup {
+      position: relative;
+      background: #000;
+      border-radius: 16px;
+      max-width: 95vw;
+      max-height: 85vh;
+      box-shadow: 0 15px 50px rgba(0,0,0,0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+    .${classPrefix}btn-close {
+      position: absolute;
+      top: 12px; right: 12px;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: #fff;
+      color: #000;
+      font-size: 1.4rem;
+      font-weight: bold;
+      line-height: 32px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      z-index: ${TOP_Z + 1};
+    }
+    .${classPrefix}btn-close:hover { transform: scale(1.1) rotate(90deg); }
+    .${classPrefix}btn-close.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+      transform: none;
+    }
+    .${classPrefix}popup-timer {
+      position: absolute;
+      top: 12px; right: 60px;
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      text-align: center;
+      min-width: 80px;
+      z-index: ${TOP_Z + 1};
+    }
+    #video-container {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      overflow: hidden;
+    }
+    #content-video, #ad-container {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    #content-video { object-fit: contain; }
+    #ad-container {
+      z-index: ${TOP_Z + 2};
+      cursor: pointer;
+      pointer-events: none;
+      background-color: transparent;
+    }
+    @media (max-width: 768px) {
+      #video-container { padding-top: 75%; }
+      .${classPrefix}popup-timer { font-size: 1rem; right: 48px; }
+      .${classPrefix}btn-close { width: 28px; height: 28px; font-size: 1.1rem; }
+    }
+  `;
   const style = document.createElement('style');
   style.type = 'text/css';
-  style.textContent = `
-  /* Reset and base styles */
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body {
-    width: 100%;
-    height: 100%;
-    font-family: Arial, sans-serif;
-    overflow-x: hidden;
-  }
+  style.textContent = css;
+  document.head.prepend(style);
 
-  /* Overlay background */
-  .popup-wrap {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw; height: 100vh;
-    background-color: rgba(0,0,0,0.65);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    z-index: 9999;
-  }
-
-  /* Popup box */
-  .popup {
-    position: relative;
-    background: #000;
-    border-radius: 16px;
-    max-width: 95vw;
-    max-height: 85vh;
-    box-shadow: 0 15px 50px rgba(0,0,0,0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-  }
-
-  /* Close button */
-  .btn-close {
-    position: absolute;
-    top: 12px; right: 12px;
-    width: 32px; height: 32px;
-    border-radius: 50%;
-    background: #fff;
-    color: #000;
-    font-size: 1.4rem;
-    font-weight: bold;
-    line-height: 32px;
-    text-align: center;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-    z-index: 999;
-  }
-  .btn-close:hover { transform: scale(1.1) rotate(90deg); }
-  .btn-close.disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    pointer-events: none;
-    transform: none;
-  }
-
-  /* Timer badge */
-  .popup-timer {
-    position: absolute;
-    top: 12px; right: 60px;
-    background: rgba(255,255,255,0.15);
-    color: #fff;
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-weight: 600;
-    font-size: 1.1rem;
-    text-align: center;
-    min-width: 80px;
-    z-index: 999;
-  }
-
-  /* Responsive video wrapper using aspect ratio */
-  #video-container {
-    position: relative;
-    width: 100%;
-    padding-top: 56.25%; /* 16:9 ratio */
-    overflow: hidden;
-  }
-
-  #content-video,
-  #ad-container {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  #content-video {
-    object-fit: contain;
-  }
-
-  #ad-container {
-    z-index: 20;
-    cursor: pointer; 
-    pointer-events: none;
-    background-color: transparent;
-  }
-
-  /* Adjust for mobile screens */
-  @media (max-width: 768px) {
-    #video-container { padding-top: 75%; } /* 4:3 for smaller ratios */
-    .popup-timer { font-size: 1rem; right: 48px; }
-    .btn-close { width: 28px; height: 28px; font-size: 1.1rem; }
-  }
-  `;
-  document.head.appendChild(style);
-  
-  // Create popup HTML structure
+  // Create popup DOM structure
   const popupWrap = document.createElement('div');
-  popupWrap.className = 'popup-wrap';
-  popupWrap.style.display = 'none';
-  
-  const popup = document.createElement('div');
-  popup.className = 'popup';
-  
-  popup.innerHTML = `
-    <div class="popup-timer"><span class="seconds"></span> sec</div>
-    <div class="btn-close disabled">×</div>
-    <div id="video-container">
-      <video id="content-video" controls playsinline poster="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgB4FisStERcFQ-_6PRXKXWkNb71hhxIWX1J3UXFQGWA&s=10">
-        <source src="/main_Resource/ads/video ads/The_Bread_-_Animated_Short_Film_by_GULU(360p).mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-      <div id="ad-container"></div>
+  popupWrap.className = classPrefix + 'popup-wrap';
+  popupWrap.innerHTML = `
+    <div class="${classPrefix}popup">
+      <div class="${classPrefix}popup-timer"><span class="seconds"></span> sec</div>
+      <div class="${classPrefix}btn-close disabled">×</div>
+      <div id="video-container">
+        <video id="content-video" controls playsinline poster="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgB4FisStERcFQ-_6PRXKXWkNb71hhxIWX1J3UXFQGWA&s=10">
+          <source src="/main_Resource/ads/video ads/The_Bread_-_Animated_Short_Film_by_GULU(360p).mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <div id="ad-container"></div>
+      </div>
     </div>
   `;
-  
-  popupWrap.appendChild(popup);
   document.body.appendChild(popupWrap);
-  
-  // Load required external scripts dynamically
+
+  // Function to safely load external scripts
   function loadScript(src) {
     return new Promise((resolve, reject) => {
       const s = document.createElement('script');
@@ -147,7 +122,8 @@
       document.head.appendChild(s);
     });
   }
-  
+
+  // Load Google IMA SDK and jQuery
   Promise.all([
     loadScript('https://code.jquery.com/jquery-3.7.1.min.js'),
     loadScript('https://imasdk.googleapis.com/js/sdkloader/ima3.js')
@@ -158,16 +134,14 @@
       let closeEnabled = false;
       let timerStarted = false;
       let timerInterval;
-      const $popupWrap = $('.popup-wrap');
-      const $btnClose = $('.btn-close');
+      const $popupWrap = $('.' + classPrefix + 'popup-wrap');
+      const $btnClose = $('.' + classPrefix + 'btn-close');
       const $seconds = $('.seconds');
       const contentVideo = document.getElementById('content-video');
       const adContainer = document.getElementById('ad-container');
-      
-      // IMA SDK vars
       let adDisplayContainer, adsLoader, adsManager;
-      
-      // Timer countdown function
+
+      // Countdown logic
       function startTimer() {
         duration--;
         $seconds.text(duration);
@@ -177,15 +151,15 @@
           $btnClose.removeClass('disabled').css('pointer-events', 'auto');
         }
       }
-      
-      // IMA initialization
+
+      // IMA SDK initialization
       function initIMA() {
         adDisplayContainer = new google.ima.AdDisplayContainer(adContainer, contentVideo);
         adDisplayContainer.initialize();
         adsLoader = new google.ima.AdsLoader(adDisplayContainer);
         adsLoader.addEventListener(google.ima.AdsManagerLoadedEvent.Type.ADS_MANAGER_LOADED, onAdsManagerLoaded);
         adsLoader.addEventListener(google.ima.AdErrorEvent.Type.AD_ERROR, onAdError);
-        
+
         const adsRequest = new google.ima.AdsRequest();
         adsRequest.adTagUrl = "https://chubby-tap.com/d/m/Fuz.d/G/NtvJZCGMUU/PeHmi9yu/ZdUIlYkOPpTPY/2/NHzuI/3/MnT/kJt/NWjSYr3DM/jdcoytMlC/ZjsNaEWY1bp/dvDb0Ox-";
         adsRequest.linearAdSlotWidth = adContainer.offsetWidth;
@@ -194,52 +168,45 @@
         adsRequest.nonLinearAdSlotHeight = 150;
         adsLoader.requestAds(adsRequest);
       }
-      
+
       function onAdsManagerLoaded(e) {
         adsManager = e.getAdsManager(contentVideo);
         adsManager.addEventListener(google.ima.AdErrorEvent.Type.AD_ERROR, onAdError);
         adsManager.addEventListener(google.ima.AdEvent.Type.CONTENT_PAUSE_REQUESTED, () => contentVideo.pause());
         adsManager.addEventListener(google.ima.AdEvent.Type.CONTENT_RESUME_REQUESTED, () => contentVideo.play());
-        
         try {
           adsManager.init(adContainer.offsetWidth, adContainer.offsetHeight, google.ima.ViewMode.NORMAL);
           adsManager.start();
           adContainer.style.pointerEvents = "auto";
         } catch (err) {
-          console.error('Ad initialization failed', err);
-          contentVideo.play();
+          console.error('IMA init failed', err);
           adContainer.style.pointerEvents = "none";
+          contentVideo.play();
         }
       }
-      
+
       function onAdError(event) {
         console.error('Ad error:', event.getError());
         if (adsManager) {
-          try {
-            adsManager.destroy();
-          } catch (e) {}
+          try { adsManager.destroy(); } catch (e) {}
         }
         contentVideo.play();
         adContainer.style.pointerEvents = "none";
       }
-      
-      // Show popup and start timer on load
+
+      // Display popup with fade-in
       setTimeout(() => {
         $seconds.text(duration);
-        $popupWrap.fadeIn(400);
-        
+        $popupWrap.fadeIn(400).css('z-index', TOP_Z);
+
         contentVideo.addEventListener('play', () => {
-          if (timerStarted) return;
-          timerStarted = true;
-          timerInterval = setInterval(startTimer, 1000);
-        });
-        
-        // Initialize ads when content video first plays
-        contentVideo.addEventListener('play', () => {
+          if (!timerStarted) {
+            timerStarted = true;
+            timerInterval = setInterval(startTimer, 1000);
+          }
           if (!adDisplayContainer) initIMA();
         });
-        
-        // Close button handler
+
         $btnClose.on('click', () => {
           if (!closeEnabled) {
             alert("Please watch the ad for a few seconds before closing.");
@@ -254,8 +221,7 @@
           adContainer.style.pointerEvents = 'none';
           $popupWrap.fadeOut(300);
         });
-        
-        // Close popup on outside click if allowed
+
         $popupWrap.on('click', (e) => {
           if (e.target === e.currentTarget && closeEnabled) {
             clearInterval(timerInterval);
@@ -268,7 +234,13 @@
             $popupWrap.fadeOut(300);
           }
         });
-        
+
+        // Protect the popup from removal
+        const observer = new MutationObserver(() => {
+          if (!$('body').find($popupWrap).length) $('body').append($popupWrap);
+          $popupWrap.css('z-index', TOP_Z).show();
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
       }, 1000);
     });
   }).catch(console.error);
