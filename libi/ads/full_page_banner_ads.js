@@ -406,6 +406,9 @@
   injectPopupAd();
   document.addEventListener('DOMContentLoaded', injectPopupAd);
 })();*/
+
+
+
 (function() {
   const classPrefix = 'mytopad-';
   
@@ -420,6 +423,7 @@
       align-items: center;
       padding: 1rem;
       z-index: 2147483647 !important;
+      overflow-y: auto;
     }
     .${classPrefix}popup {
       position: relative;
@@ -475,7 +479,6 @@
 
   function injectPopupAd() {
     if (document.querySelector('.' + classPrefix + 'popup-wrap')) return;
-    
     const style = document.createElement('style');
     style.type = 'text/css';
     style.appendChild(document.createTextNode(css));
@@ -541,31 +544,26 @@
       }, 20);
     }
 
-    function disableClicks() {
-      popupWrap.style.pointerEvents = 'none';
-      popup.style.pointerEvents = 'none';
-      link.style.pointerEvents = 'none';
-      btnClose.style.pointerEvents = 'none';
-    }
-
     function cleanup() {
       clearInterval(timerInterval);
       if (observer) observer.disconnect();
-      disableClicks();
-      style.remove();
+      // Disable image click permanently
+      link.removeAttribute('href');
+      link.style.pointerEvents = 'none';
+      // Remove DOM elements
       popupWrap.remove();
+      style.remove();
       document.removeEventListener('DOMContentLoaded', injectPopupAd);
     }
 
     function fadeOutPopup() {
-      disableClicks(); // Disable ad area instantly
       let op = 1;
       const fade = setInterval(() => {
         op -= 0.05;
         popupWrap.style.opacity = op;
         if (op <= 0) {
           clearInterval(fade);
-          cleanup(); // Completely remove all elements
+          cleanup();
         }
       }, 20);
     }
