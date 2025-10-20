@@ -294,21 +294,22 @@
       z-index: 10;
     }
   `;
-  
+
   function injectPopupAd() {
     if (document.querySelector('.' + classPrefix + 'popup-wrap')) return;
+    
     const style = document.createElement('style');
     style.type = 'text/css';
     style.appendChild(document.createTextNode(css));
     document.head.prepend(style);
-    
+
     const popupWrap = document.createElement('div');
     popupWrap.className = classPrefix + 'popup-wrap';
     popupWrap.setAttribute('role', 'dialog');
-    
+
     const popup = document.createElement('div');
     popup.className = classPrefix + 'popup';
-    
+
     const timer = document.createElement('div');
     timer.className = classPrefix + 'popup-timer';
     const timerSpan = document.createElement('span');
@@ -316,33 +317,34 @@
     timerSpan.textContent = '10';
     timer.appendChild(timerSpan);
     timer.appendChild(document.createTextNode(' second(s) left'));
-    
+
     const btnClose = document.createElement('div');
     btnClose.className = classPrefix + 'btn-close disabled';
     btnClose.textContent = '×';
-    
+
     const link = document.createElement('a');
     link.href = 'https://chubby-tap.com/G5bIuE';
     link.target = '_blank';
-    
+
     const img = document.createElement('img');
     img.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWIxmdqoMAtFmwSR-3BzxPBM_WTDi0sLAs-QG463jj2g&s=10';
     img.alt = 'Ad Banner';
     link.appendChild(img);
-    
+
     popup.appendChild(timer);
     popup.appendChild(btnClose);
     popup.appendChild(link);
     popupWrap.appendChild(popup);
     document.body.appendChild(popupWrap);
-    
+
     let duration = 10;
     let timerInterval;
     let observer;
-    
+
     popupWrap.style.display = 'flex';
     popupWrap.style.opacity = 0;
-    
+    popupWrap.style.pointerEvents = 'auto';
+
     function fadeIn() {
       let op = 0;
       const fade = setInterval(() => {
@@ -361,27 +363,30 @@
         }
       }, 20);
     }
-    
+
     function cleanup() {
       clearInterval(timerInterval);
       if (observer) observer.disconnect();
-      popupWrap.remove();
+      popupWrap.style.display = 'none';
+      popupWrap.style.pointerEvents = 'none'; // Disable all clicks
       style.remove();
+      popupWrap.remove();
       document.removeEventListener('DOMContentLoaded', injectPopupAd);
     }
-    
+
     function fadeOutPopup() {
       let op = 1;
+      popupWrap.style.pointerEvents = 'none'; // Blocks clicks during fade-out
       const fade = setInterval(() => {
         op -= 0.05;
         popupWrap.style.opacity = op;
         if (op <= 0) {
           clearInterval(fade);
-          cleanup(); // Fully stop everything
+          cleanup(); // Full destruction
         }
       }, 20);
     }
-    
+
     btnClose.addEventListener('click', () => {
       if (btnClose.classList.contains('disabled')) {
         alert('Please wait until the countdown finishes.');
@@ -389,17 +394,16 @@
       }
       fadeOutPopup();
     });
-    
+
     popupWrap.addEventListener('click', (e) => {
       if (e.target === popupWrap && !btnClose.classList.contains('disabled')) fadeOutPopup();
     });
-    
-    // Observe DOM only until close
+
     observer = new MutationObserver(() => {
       if (!document.body.contains(popupWrap)) document.body.appendChild(popupWrap);
     });
     observer.observe(document.body, { childList: true, subtree: true });
-    
+
     fadeIn();
   }
   
