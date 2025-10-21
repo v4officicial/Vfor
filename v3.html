@@ -2,139 +2,257 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>VAST Ad Compatible Video Player</title>
+  <title>Custom Modal Video Ad with IMA SDK</title>
   <style>
-    #video-container {
-      position: relative;
-      width: 640px;
-      height: 360px;
-      background-color: black;
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #000;
+      color: #fff;
+      overflow-x: hidden;
     }
-    video {
+
+    /* Modal overlay */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
       width: 100%;
       height: 100%;
+      overflow: hidden;
+      background: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
     }
+
+    .modal.show {
+      display: flex;
+    }
+
+    /* Modal box */
+    .modal-content {
+      background-color: #111;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 900px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      position: relative;
+      background: #222;
+    }
+
+    .modal-header h5 {
+      margin: 0;
+      font-size: 1.1rem;
+      color: #fff;
+    }
+
+    .btn-close {
+      background: transparent;
+      border: none;
+      width: 1.2rem;
+      height: 1.2rem;
+      position: relative;
+      opacity: 0.8;
+      cursor: pointer;
+    }
+
+    .btn-close::before, .btn-close::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 100%;
+      height: 2px;
+      background-color: #fff;
+      transform-origin: center;
+    }
+
+    .btn-close::before {
+      transform: rotate(45deg);
+    }
+
+    .btn-close::after {
+      transform: rotate(-45deg);
+    }
+
+    .btn-close.disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .modal-body {
+      position: relative;
+      background-color: #000;
+    }
+
+    video#ad-video {
+      width: 100%;
+      height: auto;
+      background-color: #000;
+      border-radius: 0;
+      display: block;
+    }
+
+    .popup-timer {
+      position: absolute;
+      top: 1rem;
+      right: 3.5rem;
+      background: rgba(255, 255, 255, 0.3);
+      color: #000;
+      padding: 0.25rem 0.75rem;
+      border-radius: 1rem;
+      font-weight: 600;
+      user-select: none;
+      z-index: 1055;
+    }
+
     #ad-container {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
+      z-index: 1040;
       pointer-events: none;
-      z-index: 10;
     }
   </style>
 </head>
 <body>
-  <div id="video-container">
-    <video id="content-video" controls playsinline>
-  <source src="video.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
-    <div id="ad-container"></div>
-  </div>
 
-  <script src="https://imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
-  <script>
-    const contentVideo = document.getElementById('content-video');
+<!-- Modal structure -->
+<div class="modal" id="popupAdModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5>Advertisement</h5>
+      <button class="btn-close disabled" id="btnCloseModal" aria-label="Close"></button>
+      <div class="popup-timer" id="popupTimer">10 sec</div>
+    </div>
+    <div class="modal-body">
+      <video id="ad-video" controls playsinline preload="auto"
+        poster="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgB4FisStERcFQ-_6PRXKXWkNb71hhxIWX1J3UXFQGWA&s=10">
+        <source src="/main_Resource/ads/video ads/The_Bread_-_Animated_Short_Film_by_GULU(360p).mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      <div id="ad-container"></div>
+    </div>
+  </div>
+</div>
+
+<!-- IMA SDK -->
+<script src="https://imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const modalEl = document.getElementById('popupAdModal');
+    const closeButton = document.getElementById('btnCloseModal');
+    const timerEl = document.getElementById('popupTimer');
+    const videoEl = document.getElementById('ad-video');
     const adContainer = document.getElementById('ad-container');
 
-    // VAST Ad Tag URL (your provided URL)
-    const vastAdTagUrl = "https://impracticalshoulder.com/dPm.FGzidLGQNtv/ZGGLUk/_eqmb9SuuZ_U/ltkmPUTHYo2CNmz/I/3hMrTEkdt/NEjpY/3AMQjGc/yYMJCWZ/sUarWd1upSdCDI0/x-";
+    let countdown = 10;
+    let timerInterval;
+    let closeEnabled = false;
 
+    // IMA SDK variables
     let adDisplayContainer;
     let adsLoader;
     let adsManager;
 
-    function initIMA() {
-      // Create the ad display container.
-      adDisplayContainer = new google.ima.AdDisplayContainer(adContainer, contentVideo);
+    // Show modal immediately
+    modalEl.classList.add('show');
 
-      // Initialize the container. Must be done via a user action on mobile devices.
+    function startCountdown() {
+      countdown--;
+      timerEl.textContent = countdown + ' sec';
+      if (countdown <= 0) {
+        clearInterval(timerInterval);
+        closeEnabled = true;
+        closeButton.classList.remove('disabled');
+      }
+    }
+
+    function initAds() {
+      adDisplayContainer = new google.ima.AdDisplayContainer(adContainer, videoEl);
       adDisplayContainer.initialize();
 
-      // Create ads loader.
       adsLoader = new google.ima.AdsLoader(adDisplayContainer);
+      adsLoader.addEventListener(google.ima.AdsManagerLoadedEvent.Type.ADS_MANAGER_LOADED, onAdsManagerLoaded, false);
+      adsLoader.addEventListener(google.ima.AdErrorEvent.Type.AD_ERROR, onAdError, false);
 
-      // Listen and respond to ads loaded and error events.
-      adsLoader.addEventListener(
-        google.ima.AdsManagerLoadedEvent.Type.ADS_MANAGER_LOADED,
-        onAdsManagerLoaded,
-        false
-      );
-      adsLoader.addEventListener(
-        google.ima.AdErrorEvent.Type.AD_ERROR,
-        onAdError,
-        false
-      );
-
-      // Request video ads.
       const adsRequest = new google.ima.AdsRequest();
-      adsRequest.adTagUrl = vastAdTagUrl;
-
-      // Specify the linear and nonlinear slot sizes. This helps the SDK to size ads appropriately.
-      adsRequest.linearAdSlotWidth = 640;
-      adsRequest.linearAdSlotHeight = 360;
-      adsRequest.nonLinearAdSlotWidth = 640;
+      adsRequest.adTagUrl = 'https://chubby-tap.com/d/m/Fuz.d/G/NtvJZCGMUU/PeHmi9yu/ZdUIlYkOPpTPY/2/NHzuI/3/MnT/kJt/NWjSYr3DM/jdcoytMlC/ZjsNaEWY1bp/dvDb0Ox-';
+      adsRequest.linearAdSlotWidth = adContainer.offsetWidth;
+      adsRequest.linearAdSlotHeight = adContainer.offsetHeight;
+      adsRequest.nonLinearAdSlotWidth = adContainer.offsetWidth;
       adsRequest.nonLinearAdSlotHeight = 150;
 
       adsLoader.requestAds(adsRequest);
     }
 
-    function onAdsManagerLoaded(adsManagerLoadedEvent) {
-      // Get the ads manager.
-      adsManager = adsManagerLoadedEvent.getAdsManager(contentVideo);
-
-      // Add listeners to the required events.
-      adsManager.addEventListener(
-        google.ima.AdErrorEvent.Type.AD_ERROR,
-        onAdError
-      );
-      adsManager.addEventListener(
-        google.ima.AdEvent.Type.CONTENT_PAUSE_REQUESTED,
-        onContentPauseRequested
-      );
-      adsManager.addEventListener(
-        google.ima.AdEvent.Type.CONTENT_RESUME_REQUESTED,
-        onContentResumeRequested
-      );
+    function onAdsManagerLoaded(event) {
+      adsManager = event.getAdsManager(videoEl);
+      adsManager.addEventListener(google.ima.AdErrorEvent.Type.AD_ERROR, onAdError);
+      adsManager.addEventListener(google.ima.AdEvent.Type.CONTENT_PAUSE_REQUESTED, () => videoEl.pause());
+      adsManager.addEventListener(google.ima.AdEvent.Type.CONTENT_RESUME_REQUESTED, () => videoEl.play());
 
       try {
-        // Initialize the ads manager. Ad rules playlist can be loaded and rendered after this.
-        adsManager.init(640, 360, google.ima.ViewMode.NORMAL);
+        adsManager.init(adContainer.offsetWidth, adContainer.offsetHeight, google.ima.ViewMode.NORMAL);
         adsManager.start();
-      } catch (adError) {
-        console.error('AdsManager could not start:', adError);
-        contentVideo.play();
+        adContainer.style.pointerEvents = "auto";
+      } catch (e) {
+        console.error('AdsManager failed to start:', e);
+        adContainer.style.pointerEvents = "none";
+        videoEl.play();
       }
     }
 
-    function onAdError(adErrorEvent) {
-      console.error('Ad error:', adErrorEvent.getError());
+    function onAdError(event) {
+      console.warn('Ad error:', event.getError());
       if (adsManager) {
-        adsManager.destroy();
+        try { adsManager.destroy(); } catch {}
       }
-      contentVideo.play();
+      adContainer.style.pointerEvents = "none";
+      videoEl.play();
     }
 
-    function onContentPauseRequested() {
-      contentVideo.pause();
-    }
-
-    function onContentResumeRequested() {
-      contentVideo.play();
-    }
-
-    // Start ad playback on user interaction (required by mobile browsers).
-    contentVideo.addEventListener('play', () => {
-      if (!adDisplayContainer) {
-        initIMA();
+    videoEl.addEventListener('play', () => {
+      if (!timerInterval) {
+        timerInterval = setInterval(startCountdown, 1000);
       }
+      if (!adDisplayContainer) initAds();
     });
 
-    // Optional: load and play content video if you want.
-    contentVideo.src = "/main_Resource/ads/video ads/The_Bread_-_Animated_Short_Film_by_GULU(360p).mp4";
-  </script>
-  <script src="https://imasdk.googleapis.com/js/sdkloader/ima3_debug.js"></script>
+    closeButton.addEventListener('click', () => {
+      if (!closeEnabled) {
+        alert('Please watch the ad for a few seconds before closing.');
+        return;
+      }
+      clearInterval(timerInterval);
+      videoEl.pause();
+      videoEl.currentTime = 0;
+      if (adsManager) {
+        try { adsManager.destroy(); } catch {}
+      }
+      adContainer.style.pointerEvents = "none";
+      modalEl.classList.remove('show');
+      countdown = 10;
+      timerEl.textContent = countdown + ' sec';
+      closeEnabled = false;
+      closeButton.classList.add('disabled');
+    });
+  });
+</script>
 </body>
 </html>
