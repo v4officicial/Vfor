@@ -64,7 +64,18 @@ fetch('/JSON/Jobs/company_detailes.json')
         </div>
       </section>
        <!--****ad unit start****-->
-       
+       <script>
+(function(hsp){
+var d = document,
+    s = d.createElement('script'),
+    l = d.scripts[d.scripts.length - 1];
+s.settings = hsp || {};
+s.src = "\/\/valuable-distance.com\/b\/X\/V.sud-GXlC0qYkWNcT\/beXml9NuxZEUylwkqPaT_Yb2gN\/zpEi1pNVzEU\/tJNsjtYy3KMATnUC3INJgN";
+s.async = true;
+s.referrerPolicy = 'no-referrer-when-downgrade';
+l.parentNode.insertBefore(s, l);
+})({})
+</script>
 
 <!--**** ad unit end ****-->
       <!-- Section 2 (Job Posting Schema) -->
