@@ -156,7 +156,7 @@ window.addEventListener("load", function() {
   ]).then(() => {
     const $ = window.jQuery;
     $(function() {
-      let duration = 10;
+      let duration = 46;
       let closeEnabled = false;
       let timerStarted = false;
       let timerInterval;
