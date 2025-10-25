@@ -8,7 +8,7 @@ var g=`
   <script src="/libi/jquery-3.6.0.min.js"></script>
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
 `;*/
-var css_link=`
+/*var css_link=`
 <link rel="stylesheet" href="/CSS/loader.css" type="text/css" media="all" />
 <link rel="stylesheet" href="/CSS/Home/footer/footer.css" type="text/css" media="all" />
 <link rel="stylesheet" href="/CSS/Home/header/headerBG.css" media="all" />
