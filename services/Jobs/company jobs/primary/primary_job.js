@@ -313,3 +313,17 @@ style.textContent = `
 .btn { position: relative; overflow: hidden; }
 `;
 document.head.appendChild(style);
+
+
+/*adding styles*/
+var css_link=`
+<link rel="stylesheet" href="/CSS/primary_page/primary_page.css" type="text/css" media="all" />
+`;
+
+libi.get_set_tag_index_plus("head",0,css_link);
+//stylesheet link
+var css_link=`
+  <link rel="stylesheet" href="/CSS/primary_page/main/mainBG.css" type="text/css" media="all" />
+`;
+
+libi.get_set_tag_index_plus("head",0,css_link);

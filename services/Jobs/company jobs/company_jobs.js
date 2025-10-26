@@ -102,3 +102,10 @@ fetch('/JSON/Jobs/company_detailes.json')
     });
   })
   .catch(error => console.error('Error loading JSON:', error));
+  
+  
+  var css_link=`
+<link rel="stylesheet" href="/CSS/secondary_page/secondary_page.css" type="text/css" media="all" />
+`;
+
+libi.get_set_tag_index_plus("head",0,css_link);

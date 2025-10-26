@@ -1,6 +1,33 @@
 console.log("index.js connected sucessful");
 //Import Requirements
 import * as libi from '/libi/lib.js';
+
+/*export var Greq=`
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="/libi/jquery-3.6.0.min.js"></script>
+  <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />-->
+
+`;
+libi.get_set_tag_index_plus("head",0,Greq);*/
+
+(function() {
+  // Array of script sources to insert
+  var scripts = [
+    "https://code.jquery.com/jquery-3.6.0.min.js",
+    "/libi/jquery-3.6.0.min.js"
+  ];
+  // Reference to <head> (fallback to <body> if <head> not found)
+  var target = document.head || document.body;
+  // Insert each script
+  scripts.forEach(function(src) {
+    var s = document.createElement("script");
+    s.src = src;
+    s.type = "text/javascript";
+    target.appendChild(s);
+  });
+})();
+
+
 /*varort * as meta from '/JS/Home/head/head_meta.js';
 var g=`
 <link rel="stylesheet" href="./CSS/loader.css" type="text/css" media="all" />
