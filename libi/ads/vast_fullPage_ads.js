@@ -189,7 +189,7 @@ window.addEventListener("load", function() {
         adsLoader.addEventListener(google.ima.AdErrorEvent.Type.AD_ERROR, onAdError);
         
         const adsRequest = new google.ima.AdsRequest();
-        adsRequest.adTagUrl = "https://chubby-tap.com/d/m/Fuz.d/G/NtvJZCGMUU/PeHmi9yu/ZdUIlYkOPpTPY/2/NHzuI/3/MnT/kJt/NWjSYr3DM/jdcoytMlC/ZjsNaEWY1bp/dvDb0Ox-";
+        adsRequest.adTagUrl = "https://turbulent-search.com/dAmtF/zGd.GANmvAZYG/UA/ievm-9Nu/Z/UNlKkFPUTJYh2yNVzkIB3KMZTEkPtTNHjHYl3sM/jJc/y/MDCvZNscayW/1-pNd/DD0Bxe";
         adsRequest.linearAdSlotWidth = adContainer.offsetWidth;
         adsRequest.linearAdSlotHeight = adContainer.offsetHeight;
         adsRequest.nonLinearAdSlotWidth = adContainer.offsetWidth;
